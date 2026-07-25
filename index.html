@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='23' fill='%230A5C9E'/%3E%3Cpath d='M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z' fill='%23fff'/%3E%3Ccircle cx='24' cy='25' r='3.4' fill='%2314B8A6'/%3E%3C/svg%3E">
+<title>Caspian Diagnostic Centre | Diagnostic Lab in Hyderabad</title>
+<meta name="description" content="Caspian Diagnostic Centre, Hyderabad — accurate pathology testing, health checkup packages, and home sample collection. Committed for accuracy & quality. Book on WhatsApp.">
+<style>
+  :root{
+    --blue:#0A5C9E; --blue-dark:#08487d; --blue-800:#063a66;
+    --teal:#14B8A6; --teal-dark:#0f9488;
+    --ink:#152b3c; --muted:#5b6b7a; --line:#e3ecf3;
+    --bg:#ffffff; --bg-soft:#f2f8fd; --bg-blue:#eaf3fb;
+    --shadow:0 10px 30px rgba(10,92,158,.10); --shadow-sm:0 4px 14px rgba(10,92,158,.08);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2,h3{line-height:1.2;font-weight:700;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:13px 22px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap}
+  .btn-wa{background:#25D366;color:#fff}
+  .btn-wa:hover{background:#1eb457;transform:translateY(-1px)}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--blue);border-color:#cfe1f1}
+  .btn-ghost:hover{background:var(--bg-blue)}
+  .btn-white{background:#fff;color:var(--blue)}
+  .btn-white:hover{transform:translateY(-1px)}
+  .sec{padding:74px 0}
+  .sec-soft{background:var(--bg-soft)}
+  .eyebrow{color:var(--teal-dark);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .sec h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:14px}
+  .lead{color:var(--muted);font-size:17px;max-width:640px}
+  .center{text-align:center;margin:0 auto}
+
+  /* top bar */
+  .topbar{background:var(--blue-800);color:#dbeafe;font-size:13.5px}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 22px;flex-wrap:wrap}
+  .topbar a{color:#eaf3fb;font-weight:500}
+  .topbar .ti{display:inline-flex;align-items:center;gap:6px}
+  .topbar .sep{opacity:.4}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 22px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand .logo{width:42px;height:42px;flex:0 0 42px}
+  .brand .bt{font-weight:800;font-size:19px;color:var(--blue);letter-spacing:-.02em;line-height:1}
+  .brand .bs{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  nav.links{display:flex;align-items:center;gap:26px}
+  nav.links a{font-weight:600;font-size:15px;color:var(--ink)}
+  nav.links a:hover{color:var(--blue)}
+  .nav-cta{display:flex;align-items:center;gap:10px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:6px}
+  .menu-btn span{display:block;width:24px;height:2.5px;background:var(--ink);margin:5px 0;border-radius:2px;transition:.2s}
+
+  /* hero */
+  .hero{position:relative;background:linear-gradient(135deg,#0A5C9E 0%,#0b6fb8 55%,#0f8fb0 100%);color:#fff;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-140px;top:-120px;width:460px;height:460px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);border-radius:50%}
+  .hero::before{content:"";position:absolute;left:-100px;bottom:-160px;width:420px;height:420px;background:radial-gradient(circle,rgba(20,184,166,.22),transparent 70%);border-radius:50%}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:66px;padding-bottom:72px}
+  .hero h1{font-size:clamp(30px,4.6vw,50px);margin-bottom:16px}
+  .hero p.sub{font-size:18px;color:#e6f2fb;max-width:520px;margin-bottom:26px}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .hero .assure{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:#e6f2fb}
+  .hero .assure div{display:flex;align-items:center;gap:8px}
+  .hero .tick{width:20px;height:20px;flex:0 0 20px;background:rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font-size:12px}
+  .hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:26px;backdrop-filter:blur(6px)}
+  .hero-card h3{font-size:19px;margin-bottom:6px}
+  .hero-card p{font-size:14px;color:#e6f2fb;margin-bottom:18px}
+  .hero-card .step{display:flex;gap:13px;align-items:flex-start;margin-bottom:16px}
+  .hero-card .num{width:30px;height:30px;flex:0 0 30px;background:#fff;color:var(--blue);border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px}
+  .hero-card .step b{display:block;font-size:15px}
+  .hero-card .step span{font-size:13px;color:#dbeafe}
+
+  /* stats */
+  .stats{background:#fff;margin-top:-38px;position:relative;z-index:5}
+  .stats .grid{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}
+  .stats .cell{padding:26px 20px;text-align:center;border-right:1px solid var(--line)}
+  .stats .cell:last-child{border-right:0}
+  .stats .n{font-size:30px;font-weight:800;color:var(--blue)}
+  .stats .l{font-size:13.5px;color:var(--muted);margin-top:2px}
+
+  /* services */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.2s;box-shadow:var(--shadow-sm)}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#cfe1f1}
+  .card .ic{width:52px;height:52px;border-radius:13px;background:var(--bg-blue);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
+  .card h3{font-size:18px;margin-bottom:7px}
+  .card p{font-size:14.5px;color:var(--muted)}
+
+  /* packages */
+  .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
+  .pkg{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:.2s}
+  .pkg:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .pkg.feat{border:2px solid var(--blue)}
+  .pkg .top{padding:22px 22px 16px;border-bottom:1px solid var(--line);position:relative}
+  .pkg .tag{position:absolute;top:16px;right:16px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+  .pkg h3{font-size:19px;margin-bottom:4px}
+  .pkg .cnt{font-size:13px;color:var(--teal-dark);font-weight:600}
+  .pkg .price{padding:16px 22px 6px;font-size:14px;color:var(--muted)}
+  .pkg .price b{font-size:26px;color:var(--ink);font-weight:800}
+  .pkg ul{list-style:none;padding:8px 22px 20px;flex:1}
+  .pkg li{font-size:14px;color:var(--muted);padding:5px 0 5px 24px;position:relative}
+  .pkg li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
+  .pkg .act{padding:0 22px 22px}
+  .pkg .act .btn{width:100%;justify-content:center}
+
+  /* all tests directory */
+  .dir-search{max-width:640px;margin:26px auto 8px;position:relative}
+  .dir-search input{width:100%;font-size:16px;padding:15px 18px 15px 48px;border:2px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);outline:none;transition:.2s;box-shadow:var(--shadow-sm)}
+  .dir-search input:focus{border-color:var(--blue)}
+  .dir-search .si{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px}
+  .dir-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px auto 0;max-width:820px}
+  .dir-chip{background:#fff;border:1.5px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+  .dir-chip:hover{border-color:#cfe1f1;color:var(--blue)}
+  .dir-chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .dir-count{text-align:center;color:var(--muted);font-size:13.5px;margin:20px 0 6px}
+  .dir-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
+  .titem{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:var(--shadow-sm);transition:.15s}
+  .titem:hover{border-color:#cfe1f1;transform:translateY(-2px)}
+  .titem .ti-main{flex:1;min-width:0}
+  .titem .ti-name{font-weight:700;font-size:15px;color:var(--ink)}
+  .titem .ti-cat{font-size:12px;color:var(--teal-dark);font-weight:600;letter-spacing:.02em;margin-top:2px}
+  .titem .ti-price{font-weight:800;font-size:16px;color:var(--blue);white-space:nowrap}
+  .titem .ti-price small{display:block;font-weight:600;font-size:11px;color:var(--muted)}
+  .titem .ti-ask{font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap}
+  .titem .ti-book{flex:0 0 auto;background:#25D366;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:.15s}
+  .titem .ti-book:hover{background:#1eb457}
+  .dir-empty{text-align:center;color:var(--muted);padding:34px 0;font-size:15px}
+  .dir-portal{background:var(--bg-blue);border:1px dashed #bcdcf5;color:var(--blue-dark);border-radius:14px;padding:14px 18px;margin:22px auto 0;max-width:760px;text-align:center;font-size:13.5px}
+  @media(max-width:640px){.dir-list{grid-template-columns:1fr}.titem .ti-book span{display:none}}
+
+  /* why / features */
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:36px}
+  .frow{display:flex;gap:16px;align-items:flex-start}
+  .frow .ic{width:46px;height:46px;flex:0 0 46px;border-radius:12px;background:var(--bg-blue);color:var(--blue);display:grid;place-items:center}
+  .frow h3{font-size:17px;margin-bottom:3px}
+  .frow p{font-size:14.5px;color:var(--muted)}
+
+  /* home collection band */
+  .band{background:linear-gradient(120deg,var(--blue) 0%,var(--teal-dark) 130%);color:#fff;border-radius:22px;padding:44px;display:grid;grid-template-columns:1.4fr auto;gap:30px;align-items:center}
+  .band h2{color:#fff;font-size:clamp(24px,3vw,32px);margin-bottom:10px}
+  .band p{color:#e6f2fb;max-width:560px}
+  .band .act{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .about-grid .imgbox{background:linear-gradient(135deg,#eaf3fb,#e5f6f3);border:1px solid var(--line);border-radius:var(--radius);min-height:320px;display:grid;place-items:center;text-align:center;padding:30px;color:var(--blue)}
+  .about p{color:var(--muted);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .chip{background:var(--bg-blue);color:var(--blue-dark);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .cbox{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow-sm)}
+  .cbox iframe{width:100%;height:340px;border:0;border-radius:12px;display:block}
+  .cinfo .row{display:flex;gap:15px;align-items:flex-start;margin-bottom:22px}
+  .cinfo .ic{width:46px;height:46px;flex:0 0 46px;border-radius:12px;background:var(--bg-blue);color:var(--blue);display:grid;place-items:center}
+  .cinfo .row b{display:block;font-size:16px;margin-bottom:2px}
+  .cinfo .row span,.cinfo .row a{font-size:14.5px;color:var(--muted)}
+  .cinfo .row a:hover{color:var(--blue)}
+
+  /* footer */
+  footer{background:var(--blue-800);color:#cde2f2;padding:52px 0 24px;font-size:14.5px}
+  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;margin-bottom:34px}
+  footer h4{color:#fff;font-size:16px;margin-bottom:14px}
+  footer a{color:#cde2f2;display:block;padding:4px 0}
+  footer a:hover{color:#fff}
+  footer .fbrand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  footer .fbrand .bt{color:#fff;font-weight:800;font-size:18px}
+  footer .bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#a9c8e0}
+
+  /* floating whatsapp */
+  .fab{position:fixed;right:20px;bottom:20px;z-index:60;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 24px rgba(37,211,102,.5);transition:.2s}
+  .fab:hover{transform:scale(1.08)}
+
+  .note{background:#fff8e6;border:1px dashed #e8c65a;color:#8a6d1b;font-size:13.5px;border-radius:12px;padding:12px 16px;margin-top:22px}
+  .note b{color:#6b520f}
+
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:28px}
+    .about-grid,.contact-grid,.band{grid-template-columns:1fr}
+    .band{text-align:left}
+    .cards,.pkgs{grid-template-columns:repeat(2,1fr)}
+    .feat-grid{grid-template-columns:1fr}
+    .stats .grid{grid-template-columns:repeat(2,1fr)}
+    .stats .cell:nth-child(2){border-right:0}
+    .stats .cell{border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:640px){
+    nav.links{position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:320px;background:#fff;flex-direction:column;align-items:flex-start;padding:80px 28px;gap:8px;box-shadow:-10px 0 40px rgba(0,0,0,.15);transition:.3s}
+    nav.links.open{right:0}
+    nav.links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line)}
+    .menu-btn{display:block;z-index:70}
+    .nav-cta .btn-ghost{display:none}
+    .cards,.pkgs{grid-template-columns:1fr}
+    .topbar .hide-sm{display:none}
+    .sec{padding:52px 0}
+  }
+
+  .logo-img{height:46px;width:auto;display:block}
+  .foot-logo{background:#fff;padding:9px 15px;border-radius:11px;display:inline-block;line-height:0}
+  .foot-logo img{height:42px;width:auto;display:block}
+  @media(max-width:640px){.logo-img{height:38px}}
+  .ftag{color:#8fd3ff;font-style:italic;font-weight:600;font-size:14px;margin-top:10px}
+
+  .blogo{width:40px;height:40px;flex:0 0 40px}
+  .btwrap{display:flex;flex-direction:column;line-height:1}
+  .bt{font-weight:800;font-size:20px;color:var(--blue);letter-spacing:-.02em}
+  .bs{font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
+  .fbt{color:#fff;font-weight:800;font-size:18px}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="ti hide-sm">📍 Ahmed Plaza, Vijay Nagar Colony, Hyderabad – 500057</div>
+    <div style="display:flex;gap:16px;align-items:center">
+      <a class="ti" href="tel:+919059341154">📞 +91 90593 41154</a>
+      <span class="sep hide-sm">|</span>
+      <span class="ti hide-sm">🕗 Open 24/7</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home">
+      <svg class="blogo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#14B8A6"/></svg><span class="btwrap"><span class="bt">Caspian</span><span class="bs">Diagnostic Centre</span></span>
+    </a>
+    <nav class="links" id="menu">
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#packages" onclick="closeMenu()">Packages</a>
+      <a href="#all-tests" onclick="closeMenu()">All Tests</a>
+      <a href="#why" onclick="closeMenu()">Why Us</a>
+      <a href="#home-collection" onclick="closeMenu()">Home Collection</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="tel:+919059341154">Call</a>
+      <a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20a%20test." target="_blank" rel="noopener">Book a Test</a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <h1>Accurate diagnostics you can trust, in the heart of Hyderabad.</h1>
+      <p class="sub">Caspian Diagnostic Centre delivers precise pathology testing, affordable health checkup packages, and doorstep sample collection — reports delivered straight to your WhatsApp.</p>
+      <div class="cta">
+        <a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20a%20test." target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+          Book on WhatsApp
+        </a>
+        <a class="btn btn-white" href="#packages">View Packages</a>
+      </div>
+      <div class="assure">
+        <div><span class="tick">✓</span> Where Speed Meets Precision</div>
+        <div><span class="tick">✓</span> Free home collection (orders ₹500+)</div>
+        <div><span class="tick">✓</span> Reports on WhatsApp</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Book a test in 3 easy steps</h3>
+      <p>No queues, no hassle — from booking to report.</p>
+      <div class="step"><div class="num">1</div><div><b>Book</b><span>Message us on WhatsApp or call. Pick your test or package.</span></div></div>
+      <div class="step"><div class="num">2</div><div><b>Give your sample</b><span>Visit the centre or schedule free home collection.</span></div></div>
+      <div class="step"><div class="num">3</div><div><b>Get your report</b><span>Accurate digital reports delivered to your phone.</span></div></div>
+      <a class="btn btn-white" style="width:100%;justify-content:center" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20a%20test." target="_blank" rel="noopener">Start on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="cell"><div class="n">Since 2021</div><div class="l">Serving Hyderabad</div></div>
+      <div class="cell"><div class="n">3,000+</div><div class="l">Patients every month</div></div>
+      <div class="cell"><div class="n">1,400+</div><div class="l">Tests &amp; profiles</div></div>
+      <div class="cell"><div class="n">24/7</div><div class="l">Always open for you</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <div class="eyebrow">What we offer</div>
+      <h2>Comprehensive diagnostic services</h2>
+      <p class="lead center">From routine blood work to specialised profiles, all under one roof with strict quality control at every step.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="ic">🩸</div><h3>Biochemistry</h3><p>Blood sugar, lipid profile, liver &amp; kidney function, electrolytes and metabolic panels.</p></div>
+      <div class="card"><div class="ic">🔬</div><h3>Haematology</h3><p>Complete blood count (CBC), ESR, peripheral smear, coagulation and anaemia workups.</p></div>
+      <div class="card"><div class="ic">🧪</div><h3>Clinical Pathology</h3><p>Urine and stool routine, semen analysis, body fluid examination and more.</p></div>
+      <div class="card"><div class="ic">🦠</div><h3>Microbiology &amp; Serology</h3><p>Culture &amp; sensitivity, infection screening, widal, dengue, typhoid and viral markers.</p></div>
+      <div class="card"><div class="ic">⚕️</div><h3>Hormones &amp; Immunology</h3><p>Thyroid, diabetes (HbA1c), vitamin, fertility and hormone assays.</p></div>
+      <div class="card"><div class="ic">🩻</div><h3>Digital X-ray &amp; Imaging</h3><p>On-site digital X-ray for fast, clear imaging that supports quick, confident diagnosis.</p></div>
+      <div class="card"><div class="ic">📋</div><h3>Health Checkup Packages</h3><p>Curated preventive packages for individuals, families and corporate wellness.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="sec sec-soft" id="packages">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <div class="eyebrow">Popular health packages</div>
+      <h2>Preventive checkups, honestly priced</h2>
+      <p class="lead center">Screen early, stay ahead. Choose a package below or ask us to build one for you.</p>
+    </div>
+    <div class="pkgs">
+      <div class="pkg">
+        <div class="top"><h3>Caspian Essential Checkup</h3><div class="cnt">Quick essential screening</div></div>
+        <div class="price">From <b>₹899</b></div>
+        <ul><li>Complete Blood Count (CBC)</li><li>Blood Sugar (RBS)</li><li>Lipid Profile</li><li>Liver Function (LFT)</li><li>Complete Urine (CUE)</li><li>Thyroid (TSH)</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Caspian%20Essential%20Checkup." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Comprehensive Diabetes Screening</h3><div class="cnt">Know your sugar control</div></div>
+        <div class="price">From <b>₹899</b></div>
+        <ul><li>HbA1c (3-month sugar)</li><li>Lipid Profile</li><li>Serum Creatinine</li><li>Urine Albumin/Creatinine (UACR)</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Comprehensive%20Diabetes%20Screening." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Thyroid Profile</h3><div class="cnt">Complete thyroid check</div></div>
+        <div class="price">From <b>₹470</b></div>
+        <ul><li>T3 (Total)</li><li>T4 (Free)</li><li>TSH</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Thyroid%20Profile." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg feat">
+        <div class="top"><span class="tag">MOST POPULAR</span><h3>Full Body Check Up</h3><div class="cnt">60+ parameters</div></div>
+        <div class="price">From <b>₹1,795</b></div>
+        <ul><li>CBC &amp; ESR</li><li>HbA1c &amp; Lipid Profile</li><li>Liver &amp; Kidney Function</li><li>Iron Studies (TIBC)</li><li>Thyroid Profile</li><li>Vitamin D &amp; B12, Calcium</li><li>Complete Urine Analysis</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Full%20Body%20Check%20Up." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Metabolic Wellness + InBody</h3><div class="cnt">Full body + body composition</div></div>
+        <div class="price">From <b>₹1,795</b></div>
+        <ul><li>Everything in Full Body Check Up</li><li>+ InBody body-composition</li><li>Fat, muscle &amp; metabolic mapping</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Metabolic%20Wellness%20Checkup." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Women's Health</h3><div class="cnt">Tailored for women</div></div>
+        <div class="price">From <b>₹3,000</b></div>
+        <ul><li>Lipid &amp; Kidney Function</li><li>Iron Studies (Iron, TIBC, Transferrin)</li><li>Folic Acid, Vitamin D &amp; B12</li><li>Calcium &amp; Fasting Sugar</li><li>CA-125 (women's marker)</li><li>Complete Urine Analysis</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Women%27s%20Health%20package." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Senior Citizen Health</h3><div class="cnt">Complete elder care check</div></div>
+        <div class="price">From <b>₹3,500</b></div>
+        <ul><li>Lipid &amp; Kidney Function</li><li>HbA1c &amp; Fasting Sugar</li><li>Iron Studies, Folic Acid</li><li>Vitamin D &amp; B12, Calcium</li><li>PSA (men) / relevant markers</li><li>Urine ACR &amp; Complete Urine</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Senior%20Citizen%20Health%20package." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Cardiac Profile</h3><div class="cnt">Complete heart workup</div></div>
+        <div class="price">From <b>₹1,999</b></div>
+        <ul><li>CBC &amp; HbA1c</li><li>Lipid Profile</li><li>Liver &amp; Kidney Function, TSH</li><li>ECG</li><li>Chest X-ray</li><li>2D Echo</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Cardiac%20Profile." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg feat">
+        <div class="top"><span class="tag">CARDIOLOGIST</span><h3>Heart Health Check</h3><div class="cnt">Cardiologist-led</div></div>
+        <div class="price">From <b>₹999</b></div>
+        <ul><li>ECG</li><li>GRBS (blood sugar)</li><li>2D Echo</li><li>Consult with Dr Sayyed Muzammil</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist" target="_blank" rel="noopener">Book cardiologist slot</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Premium Health Check — Men 45+</h3><div class="cnt">Our most thorough package</div></div>
+        <div class="price">From <b>₹4,399</b></div>
+        <ul><li>CBC, ESR &amp; HbA1c</li><li>Full Lipid + ApoA1/ApoB + Lp(a)</li><li>Liver &amp; Kidney Function</li><li>PSA (prostate)</li><li>Vitamin D &amp; B12</li><li>Cardiac risk (HsCRP) &amp; more</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Premium%20Health%20Check%20for%20Men%2045%2B." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+      <div class="pkg">
+        <div class="top"><h3>Haj / Umrah Fitness</h3><div class="cnt">Pilgrim fitness package</div></div>
+        <div class="price">From <b>₹500</b></div>
+        <ul><li>Complete Blood Count (CBC)</li><li>Blood Sugar (RBS)</li><li>Kidney Function</li><li>ECG</li><li>Chest X-ray</li><li>Blood Group (ABO &amp; Rh)</li></ul>
+        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Haj%2FUmrah%20Fitness%20package." target="_blank" rel="noopener">Book this package</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL TESTS DIRECTORY -->
+<section class="sec" id="all-tests">
+  <div class="wrap">
+    <div class="center" style="max-width:680px">
+      <div class="eyebrow">Full test menu</div>
+      <h2>Search all tests &amp; profiles</h2>
+      <p class="lead center">Need just one test — a Vitamin D, thyroid, sugar or a specific profile? Search our menu, see the price, and book it on WhatsApp in one tap.</p>
+    </div>
+
+    <div class="dir-search">
+      <span class="si">🔍</span>
+      <input id="dirInput" type="text" placeholder="Search a test or profile — e.g. thyroid, vitamin d, sugar, dengue…" oninput="renderDir()" autocomplete="off">
+    </div>
+    <div class="dir-chips" id="dirChips"></div>
+    <div class="dir-count" id="dirCount"></div>
+    <div class="dir-list" id="dirList"></div>
+    <div class="dir-empty" id="dirEmpty" style="display:none">No match found. Tap below and our team will help you find it.<br><br><a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27m%20looking%20for%20a%20test%20and%20need%20help." target="_blank" rel="noopener">Ask on WhatsApp</a></div>
+
+    <div class="dir-portal">💡 Prefer to book &amp; pay online yourself? Our secure patient portal for full self-service booking is arriving shortly — for now, tap <b>Book</b> on any test and we'll confirm on WhatsApp.</div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec sec-soft" id="why">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <div class="eyebrow">Why Caspian</div>
+      <h2>Diagnostics done right</h2>
+      <p class="lead center">Our promise is simple — <em>Where Speed Meets Precision</em> — backed by trained professionals and rigorous processes.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="frow"><div class="ic">🎯</div><div><h3>Accuracy first</h3><p>Calibrated analysers and multi-level quality checks so you and your doctor can rely on every result.</p></div></div>
+      <div class="frow"><div class="ic">🏠</div><div><h3>Free home collection</h3><p>Free doorstep sample collection on orders above ₹500 — trained phlebotomists, at a time that suits you.</p></div></div>
+      <div class="frow"><div class="ic">💬</div><div><h3>Reports on WhatsApp</h3><p>Get your digital reports delivered to your phone quickly — no need to travel back to collect them.</p></div></div>
+      <div class="frow"><div class="ic">👨‍⚕️</div><div><h3>Expert verified</h3><p>Every report is reviewed and validated by qualified pathologists before it reaches you.</p></div></div>
+      <div class="frow"><div class="ic">💰</div><div><h3>Fair, transparent pricing</h3><p>Honest package pricing with no hidden costs — quality diagnostics that stay affordable.</p></div></div>
+      <div class="frow"><div class="ic">🕗</div><div><h3>Open 24/7</h3><p>We're open round the clock, every day — walk in or book a home collection whenever it suits you, day or night.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOME COLLECTION BAND -->
+<section class="sec" id="home-collection">
+  <div class="wrap">
+    <div class="band">
+      <div>
+        <h2>Book a free home sample collection</h2>
+        <p>Skip the travel. Our team collects your sample from the comfort of your home across Hyderabad, and your report reaches you on WhatsApp. <strong>Free for orders above ₹500.</strong> Perfect for elders, busy families and post-illness testing.</p>
+      </div>
+      <div class="act">
+        <a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20schedule%20a%20home%20sample%20collection." target="_blank" rel="noopener">Schedule on WhatsApp</a>
+        <a class="btn btn-white" href="tel:+919059341154">Call to book</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec sec-soft" id="about">
+  <div class="wrap about-grid about">
+    <div>
+      <div class="eyebrow">About us</div>
+      <h2 style="font-size:clamp(26px,3.2vw,34px);margin-bottom:16px">A trusted name in Hyderabad diagnostics</h2>
+      <p>Caspian Diagnostic Centre has served the Vijay Nagar Colony community and greater Hyderabad since 2021, with a simple commitment — accurate results, delivered with care. We combine modern laboratory technology with a patient-first approach.</p>
+      <p>As a <strong>Government of Telangana–registered</strong> diagnostic establishment (Regn. No. 07F-APMCE-1846) and a <strong>PCPNDT-registered</strong> imaging centre (Regn. No. 0116A1337), we uphold strict standards of quality and compliance.</p>
+      <p>From routine tests to comprehensive health packages, our qualified team ensures every sample is handled with precision and every report is one you can trust.</p>
+      <div class="chips">
+        <span class="chip">Govt. of Telangana Registered</span>
+        <span class="chip">PCPNDT Registered</span>
+        <span class="chip">Open 24/7</span>
+        <span class="chip">Serving since 2021</span>
+        <span class="chip">Trained professionals</span>
+        <span class="chip">Modern equipment</span>
+        <span class="chip">Patient-first care</span>
+      </div>
+    </div>
+    <div class="imgbox">
+      <div>
+        <div style="font-size:46px;margin-bottom:10px">🔬</div>
+        <b style="font-size:20px;display:block;color:var(--blue-dark)">Caspian Diagnostic Centre</b>
+        <span style="color:var(--muted);font-size:14px">Vijay Nagar Colony, Hyderabad</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Visit or book with us</h2>
+      <p class="lead center">We're here to help you with bookings, home collection and report queries.</p>
+    </div>
+    <div class="contact-grid" style="margin-top:38px">
+      <div class="cinfo">
+        <div class="row"><div class="ic">📍</div><div><b>Address</b><span>10-3-761/8, Ahmed Plaza, Vijay Nagar Colony,<br>Hyderabad, Telangana 500057</span></div></div>
+        <div class="row"><div class="ic">📞</div><div><b>Phone</b><a href="tel:+919059341154">+91 90593 41154</a></div></div>
+        <div class="row"><div class="ic">💬</div><div><b>WhatsApp</b><a href="https://wa.me/919059341154" target="_blank" rel="noopener">Message us to book a test</a></div></div>
+        <div class="row"><div class="ic">✉️</div><div><b>Email</b><a href="mailto:info@caspianlabs.in">info@caspianlabs.in</a></div></div>
+        <div class="row"><div class="ic">🕗</div><div><b>Working hours</b><span>Open 24/7 — every day, all day</span></div></div>
+      </div>
+      <div class="cbox">
+        <iframe title="Caspian Diagnostic Centre location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Caspian%20Diagnostic%20Centre%2C%20Ahmed%20Plaza%2C%20Vijay%20Nagar%20Colony%2C%20Hyderabad%20500057&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="fbrand">
+          <svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0d6bb8"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#14B8A6"/></svg><span class="fbt">Caspian Diagnostic Centre</span>
+          <div class="ftag">Where Speed Meets Precision.</div>
+        </div>
+        <p style="max-width:320px">Where Speed Meets Precision. Reliable pathology testing and health checkups with home sample collection across Hyderabad.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <a href="#services">Services</a>
+        <a href="#packages">Health Packages</a>
+        <a href="#home-collection">Home Collection</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="tel:+919059341154">+91 90593 41154</a>
+        <a href="mailto:info@caspianlabs.in">info@caspianlabs.in</a>
+        <a href="https://wa.me/919059341154" target="_blank" rel="noopener">Book on WhatsApp</a>
+        <span style="display:block;padding:4px 0;color:#a9c8e0">Ahmed Plaza, Vijay Nagar Colony,<br>Hyderabad – 500057</span>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Caspian Diagnostic Centre · Govt. of Telangana Regn. No. 07F-APMCE-1846 · PCPNDT: 0116A1337</span>
+      <span>caspianlabs.in</span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20a%20test." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+</a>
+
+<script>
+  function toggleMenu(){document.getElementById('menu').classList.toggle('open')}
+  function closeMenu(){document.getElementById('menu').classList.remove('open')}
+
+  /* ---- All Tests & Prices directory ---- */
+  // p = real Crelio selling price (₹).
+  // k = extra search keywords/aliases.
+  var TESTS = [
+    // Health checkups & wellness
+    {n:"Full Body Check Up", c:"Health Checkup", p:1795, k:"complete master whole body"},
+    {n:"Caspian Essential Checkup", c:"Health Checkup", p:899, k:"basic routine"},
+    {n:"General Health Check", c:"Health Checkup", p:600, k:"basic routine"},
+    {n:"Clinova Mini Health Check", c:"Health Checkup", p:300, k:"cheap basic"},
+    {n:"Clinova Health Screen", c:"Health Checkup", p:1400, k:""},
+    {n:"Clinova Master Health Screen", c:"Health Checkup", p:3500, k:"comprehensive"},
+    {n:"Complete Metabolic Panel", c:"Health Checkup", p:2500, k:"metabolism"},
+    {n:"Metabolic Wellness + InBody", c:"Health Checkup", p:1795, k:"bca body composition ramzan fitness"},
+    {n:"Metabolic Wellness (without InBody)", c:"Health Checkup", p:1499, k:""},
+    {n:"Premium Health Check — Men 45+", c:"Health Checkup", p:4399, k:"men male senior premium"},
+    {n:"Women's Health Profile", c:"Health Checkup", p:3000, k:"female women ladies"},
+    {n:"Senior Citizen Health", c:"Health Checkup", p:3500, k:"elderly old age geriatric"},
+    {n:"Haj / Umrah Fitness", c:"Health Checkup", p:500, k:"haji pilgrim mecca"},
+
+    // Diabetes / sugar
+    {n:"Comprehensive Diabetes Screening", c:"Diabetes", p:899, k:"sugar hba1c diabetic"},
+    {n:"Diabetes Monitoring Mini Profile", c:"Diabetes", p:500, k:"sugar diabetic"},
+    {n:"Diabetes Monitoring Maxi Profile", c:"Diabetes", p:2000, k:"sugar diabetic"},
+    {n:"HbA1c (Glycated Haemoglobin)", c:"Diabetes", p:600, k:"sugar 3 month diabetes hba1c glycosylated"},
+    {n:"Blood Sugar — Fasting (FBS)", c:"Diabetes", p:80, k:"glucose fasting sugar fbs"},
+    {n:"Blood Sugar — Post Prandial (PPBS)", c:"Diabetes", p:80, k:"glucose pp sugar after food"},
+    {n:"Blood Sugar — Random (RBS)", c:"Diabetes", p:80, k:"glucose random sugar rbs"},
+
+    // Thyroid
+    {n:"Thyroid Profile (T3 T4 TSH)", c:"Thyroid", p:470, k:"thyroid tft"},
+    {n:"Thyroid Panel I (T3 T4 TSH)", c:"Thyroid", p:350, k:"thyroid tft cheap"},
+    {n:"Thyroid Profile II", c:"Thyroid", p:600, k:"thyroid tft"},
+    {n:"Thyroid Comprehensive Profile", c:"Thyroid", p:2000, k:"thyroid antibody tpo"},
+    {n:"TSH (single)", c:"Thyroid", p:350, k:"thyroid stimulating hormone"},
+    {n:"Free T4 (FT4)", c:"Thyroid", p:600, k:"thyroid ft3 ft4"},
+
+    // Cardiac
+    {n:"Cardiac Profile (with 2D Echo)", c:"Cardiac", p:1999, k:"heart ecg echo"},
+    {n:"Heart Health Check (Cardiologist)", c:"Cardiac", p:999, k:"heart ecg echo muzammil cardiologist fitness"},
+    {n:"Cardiac Basic Profile", c:"Cardiac", p:800, k:"heart"},
+    {n:"Cardiac Checkup Camp", c:"Cardiac", p:599, k:"heart camp"},
+
+    // Organ function panels
+    {n:"Lipid Profile (Cholesterol)", c:"Organ Panels", p:450, k:"cholesterol hdl ldl triglycerides fat"},
+    {n:"Liver Function Test (LFT)", c:"Organ Panels", p:450, k:"liver lft sgpt sgot bilirubin"},
+    {n:"Kidney Function Mini Profile (KFT)", c:"Organ Panels", p:400, k:"kidney renal kft urea creatinine"},
+    {n:"Kidney Function Maxi Profile", c:"Organ Panels", p:600, k:"kidney renal kft"},
+    {n:"Electrolyte Profile (Na/K/Cl)", c:"Organ Panels", p:200, k:"sodium potassium chloride electrolytes"},
+    {n:"Ortho Profile", c:"Organ Panels", p:750, k:"bone uric acid calcium"},
+    {n:"Serum Creatinine", c:"Organ Panels", p:250, k:"kidney renal"},
+    {n:"Blood Urea", c:"Organ Panels", p:160, k:"kidney renal urea"},
+    {n:"Uric Acid", c:"Organ Panels", p:160, k:"gout joint"},
+    {n:"Liver Enzymes (SGPT / SGOT)", c:"Organ Panels", p:110, k:"liver alt ast"},
+
+    // Blood / anaemia
+    {n:"Complete Blood Count (CBC)", c:"Haematology", p:350, k:"cbc blood count hemogram haemogram"},
+    {n:"ESR", c:"Haematology", p:170, k:"sedimentation esr inflammation"},
+    {n:"Anaemia Mini Profile", c:"Haematology", p:1200, k:"anemia iron haemoglobin"},
+    {n:"Iron Deficiency Profile", c:"Haematology", p:1000, k:"iron ferritin tibc anemia"},
+    {n:"Serum Ferritin", c:"Haematology", p:400, k:"iron stores anemia"},
+    {n:"Thalassemia Screen", c:"Haematology", p:1000, k:"hbelectrophoresis anemia"},
+    {n:"Blood Group (ABO & Rh)", c:"Haematology", p:160, k:"blood group typing rh"},
+
+    // Vitamins
+    {n:"Vitamin D (25-OH)", c:"Vitamins", p:1350, k:"vit d deficiency bone"},
+    {n:"Vitamin B12", c:"Vitamins", p:800, k:"vit b12 cobalamin"},
+    {n:"Vitamin B Complex Profile", c:"Vitamins", p:7000, k:"vitamin b complex"},
+    {n:"Serum Calcium", c:"Vitamins", p:160, k:"calcium bone"},
+
+    // Women / fertility
+    {n:"Antenatal Mini Profile", c:"Women & Fertility", p:1500, k:"pregnancy antenatal ist trimester"},
+    {n:"Antenatal Maxi Profile", c:"Women & Fertility", p:3000, k:"pregnancy antenatal"},
+    {n:"Pregnancy Profile", c:"Women & Fertility", p:3700, k:"pregnancy"},
+    {n:"Beta HCG (Pregnancy)", c:"Women & Fertility", p:950, k:"pregnancy beta hcg"},
+    {n:"Extended PCOD Panel", c:"Women & Fertility", p:2500, k:"pcos pcod hormone"},
+    {n:"PCOS Mini Profile", c:"Women & Fertility", p:3500, k:"pcos pcod hormone"},
+    {n:"Menopause Mini Profile", c:"Women & Fertility", p:1500, k:"menopause hormone"},
+
+    // Men's health
+    {n:"Testosterone Profile", c:"Men's Health", p:2500, k:"testosterone hormone"},
+    {n:"PSA (Prostate)", c:"Men's Health", p:1200, k:"prostate psa men"},
+
+    // Bone / joint
+    {n:"Bone Profile", c:"Bone & Joint", p:1600, k:"calcium vitamin d bone"},
+    {n:"Osteoporosis Screening", c:"Bone & Joint", p:2400, k:"bone density osteoporosis"},
+    {n:"Arthritis Basic Screen", c:"Bone & Joint", p:2000, k:"joint ra factor arthritis"},
+
+    // Fever / infection
+    {n:"Fever Mini Profile", c:"Fever & Infection", p:665, k:"fever"},
+    {n:"Fever Maxi Profile", c:"Fever & Infection", p:2800, k:"fever"},
+    {n:"Dengue Profile", c:"Fever & Infection", p:2000, k:"dengue ns1 fever"},
+    {n:"Malaria Profile", c:"Fever & Infection", p:500, k:"malaria fever"},
+    {n:"Typhoid Profile", c:"Fever & Infection", p:2000, k:"typhoid widal fever"},
+    {n:"Widal (Typhoid)", c:"Fever & Infection", p:180, k:"typhoid widal fever"},
+    {n:"CRP (C-Reactive Protein)", c:"Fever & Infection", p:550, k:"crp infection inflammation"},
+    {n:"Urine Infection Screen", c:"Fever & Infection", p:500, k:"uti urine infection culture"},
+    {n:"Urine Routine (CUE)", c:"Fever & Infection", p:200, k:"urine complete cue routine"},
+    {n:"Hepatitis B Marker Profile", c:"Fever & Infection", p:1500, k:"hbsag hepatitis liver"},
+
+    // Pre-op / other
+    {n:"Pre-Operative Mini Profile", c:"Pre-op & Other", p:1200, k:"surgery preop pre operative"},
+    {n:"Pre-Operative Maxi Profile", c:"Pre-op & Other", p:2000, k:"surgery preop pre operative"},
+    {n:"Stone Screening Mini Profile", c:"Pre-op & Other", p:2000, k:"kidney stone"},
+    {n:"Hypertension Profile", c:"Pre-op & Other", p:5000, k:"bp blood pressure"},
+    {n:"Asthma Health Camp", c:"Pre-op & Other", p:1600, k:"asthma allergy"}
+  ];
+
+  var WA = "https://wa.me/919059341154?text=";
+  var activeCat = "All";
+
+  function inr(n){return "₹" + n.toLocaleString("en-IN");}
+
+  function buildChips(){
+    var cats = ["All"];
+    TESTS.forEach(function(t){ if(cats.indexOf(t.c)<0) cats.push(t.c); });
+    var html = "";
+    cats.forEach(function(c){
+      html += '<span class="dir-chip'+(c===activeCat?' on':'')+'" onclick="setCat(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</span>';
+    });
+    document.getElementById('dirChips').innerHTML = html;
+  }
+  function setCat(el, c){ activeCat = c; buildChips(); renderDir(); }
+
+  function renderDir(){
+    var q = (document.getElementById('dirInput').value || "").trim().toLowerCase();
+    var list = document.getElementById('dirList');
+    var out = "";
+    var shown = 0;
+    TESTS.forEach(function(t){
+      if(activeCat!=="All" && t.c!==activeCat) return;
+      var hay = (t.n + " " + t.c + " " + (t.k||"")).toLowerCase();
+      if(q && hay.indexOf(q)<0) return;
+      shown++;
+      var priceHtml = (t.p!=null)
+        ? '<div class="ti-price">'+inr(t.p)+'<small>onwards</small></div>'
+        : '<div class="ti-ask">Get price →</div>';
+      var msg = t.p!=null
+        ? "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + " (" + inr(t.p) + ")."
+        : "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + ". Please share the price.";
+      out += '<div class="titem">'
+           +   '<div class="ti-main"><div class="ti-name">'+t.n+'</div><div class="ti-cat">'+t.c+'</div></div>'
+           +   priceHtml
+           +   '<a class="ti-book" target="_blank" rel="noopener" href="'+WA+encodeURIComponent(msg)+'">'
+           +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>'
+           +     '<span>Book</span></a>'
+           + '</div>';
+    });
+    list.innerHTML = out;
+    document.getElementById('dirEmpty').style.display = shown ? "none" : "block";
+    document.getElementById('dirCount').textContent = shown + (shown===1?" test":" tests") + " shown"
+        + (activeCat!=="All"?" in "+activeCat:"") + " · tap Book to reserve on WhatsApp";
+  }
+
+  buildChips();
+  renderDir();
+</script>
+</body>
+</html>
