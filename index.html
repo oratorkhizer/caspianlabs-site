@@ -127,6 +127,9 @@
   .titem .ti-main{flex:1;min-width:0}
   .titem .ti-name{font-weight:700;font-size:15px;color:var(--ink)}
   .titem .ti-cat{font-size:12px;color:var(--teal-dark);font-weight:600;letter-spacing:.02em;margin-top:2px}
+  .titem .ti-inc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .titem .ti-inc b{color:var(--ink);font-weight:600}
+  .dir-hit{background:#fff6d6;border-radius:3px;padding:0 2px;font-weight:700;color:#8a6d1b}
   .titem .ti-price{font-weight:800;font-size:16px;color:var(--blue);white-space:nowrap}
   .titem .ti-price small{display:block;font-weight:600;font-size:11px;color:var(--muted)}
   .titem .ti-ask{font-size:12.5px;color:var(--muted);font-weight:600;white-space:nowrap}
@@ -655,6 +658,40 @@
     {n:"Asthma Health Camp", c:"Pre-op & Other", p:1600, k:"asthma allergy"}
   ];
 
+  // Tests included in each profile/package (shown under the name + searchable).
+  // Common/high-traffic profiles are filled now; remaining ones fill automatically
+  // once the Crelio API is connected.
+  var INC = {
+    "Full Body Check Up":"CBC, ESR, HbA1c, Lipid Profile, Liver Function (LFT), Kidney Function (KFT), Iron Studies (TIBC), Thyroid Profile, Vitamin D, Vitamin B12, Calcium, Complete Urine (CUE)",
+    "Caspian Essential Checkup":"CBC, Blood Sugar (RBS), Lipid Profile, Liver Function (LFT), Complete Urine (CUE), TSH",
+    "Comprehensive Diabetes Screening":"HbA1c, Lipid Profile, Serum Creatinine, Urine Albumin/Creatinine (UACR)",
+    "Diabetes Monitoring Mini Profile":"HbA1c, Fasting Blood Sugar, Post Prandial Blood Sugar",
+    "Diabetes Monitoring Maxi Profile":"HbA1c, Fasting & PP Blood Sugar, Lipid Profile, Kidney Function, Urine Microalbumin",
+    "Metabolic Wellness + InBody":"Full Body Check Up tests + InBody body-composition analysis (fat, muscle, metabolic mapping)",
+    "Metabolic Wellness (without InBody)":"CBC, HbA1c, Lipid Profile, Liver & Kidney Function, Thyroid, Vitamin D & B12",
+    "Women's Health Profile":"Lipid Profile, Kidney Function, Iron Studies (Iron, TIBC), Folic Acid, Vitamin D, Vitamin B12, Calcium, Fasting Sugar, CA-125, Complete Urine",
+    "Senior Citizen Health — Male":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, PSA, Urine ACR & CUE",
+    "Senior Citizen Health — Female":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, Urine ACR & CUE",
+    "Premium Health Check — Men 45+":"CBC, ESR, HbA1c, Lipid Profile + ApoA1/ApoB + Lp(a), Liver & Kidney Function, PSA, Vitamin D & B12, HsCRP (cardiac risk)",
+    "Haj / Umrah Fitness":"CBC, Blood Sugar (RBS), Kidney Function, ECG, Chest X-ray, Blood Group (ABO & Rh)",
+    "Thyroid Profile (T3 T4 TSH)":"T3, T4, TSH",
+    "Thyroid Panel I (T3 T4 TSH)":"T3, T4, TSH",
+    "Cardiac Basic Markers":"CPK (Creatine Kinase), CK-MB, LDH, AST/SGOT",
+    "Heart Health Check (Cardiologist)":"ECG, Blood Sugar (GRBS), 2D Echo, Cardiologist consultation (Dr Sayyed Muzammil)",
+    "Antenatal Maxi Profile":"HIV 1&2, HBsAg, VDRL/RPR, Blood Group (ABO & Rh), Serum Creatinine, Random Blood Sugar, Complete Urine (CUE)",
+    "Antenatal Mini Profile":"HIV 1&2, HBsAg, VDRL/RPR, Blood Group (ABO & Rh), Haemoglobin, Blood Sugar, Urine Routine",
+    "APLA Profile":"Cardiolipin IgG & IgM, Anti-Phospholipid IgA/IgG/IgM, HIV 1&2, HBsAg, VDRL/RPR",
+    "Iron Deficiency Profile":"Serum Iron, TIBC, Transferrin Saturation, Ferritin",
+    "Anaemia Mini Profile":"CBC, Peripheral Smear, Serum Iron, Ferritin, Vitamin B12",
+    "Lipid Profile (Cholesterol)":"Total Cholesterol, HDL, LDL, VLDL, Triglycerides",
+    "Kidney Function Mini Profile (KFT)":"Blood Urea, Serum Creatinine, Uric Acid, Electrolytes",
+    "Liver Function Test (LFT)":"Bilirubin, SGPT, SGOT, ALP, Total Protein, Albumin",
+    "Fever Mini Profile":"CBC, Malaria, Widal, Dengue NS1, Urine Routine",
+    "Fever Maxi Profile":"CBC, Malaria, Widal, Dengue (NS1/IgG/IgM), Typhoid, CRP, LFT, Urine Routine",
+    "Pre-Operative Mini Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, Bleeding & Clotting Time",
+    "Pre-Operative Maxi Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, HCV, PT/INR, LFT, KFT, ECG, Chest X-ray"
+  };
+
   var WA = "https://wa.me/919059341154?text=";
   var activeCat = "All";
 
@@ -678,7 +715,8 @@
     var shown = 0;
     TESTS.forEach(function(t){
       if(activeCat!=="All" && t.c!==activeCat) return;
-      var hay = (t.n + " " + t.c + " " + (t.k||"")).toLowerCase();
+      var incTxt = INC[t.n] || "";
+      var hay = (t.n + " " + t.c + " " + (t.k||"") + " " + incTxt).toLowerCase();
       if(q && hay.indexOf(q)<0) return;
       shown++;
       var priceHtml = (t.p!=null)
@@ -687,8 +725,16 @@
       var msg = t.p!=null
         ? "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + " (" + inr(t.p) + ")."
         : "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + ". Please share the price.";
+      var incHtml = "";
+      if(incTxt){
+        var shownInc = incTxt;
+        if(q){ // highlight the matched test within the includes
+          try { shownInc = incTxt.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'), '<span class="dir-hit">$1</span>'); } catch(e){ shownInc = incTxt; }
+        }
+        incHtml = '<div class="ti-inc"><b>Includes:</b> '+shownInc+'</div>';
+      }
       out += '<div class="titem">'
-           +   '<div class="ti-main"><div class="ti-name">'+t.n+'</div><div class="ti-cat">'+t.c+'</div></div>'
+           +   '<div class="ti-main"><div class="ti-name">'+t.n+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
            +   priceHtml
            +   '<a class="ti-book" target="_blank" rel="noopener" href="'+WA+encodeURIComponent(msg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>'
