@@ -56,6 +56,7 @@
   nav.links{display:flex;align-items:center;gap:26px}
   nav.links a{font-weight:600;font-size:15px;color:var(--ink)}
   nav.links a:hover{color:var(--blue)}
+  .nav-hosp{display:none}
   .nav-cta{display:flex;align-items:center;gap:10px}
   .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:6px}
   .menu-btn span{display:block;width:24px;height:2.5px;background:var(--ink);margin:5px 0;border-radius:2px;transition:.2s}
@@ -202,6 +203,7 @@
     nav.links.open{right:0}
     nav.links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line)}
     .menu-btn{display:block;z-index:70}
+    nav.links a.nav-hosp{display:block;color:var(--blue);font-weight:700}
     .nav-cta .btn-ghost{display:none}
     .cards,.pkgs{grid-template-columns:1fr}
     .topbar .hide-sm{display:none}
@@ -384,6 +386,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       <a href="#home-collection" onclick="closeMenu()">Home Collection</a>
       <a href="#about" onclick="closeMenu()">About</a>
       <a href="#contact" onclick="closeMenu()">Contact</a>
+      <a class="nav-hosp" href="https://www.caspianhealthcare.in" target="_blank" rel="noopener" onclick="closeMenu()">🏥 Our Hospital ↗</a>
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="tel:+919059341154">Call</a>
