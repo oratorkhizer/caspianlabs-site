@@ -17,7 +17,7 @@
     --radius:16px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:hidden}
   body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   h1,h2,h3{line-height:1.2;font-weight:700;letter-spacing:-.01em}
   a{color:inherit;text-decoration:none}
@@ -122,6 +122,9 @@
   .dir-chip{background:#fff;border:1.5px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.15s}
   .dir-chip:hover{border-color:#cfe1f1;color:var(--blue)}
   .dir-chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .dir-chip-pop{border-color:#f6c945;color:#a9791b;background:#fffdf5}
+  .dir-chip-pop.on{background:#f6b21b;border-color:#f6b21b;color:#3a2a00}
+  .ti-pop{display:inline-block;font-size:10.5px;font-weight:800;color:#a9791b;background:#fff5da;border:1px solid #f2d98a;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle;white-space:nowrap}
   .dir-count{text-align:center;color:var(--muted);font-size:13.5px;margin:20px 0 6px}
   .dir-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
   .titem{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:var(--shadow-sm);transition:.15s}
@@ -191,16 +194,17 @@
   @media(max-width:900px){
     .hero .wrap{grid-template-columns:1fr;gap:28px}
     .about-grid,.contact-grid,.band{grid-template-columns:1fr}
-    .band{text-align:left}
+    .band{text-align:left;padding:30px}
     .cards,.pkgs{grid-template-columns:repeat(2,1fr)}
     .feat-grid{grid-template-columns:1fr}
     .stats .grid{grid-template-columns:repeat(2,1fr)}
     .stats .cell:nth-child(2){border-right:0}
     .stats .cell{border-bottom:1px solid var(--line)}
+    footer .cols{grid-template-columns:1fr 1fr;gap:24px}
   }
   @media(max-width:640px){
-    nav.links{position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:320px;background:#fff;flex-direction:column;align-items:flex-start;padding:80px 28px;gap:8px;box-shadow:-10px 0 40px rgba(0,0,0,.15);transition:.3s}
-    nav.links.open{right:0}
+    nav.links{position:fixed;top:0;right:0;height:100vh;width:78%;max-width:320px;background:#fff;flex-direction:column;align-items:flex-start;padding:80px 28px;gap:8px;box-shadow:-10px 0 40px rgba(0,0,0,.15);transform:translateX(100%);visibility:hidden;transition:transform .3s ease,visibility .3s}
+    nav.links.open{transform:translateX(0);visibility:visible}
     nav.links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line)}
     .menu-btn{display:block;z-index:70}
     nav.links a.nav-hosp{display:block;color:var(--blue);font-weight:700}
@@ -208,6 +212,9 @@
     .cards,.pkgs{grid-template-columns:1fr}
     .topbar .hide-sm{display:none}
     .sec{padding:52px 0}
+    .band{padding:24px}
+    footer .cols{grid-template-columns:1fr;gap:20px}
+    .band .act .btn{width:100%;justify-content:center}
   }
 
   .logo-img{height:46px;width:auto;display:block}
@@ -610,7 +617,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         <p>Skip the travel. Our team collects your sample from the comfort of your home across Hyderabad, and your report reaches you on WhatsApp. <strong>Free for orders above ₹500.</strong> Perfect for elders, busy families and post-illness testing.</p>
       </div>
       <div class="act">
-        <a class="btn btn-white" href="#all-tests">Book Online — pick "Home collection"</a>
+        <a class="btn btn-white" href="#all-tests">Book a Test Online</a>
         <a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20schedule%20a%20home%20sample%20collection." target="_blank" rel="noopener">Or WhatsApp</a>
         <a class="btn btn-white" href="tel:+919059341154">Call to book</a>
       </div>
@@ -827,14 +834,14 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   // k = extra search keywords/aliases.
   var TESTS = [
     // Health checkups & wellness
-    {n:"Full Body Check Up", c:"Health Checkup", p:1795, k:"complete master whole body"},
+    {n:"Full Body Check Up", c:"Health Checkup", p:1795, pop:1, k:"complete master whole body"},
     {n:"Caspian Essential Checkup", c:"Health Checkup", p:899, k:"basic routine"},
     {n:"General Health Check", c:"Health Checkup", p:600, k:"basic routine"},
     {n:"Clinova Mini Health Check", c:"Health Checkup", p:300, k:"cheap basic"},
     {n:"Clinova Health Screen", c:"Health Checkup", p:1400, k:""},
     {n:"Clinova Master Health Screen", c:"Health Checkup", p:3500, k:"comprehensive"},
     {n:"Complete Metabolic Panel", c:"Health Checkup", p:2500, k:"metabolism"},
-    {n:"Metabolic Wellness + InBody", c:"Health Checkup", p:1795, k:"bca body composition ramzan fitness"},
+    {n:"Metabolic Wellness + InBody", c:"Health Checkup", p:1795, pop:1, k:"bca body composition ramzan fitness"},
     {n:"Metabolic Wellness (without InBody)", c:"Health Checkup", p:1499, k:""},
     {n:"Premium Health Check — Men 45+", c:"Health Checkup", p:4399, k:"men male senior premium"},
     {n:"Women's Health Profile", c:"Health Checkup", p:3000, k:"female women ladies"},
@@ -843,20 +850,20 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Haj / Umrah Fitness", c:"Health Checkup", p:500, k:"haji pilgrim mecca"},
 
     // Diabetes / sugar
-    {n:"Comprehensive Diabetes Screening", c:"Diabetes", p:899, k:"sugar hba1c diabetic"},
+    {n:"Comprehensive Diabetes Screening", c:"Diabetes", p:899, pop:1, k:"sugar hba1c diabetic"},
     {n:"Diabetes Monitoring Mini Profile", c:"Diabetes", p:500, k:"sugar diabetic"},
     {n:"Diabetes Monitoring Maxi Profile", c:"Diabetes", p:2000, k:"sugar diabetic"},
-    {n:"HbA1c (Glycated Haemoglobin)", c:"Diabetes", p:600, k:"sugar 3 month diabetes hba1c glycosylated"},
-    {n:"Blood Sugar — Fasting (FBS)", c:"Diabetes", p:80, k:"glucose fasting sugar fbs"},
+    {n:"HbA1c (Glycated Haemoglobin)", c:"Diabetes", p:600, pop:1, k:"sugar 3 month diabetes hba1c glycosylated"},
+    {n:"Blood Sugar — Fasting (FBS)", c:"Diabetes", p:80, pop:1, k:"glucose fasting sugar fbs"},
     {n:"Blood Sugar — Post Prandial (PPBS)", c:"Diabetes", p:80, k:"glucose pp sugar after food"},
     {n:"Blood Sugar — Random (RBS)", c:"Diabetes", p:80, k:"glucose random sugar rbs"},
 
     // Thyroid
-    {n:"Thyroid Profile (T3 T4 TSH)", c:"Thyroid", p:470, k:"thyroid tft"},
+    {n:"Thyroid Profile (T3 T4 TSH)", c:"Thyroid", p:470, pop:1, k:"thyroid tft"},
     {n:"Thyroid Panel I (T3 T4 TSH)", c:"Thyroid", p:350, k:"thyroid tft cheap"},
     {n:"Thyroid Profile II", c:"Thyroid", p:600, k:"thyroid tft"},
     {n:"Thyroid Comprehensive Profile", c:"Thyroid", p:2000, k:"thyroid antibody tpo"},
-    {n:"TSH (single)", c:"Thyroid", p:350, k:"thyroid stimulating hormone"},
+    {n:"TSH (single)", c:"Thyroid", p:350, pop:1, k:"thyroid stimulating hormone"},
     {n:"Free T4 (FT4)", c:"Thyroid", p:600, k:"thyroid ft3 ft4"},
 
     // Cardiac
@@ -864,9 +871,9 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Cardiac Basic Markers", c:"Cardiac", p:800, k:"heart cpk ckmb ldh sgot enzymes"},
 
     // Organ function panels
-    {n:"Lipid Profile (Cholesterol)", c:"Organ Panels", p:450, k:"cholesterol hdl ldl triglycerides fat"},
-    {n:"Liver Function Test (LFT)", c:"Organ Panels", p:450, k:"liver lft sgpt sgot bilirubin"},
-    {n:"Kidney Function Mini Profile (KFT)", c:"Organ Panels", p:400, k:"kidney renal kft urea creatinine"},
+    {n:"Lipid Profile (Cholesterol)", c:"Organ Panels", p:450, pop:1, k:"cholesterol hdl ldl triglycerides fat"},
+    {n:"Liver Function Test (LFT)", c:"Organ Panels", p:450, pop:1, k:"liver lft sgpt sgot bilirubin"},
+    {n:"Kidney Function Mini Profile (KFT)", c:"Organ Panels", p:400, pop:1, k:"kidney renal kft urea creatinine"},
     {n:"Kidney Function Maxi Profile", c:"Organ Panels", p:600, k:"kidney renal kft"},
     {n:"Electrolyte Profile (Na/K/Cl)", c:"Organ Panels", p:200, k:"sodium potassium chloride electrolytes"},
     {n:"Ortho Profile", c:"Organ Panels", p:750, k:"bone uric acid calcium"},
@@ -876,7 +883,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Liver Enzymes (SGPT / SGOT)", c:"Organ Panels", p:110, k:"liver alt ast"},
 
     // Blood / anaemia
-    {n:"Complete Blood Count (CBC)", c:"Haematology", p:350, k:"cbc blood count hemogram haemogram"},
+    {n:"Complete Blood Count (CBC)", c:"Haematology", p:350, pop:1, k:"cbc blood count hemogram haemogram"},
     {n:"ESR", c:"Haematology", p:170, k:"sedimentation esr inflammation"},
     {n:"Anaemia Mini Profile", c:"Haematology", p:1200, k:"anemia iron haemoglobin"},
     {n:"Iron Deficiency Profile", c:"Haematology", p:1000, k:"iron ferritin tibc anemia"},
@@ -885,7 +892,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Blood Group (ABO & Rh)", c:"Haematology", p:160, k:"blood group typing rh"},
 
     // Vitamins
-    {n:"Vitamin D (25-OH)", c:"Vitamins", p:1350, k:"vit d deficiency bone"},
+    {n:"Vitamin D (25-OH)", c:"Vitamins", p:1350, pop:1, k:"vit d deficiency bone"},
     {n:"Vitamin B12", c:"Vitamins", p:800, k:"vit b12 cobalamin"},
     {n:"Vitamin B Complex Profile", c:"Vitamins", p:7000, k:"vitamin b complex"},
     {n:"Serum Calcium", c:"Vitamins", p:160, k:"calcium bone"},
@@ -914,9 +921,9 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Malaria Profile", c:"Fever & Infection", p:500, k:"malaria fever"},
     {n:"Typhoid Profile", c:"Fever & Infection", p:2000, k:"typhoid widal fever"},
     {n:"Widal (Typhoid)", c:"Fever & Infection", p:180, k:"typhoid widal fever"},
-    {n:"CRP (C-Reactive Protein)", c:"Fever & Infection", p:550, k:"crp infection inflammation"},
+    {n:"CRP (C-Reactive Protein)", c:"Fever & Infection", p:550, pop:1, k:"crp infection inflammation"},
     {n:"Urine Infection Screen", c:"Fever & Infection", p:500, k:"uti urine infection culture"},
-    {n:"Urine Routine (CUE)", c:"Fever & Infection", p:200, k:"urine complete cue routine"},
+    {n:"Urine Routine (CUE)", c:"Fever & Infection", p:200, pop:1, k:"urine complete cue routine"},
     {n:"Hepatitis B Marker Profile", c:"Fever & Infection", p:1500, k:"hbsag hepatitis liver"},
 
     // Pre-op / other
@@ -927,8 +934,19 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Asthma Health Camp", c:"Pre-op & Other", p:1600, k:"asthma allergy"},
 
     // Imaging & home services
-    {n:"Digital X-ray (Department)", c:"Imaging", p:300, k:"xray x-ray chest spine kub limb bone pns pelvis department radiograph film"},
-    {n:"Chest X-ray at Home (Portable)", c:"Imaging", p:2000, k:"home xray home x-ray home x ray xray at home chest xray at home portable bedridden elderly immobile visiting doorstep house"},
+    {n:"Chest X-ray (PA / AP)", c:"Imaging", p:300, pop:1, k:"xray x-ray chest cxr pa ap view lung tb cough breathless department radiograph film"},
+    {n:"Knee X-ray (AP / Lateral)", c:"Imaging", p:500, k:"xray x-ray knee joint leg ap lat both right left"},
+    {n:"Lumbar Spine X-ray", c:"Imaging", p:500, k:"xray x-ray lumbar spine lower back lbp ls ap lat"},
+    {n:"Cervical Spine X-ray", c:"Imaging", p:500, k:"xray x-ray cervical spine neck ap lat"},
+    {n:"Nasopharynx (Adenoids) X-ray", c:"Imaging", p:300, k:"xray x-ray nasopharynx adenoids child mouth open lateral snoring"},
+    {n:"Foot / Ankle X-ray", c:"Imaging", p:500, k:"xray x-ray foot ankle heel oblique ap lat"},
+    {n:"Hand / Wrist X-ray", c:"Imaging", p:500, k:"xray x-ray hand wrist finger oblique ap"},
+    {n:"Pelvis / Hip X-ray", c:"Imaging", p:1200, k:"xray x-ray pelvis hip"},
+    {n:"Abdomen / KUB X-ray", c:"Imaging", p:1200, k:"xray x-ray abdomen kub kidney stone erect"},
+    {n:"Shoulder X-ray", c:"Imaging", p:300, k:"xray x-ray shoulder ap lateral"},
+    {n:"PNS / Sinus X-ray", c:"Imaging", p:300, k:"xray x-ray pns sinus paranasal sinusitis"},
+    {n:"Other Department X-ray", c:"Imaging", p:300, k:"xray x-ray department elbow thoracic spine other view from 300 radiograph film"},
+    {n:"Chest X-ray at Home (Portable)", c:"Imaging", p:2000, k:"home xray home x-ray home x ray xray at home chest cxr bedside portable bedridden elderly immobile visiting doorstep house"},
     {n:"CGM at Home — FreeStyle Libre 2+", c:"CGM at Home", p:null, k:"cgm continuous glucose monitor libre freestyle abbott sensor diabetes sugar nfc reader flash"},
     {n:"CGM at Home — Guardian IV Sensor", c:"CGM at Home", p:null, k:"cgm continuous glucose monitor guardian medtronic sensor diabetes sugar reader"}
   ];
@@ -965,7 +983,8 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     "Fever Maxi Profile":"CBC, Malaria, Widal, Dengue (NS1/IgG/IgM), Typhoid, CRP, LFT, Urine Routine",
     "Pre-Operative Mini Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, Bleeding & Clotting Time",
     "Pre-Operative Maxi Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, HCV, PT/INR, LFT, KFT, ECG, Chest X-ray",
-    "Digital X-ray (Department)":"Chest, spine, limbs, KUB, PNS, pelvis & more — 60+ views. Standard department X-ray from ₹300. Centre visit only.",
+    "Chest X-ray (PA / AP)":"Our most-requested X-ray — PA or AP chest view for cough, fever, TB screening, breathlessness & pre-op. Digital, same-day film & report.",
+    "Other Department X-ray":"Any other view — elbow, thoracic spine, skull, ribs & more. Standard department X-ray from ₹300, done at the centre.",
     "Chest X-ray at Home (Portable)":"Portable chest X-ray taken at your home by our visiting X-ray team — ideal for elderly, bedridden or post-surgery patients who can't travel to the centre.",
     "CGM at Home — FreeStyle Libre 2+":"Abbott FreeStyle Libre 2+ sensor fitted at your home at MRP — no application charge. Read it on a compatible NFC smartphone or the FreeStyle reader.",
     "CGM at Home — Guardian IV Sensor":"Medtronic Guardian IV sensor fitted at your home at MRP — no application charge. Read it on a compatible phone/receiver. More CGMs (Linx, GlucoRx & others) coming soon."
@@ -985,11 +1004,12 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   function inr(n){return "₹" + n.toLocaleString("en-IN");}
 
   function buildChips(){
-    var cats = ["All"];
+    var cats = ["All","★ Most booked"];
     TESTS.forEach(function(t){ if(cats.indexOf(t.c)<0) cats.push(t.c); });
     var html = "";
     cats.forEach(function(c){
-      html += '<span class="dir-chip'+(c===activeCat?' on':'')+'" onclick="setCat(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</span>';
+      var extra = (c==="★ Most booked") ? ' dir-chip-pop' : '';
+      html += '<span class="dir-chip'+extra+(c===activeCat?' on':'')+'" onclick="setCat(this,\''+c.replace(/'/g,"\\'")+'\')">'+c+'</span>';
     });
     document.getElementById('dirChips').innerHTML = html;
   }
@@ -1000,8 +1020,13 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     var list = document.getElementById('dirList');
     var out = "";
     var shown = 0;
-    TESTS.forEach(function(t){
-      if(activeCat!=="All" && t.c!==activeCat) return;
+    // Popular-first ordering so top sellers surface (Pareto). Stable sort keeps original order otherwise.
+    var order = TESTS.map(function(t,i){return {t:t,i:i};});
+    order.sort(function(a,b){ return ((b.t.pop?1:0)-(a.t.pop?1:0)) || (a.i-b.i); });
+    order.forEach(function(o){
+      var t = o.t;
+      if(activeCat==="★ Most booked"){ if(!t.pop) return; }
+      else if(activeCat!=="All" && t.c!==activeCat) return;
       var incTxt = INC[t.n] || "";
       var hay = (t.n + " " + t.c + " " + (t.k||"") + " " + incTxt).toLowerCase();
       if(q && hay.indexOf(q)<0) return;
@@ -1021,7 +1046,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         incHtml = '<div class="ti-inc"><b>Includes:</b> '+shownInc+'</div>';
       }
       out += '<div class="titem">'
-           +   '<div class="ti-main"><div class="ti-name">'+t.n+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
+           +   '<div class="ti-main"><div class="ti-name">'+t.n+(t.pop?' <span class="ti-pop">★ Popular</span>':'')+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
            +   priceHtml
            +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.n)+'" data-book-price="'+(t.p==null?'':t.p)+'" href="'+WA+encodeURIComponent(msg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>'
@@ -1031,7 +1056,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     list.innerHTML = out;
     document.getElementById('dirEmpty').style.display = shown ? "none" : "block";
     document.getElementById('dirCount').textContent = shown + (shown===1?" test":" tests") + " shown"
-        + (activeCat!=="All"?" in "+activeCat:"") + " · tap Book to reserve on WhatsApp";
+        + (activeCat!=="All"?" in "+activeCat:"") + " · tap Book to reserve online";
   }
 
   buildChips();
@@ -1156,7 +1181,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       var j = res.j || {};
       if(res.status>=200 && res.status<300 && j.ok){
         if(typeof gtag==='function'){gtag('event','booking_success',{event_category:'booking',event_label:bkState.name});}
-        if(typeof fbq==='function'){fbq('track','Schedule',{content_name:bkState.name});}
+        if(typeof fbq==='function'){fbq('track','Schedule');}  // no test name sent to Meta (health-data compliance)
         var done = document.getElementById('bkDone');
         document.getElementById('bkFormWrap').style.display="none";
         done.style.display="";
