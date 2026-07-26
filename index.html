@@ -243,6 +243,8 @@
   .grating .gstars{color:#fbbc04;font-size:15px;letter-spacing:1px}
   .grating .glbl{font-size:13px;color:#5b6b7a;font-weight:600;white-space:nowrap}
   .gg{font-weight:700}.gg .b{color:#4285F4}.gg .r{color:#ea4335}.gg .y{color:#fbbc04}.gg .g{color:#34a853}
+  .btn-google{background:#fff;color:#202124;border:1.5px solid #dadce0;box-shadow:var(--shadow-sm)}
+  .btn-google:hover{background:#f6f9ff;transform:translateY(-1px);border-color:#c8d2df}
 </style>
 
 <!-- ===== SEO: canonical + social preview ===== -->
@@ -570,6 +572,25 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       <div class="frow"><div class="ic">💰</div><div><h3>Fair, transparent pricing</h3><p>Honest package pricing with no hidden costs — quality diagnostics that stay affordable.</p></div></div>
       <div class="frow"><div class="ic">🕗</div><div><h3>Open 24/7</h3><p>We're open round the clock, every day — walk in or book a home collection whenever it suits you, day or night.</p></div></div>
     </div>
+  </div>
+</section>
+
+<!-- REVIEWS / RATE US -->
+<section class="sec" id="reviews" style="background:var(--bg-blue)">
+  <div class="wrap">
+    <div class="center" style="max-width:660px">
+      <div class="eyebrow">Loved by patients</div>
+      <h2>Rated 4.9&#9733; on Google</h2>
+      <p class="lead center">Genuine reviews from patients across Hyderabad. If Caspian has cared for you, a quick rating on Google helps other families find us.</p>
+      <div style="margin-top:22px">
+        <a class="btn btn-google" href="https://g.page/r/CYPwyCtMe4PYEBM/review" target="_blank" rel="noopener" aria-label="Rate Caspian Diagnostic Centre on Google">
+          <span style="color:#fbbc04;font-size:17px">&#9733;</span>&nbsp;Rate us on <span class="gg" style="margin-left:5px"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span>
+        </a>
+      </div>
+    </div>
+    <!-- ELFSIGHT GOOGLE REVIEWS WIDGET: paste the embed code between the markers below -->
+    <!-- WIDGET-START -->
+    <!-- WIDGET-END -->
   </div>
 </section>
 
@@ -927,6 +948,12 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(wa){
       if(typeof gtag==='function'){gtag('event','whatsapp_click',{event_category:'engagement',event_label:(wa.href||'').split('?')[0]});}
       if(typeof fbq==='function'){fbq('track','Contact',{method:'whatsapp'});}
+      return;
+    }
+    var rev = e.target.closest('a[href*="g.page"]');
+    if(rev){
+      if(typeof gtag==='function'){gtag('event','review_click',{event_category:'engagement'});}
+      if(typeof fbq==='function'){fbq('track','Lead',{content_name:'google_review'});}
       return;
     }
     var tel = e.target.closest('a[href^="tel:"]');
