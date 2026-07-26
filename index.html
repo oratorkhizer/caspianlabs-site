@@ -738,6 +738,85 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
 </a>
 
+<!-- ONLINE BOOKING MODAL (dormant until BOOKING_LIVE=true) -->
+<style>
+  .bk-ov{position:fixed;inset:0;z-index:9999;display:none;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);padding:0}
+  .bk-ov.on{display:flex}
+  @media(min-width:640px){.bk-ov{align-items:center;padding:20px}}
+  .bk-card{background:#fff;width:100%;max-width:480px;max-height:94vh;overflow-y:auto;border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.25);animation:bkup .22s ease}
+  @media(min-width:640px){.bk-card{border-radius:20px;animation:bkin .18s ease}}
+  @keyframes bkup{from{transform:translateY(40px);opacity:.6}to{transform:translateY(0);opacity:1}}
+  @keyframes bkin{from{transform:scale(.97);opacity:.6}to{transform:scale(1);opacity:1}}
+  .bk-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 12px}
+  .bk-head h3{margin:0;font-size:19px;font-weight:800;color:#0f2444}
+  .bk-x{border:0;background:#f1f5f9;width:34px;height:34px;border-radius:50%;font-size:20px;line-height:1;color:#475569;cursor:pointer;flex:0 0 auto}
+  .bk-x:hover{background:#e2e8f0}
+  .bk-body{padding:0 20px 20px}
+  .bk-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#eef4ff;border:1px solid #d6e4ff;border-radius:12px;padding:11px 14px;margin-bottom:16px}
+  .bk-chip .nm{font-weight:700;color:#0f2444;font-size:14.5px;line-height:1.3}
+  .bk-chip .pr{font-weight:800;color:#1a56db;white-space:nowrap;font-size:14.5px}
+  .bk-f{margin-bottom:13px}
+  .bk-f label{display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:5px}
+  .bk-f label .req{color:#e11d48}
+  .bk-f input,.bk-f select,.bk-f textarea{width:100%;box-sizing:border-box;border:1.5px solid #d9e0ea;border-radius:10px;padding:11px 12px;font-size:15px;font-family:inherit;color:#0f2444;background:#fff;transition:.15s}
+  .bk-f input:focus,.bk-f select:focus,.bk-f textarea:focus{outline:0;border-color:#1a56db;box-shadow:0 0 0 3px rgba(26,86,219,.12)}
+  .bk-row{display:flex;gap:11px}.bk-row .bk-f{flex:1}
+  .bk-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}
+  .bk-mode{border:1.5px solid #d9e0ea;border-radius:11px;padding:10px 6px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:#475569;line-height:1.3;transition:.15s;user-select:none}
+  .bk-mode .em{display:block;font-size:19px;margin-bottom:3px}
+  .bk-mode.on{border-color:#1a56db;background:#eef4ff;color:#1a56db}
+  .bk-note{font-size:11.5px;color:#64748b;margin:2px 2px 15px;line-height:1.5}
+  .bk-sub{width:100%;border:0;border-radius:12px;background:#1a56db;color:#fff;font-weight:800;font-size:16px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+  .bk-sub:hover{background:#1447b8}.bk-sub:disabled{opacity:.65;cursor:default}
+  .bk-err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:13px;padding:10px 12px;border-radius:10px;margin-bottom:13px;display:none}
+  .bk-secure{text-align:center;font-size:11.5px;color:#94a3b8;margin-top:12px}
+  .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
+  @keyframes bkspin{to{transform:rotate(360deg)}}
+  .bk-done{text-align:center;padding:14px 4px 6px}
+  .bk-done .tick{width:64px;height:64px;border-radius:50%;background:#dcfce7;color:#16a34a;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 14px}
+  .bk-done h4{margin:0 0 6px;font-size:20px;color:#0f2444;font-weight:800}
+  .bk-done p{margin:0 0 6px;color:#475569;font-size:14.5px;line-height:1.55}
+  .bk-done .ref{display:inline-block;background:#eef4ff;color:#1a56db;font-weight:800;padding:6px 14px;border-radius:9px;margin:8px 0 4px;font-size:15px}
+  .bk-done .btn-wa2{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:11px;margin-top:14px;font-size:15px}
+</style>
+<div class="bk-ov" id="bkOv" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+  <div class="bk-card">
+    <div class="bk-head">
+      <h3 id="bkTitle">Book your test</h3>
+      <button class="bk-x" type="button" onclick="closeBooking()" aria-label="Close">&times;</button>
+    </div>
+    <div class="bk-body">
+      <div id="bkFormWrap">
+        <div class="bk-chip"><span class="nm" id="bkTestName">—</span><span class="pr" id="bkTestPrice"></span></div>
+        <div class="bk-err" id="bkErr"></div>
+        <form id="bkForm" novalidate>
+          <div class="bk-f"><label>Full name <span class="req">*</span></label><input id="bkName" type="text" autocomplete="name" placeholder="Patient's full name" required></div>
+          <div class="bk-row">
+            <div class="bk-f"><label>Mobile <span class="req">*</span></label><input id="bkMobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10-digit number" maxlength="10" required></div>
+            <div class="bk-f" style="flex:0 0 90px"><label>Age</label><input id="bkAge" type="number" min="0" max="120" inputmode="numeric" placeholder="Years"></div>
+          </div>
+          <div class="bk-row">
+            <div class="bk-f"><label>Gender</label><select id="bkGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+            <div class="bk-f"><label>Email</label><input id="bkEmail" type="email" autocomplete="email" placeholder="For your report"></div>
+          </div>
+          <label style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:6px">How would you like it?</label>
+          <div class="bk-modes" id="bkModes">
+            <div class="bk-mode on" data-mode="now"><span class="em">🏢</span>At the centre</div>
+            <div class="bk-mode" data-mode="home"><span class="em">🏠</span>Home collection</div>
+            <div class="bk-mode" data-mode="scheduled"><span class="em">🗓️</span>Pick a slot</div>
+          </div>
+          <div class="bk-f" id="bkAddrWrap" style="display:none"><label>Home address <span class="req">*</span></label><textarea id="bkAddr" rows="2" placeholder="Flat / house, area, landmark, Hyderabad"></textarea></div>
+          <div class="bk-f" id="bkTimeWrap" style="display:none"><label>Preferred date &amp; time</label><input id="bkTime" type="datetime-local"></div>
+          <div class="bk-note">Free home collection on orders above ₹500. Payment is collected at the centre or at your doorstep — you don't pay online.</div>
+          <button class="bk-sub" type="submit" id="bkSub">Confirm booking</button>
+          <div class="bk-secure">🔒 Your details go straight to Caspian — never shared.</div>
+        </form>
+      </div>
+      <div id="bkDone" class="bk-done" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   function toggleMenu(){document.getElementById('menu').classList.toggle('open')}
   function closeMenu(){document.getElementById('menu').classList.remove('open')}
@@ -894,6 +973,14 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   var WA = "https://wa.me/919059341154?text=";
   var activeCat = "All";
 
+  // ── Online booking switch ──────────────────────────────────────────────
+  // false = every "Book" button opens WhatsApp exactly as before (zero change to the live site).
+  // true  = "Book" buttons open the online form, which registers directly in Crelio via /api/book,
+  //         and silently falls back to WhatsApp if the API errors or a test isn't mapped yet.
+  //         Flip to true ONLY after the Vercel env vars (CRELIO_TOKEN etc.) are set.
+  var BOOKING_LIVE = false;
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function inr(n){return "₹" + n.toLocaleString("en-IN");}
 
   function buildChips(){
@@ -935,7 +1022,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       out += '<div class="titem">'
            +   '<div class="ti-main"><div class="ti-name">'+t.n+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
            +   priceHtml
-           +   '<a class="ti-book" target="_blank" rel="noopener" href="'+WA+encodeURIComponent(msg)+'">'
+           +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.n)+'" data-book-price="'+(t.p==null?'':t.p)+'" href="'+WA+encodeURIComponent(msg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.6.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>'
            +     '<span>Book</span></a>'
            + '</div>';
@@ -948,6 +1035,145 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 
   buildChips();
   renderDir();
+
+  /* ===== Online booking modal ===== */
+  var bkState = { name:"", price:null, mode:"now" };
+
+  // Intercept any "Book" trigger that carries a test name — only when booking is live.
+  document.addEventListener('click', function(e){
+    if(!BOOKING_LIVE) return;                       // dormant: let the WhatsApp href work as normal
+    var t = e.target.closest('[data-book-name]');
+    if(!t) return;
+    e.preventDefault();
+    e.stopPropagation();                            // don't also fire the WhatsApp-click tracker
+    var price = t.getAttribute('data-book-price');
+    openBooking(t.getAttribute('data-book-name'), price===""?null:Number(price));
+  }, true);
+
+  function openBooking(name, price){
+    bkState.name = name; bkState.price = price; bkState.mode = "now";
+    document.getElementById('bkTestName').textContent = name;
+    document.getElementById('bkTestPrice').textContent = (price!=null) ? inr(price) : "";
+    document.getElementById('bkErr').style.display = "none";
+    document.getElementById('bkForm').reset();
+    document.getElementById('bkFormWrap').style.display = "";
+    document.getElementById('bkDone').style.display = "none";
+    document.getElementById('bkDone').innerHTML = "";
+    setMode('now');
+    var sub = document.getElementById('bkSub'); sub.disabled=false; sub.textContent="Confirm booking";
+    document.getElementById('bkOv').classList.add('on');
+    document.body.style.overflow = "hidden";
+    if(typeof gtag==='function'){gtag('event','booking_open',{event_category:'booking',event_label:name});}
+  }
+  function closeBooking(){
+    document.getElementById('bkOv').classList.remove('on');
+    document.body.style.overflow = "";
+  }
+  // close on backdrop click / Esc
+  document.getElementById('bkOv').addEventListener('click', function(e){ if(e.target===this) closeBooking(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeBooking(); });
+
+  function setMode(m){
+    bkState.mode = m;
+    Array.prototype.forEach.call(document.querySelectorAll('#bkModes .bk-mode'), function(el){
+      el.classList.toggle('on', el.getAttribute('data-mode')===m);
+    });
+    document.getElementById('bkAddrWrap').style.display = (m==='home') ? "" : "none";
+    document.getElementById('bkTimeWrap').style.display = (m==='home'||m==='scheduled') ? "" : "none";
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#bkModes .bk-mode'), function(el){
+    el.addEventListener('click', function(){ setMode(el.getAttribute('data-mode')); });
+  });
+
+  // Build a rich WhatsApp fallback message (used whenever the API can't complete the booking).
+  function bkWhatsAppUrl(v){
+    var L = [];
+    L.push("Hi Caspian Diagnostic Centre, I'd like to book:");
+    L.push("• " + bkState.name + (bkState.price!=null ? " (" + inr(bkState.price) + ")" : ""));
+    if(v.name)   L.push("Name: " + v.name);
+    if(v.age||v.gender) L.push("Age/Gender: " + [v.age, v.gender].filter(Boolean).join(" / "));
+    if(v.mobile) L.push("Mobile: " + v.mobile);
+    if(v.email)  L.push("Email: " + v.email);
+    var modeTxt = {now:"At the centre", home:"Home collection", scheduled:"Preferred slot"}[v.mode] || v.mode;
+    L.push("Preference: " + modeTxt);
+    if(v.mode==='home' && v.address) L.push("Address: " + v.address);
+    if((v.mode==='home'||v.mode==='scheduled') && v.dateTime) L.push("Time: " + v.dateTime.replace('T',' '));
+    return WA + encodeURIComponent(L.join("\n"));
+  }
+  function bkFallback(v, reason){
+    if(typeof gtag==='function'){gtag('event','booking_fallback_whatsapp',{event_category:'booking',event_label:reason||'',});}
+    if(typeof fbq==='function'){fbq('track','Lead',{content_name:'booking_whatsapp_fallback'});}
+    var url = bkWhatsAppUrl(v);
+    var done = document.getElementById('bkDone');
+    document.getElementById('bkFormWrap').style.display = "none";
+    done.style.display = "";
+    done.innerHTML = '<div class="tick" style="background:#e7f7ee;color:#25D366">💬</div>'
+      + '<h4>Almost done!</h4>'
+      + '<p>Tap below to send your booking to our team on WhatsApp — we\'ll confirm your slot right away.</p>'
+      + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Confirm on WhatsApp</a>';
+    // best-effort auto-open so a tap isn't strictly required
+    try { window.open(url, '_blank', 'noopener'); } catch(err){}
+  }
+
+  document.getElementById('bkForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = {
+      name:   document.getElementById('bkName').value.trim(),
+      mobile: document.getElementById('bkMobile').value.replace(/\D/g,''),
+      age:    document.getElementById('bkAge').value.trim(),
+      gender: document.getElementById('bkGender').value,
+      email:  document.getElementById('bkEmail').value.trim(),
+      mode:   bkState.mode,
+      address:document.getElementById('bkAddr').value.trim(),
+      dateTime:document.getElementById('bkTime').value
+    };
+    var err = document.getElementById('bkErr');
+    function fail(m){ err.textContent = m; err.style.display="block"; }
+    if(!v.name){ return fail("Please enter the patient's full name."); }
+    if(v.mobile.length!==10){ return fail("Please enter a valid 10-digit mobile number."); }
+    if(v.mode==='home' && !v.address){ return fail("Please add the home address for collection."); }
+    err.style.display="none";
+
+    var sub = document.getElementById('bkSub');
+    sub.disabled = true; sub.innerHTML = '<span class="bk-spin"></span> Booking…';
+
+    var payload = {
+      fullName:v.name, mobile:v.mobile, email:v.email, age:v.age, gender:v.gender,
+      mode:v.mode, address:v.address, dateTime:v.dateTime,
+      items:[ { name:bkState.name } ]
+    };
+
+    var timedOut = false;
+    var timer = setTimeout(function(){ timedOut = true; bkFallback(v,'timeout'); }, 12000);
+
+    fetch('/api/book', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j}; }); })
+    .then(function(res){
+      if(timedOut) return;
+      clearTimeout(timer);
+      var j = res.j || {};
+      if(res.status>=200 && res.status<300 && j.ok){
+        if(typeof gtag==='function'){gtag('event','booking_success',{event_category:'booking',event_label:bkState.name});}
+        if(typeof fbq==='function'){fbq('track','Schedule',{content_name:bkState.name});}
+        var done = document.getElementById('bkDone');
+        document.getElementById('bkFormWrap').style.display="none";
+        done.style.display="";
+        var ref = j.billId ? ('<div class="ref">Booking Ref #'+j.billId+'</div>') : '';
+        done.innerHTML = '<div class="tick">✓</div>'
+          + '<h4>Booking confirmed!</h4>'
+          + '<p>Thank you, '+esc(v.name)+'. Your booking for <b>'+esc(bkState.name)+'</b> is registered with Caspian.</p>'
+          + ref
+          + '<p style="margin-top:8px">Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm the details'
+          + (v.mode==='home' ? ' and your home-collection slot' : '') + '.</p>'
+          + '<a class="btn-wa2" href="'+bkWhatsAppUrl(v)+'" target="_blank" rel="noopener">Message us on WhatsApp</a>';
+      } else {
+        // notConfigured / notMapped / any API error → WhatsApp, no dead ends
+        bkFallback(v, j.notConfigured ? 'not_configured' : (j.notMapped ? 'not_mapped' : ('http_'+res.status)));
+      }
+    })
+    .catch(function(){ if(timedOut) return; clearTimeout(timer); bkFallback(v,'network'); });
+  });
 
   /* ===== Conversion tracking: WhatsApp booking & phone clicks ===== */
   document.addEventListener('click', function(e){
