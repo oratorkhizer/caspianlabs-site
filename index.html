@@ -978,7 +978,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   // true  = "Book" buttons open the online form, which registers directly in Crelio via /api/book,
   //         and silently falls back to WhatsApp if the API errors or a test isn't mapped yet.
   //         Flip to true ONLY after the Vercel env vars (CRELIO_TOKEN etc.) are set.
-  var BOOKING_LIVE = false;
+  var BOOKING_LIVE = true;
 
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function inr(n){return "₹" + n.toLocaleString("en-IN");}
