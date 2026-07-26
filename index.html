@@ -218,7 +218,121 @@
   .bt{font-weight:800;font-size:20px;color:var(--blue);letter-spacing:-.02em}
   .bs{font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
   .fbt{color:#fff;font-weight:800;font-size:18px}
+
+  /* FAQ */
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;box-shadow:var(--shadow-sm);overflow:hidden}
+  .faq-item summary{list-style:none;cursor:pointer;padding:17px 22px;font-weight:600;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-size:24px;font-weight:400;color:var(--blue);transition:.2s;flex:0 0 auto;line-height:1}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-item summary:hover{color:var(--blue)}
+  .faq-item p{padding:0 22px 18px;color:var(--muted);font-size:15px}
 </style>
+
+<!-- ===== SEO: canonical + social preview ===== -->
+<link rel="canonical" href="https://www.caspianlabs.in/">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="diagnostic centre Hyderabad, pathology lab Vijay Nagar, blood test Hyderabad, health checkup packages, home sample collection Hyderabad, HbA1c, thyroid profile, full body checkup">
+<meta name="author" content="Caspian Diagnostic Centre">
+<meta property="og:title" content="Caspian Diagnostic Centre — Diagnostic Lab in Hyderabad">
+<meta property="og:description" content="Accurate pathology testing, health checkup packages &amp; home sample collection in Hyderabad. Open 24/7. Book on WhatsApp.">
+<meta property="og:image" content="https://www.caspianlabs.in/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://www.caspianlabs.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caspian Diagnostic Centre">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Caspian Diagnostic Centre — Diagnostic Lab in Hyderabad">
+<meta name="twitter:description" content="Accurate pathology testing, health packages &amp; home collection. Open 24/7. Book on WhatsApp.">
+<meta name="twitter:image" content="https://www.caspianlabs.in/og-image.png">
+
+<!-- ===== Structured data: MedicalBusiness ===== -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"MedicalBusiness",
+  "@id":"https://www.caspianlabs.in/#business",
+  "name":"Caspian Diagnostic Centre",
+  "alternateName":"Caspian Labs",
+  "description":"Pathology lab, health checkup packages and home sample collection in Vijay Nagar, Hyderabad. Government of Telangana and PCPNDT registered. Open 24/7.",
+  "url":"https://www.caspianlabs.in/",
+  "logo":"https://www.caspianlabs.in/og-image.png",
+  "image":"https://www.caspianlabs.in/og-image.png",
+  "telephone":"+91-90593-41154",
+  "email":"info@caspianlabs.in",
+  "priceRange":"₹₹",
+  "medicalSpecialty":"Pathology",
+  "currenciesAccepted":"INR",
+  "foundingDate":"2021",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"10-3-761/8, Ahmed Plaza, Vijay Nagar Colony",
+    "addressLocality":"Hyderabad",
+    "postalCode":"500057",
+    "addressRegion":"Telangana",
+    "addressCountry":"IN"
+  },
+  "hasMap":"https://share.google/AIJCsiy3rClrF880u",
+  "areaServed":{"@type":"City","name":"Hyderabad"},
+  "openingHoursSpecification":[{
+    "@type":"OpeningHoursSpecification",
+    "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens":"00:00",
+    "closes":"23:59"
+  }],
+  "availableService":[
+    {"@type":"MedicalTest","name":"Pathology &amp; blood testing"},
+    {"@type":"MedicalTest","name":"Health checkup packages"},
+    {"@type":"MedicalProcedure","name":"Home sample collection"},
+    {"@type":"MedicalImaging","name":"Ultrasound (USG)"}
+  ],
+  "sameAs":["https://www.facebook.com/caspianlabs"]
+}
+</script>
+
+<!-- ===== Structured data: FAQ ===== -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Do I need to fast before my blood test?","acceptedAnswer":{"@type":"Answer","text":"Some tests such as fasting blood sugar and lipid profile need 8–12 hours of fasting, while many others do not. Message us on WhatsApp with your test name and we will confirm whether fasting is required."}},
+    {"@type":"Question","name":"Do you offer home sample collection?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our trained phlebotomists collect samples from your home, free for orders above ₹500. Book on WhatsApp with your name, area and preferred time and our team will confirm your slot."}},
+    {"@type":"Question","name":"When will I receive my report?","acceptedAnswer":{"@type":"Answer","text":"Most routine reports are ready the same day or within 24 hours and are delivered directly on WhatsApp. Timing can vary for specialised tests."}},
+    {"@type":"Question","name":"What are your timings?","acceptedAnswer":{"@type":"Answer","text":"Caspian Diagnostic Centre is open 24/7, every day of the week."}},
+    {"@type":"Question","name":"How do I book a test?","acceptedAnswer":{"@type":"Answer","text":"You can book online at caspianlabs.in, message us on WhatsApp at +91 90593 41154, or walk in to our centre at Ahmed Plaza, Vijay Nagar Colony, Hyderabad."}},
+    {"@type":"Question","name":"Where is Caspian Diagnostic Centre located?","acceptedAnswer":{"@type":"Answer","text":"We are at 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad, Telangana 500057."}},
+    {"@type":"Question","name":"Can I consult a doctor at Caspian?","acceptedAnswer":{"@type":"Answer","text":"Doctor consultations are handled at Caspian Healthcare, our OPD. You can book a doctor appointment online on Eka."}}
+  ]
+}
+</script>
+
+<!-- ===== Google Analytics 4 ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLC8586NC3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MLC8586NC3');
+</script>
+
+<!-- ===== Meta Pixel ===== -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4485931708352445');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 
@@ -474,6 +588,26 @@
         <b style="font-size:20px;display:block;color:var(--blue-dark)">Caspian Diagnostic Centre</b>
         <span style="color:var(--muted);font-size:14px">Vijay Nagar Colony, Hyderabad</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-soft" id="faq">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <div class="eyebrow">Good to know</div>
+      <h2>Frequently asked questions</h2>
+      <p class="lead center">Quick answers to what patients ask us most. Need something else? Message us on WhatsApp — we're open 24/7.</p>
+    </div>
+    <div class="faq-list" style="max-width:820px;margin:34px auto 0">
+      <details class="faq-item"><summary>Do I need to fast before my blood test?</summary><p>Some tests such as fasting blood sugar and lipid profile need 8–12 hours of fasting, while many others don't. Message us on WhatsApp with your test name and we'll confirm whether fasting is required.</p></details>
+      <details class="faq-item"><summary>Do you offer home sample collection?</summary><p>Yes — our trained phlebotomists collect samples from your home, free for orders above ₹500. Book on WhatsApp with your name, area and preferred time, and our team will confirm your slot.</p></details>
+      <details class="faq-item"><summary>When will I receive my report?</summary><p>Most routine reports are ready the same day or within 24 hours, and are delivered directly on WhatsApp. Timing can vary for specialised tests.</p></details>
+      <details class="faq-item"><summary>What are your timings?</summary><p>We're open <strong>24/7</strong>, every day of the week.</p></details>
+      <details class="faq-item"><summary>How do I book a test?</summary><p>Book online right here at caspianlabs.in, message us on WhatsApp at +91 90593 41154, or simply walk in to our centre at Ahmed Plaza, Vijay Nagar Colony.</p></details>
+      <details class="faq-item"><summary>Where are you located?</summary><p>10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad, Telangana 500057. <a href="https://share.google/AIJCsiy3rClrF880u" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">Get directions →</a></p></details>
+      <details class="faq-item"><summary>Can I consult a doctor at Caspian?</summary><p>Doctor consultations are handled at <strong>Caspian Healthcare</strong>, our OPD. You can book a doctor appointment online on Eka — just ask us on WhatsApp and we'll share the link.</p></details>
     </div>
   </div>
 </section>
@@ -749,6 +883,21 @@
 
   buildChips();
   renderDir();
+
+  /* ===== Conversion tracking: WhatsApp booking & phone clicks ===== */
+  document.addEventListener('click', function(e){
+    var wa = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp"], a[href*="whatsapp.com"]');
+    if(wa){
+      if(typeof gtag==='function'){gtag('event','whatsapp_click',{event_category:'engagement',event_label:(wa.href||'').split('?')[0]});}
+      if(typeof fbq==='function'){fbq('track','Contact',{method:'whatsapp'});}
+      return;
+    }
+    var tel = e.target.closest('a[href^="tel:"]');
+    if(tel){
+      if(typeof gtag==='function'){gtag('event','phone_click',{event_category:'engagement'});}
+      if(typeof fbq==='function'){fbq('track','Contact',{method:'phone'});}
+    }
+  });
 </script>
 </body>
 </html>
