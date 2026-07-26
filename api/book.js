@@ -35,6 +35,11 @@ export default async function handler(req, res) {
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = {}; } }
   body = body || {};
 
+  // ---- Honeypot: bots fill hidden fields humans never see. Pretend success, create no bill. ----
+  if (body.website || body.company_url) {
+    return res.status(200).json({ ok: true, billId: null, patientId: null, skipped: true });
+  }
+
   // ---- Validate ----
   const errors = [];
   const fullName = String(body.fullName || body.name || "").trim();
@@ -56,7 +61,7 @@ export default async function handler(req, res) {
   const testList = items.map((it) => {
     const entry = {};
     const id = it.id ?? it.testID ?? it.testId;
-    if (id !== undefined && id !== null && String(id).trim() !== "") entry.testID = Number(id) || String(id);
+    if (id !== undefined && id !== null && String(id).trim() !== "") { const nid = Number(id); entry.testID = Number.isFinite(nid) ? nid : String(id); }
     let code = it.code ?? it.testCode;
     if (!code && it.name) { const m = CODE_MAP[String(it.name).trim()]; if (m) code = m.code; }
     if (code) entry.testCode = String(code);
@@ -123,14 +128,16 @@ export default async function handler(req, res) {
         401: "Request type not accepted by Crelio",
         403: "Organisation/referral not authorised (try paymentType Cash)",
       }[r.status] || "Crelio API error";
-      return res.status(502).json({ ok: false, error: hint, status: r.status, detail: data });
+      console.error("Crelio booking error", r.status, JSON.stringify(data).slice(0, 500));  // server log only
+      return res.status(502).json({ ok: false, error: hint, status: r.status });
     }
 
     const billId    = data.billId || data.orderId || null;
     const patientId = data.patientId || null;
     return res.status(200).json({ ok: true, mode, billId, patientId, crelio: data });
   } catch (e) {
-    return res.status(500).json({ ok: false, error: "Server error contacting Crelio", detail: String(e) });
+    console.error("Booking server error", String(e));  // server log only
+    return res.status(500).json({ ok: false, error: "Server error contacting Crelio" });
   }
 }
 
