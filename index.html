@@ -61,6 +61,13 @@
   nav.links a:hover{color:var(--blue)}
   .nav-hosp{display:none}
   .nav-cta{display:flex;align-items:center;gap:10px}
+  .nav-cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1.5px solid var(--line);background:#fff;border-radius:11px;color:var(--ink);cursor:pointer;transition:.15s;flex:0 0 auto;padding:0}
+  .nav-cart:hover{border-color:#cfe1f1;color:var(--blue)}
+  .nav-cart .nc-badge{position:absolute;top:-7px;right:-7px;background:var(--blue);color:#fff;font-size:11px;font-weight:800;min-width:19px;height:19px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px;box-shadow:0 0 0 2px #fff}
+  .nav-cart .nc-badge[hidden]{display:none}
+  .nav-cart.bump{animation:ncbump .35s ease}
+  @keyframes ncbump{0%{transform:scale(1)}40%{transform:scale(1.22)}100%{transform:scale(1)}}
+  @media(max-width:640px){ .nav-cart{display:none} }
   .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:6px}
   .menu-btn span{display:block;width:24px;height:2.5px;background:var(--ink);margin:5px 0;border-radius:2px;transition:.2s}
 
@@ -133,7 +140,8 @@
   .titem{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:var(--shadow-sm);transition:.15s}
   .titem:hover{border-color:#cfe1f1;transform:translateY(-2px)}
   .titem .ti-main{flex:1;min-width:0}
-  .titem .ti-name{font-weight:700;font-size:15px;color:var(--ink)}
+  .titem .ti-name{font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;display:inline-block}
+  .titem .ti-name:hover{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
   .titem .ti-cat{font-size:12px;color:var(--teal-dark);font-weight:600;letter-spacing:.02em;margin-top:2px}
   .titem .ti-inc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
   .titem .ti-inc b{color:var(--ink);font-weight:600}
@@ -155,6 +163,7 @@
   #sharePop button{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:10px 10px;border-radius:8px;font-size:14px;color:#0f2444;cursor:pointer;text-align:left;font-family:inherit}
   #sharePop button:hover{background:#f1f5f9}
   #toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(20px);background:#0f2444;color:#fff;font-size:14px;font-weight:600;padding:11px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.25s;z-index:10000}
+  @media(max-width:640px){ #toast{bottom:150px} }
   #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
   .dir-empty{text-align:center;color:var(--muted);padding:34px 0;font-size:15px}
   .dir-portal{background:var(--bg-blue);border:1px dashed #bcdcf5;color:var(--blue-dark);border-radius:14px;padding:14px 18px;margin:22px auto 0;max-width:760px;text-align:center;font-size:13.5px}
@@ -417,6 +426,10 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="tel:+919059341154">Call</a>
+      <button class="nav-cart" id="navCart" type="button" onclick="openCart()" aria-label="Your booking (empty)" title="Your booking">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.4"/><circle cx="19" cy="21" r="1.4"/><path d="M2.5 3.5h2.2l2.1 11.4a2 2 0 0 0 2 1.6h8.3a2 2 0 0 0 2-1.6L21 8H6.2"/></svg>
+        <span class="nc-badge" id="navCartCount" hidden>0</span>
+      </button>
       <a class="btn btn-primary" href="#all-tests">Book Online</a>
       <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
@@ -540,7 +553,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         <div class="top"><h3>Senior Citizen Health</h3><div class="cnt">Complete elder care check</div></div>
         <div class="price">From <b>₹3,500</b></div>
         <ul><li>Lipid &amp; Kidney Function</li><li>HbA1c &amp; Fasting Sugar</li><li>Iron Studies, Folic Acid</li><li>Vitamin D &amp; B12, Calcium</li><li>PSA (men) / relevant markers</li><li>Urine ACR &amp; Complete Urine</li></ul>
-        <div class="act"><a class="btn btn-primary" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Senior%20Citizen%20Health%20package." target="_blank" rel="noopener">Book this package</a></div>
+        <div class="act"><a class="btn btn-primary" href="#all-tests" onclick="var i=document.getElementById('dirInput'); if(i){activeCat='All';buildChips();i.value='Senior Citizen';renderDir();}">Choose &amp; book (M / F)</a></div>
       </div>
       <div class="pkg feat">
         <div class="top"><span class="tag">CARDIOLOGIST</span><h3>Heart Health Check</h3><div class="cnt">Cardiologist-led</div></div>
@@ -878,7 +891,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-sub{width:100%;border:0;border-radius:12px;background:#1a56db;color:#fff;font-weight:800;font-size:16px;padding:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
   .bk-sub:hover{background:#1447b8}.bk-sub:disabled{opacity:.65;cursor:default}
   .bk-err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:13px;padding:10px 12px;border-radius:10px;margin-bottom:13px;display:none}
-  .bk-secure{text-align:center;font-size:11.5px;color:#94a3b8;margin-top:12px}
+  .bk-secure{text-align:center;font-size:11.5px;color:#64748b;margin-top:12px}
   .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
   @keyframes bkspin{to{transform:rotate(360deg)}}
   .bk-done{text-align:center;padding:14px 4px 6px}
@@ -937,7 +950,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           </div>
           <div class="bk-row">
             <div class="bk-f"><label for="bkGender">Gender</label><select id="bkGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
-            <div class="bk-f"><label for="bkEmail">Email</label><input id="bkEmail" type="email" autocomplete="email" placeholder="For your report"></div>
+            <div class="bk-f"><label for="bkEmail">Email <span style="color:#94a3b8;font-weight:600">(optional)</span></label><input id="bkEmail" type="email" autocomplete="email" placeholder="name@email.com"></div>
           </div>
           <label id="bkModeLbl" style="display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:6px">How would you like it?</label>
           <div class="bk-modes" id="bkModes" role="radiogroup" aria-labelledby="bkModeLbl">
@@ -957,9 +970,59 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   </div>
 </div>
 
+<!-- TEST / PROFILE DETAIL VIEW (what a shared link opens) -->
+<style>
+  .dt-ov{position:fixed;inset:0;z-index:9999;display:none;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.55);backdrop-filter:blur(2px)}
+  .dt-ov.on{display:flex}
+  @media(min-width:640px){.dt-ov{align-items:center;padding:20px}}
+  .dt-card{background:#fff;width:100%;max-width:500px;max-height:94vh;overflow-y:auto;border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.25);animation:bkup .22s ease}
+  @media(min-width:640px){.dt-card{border-radius:20px;animation:bkin .18s ease}}
+  .dt-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px 20px 8px}
+  .dt-cat{font-size:12px;font-weight:700;color:var(--teal-dark);letter-spacing:.03em;text-transform:uppercase;margin-bottom:3px}
+  .dt-head h3{margin:0;font-size:21px;font-weight:800;color:#0f2444;line-height:1.25}
+  .dt-body{padding:0 20px 8px}
+  .dt-pricerow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 14px}
+  .dt-price{font-size:22px;font-weight:800;color:var(--blue)}
+  .dt-price small{font-size:12px;font-weight:600;color:var(--muted);margin-left:4px}
+  .dt-share{display:inline-flex;align-items:center;gap:6px;background:#eef4ff;border:1px solid #d6e4ff;color:var(--blue);font-weight:700;font-size:13px;padding:8px 13px;border-radius:10px;cursor:pointer;font-family:inherit;flex:0 0 auto}
+  .dt-share:hover{background:#dbe8ff}
+  .dt-inc-h{font-size:13px;font-weight:800;color:#0f2444;margin-bottom:6px}
+  .dt-inc-b{font-size:14px;color:#33445c;line-height:1.6;background:#f6f8fb;border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .dt-inc-b.dt-muted{color:#5b6b7f}
+  .dt-prep{font-size:12.5px;color:#8a6d1b;background:#fff8e6;border:1px solid #e8c65a;border-radius:10px;padding:10px 13px;margin-top:11px;line-height:1.5}
+  .dt-foot{display:flex;gap:10px;padding:14px 20px 20px}
+  .dt-add{flex:1;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;font-size:15px;padding:13px;border-radius:12px;cursor:pointer;font-family:inherit;transition:.15s}
+  .dt-add:hover{background:#eef4ff}
+  .dt-add.added{background:#dcfce7;border-color:#bbf7d0;color:#16a34a}
+  .dt-book{flex:1;border:0;background:var(--blue);color:#fff;font-weight:800;font-size:15px;padding:13px;border-radius:12px;cursor:pointer;font-family:inherit;transition:.15s}
+  .dt-book:hover{background:#1447b8}
+</style>
+<div class="dt-ov" id="dtOv" role="dialog" aria-modal="true" aria-labelledby="dtTitle">
+  <div class="dt-card">
+    <div class="dt-head">
+      <div><div class="dt-cat" id="dtCat"></div><h3 id="dtTitle">—</h3></div>
+      <button class="bk-x" type="button" onclick="closeDetail()" aria-label="Close">&times;</button>
+    </div>
+    <div class="dt-body">
+      <div class="dt-pricerow">
+        <span class="dt-price" id="dtPrice"></span>
+        <button class="dt-share" id="dtShareBtn" type="button" aria-label="Share this test"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg> Share</button>
+      </div>
+      <div id="dtInc"></div>
+      <div class="dt-prep" id="dtPrep" style="display:none"></div>
+    </div>
+    <div class="dt-foot">
+      <button class="dt-add" id="dtAdd" type="button" onclick="detailAdd()">＋ Add to booking</button>
+      <button class="dt-book" id="dtBook" type="button" onclick="detailBook()">Book now</button>
+    </div>
+  </div>
+</div>
+
 <script>
   function toggleMenu(){var m=document.getElementById('menu');var open=m.classList.toggle('open');var b=document.querySelector('.menu-btn');if(b)b.setAttribute('aria-expanded',open?'true':'false');}
-  function closeMenu(){document.getElementById('menu').classList.remove('open')}
+  function closeMenu(){document.getElementById('menu').classList.remove('open');var b=document.querySelector('.menu-btn');if(b)b.setAttribute('aria-expanded','false');}
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+  document.addEventListener('click', function(e){ var m=document.getElementById('menu'); if(m&&m.classList.contains('open')&&!e.target.closest('#menu')&&!e.target.closest('.menu-btn')) closeMenu(); }, true);
 
   /* ---- All Tests & Prices directory ---- */
   // p = real Crelio selling price (₹).
@@ -1163,9 +1226,10 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       var hay = (t.n + " " + t.c + " " + (t.k||"") + " " + incTxt).toLowerCase();
       if(q && hay.indexOf(q)<0) return;
       shown++;
+      var isBundle = !!INC[t.n];
       var priceHtml = (t.p!=null)
-        ? '<div class="ti-price">'+inr(t.p)+'<small>onwards</small></div>'
-        : '<div class="ti-ask">Get price →</div>';
+        ? '<div class="ti-price">'+inr(t.p)+(isBundle?'<small>onwards</small>':'')+'</div>'
+        : '<div class="ti-ask">Price at centre</div>';
       var msg = t.p!=null
         ? "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + " (" + inr(t.p) + ")."
         : "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + ". Please share the price.";
@@ -1178,7 +1242,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         incHtml = '<div class="ti-inc"><b>Includes:</b> '+shownInc+'</div>';
       }
       out += '<div class="titem">'
-           +   '<div class="ti-main"><div class="ti-name">'+t.n+(t.pop?' <span class="ti-pop">★ Popular</span>':'')+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
+           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.n)+'" data-detail-price="'+(t.p==null?'':t.p)+'" data-detail-cat="'+esc(t.c)+'" title="View details">'+t.n+(t.pop?' <span class="ti-pop">★ Popular</span>':'')+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
            +   priceHtml
            +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.n)+'" data-book-price="'+(t.p==null?'':t.p)+'" href="'+WA+encodeURIComponent(msg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg>'
@@ -1227,7 +1291,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     hits.forEach(function(t){
       var waMsg="Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+". Please share the price.";
       out += '<div class="titem cat-item">'
-           +   '<div class="ti-main"><div class="ti-name">'+esc(t.name)+'</div><div class="ti-cat">'+esc(t.dept||"Lab test")+'</div></div>'
+           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.name)+'" data-detail-price="" data-detail-code="'+esc(t.code||"")+'" data-detail-cat="'+esc(t.dept||"Lab test")+'" title="View details">'+esc(t.name)+'</div><div class="ti-cat">'+esc(t.dept||"Lab test")+'</div></div>'
            +   '<div class="ti-price">Price at centre</div>'
            +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.name)+'" data-book-price="" data-book-code="'+esc(t.code||"")+'" href="'+WA+encodeURIComponent(waMsg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg><span>Book</span></a>'
@@ -1261,6 +1325,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     pop.style.top=(window.scrollY+vt)+'px'; pop.style.left=(window.scrollX+vl)+'px';
   }
   window.addEventListener('resize', function(){ closeSharePop(); });
+  window.addEventListener('scroll', function(){ closeSharePop(); }, {passive:true});
   function closeSharePop(){ var p=document.getElementById('sharePop'); if(p) p.classList.remove('on'); }
   function legacyCopy(t){ try{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}catch(e){} }
   var _toastT;
@@ -1308,7 +1373,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       if(input){ activeCat='All'; buildChips(); input.value=want; renderDir(); }
       var sec=document.getElementById('all-tests'); if(sec) sec.scrollIntoView({behavior:'smooth'});
       var match=TESTS.filter(function(t){return t.n.toLowerCase()===want.toLowerCase();})[0];
-      if(match && typeof openBooking==='function' && window.BOOKING_LIVE){ setTimeout(function(){ openBooking(match.n, match.p); }, 700); }
+      if(match && typeof openDetail==='function'){ setTimeout(function(){ openDetail(match.n, match.p, '', INC[match.n]||'', match.c); }, 650); }
     }catch(e){}
   })();
 
@@ -1317,30 +1382,80 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 
   /* ===== Multi-test cart ===== */
   var CART = [];   // [{name, price, code}]
+  function saveCart(){ try{ sessionStorage.setItem('cdcCart', JSON.stringify(CART)); }catch(e){} }
+  function loadCart(){ try{ var s=sessionStorage.getItem('cdcCart'); if(s){ var a=JSON.parse(s); if(Array.isArray(a)) CART=a; } }catch(e){} }
   function cartFind(name){ for(var i=0;i<CART.length;i++){ if(CART[i].name===name) return i; } return -1; }
+  function cartBump(){ var nc=document.getElementById('navCart'); if(nc){ nc.classList.remove('bump'); void nc.offsetWidth; nc.classList.add('bump'); } }
   function cartAdd(name, price, code, silent){
     var i = cartFind(name);
     if(i<0){
       CART.push({ name:name, price:(price==null||price===""?null:Number(price)), code:code||"" });
       if(!silent) showToast('Added — '+CART.length+(CART.length===1?' test':' tests')+' in your booking');
     } else if(!silent){ showToast('Already in your booking'); }
-    updateSticky();
+    saveCart(); updateSticky(); cartBump();
     if(document.getElementById('bkOv').classList.contains('on')) renderBkItems();
   }
   function cartRemove(idx){
     CART.splice(idx,1);
-    updateSticky();
-    if(!CART.length){ closeBooking(); return; }
-    renderBkItems();
+    saveCart(); updateSticky();
+    if(document.getElementById('bkOv').classList.contains('on')) renderBkItems();
   }
   function cartTotal(){ var t=0, unknown=false; CART.forEach(function(it){ if(it.price!=null) t+=Number(it.price); else unknown=true; }); return {t:t, unknown:unknown}; }
   function updateSticky(){
-    var lbl=document.getElementById('sbLabel'); if(!lbl) return;
     var n=CART.length;
-    document.getElementById('sbCount').textContent = n;
-    document.getElementById('sbCart').style.display = n>0 ? 'flex' : 'none';
-    lbl.textContent = n>0 ? ('Review booking ('+n+')') : 'Book a test';
+    var lbl=document.getElementById('sbLabel');
+    if(lbl){
+      document.getElementById('sbCount').textContent = n;
+      document.getElementById('sbCart').style.display = n>0 ? 'flex' : 'none';
+      lbl.textContent = n>0 ? ('Review booking ('+n+')') : 'Book a test';
+    }
+    var nc=document.getElementById('navCart'), ncc=document.getElementById('navCartCount');
+    if(nc && ncc){
+      if(n>0){ ncc.textContent=n; ncc.hidden=false; nc.setAttribute('aria-label','Your booking ('+n+(n>1?' items':' item')+')'); }
+      else { ncc.hidden=true; nc.setAttribute('aria-label','Your booking (empty)'); }
+    }
   }
+
+  /* ===== Test / profile detail view (what a shared link opens) ===== */
+  var dtState={name:'',price:null,code:''}, dtReturnFocus=null;
+  function openDetail(name, price, code, incText, cat){
+    dtState={name:name, price:(price==null||price===''?null:Number(price)), code:code||''};
+    document.getElementById('dtTitle').textContent=name;
+    var ce=document.getElementById('dtCat'); ce.textContent=cat||''; ce.style.display=cat?'block':'none';
+    document.getElementById('dtPrice').innerHTML=(dtState.price!=null)?(inr(dtState.price)+(incText?'<small>onwards</small>':'')):'Price at centre';
+    var incWrap=document.getElementById('dtInc');
+    if(incText){ incWrap.innerHTML='<div class="dt-inc-h">What’s included</div><div class="dt-inc-b">'+esc(incText)+'</div>'; }
+    else { incWrap.innerHTML='<div class="dt-inc-b dt-muted">A single lab test. Add it to your booking and our team confirms the price and any preparation when they call.</div>'; }
+    var prep=document.getElementById('dtPrep'), low=(name+' '+(cat||'')).toLowerCase();
+    if(/lipid|fasting|full body|diabet|sugar|glucose|metabolic|insulin|cholesterol/.test(low)){ prep.textContent='Tip: this usually needs 8–12 hours of fasting — our team will confirm when you book.'; prep.style.display='block'; }
+    else { prep.style.display='none'; }
+    var add=document.getElementById('dtAdd'); add.textContent='＋ Add to booking'; add.classList.remove('added');
+    document.getElementById('dtOv').classList.add('on');
+    document.body.style.overflow='hidden';
+    dtReturnFocus=document.activeElement;
+    if(typeof gtag==='function'){gtag('event','test_detail_open',{event_category:'booking'});}
+  }
+  function closeDetail(){
+    document.getElementById('dtOv').classList.remove('on');
+    if(!document.getElementById('bkOv').classList.contains('on')) document.body.style.overflow='';
+    if(dtReturnFocus && dtReturnFocus.focus){ try{ dtReturnFocus.focus(); }catch(e){} dtReturnFocus=null; }
+  }
+  function detailAdd(){ cartAdd(dtState.name, dtState.price, dtState.code); var a=document.getElementById('dtAdd'); a.textContent='✓ Added to booking'; a.classList.add('added'); }
+  function detailBook(){ if(cartFind(dtState.name)<0){ CART.push({name:dtState.name,price:dtState.price,code:dtState.code}); saveCart(); updateSticky(); } closeDetail(); openCart(); }
+  document.getElementById('dtShareBtn').addEventListener('click', function(){ openSharePop(dtState.name, dtState.price, this); });
+  document.getElementById('dtOv').addEventListener('click', function(e){ if(e.target===this) closeDetail(); });
+  // Click a test/profile NAME anywhere in the directory → open its detail view
+  document.addEventListener('click', function(e){
+    var d=e.target.closest('[data-detail-name]'); if(!d) return;
+    var nm=d.getAttribute('data-detail-name');
+    var pr=d.getAttribute('data-detail-price');
+    openDetail(nm, pr===''?null:Number(pr), d.getAttribute('data-detail-code')||'', INC[nm]||'', d.getAttribute('data-detail-cat')||'');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Enter' && e.key!==' ') return;
+    var d=e.target.closest && e.target.closest('[data-detail-name]');
+    if(d){ e.preventDefault(); d.click(); }
+  });
   function scrollToTests(){
     var el=document.getElementById('all-tests'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
     setTimeout(function(){ try{ document.getElementById('dirInput').focus({preventScroll:true}); }catch(e){} }, 450);
@@ -1349,6 +1464,16 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   function addMoreTests(){ closeBooking(); scrollToTests(); }
   function renderBkItems(){
     var wrap=document.getElementById('bkItems'); if(!wrap) return;
+    var form=document.getElementById('bkForm');
+    if(!CART.length){
+      if(form) form.style.display='none';
+      wrap.innerHTML='<div style="text-align:center;padding:22px 8px;color:#5b6b7f">'
+        +'<div style="font-size:34px;margin-bottom:8px">🧺</div>'
+        +'<p style="margin:0 0 14px;font-size:14.5px">Your booking is empty.</p>'
+        +'<button type="button" class="bk-sub" style="width:auto;padding:11px 20px" onclick="addMoreTests()">Browse tests</button></div>';
+      return;
+    }
+    if(form) form.style.display='';
     var out="";
     CART.forEach(function(it, idx){
       var pr = it.price!=null ? inr(it.price) : "Price at centre";
@@ -1423,7 +1548,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   // close on backdrop click / Esc (Esc also closes the share popover)
   document.getElementById('bkOv').addEventListener('click', function(e){ if(e.target===this) closeBooking(); });
   document.addEventListener('keydown', function(e){
-    if(e.key==='Escape'){ closeSharePop(); if(document.getElementById('bkOv').classList.contains('on')) closeBooking(); }
+    if(e.key==='Escape'){ closeSharePop(); if(document.getElementById('dtOv').classList.contains('on')) closeDetail(); if(document.getElementById('bkOv').classList.contains('on')) closeBooking(); }
   });
   // Simple focus trap: keep Tab within the open dialog
   document.getElementById('bkOv').addEventListener('keydown', function(e){
@@ -1496,6 +1621,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       + '<h4>Still processing…</h4>'
       + '<p>Your request is taking longer than usual. <b>Please don\'t book again</b> — it may already be registered. Our team will confirm on your phone (<b>'+esc(v.mobile)+'</b>) shortly.</p>'
       + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Check status on WhatsApp</a>';
+    CART=[]; saveCart(); updateSticky();   // clear so the patient can't resubmit the same order
   }
 
   document.getElementById('bkForm').addEventListener('submit', function(e){
@@ -1553,10 +1679,13 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           + '<h4>Booking confirmed!</h4>'
           + '<p>Thank you, '+esc(v.name)+'. Your booking for <b>'+_bookedNames+'</b> is registered with Caspian.</p>'
           + ref
-          + '<p style="margin-top:8px">Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm the details'
-          + (v.mode==='home' ? ' and your home-collection slot' : '') + '.</p>'
+          + '<p style="margin-top:8px">'
+          + (v.mode==='now'
+              ? 'Show this Booking Ref at our centre and we\'ll have your tests ready — payment is collected at the counter.'
+              : 'Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm the details'+(v.mode==='home'?' and your home-collection slot':' and your slot')+'.')
+          + '</p>'
           + '<a class="btn-wa2" href="'+_waUrl+'" target="_blank" rel="noopener">Message us on WhatsApp</a>';
-        CART = []; updateSticky();   // order placed — clear the cart
+        CART = []; saveCart(); updateSticky();   // order placed — clear the cart
       } else {
         // notConfigured / notMapped / any API error → WhatsApp, no dead ends
         bkFallback(v, j.notConfigured ? 'not_configured' : (j.notMapped ? 'not_mapped' : ('http_'+res.status)));
@@ -1585,6 +1714,9 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       if(typeof fbq==='function'){fbq('track','Contact',{method:'phone'});}
     }
   });
+
+  /* ===== Restore any saved cart (survives refresh / shared-link navigation) ===== */
+  loadCart(); updateSticky();
 </script>
 </body>
 </html>
