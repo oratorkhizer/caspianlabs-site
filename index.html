@@ -895,6 +895,8 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#5b6b7f;margin:2px 2px 13px;line-height:1.45;cursor:pointer}
   .bk-consent input{margin-top:2px;flex:0 0 auto;width:16px;height:16px;accent-color:#1a56db}
   .bk-consent a{color:#1a56db;font-weight:600}
+  .bk-warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:0 0 13px;line-height:1.5}
+  .bk-overlap{background:#eef6ff;border:1px solid #cfe1f5;color:#1e4a72;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:2px 0 12px;line-height:1.5}
   .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
   @keyframes bkspin{to{transform:rotate(360deg)}}
   .bk-done{text-align:center;padding:14px 4px 6px}
@@ -964,6 +966,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           <div class="bk-f" id="bkAddrWrap" style="display:none"><label for="bkAddr">Home address <span class="req">*</span></label><textarea id="bkAddr" rows="2" placeholder="Flat / house, area, landmark, Hyderabad"></textarea></div>
           <div class="bk-f" id="bkTimeWrap" style="display:none"><label for="bkTime">Preferred date &amp; time</label><input id="bkTime" type="datetime-local"></div>
           <div class="bk-note">Free home collection on orders above ₹500. Payment is collected at the centre or at your doorstep — you don't pay online.</div>
+          <div class="bk-warn" id="bkHomeWarn" style="display:none"></div>
           <label class="bk-consent"><input type="checkbox" id="bkConsent"> I agree to be contacted about this booking and accept Caspian's <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
           <button class="bk-sub" type="submit" id="bkSub">Confirm booking</button>
           <div class="bk-secure">🔒 Your details go straight to Caspian — never shared.</div>
@@ -1458,9 +1461,10 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(/lipid|fasting|full body|diabet|sugar|glucose|metabolic|insulin|cholesterol/.test(low)){ prep.textContent='Tip: this usually needs 8–12 hours of fasting — our team will confirm when you book.'; prep.style.display='block'; }
     else { prep.style.display='none'; }
     var add=document.getElementById('dtAdd'); add.textContent='＋ Add to booking'; add.classList.remove('added');
+    dtReturnFocus=document.activeElement;
     document.getElementById('dtOv').classList.add('on');
     document.body.style.overflow='hidden';
-    dtReturnFocus=document.activeElement;
+    setTimeout(function(){ try{ document.getElementById('dtAdd').focus(); }catch(e){} }, 60);
     if(typeof gtag==='function'){gtag('event','test_detail_open',{event_category:'booking'});}
   }
   function closeDetail(){
@@ -1472,6 +1476,14 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   function detailBook(){ if(cartFind(dtState.name)<0){ CART.push({name:dtState.name,price:dtState.price,code:dtState.code}); saveCart(); updateSticky(); } closeDetail(); openCart(); }
   document.getElementById('dtShareBtn').addEventListener('click', function(){ openSharePop(dtState.name, dtState.price, this); });
   document.getElementById('dtOv').addEventListener('click', function(e){ if(e.target===this) closeDetail(); });
+  document.getElementById('dtOv').addEventListener('keydown', function(e){
+    if(e.key!=='Tab') return;
+    var f=Array.prototype.filter.call(this.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'), function(el){ return el.offsetParent!==null && !el.disabled; });
+    if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
   // Click a test/profile NAME anywhere in the directory → open its detail view
   document.addEventListener('click', function(e){
     var d=e.target.closest('[data-detail-name]'); if(!d) return;
@@ -1512,8 +1524,32 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(CART.length>1 && tot.t>0){
       out += '<div class="bk-total"><span>Total'+(tot.unknown?' <small>(+ items priced at centre)</small>':'')+'</span><span>'+inr(tot.t)+(tot.unknown?' +':'')+'</span></div>';
     }
+    // Overlap hint: a loose test already covered by a package in the cart
+    var overlaps=cartOverlaps();
+    if(overlaps.length){
+      out += '<div class="bk-overlap">ℹ️ '+overlaps.map(function(o){return esc(o.test)+' may already be included in <b>'+esc(o.pkg)+'</b>';}).join('<br>')+'</div>';
+    }
     out += '<button class="bk-addmore" type="button" onclick="addMoreTests()">＋ Add another test</button>';
     wrap.innerHTML=out;
+    updateHomeWarn();
+  }
+  function cartOverlaps(){
+    function norm(s){ return s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim(); }
+    var pkgs=CART.filter(function(it){ return !!INC[it.name]; });
+    var res=[];
+    if(!pkgs.length) return res;
+    CART.forEach(function(it){
+      if(INC[it.name]) return;              // the item is itself a package
+      var cands=[norm(it.name), norm(it.name.replace(/\(.*?\)/g,''))];
+      var acr=(it.name.match(/\(([A-Za-z0-9\/]{2,6})\)/)||[])[1]; if(acr) cands.push(norm(acr));
+      cands=cands.filter(function(c){return c.length>=3;});
+      pkgs.forEach(function(pk){
+        var inc=' '+norm(INC[pk.name])+' ';
+        var hit=cands.some(function(c){ return inc.indexOf(' '+c+' ')>=0 || inc.indexOf(c)>=0; });
+        if(hit) res.push({test:it.name, pkg:pk.name});
+      });
+    });
+    return res;
   }
 
   // Intercept any "Book" trigger → adds the test to the cart and opens checkout (which shows the whole cart).
@@ -1589,21 +1625,39 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
   });
 
+  function updateHomeWarn(){
+    var w=document.getElementById('bkHomeWarn'); if(!w) return;
+    if(bkState.mode!=='home'){ w.style.display='none'; return; }
+    var t=cartTotal();
+    if(t.unknown){ w.textContent='Home collection is free on orders above ₹500. If your order is below that, a small visit charge applies — our team will confirm.'; w.style.display=''; }
+    else if(t.t>0 && t.t<500){ w.textContent='Your order is '+inr(t.t)+'. Home collection is free above ₹500 — below that a small visit charge applies, which our team will confirm.'; w.style.display=''; }
+    else { w.style.display='none'; }
+  }
   function setMode(m){
     bkState.mode = m;
     Array.prototype.forEach.call(document.querySelectorAll('#bkModes .bk-mode'), function(el){
       var on = el.getAttribute('data-mode')===m;
       el.classList.toggle('on', on);
       el.setAttribute('aria-checked', on?'true':'false');
+      el.setAttribute('tabindex', on?'0':'-1');   // roving tabindex
     });
     document.getElementById('bkAddrWrap').style.display = (m==='home') ? "" : "none";
     document.getElementById('bkTimeWrap').style.display = (m==='home'||m==='scheduled') ? "" : "none";
+    updateHomeWarn();
   }
-  Array.prototype.forEach.call(document.querySelectorAll('#bkModes .bk-mode'), function(el){
-    el.setAttribute('role','radio'); el.setAttribute('tabindex','0');
-    el.addEventListener('click', function(){ setMode(el.getAttribute('data-mode')); });
-    el.addEventListener('keydown', function(ev){ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); setMode(el.getAttribute('data-mode')); } });
-  });
+  (function(){
+    var modes=Array.prototype.slice.call(document.querySelectorAll('#bkModes .bk-mode'));
+    modes.forEach(function(el, idx){
+      el.setAttribute('role','radio');
+      el.setAttribute('tabindex', el.classList.contains('on')?'0':'-1');
+      el.addEventListener('click', function(){ setMode(el.getAttribute('data-mode')); });
+      el.addEventListener('keydown', function(ev){
+        if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); setMode(el.getAttribute('data-mode')); return; }
+        var dir = (ev.key==='ArrowRight'||ev.key==='ArrowDown')?1:(ev.key==='ArrowLeft'||ev.key==='ArrowUp')?-1:0;
+        if(dir){ ev.preventDefault(); var ni=(idx+dir+modes.length)%modes.length; var next=modes[ni]; setMode(next.getAttribute('data-mode')); next.focus(); }
+      });
+    });
+  })();
 
   // Build a rich WhatsApp fallback message (used whenever the API can't complete the booking).
   function bkWhatsAppUrl(v){
