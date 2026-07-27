@@ -892,6 +892,9 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-sub:hover{background:#1447b8}.bk-sub:disabled{opacity:.65;cursor:default}
   .bk-err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:13px;padding:10px 12px;border-radius:10px;margin-bottom:13px;display:none}
   .bk-secure{text-align:center;font-size:11.5px;color:#64748b;margin-top:12px}
+  .bk-consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#5b6b7f;margin:2px 2px 13px;line-height:1.45;cursor:pointer}
+  .bk-consent input{margin-top:2px;flex:0 0 auto;width:16px;height:16px;accent-color:#1a56db}
+  .bk-consent a{color:#1a56db;font-weight:600}
   .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
   @keyframes bkspin{to{transform:rotate(360deg)}}
   .bk-done{text-align:center;padding:14px 4px 6px}
@@ -961,6 +964,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           <div class="bk-f" id="bkAddrWrap" style="display:none"><label for="bkAddr">Home address <span class="req">*</span></label><textarea id="bkAddr" rows="2" placeholder="Flat / house, area, landmark, Hyderabad"></textarea></div>
           <div class="bk-f" id="bkTimeWrap" style="display:none"><label for="bkTime">Preferred date &amp; time</label><input id="bkTime" type="datetime-local"></div>
           <div class="bk-note">Free home collection on orders above ₹500. Payment is collected at the centre or at your doorstep — you don't pay online.</div>
+          <label class="bk-consent"><input type="checkbox" id="bkConsent"> I agree to be contacted about this booking and accept Caspian's <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
           <button class="bk-sub" type="submit" id="bkSub">Confirm booking</button>
           <div class="bk-secure">🔒 Your details go straight to Caspian — never shared.</div>
         </form>
@@ -1150,39 +1154,63 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   // Common/high-traffic profiles are filled now; remaining ones fill automatically
   // once the Crelio API is connected.
   var INC = {
-    "Full Body Check Up":"CBC, ESR, HbA1c, Lipid Profile, Liver Function (LFT), Kidney Function (KFT), Iron Studies (TIBC), Thyroid Profile, Vitamin D, Vitamin B12, Calcium, Complete Urine (CUE)",
-    "Caspian Essential Checkup":"CBC, Blood Sugar (RBS), Lipid Profile, Liver Function (LFT), Complete Urine (CUE), TSH",
-    "Comprehensive Diabetes Screening":"HbA1c, Lipid Profile, Serum Creatinine, Urine Albumin/Creatinine (UACR)",
-    "Diabetes Monitoring Mini Profile":"HbA1c, Fasting Blood Sugar, Post Prandial Blood Sugar",
-    "Diabetes Monitoring Maxi Profile":"HbA1c, Fasting & PP Blood Sugar, Lipid Profile, Kidney Function, Urine Microalbumin",
+    "Full Body Check Up":"Complete blood count CBC, Erythrocyte Sedimentation Rate (ESR), HbA1c (Glycated Haemoglobin), Lipid Profile, Liver Function Test; LFT, Kidney Function Test (KFT) Basic, TOTAL IRON BINDING CAPACITY, Thyroid Profile I, Vitamin D Total-25 Hydroxy, Vitamin B12 Cyanocobalamin, Calcium, Serum, Complete Urine Analysis (CUE)",
+    "Caspian Essential Checkup":"Complete blood count CBC, Lipid Profile, Glucose-Random (RBS), Liver Function Test; LFT, Complete Urine Analysis (CUE), TSH (Thyroid Stimulating Hormone)",
+    "Comprehensive Diabetes Screening":"Albumin/Creatinine Ratio, Urine Spot (UACR), Lipid Profile, Creatinine, Serum, HbA1c (Glycated Haemoglobin)",
+    "Diabetes Monitoring Mini Profile":"Glucose-Fasting (FBS), HbA1c (Glycated Haemoglobin), Microalbumin",
+    "Diabetes Monitoring Maxi Profile":"Glucose F/PP, HbA1c (Glycated Haemoglobin), Microalbumin, Creatinine, Serum, Blood Urea Nitrogen (BUN), Insulin Antibody, C-Peptide fasting, Lipid Profile",
     "Metabolic Wellness + InBody":"Full Body Check Up tests + InBody body-composition analysis (fat, muscle, metabolic mapping)",
-    "Metabolic Wellness (without InBody)":"CBC, HbA1c, Lipid Profile, Liver & Kidney Function, Thyroid, Vitamin D & B12",
-    "Women's Health Profile":"Lipid Profile, Kidney Function, Iron Studies (Iron, TIBC), Folic Acid, Vitamin D, Vitamin B12, Calcium, Fasting Sugar, CA-125, Complete Urine",
+    "Metabolic Wellness (without InBody)":"Complete blood count CBC, Erythrocyte Sedimentation Rate (ESR), HbA1c (Glycated Haemoglobin), Lipid Profile, Liver Function Test; LFT, Kidney Function Test (KFT) Basic, TOTAL IRON BINDING CAPACITY, Vitamin D Total-25 Hydroxy, Thyroid Profile I, Vitamin B12 Cyanocobalamin, Calcium, Serum, Complete Urine Analysis (CUE)",
+    "Women's Health Profile":"Lipid Profile, Kidney Function Test (KFT) Basic, Vitamin D Total-25 Hydroxy, Calcium, Serum, Complete Urine Analysis (CUE), Folic Acid, Glucose-Fasting (FBS), Iron, Total Iron Binding Capacity (TIBC), Transferrin, CA125 - Cancer marker, Vitamin B12 Cyanocobalamin",
     "Senior Citizen Health — Male":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, PSA, Urine ACR & CUE",
     "Senior Citizen Health — Female":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, Urine ACR & CUE",
-    "Premium Health Check — Men 45+":"CBC, ESR, HbA1c, Lipid Profile + ApoA1/ApoB + Lp(a), Liver & Kidney Function, PSA, Vitamin D & B12, HsCRP (cardiac risk)",
-    "Haj / Umrah Fitness":"CBC, Blood Sugar (RBS), Kidney Function, ECG, Chest X-ray, Blood Group (ABO & Rh)",
-    "Thyroid Profile (T3 T4 TSH)":"T3, T4, TSH",
-    "Thyroid Panel I (T3 T4 TSH)":"T3, T4, TSH",
-    "Cardiac Basic Markers":"CPK (Creatine Kinase), CK-MB, LDH, AST/SGOT",
+    "Premium Health Check — Men 45+":"Amylase, Serum, Cortisol Serum (3 to 5 PM), HsCRP (High Sensitive CRP), HbA1c (Glycated Haemoglobin), TOTAL IRON BINDING CAPACITY, Lipid Profile, Liver Function Test; LFT, Prostaate Specific Antigen (PSA Total), Vitamin D Total-25 Hydroxy, Kidney Function Test (KFT) Basic, Lp-a Lipoprotein(a), Apolipoprotein A1 (APO-A1), Complete Urine Analysis (CUE), Vitamin B12 Cyanocobalamin, Rheumatoid Factor-RA Test, Erythrocyte Sedimentation Rate (ESR), Apolipoprotein B (APO-B), Complete blood count CBC",
+    "Haj / Umrah Fitness":"Complete blood count CBC, Glucose-Random (RBS), Kidney Function Test (KFT) Basic, ECG, X -Ray Chest PA view, Blood Grouping ABO & Rh Typing",
+    "Thyroid Profile (T3 T4 TSH)":"T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone)",
+    "Thyroid Panel I (T3 T4 TSH)":"T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone)",
+    "Cardiac Basic Markers":"Creatinine Kinase (IFCC), Creatine Kinase MB (CK-MB), Lactate Dehyderogenase (LDH), Serum, Aspartate Aminotransferase (AST/SGOT)",
     "Heart Health Check (Cardiologist)":"ECG, Blood Sugar (GRBS), 2D Echo, Cardiologist consultation (Dr Sayyed Muzammil)",
-    "Antenatal Maxi Profile":"HIV 1&2, HBsAg, VDRL/RPR, Blood Group (ABO & Rh), Serum Creatinine, Random Blood Sugar, Complete Urine (CUE)",
-    "Antenatal Mini Profile":"HIV 1&2, HBsAg, VDRL/RPR, Blood Group (ABO & Rh), Haemoglobin, Blood Sugar, Urine Routine",
-    "APLA Profile":"Cardiolipin IgG & IgM, Anti-Phospholipid IgA/IgG/IgM, HIV 1&2, HBsAg, VDRL/RPR",
-    "Iron Deficiency Profile":"Serum Iron, TIBC, Transferrin Saturation, Ferritin",
-    "Anaemia Mini Profile":"CBC, Peripheral Smear, Serum Iron, Ferritin, Vitamin B12",
-    "Lipid Profile (Cholesterol)":"Total Cholesterol, HDL, LDL, VLDL, Triglycerides",
-    "Kidney Function Mini Profile (KFT)":"Blood Urea, Serum Creatinine, Uric Acid, Electrolytes",
+    "Antenatal Maxi Profile":"HIV-1&2 Antibody, CLIA, Hepatitis B Surface Antigen (HBsAg), VDRL/RPR, Blood Grouping ABO & Rh Typing, Creatinine, Serum, Glucose-Random (RBS), Complete Urine Analysis (CUE)",
+    "Antenatal Mini Profile":"HIV-1&2 Antibody, CLIA, Hepatitis B Surface Antigen (HBsAg), VDRL/RPR, Blood Grouping ABO & Rh Typing, Glucose-Random (RBS), Complete Urine Analysis (CUE)",
+    "APLA Profile":"Cardiolipin IgM Antibody, Cardiolipin IgG Antibody, Anti Phospholipid IgA Antibody, CLIA, Anti Phospholipid IgG Antibody, CLIA, Anti Phospholipid IgM Antibody, CLIA, HIV-1&2 Antibody, Hepatitis B Surface Antigen (HBsAg), VDRL/RPR",
+    "Iron Deficiency Profile":"Iron, Ferritin, Total Iron Binding Capacity (TIBC), Transferrin",
+    "Anaemia Mini Profile":"Iron, Ferritin, Total Iron Binding Capacity (TIBC), Transferrin, Vitamin B12 Cyanocobalamin, RBC Folate",
+    "Lipid Profile (Cholesterol)":"Triglycerides (TGL), Cholesterol - HDL, Cholesterol - Total, Cholesterol - LDL",
+    "Kidney Function Mini Profile (KFT)":"Urea, Serum, Creatinine, Serum, Sodium, Serum, Potassium, Serum, Chloride, Serum",
     "Liver Function Test (LFT)":"Bilirubin, SGPT, SGOT, ALP, Total Protein, Albumin",
-    "Fever Mini Profile":"CBC, Malaria, Widal, Dengue NS1, Urine Routine",
-    "Fever Maxi Profile":"CBC, Malaria, Widal, Dengue (NS1/IgG/IgM), Typhoid, CRP, LFT, Urine Routine",
-    "Pre-Operative Mini Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, Bleeding & Clotting Time",
-    "Pre-Operative Maxi Profile":"CBC, Blood Sugar, Blood Group, HIV, HBsAg, HCV, PT/INR, LFT, KFT, ECG, Chest X-ray",
+    "Fever Mini Profile":"Erythrocyte Sedimentation Rate (ESR), Malarial Parasite Identification, CRP (C Reactive Protein), Complete blood count CBC, Widal Test (Slide Test)",
+    "Fever Maxi Profile":"Malarial Parasite Falciparum & Vivax Antigen, Dengue IgG Antibody, CLIA, Dengue IgM Antibody, CLIA, CRP (C Reactive Protein), Erythrocyte Sedimentation Rate (ESR), Complete blood count CBC, Dengue NS1 Antigen, CLIA, Salmonella typhi IgM Antibody",
+    "Pre-Operative Mini Profile":"Blood Grouping ABO & Rh Typing, Complete Urine Analysis (CUE), Blood Urea Nitrogen (BUN), Creatinine, Serum, Glucose-Fasting (FBS), HIV-1&2 Antibody, Hepatitis B Surface Antigen (HBsAg), VDRL/RPR",
+    "Pre-Operative Maxi Profile":"Blood Grouping ABO & Rh Typing, Complete Urine Analysis (CUE), Blood Urea Nitrogen (BUN), Creatinine, Serum, Glucose-Fasting (FBS), Hepatitis B Surface Antigen (HBsAg), HIV-1&2 Antibody, Hepatitis C Virus Antibody, VDRL/RPR, Prothrombin Time (PT), Activated Partial Thromboplastin Time (APTT/PTTK)",
     "Chest X-ray (PA / AP)":"Our most-requested X-ray — PA or AP chest view for cough, fever, TB screening, breathlessness & pre-op. Digital, same-day film & report.",
     "Other Department X-ray":"Any other view — elbow, thoracic spine, skull, ribs & more. Standard department X-ray from ₹300, done at the centre.",
     "Chest X-ray at Home (Portable)":"Portable chest X-ray taken at your home by our visiting X-ray team — ideal for elderly, bedridden or post-surgery patients who can't travel to the centre.",
     "CGM at Home — FreeStyle Libre 2+":"Abbott FreeStyle Libre 2+ sensor fitted at your home at MRP — no application charge. Read it on a compatible NFC smartphone or the FreeStyle reader.",
-    "CGM at Home — Guardian IV Sensor":"Medtronic Guardian IV sensor fitted at your home at MRP — no application charge. Read it on a compatible phone/receiver. More CGMs (Linx, GlucoRx & others) coming soon."
+    "CGM at Home — Guardian IV Sensor":"Medtronic Guardian IV sensor fitted at your home at MRP — no application charge. Read it on a compatible phone/receiver. More CGMs (Linx, GlucoRx & others) coming soon.",
+    "General Health Check":"Creatinine, Serum, Urea, Serum, Lipid Profile, HIV-1&2 Antibody, CLIA, Hepatitis B Surface Antigen (HBsAg), Glucose-Random (RBS), Complete Blood Picture (CBP), Erythrocyte Sedimentation Rate (ESR), Blood Grouping ABO & Rh Typing, Complete Urine Analysis (CUE)",
+    "Clinova Mini Health Check":"Lipid Profile, Urea, Serum, Creatinine, Serum, Glucose-Fasting (FBS)",
+    "Clinova Health Screen":"Hemogram, Complete Urine Analysis (CUE), Lipid Profile, Kidney Function Test (KFT) Basic, Calcium, Serum, HbA1c (Glycated Haemoglobin), Albumin/Creatinine Ratio, Urine Spot (UACR)",
+    "Clinova Master Health Screen":"Complete Blood Picture (CBP), Complete Urine Analysis (CUE), Lipid Profile, Kidney Function Test (KFT) Basic, Iron, HbA1c (Glycated Haemoglobin), Calcium, Serum, Vitamin D Total-25 Hydroxy, Ferritin, Folic Acid, Vitamin B12 Cyanocobalamin, Albumin/Creatinine Ratio, Urine Spot (UACR)",
+    "Complete Metabolic Panel":"Liver Function Test; LFT, Kidney Function Test (KFT) Basic, Calcium, Serum, Phosphorus, Serum, Glucose-Fasting (FBS)",
+    "Thyroid Profile II":"T3-Free, Free Tri-Iodothyronine (FT3), T4-Free, Free Thyroxine (FT4), T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone)",
+    "Thyroid Comprehensive Profile":"T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone), T3-Free, Free Tri-Iodothyronine (FT3), T4-Free, Free Thyroxine (FT4), Anti Thryroperoxidase Antibody (TPO), Anti Thyroglobulin Antibody (ATG)",
+    "Kidney Function Maxi Profile":"Complete Urine Analysis (CUE), Creatinine, Serum, Uric Acid, Serum, Cholesterol - Total, Protein Total with Albumin, Alkaline Phosphatase (ALP), Sodium, Serum, Potassium, Serum, Chloride, Serum",
+    "Electrolyte Profile (Na/K/Cl)":"Sodium, Serum, Potassium, Serum, Chloride, Serum, Ionized Calcium",
+    "Ortho Profile":"ASO Titres (Anti Streptolysin O), CRP (C Reactive Protein), Rheumatoid Factor-RA Test, Uric Acid, Serum",
+    "Vitamin B Complex Profile":"Vitamin B2 Riboflavin, Vitamin B6 pyridoxal 5 phosphate, Vitamin B12 Cyanocobalamin",
+    "Extended PCOD Panel":"Dehydroepiandrosterone Sulphate (DHEAS), Estradiol (E2), Insulin Fasting, Testosterone Total, Testosterone Free, Thyroid Profile I",
+    "PCOS Mini Profile":"Glucose-Fasting (FBS), Glucose-Post Prondial(PLBS), HOMA Index (Insulin/C-Peptide Resistance), Testosterone Free, FSH (Follicle Stimulating Hormone), Luteinising Hormone (LH), Prolactin (PRL), 17-Hydroxy Progesterone (17 0HP)",
+    "Menopause Mini Profile":"FSH (Follicle Stimulating Hormone), Estradiol (E2), TSH (Thyroid Stimulating Hormone), T4-Free, Free Thyroxine (FT4)",
+    "Testosterone Profile":"Testosterone Total, Testosterone Free, Sex Hormone Binding Globulin (SHBG), Albumin, Serum, Free Androgen Index",
+    "Bone Profile":"Calcium, Serum, Ionized Calcium, Phosphorus, Serum, Alkaline Phosphatase (ALP), Protein Total",
+    "Arthritis Basic Screen":"Rheumatoid Factor-RA Test, ASO Titres (Anti Streptolysin O), CRP (C Reactive Protein), Calcium, Serum, Uric Acid, Serum, Phosphorus, Serum, Albumin, Serum, Anti Nuclear Antibody, ELISA",
+    "Dengue Profile":"Dengue IgG Antibody, CLIA, Dengue IgM Antibody, CLIA, Dengue NS1 Antigen, CLIA",
+    "Typhoid Profile":"Widal Test (Tube Test), Erythrocyte Sedimentation Rate (ESR), Complete Urine Analysis (CUE), Culture & Sensitivity Aerobic bacteria, Na-Heparin",
+    "Urine Infection Screen":"Complete Urine Analysis (CUE), Culture & Sensitivity Aerobic bacteria, Urine",
+    "Hepatitis B Marker Profile":"Hepatitis B Envelope Antibody (AntiHBe), Hepatitis B Envelope Antigen (HBeAg), Hepatitis B surface Antibody Total (Anti HBs), Hepatitis B Surface Antigen (HBsAg), Hepatitis Core Antibody IgM (Anti HBc - IgM), Hepatitis Core Antibody Total (HBcAb- Total)",
+    "Stone Screening Mini Profile":"Calcium, Serum, Magnesium, Serum, Uric Acid, Serum, Oxalate, EDTA Plasma, Phosphorus, Serum",
+    "Hypertension Profile":"Aldosterone, Serum, Sodium, Serum, Potassium, Serum, Plasma Renin Activity (PRA), Catecholamines, Urine, Metanephrine PLASMA EDTA, VMA-SPOT",
+    "Asthma Health Camp":"DR. AMREEN CONSULTATION CHARGE, SPIROMETRY/ LUNG FUNCTION TEST"
   };
 
   var WA = "https://wa.me/919059341154?text=";
@@ -1640,6 +1668,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     function fail(m){ err.textContent = m; err.style.display="block"; }
     if(!v.name){ return fail("Please enter the patient's full name."); }
     if(v.mobile.length!==10){ return fail("Please enter a valid 10-digit mobile number."); }
+    if(!document.getElementById('bkConsent').checked){ return fail("Please tick the consent box so we can proceed with your booking."); }
     if(v.mode==='home' && !v.address){ return fail("Please add the home address for collection."); }
     if(v.mode==='scheduled' && !v.dateTime){ return fail("Please pick your preferred date & time."); }
     if(v.dateTime){ var dt=new Date(v.dateTime); if(!isNaN(dt) && dt.getTime() < Date.now()-60000){ return fail("Please choose a date & time in the future."); } }
