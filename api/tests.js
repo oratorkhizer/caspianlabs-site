@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       const name = pick(o, ["testName", "TestName", "test_name", "name", "Name", "profileName", "ProfileName"]);
       const code = pick(o, ["testCode", "TestCode", "test_code", "code", "Code", "profileCode", "shortCode"]);
       const id = pick(o, ["testID", "testId", "TestID", "id", "ID", "dictionaryId"]);
-      const priceRaw = pick(o, ["cost", "price", "rate", "mrp", "MRP", "amount", "testCost", "testRate", "testMRP"]);
+      const priceRaw = pick(o, ["testAmount", "cost", "price", "rate", "mrp", "MRP", "amount", "testAmount2", "testCost", "testRate", "testMRP"]);
       const dept = pick(o, ["department", "departmentName", "category", "Category", "categoryName"]);
       const type = pick(o, ["type", "testType", "itemType"]) || (pick(o, ["profileName", "profileCode"]) ? "profile" : "test");
       const price = priceRaw !== undefined ? Number(String(priceRaw).replace(/[^\d.]/g, "")) : null;

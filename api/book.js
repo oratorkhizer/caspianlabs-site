@@ -83,12 +83,13 @@ export default async function handler(req, res) {
     countryCode: "91",
     mobile, email,
     patientType: "OP",
-    referralSource: "caspianlabs.in",
     billDetails: {
       emergencyFlag: "0",
       organizationIdLH: String(process.env.CRELIO_ORG_ID || "539536"),
       referralName: "Self",
-      paymentType: "CREDIT",   // org-channel booking. If Crelio 403s on first test, switch to "Cash".
+      // Per Crelio (Balaji Awale, Jul 2026): use "Cash" for walk-in online bookings so unpaid
+      // reports aren't accessible before payment. Advance stays 0 (patient pays at centre/doorstep).
+      paymentType: "Cash",
       advance: "0",
       billConcession: "0",
       comments: "Online booking via caspianlabs.in",
