@@ -1320,14 +1320,19 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(!hits.length){ more.innerHTML=""; head.style.display="none"; setEmpty(); return; }
     var out="";
     hits.forEach(function(t){
-      var waMsg="Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+". Please share the price.";
+      var pp = (t.price!=null && Number(t.price)>0) ? Number(t.price) : null;
+      var pAttr = pp!=null ? pp : "";
+      var waMsg = pp!=null
+        ? "Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+" ("+inr(pp)+")."
+        : "Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+". Please share the price.";
+      var priceHtml = pp!=null ? '<div class="ti-price">'+inr(pp)+'</div>' : '<div class="ti-price">Price at centre</div>';
       out += '<div class="titem cat-item">'
-           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.name)+'" data-detail-price="" data-detail-code="'+esc(t.code||"")+'" data-detail-cat="'+esc(t.dept||"Lab test")+'" title="View details">'+esc(t.name)+'</div><div class="ti-cat">'+esc(t.dept||"Lab test")+'</div></div>'
-           +   '<div class="ti-price">Price at centre</div>'
-           +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.name)+'" data-book-price="" data-book-code="'+esc(t.code||"")+'" href="'+WA+encodeURIComponent(waMsg)+'">'
+           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.name)+'" data-detail-price="'+pAttr+'" data-detail-code="'+esc(t.code||"")+'" data-detail-cat="'+esc(t.dept||"Lab test")+'" title="View details">'+esc(t.name)+'</div><div class="ti-cat">'+esc(t.dept||"Lab test")+'</div></div>'
+           +   priceHtml
+           +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.name)+'" data-book-price="'+pAttr+'" data-book-code="'+esc(t.code||"")+'" href="'+WA+encodeURIComponent(waMsg)+'">'
            +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg><span>Book</span></a>'
-           +   '<button class="ti-add" title="Add to booking" aria-label="Add to booking" data-add-name="'+esc(t.name)+'" data-add-price="" data-add-code="'+esc(t.code||"")+'">＋</button>'
-           +   '<button class="ti-share" title="Share this test" aria-label="Share" data-share-name="'+esc(t.name)+'" data-share-price=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></button>'
+           +   '<button class="ti-add" title="Add to booking" aria-label="Add to booking" data-add-name="'+esc(t.name)+'" data-add-price="'+pAttr+'" data-add-code="'+esc(t.code||"")+'">＋</button>'
+           +   '<button class="ti-share" title="Share this test" aria-label="Share" data-share-name="'+esc(t.name)+'" data-share-price="'+pAttr+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></button>'
            + '</div>';
     });
     more.innerHTML=out;
