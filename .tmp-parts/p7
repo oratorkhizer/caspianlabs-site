@@ -1,0 +1,290 @@
+    var shown = 0;
+    // Popular-first ordering so top sellers surface (Pareto). Stable sort keeps original order otherwise.
+    var order = TESTS.map(function(t,i){return {t:t,i:i};});
+    order.sort(function(a,b){ return ((b.t.pop?1:0)-(a.t.pop?1:0)) || (a.i-b.i); });
+    order.forEach(function(o){
+      var t = o.t;
+      if(activeCat==="★ Most booked"){ if(!t.pop) return; }
+      else if(activeCat!=="All" && t.c!==activeCat) return;
+      var incTxt = INC[t.n] || "";
+      var hay = (t.n + " " + t.c + " " + (t.k||"") + " " + incTxt).toLowerCase();
+      if(q && !hayMatch(hay, q)) return;
+      shown++;
+      var isBundle = !!INC[t.n];
+      var priceHtml = (t.p!=null)
+        ? '<div class="ti-price">'+inr(t.p)+(isBundle?'<small>onwards</small>':'')+'</div>'
+        : '<div class="ti-ask">Price at centre</div>';
+      var msg = t.p!=null
+        ? "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + " (" + inr(t.p) + ")."
+        : "Hi Caspian Diagnostic Centre, I'd like to book: " + t.n + ". Please share the price.";
+      var incHtml = "";
+      if(incTxt){
+        var shownInc = incTxt;
+        if(q){ // highlight the matched test within the includes
+          try { shownInc = incTxt.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'), '<span class="dir-hit">$1</span>'); } catch(e){ shownInc = incTxt; }
+        }
+        incHtml = '<div class="ti-inc"><b>Includes:</b> '+shownInc+'</div>';
+      }
+      out += '<div class="titem">'
+           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.n)+'" data-detail-price="'+(t.p==null?'':t.p)+'" data-detail-cat="'+esc(t.c)+'" title="View details">'+t.n+(t.pop?' <span class="ti-pop">★ Popular</span>':'')+'</div><div class="ti-cat">'+t.c+'</div>'+incHtml+'</div>'
+           +   priceHtml
+           +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.n)+'" data-book-price="'+(t.p==null?'':t.p)+'" href="'+WA+encodeURIComponent(msg)+'">'
+           +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg>'
+           +     '<span>Book</span></a>'
+           +   '<button class="ti-add" title="Add to booking" aria-label="Add to booking" data-add-name="'+esc(t.n)+'" data-add-price="'+(t.p==null?'':t.p)+'">＋</button>'
+           +   '<button class="ti-share" title="Share this test" aria-label="Share" data-share-name="'+esc(t.n)+'" data-share-price="'+(t.p==null?'':t.p)+'">'
+           +     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg>'
+           +   '</button>'
+           + '</div>';
+    });
+    list.innerHTML = out;
+    document.getElementById('dirCount').textContent = shown + (shown===1?" test":" tests") + " shown"
+        + (activeCat!=="All"?" in "+activeCat:"") + " · tap Book to reserve online";
+    renderCatalog(q, shown);   // hybrid: also surface the full reception catalogue on search
+  }
+
+  /* ===== Hybrid: full Crelio catalogue fallback (same menu reception sees) ===== */
+  var CATALOG=null, CATALOG_LOADING=false, _curatedNames=null;
+  function curatedNameSet(){ if(!_curatedNames){ _curatedNames={}; TESTS.forEach(function(t){_curatedNames[t.n.toLowerCase()]=1;}); } return _curatedNames; }
+  function loadCatalog(cb){
+    if(CATALOG){ cb&&cb(); return; }
+    if(CATALOG_LOADING) return;
+    CATALOG_LOADING=true;
+    fetch('/api/tests').then(function(r){return r.json();}).then(function(j){
+      CATALOG=(j&&j.ok&&Array.isArray(j.tests))?j.tests:[]; CATALOG_LOADING=false; cb&&cb();
+    }).catch(function(){ CATALOG=[]; CATALOG_LOADING=false; cb&&cb(); });
+  }
+  function renderCatalog(q, curatedShown){
+    var more=document.getElementById('dirMore'), head=document.getElementById('dirMoreHead'), empty=document.getElementById('dirEmpty');
+    function setEmpty(){ empty.style.display = (curatedShown===0 && more.innerHTML==="") ? "block" : "none"; }
+    if(!q || q.length<2){ more.innerHTML=""; head.style.display="none"; empty.style.display = curatedShown?"none":"block"; return; }
+    if(CATALOG===null){
+      head.style.display="block"; head.innerHTML="Searching our full lab menu…";
+      more.innerHTML=""; empty.style.display="none";
+      loadCatalog(function(){ renderDir(); });   // reruns renderDir → renderCatalog with data
+      return;
+    }
+    var cur=curatedNameSet();
+    var hits=CATALOG.filter(function(t){
+      if(cur[t.name.toLowerCase()]) return false;             // already in curated list above
+      return hayMatch(t.name+" "+(t.code||"")+" "+(t.dept||""), q);
+    });
+    var CAP=40, total=hits.length; hits=hits.slice(0,CAP);
+    if(!hits.length){ more.innerHTML=""; head.style.display="none"; setEmpty(); return; }
+    var out="";
+    hits.forEach(function(t){
+      var pp = (t.price!=null && Number(t.price)>0) ? Number(t.price) : null;
+      var pAttr = pp!=null ? pp : "";
+      var waMsg = pp!=null
+        ? "Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+" ("+inr(pp)+")."
+        : "Hi Caspian Diagnostic Centre, I'd like to book: "+t.name+". Please share the price.";
+      var priceHtml = pp!=null ? '<div class="ti-price">'+inr(pp)+'</div>' : '<div class="ti-price">Price at centre</div>';
+      out += '<div class="titem cat-item">'
+           +   '<div class="ti-main"><div class="ti-name" role="button" tabindex="0" data-detail-name="'+esc(t.name)+'" data-detail-price="'+pAttr+'" data-detail-code="'+esc(t.code||"")+'" data-detail-cat="'+esc(t.dept||"Lab test")+'" title="View details">'+esc(t.name)+'</div><div class="ti-cat">'+esc(t.dept||"Lab test")+'</div></div>'
+           +   priceHtml
+           +   '<a class="ti-book" target="_blank" rel="noopener" data-book-name="'+esc(t.name)+'" data-book-price="'+pAttr+'" data-book-code="'+esc(t.code||"")+'" href="'+WA+encodeURIComponent(waMsg)+'">'
+           +     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg><span>Book</span></a>'
+           +   '<button class="ti-add" title="Add to booking" aria-label="Add to booking" data-add-name="'+esc(t.name)+'" data-add-price="'+pAttr+'" data-add-code="'+esc(t.code||"")+'">＋</button>'
+           +   '<button class="ti-share" title="Share this test" aria-label="Share" data-share-name="'+esc(t.name)+'" data-share-price="'+pAttr+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></button>'
+           + '</div>';
+    });
+    more.innerHTML=out;
+    head.style.display="block";
+    head.innerHTML='<b>'+total+' more</b> from our full lab menu — the complete catalogue our reception can order'
+      + (total>CAP?(' (showing first '+CAP+')'):'')
+      + '. Tap <b>Book</b> to request; our team confirms the exact price.';
+    setEmpty();
+  }
+
+  buildChips();
+  renderDir();
+
+  /* ===== Share a test / package ===== */
+  var _shareName="", _sharePrice=null;
+  function shareUrl(name){ return location.origin + location.pathname + '?test=' + encodeURIComponent(name); }
+  function openSharePop(name, price, btn){
+    _shareName=name; _sharePrice=(price===""||price==null)?null:Number(price);
+    var pop=document.getElementById('sharePop');
+    document.getElementById('spNative').style.display = navigator.share ? 'flex' : 'none';
+    pop.classList.add('on');
+    var r=btn.getBoundingClientRect();
+    var pw=pop.offsetWidth||190, ph=pop.offsetHeight||170;
+    var vl=r.right-pw; if(vl<8)vl=8; if(vl+pw>window.innerWidth-8)vl=Math.max(8,window.innerWidth-pw-8);
+    var vt=r.bottom+8; if(vt+ph>window.innerHeight-8)vt=Math.max(8,r.top-ph-8);
+    pop.style.top=(window.scrollY+vt)+'px'; pop.style.left=(window.scrollX+vl)+'px';
+  }
+  window.addEventListener('resize', function(){ closeSharePop(); });
+  window.addEventListener('scroll', function(){ closeSharePop(); }, {passive:true});
+  function closeSharePop(){ var p=document.getElementById('sharePop'); if(p) p.classList.remove('on'); }
+  function legacyCopy(t){ try{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}catch(e){} }
+  var _toastT;
+  function showToast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(_toastT); _toastT=setTimeout(function(){t.classList.remove('on');},2200); }
+  function shareVia(how){
+    var name=_shareName, url=shareUrl(name);
+    var label=(_sharePrice!=null ? name+' ('+inr(_sharePrice)+')' : name);
+    var msg='Recommended: '+label+' at Caspian Diagnostic Centre. Book online here: '+url;
+    if(how==='copy'){
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(function(){showToast('Link copied!');},function(){legacyCopy(url);showToast('Link copied!');}); }
+      else { legacyCopy(url); showToast('Link copied!'); }
+    } else if(how==='whatsapp'){ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener'); }
+    else if(how==='email'){ window.location.href='mailto:?subject='+encodeURIComponent('Caspian Diagnostic Centre — '+name)+'&body='+encodeURIComponent(msg); }
+    else if(how==='native' && navigator.share){ navigator.share({title:name,text:label+' at Caspian Diagnostic Centre',url:url}).catch(function(){}); }
+    if(typeof gtag==='function'){gtag('event','share',{method:how});}  // no test name to analytics (health-data privacy)
+    closeSharePop();
+  }
+  document.addEventListener('click', function(e){
+    var s=e.target.closest('[data-share-name]');
+    if(s){ e.preventDefault(); openSharePop(s.getAttribute('data-share-name'), s.getAttribute('data-share-price'), s); return; }
+    if(!e.target.closest('#sharePop')) closeSharePop();
+  }, true);
+
+  // Add a Share button to each package card (reusing its Book button's name/price)
+  (function(){
+    var acts=document.querySelectorAll('#packages .pkg .act');
+    for(var i=0;i<acts.length;i++){
+      var bk=acts[i].querySelector('a[data-book-name]'); if(!bk) continue;
+      var b=document.createElement('button');
+      b.type='button'; b.className='pkg-share';
+      b.setAttribute('data-share-name', bk.getAttribute('data-book-name'));
+      b.setAttribute('data-share-price', bk.getAttribute('data-book-price')||'');
+      b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg> Share this package';
+      acts[i].appendChild(b);
+    }
+  })();
+
+  // Deep link: /?test=NAME lands the visitor on that test, ready to book (no re-search)
+  (function(){
+    try{
+      var params=new URLSearchParams(location.search);
+      var want=(params.get('test')||params.get('pkg')||'').trim();
+      if(!want) return;
+      var input=document.getElementById('dirInput');
+      if(input){ activeCat='All'; buildChips(); input.value=want; renderDir(); }
+      var sec=document.getElementById('all-tests'); if(sec) sec.scrollIntoView({behavior:'smooth'});
+      var match=TESTS.filter(function(t){return t.n.toLowerCase()===want.toLowerCase();})[0];
+      if(match && typeof openDetail==='function'){ setTimeout(function(){ openDetail(match.n, match.p, '', INC[match.n]||'', match.c); }, 650); }
+    }catch(e){}
+  })();
+
+  /* ===== Online booking modal ===== */
+  var bkState = { mode:"now" };
+
+  /* ===== Multi-test cart ===== */
+  var CART = [];   // [{name, price, code}]
+  function saveCart(){ try{ sessionStorage.setItem('cdcCart', JSON.stringify(CART)); }catch(e){} }
+  function loadCart(){ try{ var s=sessionStorage.getItem('cdcCart'); if(s){ var a=JSON.parse(s); if(Array.isArray(a)) CART=a; } }catch(e){} }
+  function cartFind(name){ for(var i=0;i<CART.length;i++){ if(CART[i].name===name) return i; } return -1; }
+  function cartBump(){ var nc=document.getElementById('navCart'); if(nc){ nc.classList.remove('bump'); void nc.offsetWidth; nc.classList.add('bump'); } }
+  function cartAdd(name, price, code, silent){
+    var i = cartFind(name);
+    if(i<0){
+      CART.push({ name:name, price:(price==null||price===""?null:Number(price)), code:code||"" });
+      if(!silent) showToast('Added — '+CART.length+(CART.length===1?' test':' tests')+' in your booking');
+    } else if(!silent){ showToast('Already in your booking'); }
+    saveCart(); updateSticky(); cartBump();
+    if(document.getElementById('bkOv').classList.contains('on')) renderBkItems();
+  }
+  function cartRemove(idx){
+    CART.splice(idx,1);
+    saveCart(); updateSticky();
+    if(document.getElementById('bkOv').classList.contains('on')) renderBkItems();
+  }
+  function cartTotal(){ var t=0, unknown=false; CART.forEach(function(it){ if(it.price!=null) t+=Number(it.price); else unknown=true; }); return {t:t, unknown:unknown}; }
+  function updateSticky(){
+    var n=CART.length;
+    var lbl=document.getElementById('sbLabel');
+    if(lbl){
+      document.getElementById('sbCount').textContent = n;
+      document.getElementById('sbCart').style.display = n>0 ? 'flex' : 'none';
+      lbl.textContent = n>0 ? ('Review booking ('+n+')') : 'Book a test';
+    }
+    var nc=document.getElementById('navCart'), ncc=document.getElementById('navCartCount');
+    if(nc && ncc){
+      if(n>0){ ncc.textContent=n; ncc.hidden=false; nc.setAttribute('aria-label','Your booking ('+n+(n>1?' items':' item')+')'); }
+      else { ncc.hidden=true; nc.setAttribute('aria-label','Your booking (empty)'); }
+    }
+  }
+
+  /* ===== Test / profile detail view (what a shared link opens) ===== */
+  var dtState={name:'',price:null,code:''}, dtReturnFocus=null;
+  function openDetail(name, price, code, incText, cat){
+    dtState={name:name, price:(price==null||price===''?null:Number(price)), code:code||''};
+    document.getElementById('dtTitle').textContent=name;
+    var ce=document.getElementById('dtCat'); ce.textContent=cat||''; ce.style.display=cat?'block':'none';
+    document.getElementById('dtPrice').innerHTML=(dtState.price!=null)?(inr(dtState.price)+(incText?'<small>onwards</small>':'')):'Price at centre';
+    var incWrap=document.getElementById('dtInc');
+    if(incText){ incWrap.innerHTML='<div class="dt-inc-h">What’s included</div><div class="dt-inc-b">'+esc(incText)+'</div>'; }
+    else { incWrap.innerHTML='<div class="dt-inc-b dt-muted">A single lab test. Add it to your booking and our team confirms the price and any preparation when they call.</div>'; }
+    var prep=document.getElementById('dtPrep'), low=(name+' '+(cat||'')).toLowerCase();
+    if(/lipid|fasting|full body|diabet|sugar|glucose|metabolic|insulin|cholesterol/.test(low)){ prep.textContent='Tip: this usually needs 8–12 hours of fasting — our team will confirm when you book.'; prep.style.display='block'; }
+    else { prep.style.display='none'; }
+    var add=document.getElementById('dtAdd'); add.textContent='＋ Add to booking'; add.classList.remove('added');
+    dtReturnFocus=document.activeElement;
+    document.getElementById('dtOv').classList.add('on');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){ try{ document.getElementById('dtAdd').focus(); }catch(e){} }, 60);
+    if(typeof gtag==='function'){gtag('event','test_detail_open',{event_category:'booking'});}
+  }
+  function closeDetail(){
+    document.getElementById('dtOv').classList.remove('on');
+    if(!document.getElementById('bkOv').classList.contains('on')) document.body.style.overflow='';
+    if(dtReturnFocus && dtReturnFocus.focus){ try{ dtReturnFocus.focus(); }catch(e){} dtReturnFocus=null; }
+  }
+  function detailAdd(){ cartAdd(dtState.name, dtState.price, dtState.code); var a=document.getElementById('dtAdd'); a.textContent='✓ Added to booking'; a.classList.add('added'); }
+  function detailBook(){ if(cartFind(dtState.name)<0){ CART.push({name:dtState.name,price:dtState.price,code:dtState.code}); saveCart(); updateSticky(); } closeDetail(); openCart(); }
+  document.getElementById('dtShareBtn').addEventListener('click', function(){ openSharePop(dtState.name, dtState.price, this); });
+  document.getElementById('dtOv').addEventListener('click', function(e){ if(e.target===this) closeDetail(); });
+  document.getElementById('dtOv').addEventListener('keydown', function(e){
+    if(e.key!=='Tab') return;
+    var f=Array.prototype.filter.call(this.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'), function(el){ return el.offsetParent!==null && !el.disabled; });
+    if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
+  // Click a test/profile NAME anywhere in the directory → open its detail view
+  document.addEventListener('click', function(e){
+    var d=e.target.closest('[data-detail-name]'); if(!d) return;
+    var nm=d.getAttribute('data-detail-name');
+    var pr=d.getAttribute('data-detail-price');
+    openDetail(nm, pr===''?null:Number(pr), d.getAttribute('data-detail-code')||'', INC[nm]||'', d.getAttribute('data-detail-cat')||'');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Enter' && e.key!==' ') return;
+    var d=e.target.closest && e.target.closest('[data-detail-name]');
+    if(d){ e.preventDefault(); d.click(); }
+  });
+  function scrollToTests(){
+    var el=document.getElementById('all-tests'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    setTimeout(function(){ try{ document.getElementById('dirInput').focus({preventScroll:true}); }catch(e){} }, 450);
+  }
+  function stickyAction(){ if(CART.length) openCart(); else scrollToTests(); }
+  function addMoreTests(){ closeBooking(); scrollToTests(); }
+  function renderBkItems(){
+    var wrap=document.getElementById('bkItems'); if(!wrap) return;
+    var form=document.getElementById('bkForm');
+    if(!CART.length){
+      if(form) form.style.display='none';
+      wrap.innerHTML='<div style="text-align:center;padding:22px 8px;color:#5b6b7f">'
+        +'<div style="font-size:34px;margin-bottom:8px">🧺</div>'
+        +'<p style="margin:0 0 14px;font-size:14.5px">Your booking is empty.</p>'
+        +'<button type="button" class="bk-sub" style="width:auto;padding:11px 20px" onclick="addMoreTests()">Browse tests</button></div>';
+      return;
+    }
+    if(form) form.style.display='';
+    var out="";
+    CART.forEach(function(it, idx){
+      var pr = it.price!=null ? inr(it.price) : "Price at centre";
+      out += '<div class="bk-item"><span class="nm">'+esc(it.name)+'</span><span class="pr">'+pr+'</span>'
+          +  '<button class="rm" type="button" aria-label="Remove '+esc(it.name)+'" onclick="cartRemove('+idx+')">&times;</button></div>';
+    });
+    var tot=cartTotal();
+    if(CART.length>1 && tot.t>0){
+      out += '<div class="bk-total"><span>Total'+(tot.unknown?' <small>(+ items priced at centre)</small>':'')+'</span><span>'+inr(tot.t)+(tot.unknown?' +':'')+'</span></div>';
+    }
+    // Overlap hint: a loose test already covered by a package in the cart
+    var overlaps=cartOverlaps();
+    if(overlaps.length){
+      out += '<div class="bk-overlap">ℹ️ '+overlaps.map(function(o){return esc(o.test)+' may already be included in <b>'+esc(o.pkg)+'</b>';}).join('<br>')+'</div>';
+    }
+    out += '<button class="bk-addmore" type="button" onclick="addMoreTests()">＋ Add another test</button>';
