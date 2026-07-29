@@ -1,0 +1,13 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "caspianlabs.in" }],
+      "destination": "https://www.caspianlabs.in/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ]
+}

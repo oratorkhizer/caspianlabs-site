@@ -51,7 +51,7 @@ export default async function handler(req, res) {
   const items    = Array.isArray(body.items) ? body.items : []; // [{id,code,name}]
 
   if (!fullName) errors.push("Full name is required");
-  if (!mobile || mobile.length < 10) errors.push("A valid 10-digit mobile is required");
+  if (!/^[6-9]\d{9}$/.test(mobile)) errors.push("A valid 10-digit Indian mobile number is required");
   if (!items.length) errors.push("Select at least one test or package");
   if (errors.length) return res.status(400).json({ ok: false, error: errors.join("; ") });
 
@@ -160,16 +160,16 @@ const CODE_MAP = {
   "Complete Metabolic Panel": { code: "Complete Metabolic Panel", type: "profile" },
   "Metabolic Wellness + InBody": { code: "RAMZAN FITNESS CHECKUP", type: "profile" },
   "Metabolic Wellness (without InBody)": { code: "Metabolic Wellness Checkup", type: "profile" },
-  "Premium Health Check \u2014 Men 45+": { code: "PREMIUM HEALTH CHECK FOR MEN ABOVE 45", type: "profile" },
+  "Premium Health Check — Men 45+": { code: "PREMIUM HEALTH CHECK FOR MEN ABOVE 45", type: "profile" },
   "Women's Health Profile": { code: "PHP03", type: "profile" },
   "Haj / Umrah Fitness": { code: "HAJI PROFILE", type: "profile" },
   "Comprehensive Diabetes Screening": { code: "COMPREHENSIVE DIABETES  SCREENING", type: "profile" },
   "Diabetes Monitoring Mini Profile": { code: "PD03", type: "profile" },
   "Diabetes Monitoring Maxi Profile": { code: "PD04", type: "profile" },
   "HbA1c (Glycated Haemoglobin)": { code: "H04CB", type: "test" },
-  "Blood Sugar \u2014 Fasting (FBS)": { code: "G20CB", type: "test" },
-  "Blood Sugar \u2014 Post Prandial (PPBS)": { code: "G21CB", type: "test" },
-  "Blood Sugar \u2014 Random (RBS)": { code: "G22CB", type: "test" },
+  "Blood Sugar — Fasting (FBS)": { code: "G20CB", type: "test" },
+  "Blood Sugar — Post Prandial (PPBS)": { code: "G21CB", type: "test" },
+  "Blood Sugar — Random (RBS)": { code: "G22CB", type: "test" },
   "Thyroid Profile (T3 T4 TSH)": { code: "PT07", type: "profile" },
   "Thyroid Panel I (T3 T4 TSH)": { code: "PT07", type: "profile" },
   "Thyroid Profile II": { code: "PT08", type: "profile" },
