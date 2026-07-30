@@ -1,14 +1,22 @@
 // Edge middleware bridge: serves the uploaded homepage file "index (1).html"
-// until it is renamed to index.html. The URL constructor handles the
-// space/parens encoding that vercel.json rewrites cannot express.
-// Currently limited to the /index-new test route; / and /index.html are added
-// after the test route is verified.
+// at / and /index.html until it is renamed to index.html in the repo.
+// Self-healing: if the uploaded file no longer exists (i.e. the rename has
+// happened), the middleware falls through to normal routing, so the swap is
+// zero-downtime in every state. Delete this file after the rename lands.
 
-export const config = { matcher: ["/index-new"] };
+export const config = { matcher: ["/", "/index.html", "/index-new"] };
 
-export default function middleware(request) {
+export default async function middleware(request) {
   const target = new URL("/index (1).html", request.url);
-  return new Response(null, {
-    headers: { "x-middleware-rewrite": target.toString() },
-  });
+  try {
+    const head = await fetch(target, { method: "HEAD" });
+    if (head.ok) {
+      return new Response(null, {
+        headers: { "x-middleware-rewrite": target.toString() },
+      });
+    }
+  } catch (e) {
+    // network hiccup — fall through to normal routing
+  }
+  return; // no rewrite: serve whatever the filesystem has
 }
