@@ -13,7 +13,7 @@
 <style>
   :root{
     --blue:#0A5C9E; --blue-dark:#08487d; --blue-800:#063a66;
-    --teal:#14B8A6; --teal-dark:#0f9488;
+    --teal:#14B8A6; --teal-dark:#0c776e;
     --ink:#152b3c; --muted:#5b6b7a; --line:#e3ecf3;
     --bg:#ffffff; --bg-soft:#f2f8fd; --bg-blue:#eaf3fb;
     --shadow:0 10px 30px rgba(10,92,158,.10); --shadow-sm:0 4px 14px rgba(10,92,158,.08);
@@ -27,8 +27,8 @@
   img{max-width:100%}
   .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
   .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;padding:13px 22px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:.2s;white-space:nowrap}
-  .btn-wa{background:#25D366;color:#fff}
-  .btn-wa:hover{background:#1eb457;transform:translateY(-1px)}
+  .btn-wa{background:#0f8440;color:#fff}
+  .btn-wa:hover{background:#0d7237;transform:translateY(-1px)}
   .btn-primary{background:var(--blue);color:#fff}
   .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
   .btn-ghost{background:transparent;color:var(--blue);border-color:#cfe1f1}
@@ -112,7 +112,7 @@
   .pkg:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
   .pkg.feat{border:2px solid var(--blue)}
   .pkg .top{padding:22px 22px 16px;border-bottom:1px solid var(--line);position:relative}
-  .pkg .tag{position:absolute;top:16px;right:16px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+  .pkg .tag{position:absolute;top:16px;right:16px;background:var(--teal-dark);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.04em}
   .pkg h3{font-size:19px;margin-bottom:4px}
   .pkg .cnt{font-size:13px;color:var(--teal-dark);font-weight:600}
   .pkg .price{padding:16px 22px 6px;font-size:14px;color:var(--muted)}
@@ -132,9 +132,9 @@
   .dir-chip{background:#fff;border:1.5px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.15s}
   .dir-chip:hover{border-color:#cfe1f1;color:var(--blue)}
   .dir-chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
-  .dir-chip-pop{border-color:#f6c945;color:#a9791b;background:#fffdf5}
+  .dir-chip-pop{border-color:#f6c945;color:#8f6410;background:#fffdf5}
   .dir-chip-pop.on{background:#f6b21b;border-color:#f6b21b;color:#3a2a00}
-  .ti-pop{display:inline-block;font-size:10.5px;font-weight:800;color:#a9791b;background:#fff5da;border:1px solid #f2d98a;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle;white-space:nowrap}
+  .ti-pop{display:inline-block;font-size:10.5px;font-weight:800;color:#8f6410;background:#fff5da;border:1px solid #f2d98a;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle;white-space:nowrap}
   .dir-count{text-align:center;color:var(--muted);font-size:13.5px;margin:20px 0 6px}
   .dir-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
   .titem{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;box-shadow:var(--shadow-sm);transition:.15s}
@@ -396,13 +396,13 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap">
-    <div class="ti hide-sm">📍 Ahmed Plaza, Vijay Nagar Colony, Hyderabad – 500057</div>
+    <div class="ti hide-sm"><span aria-hidden="true">📍</span> Ahmed Plaza, Vijay Nagar Colony, Hyderabad – 500057</div>
     <div style="display:flex;gap:16px;align-items:center">
-      <a class="ti hide-sm" href="https://www.caspianhealthcare.in" target="_blank" rel="noopener">🏥 Our Hospital: Caspian Healthcare ↗</a>
+      <a class="ti hide-sm" href="https://www.caspianhealthcare.in" target="_blank" rel="noopener"><span aria-hidden="true">🏥</span> Our Hospital: Caspian Healthcare ↗</a>
       <span class="sep hide-sm">|</span>
-      <a class="ti" href="tel:+919059341154">📞 +91 90593 41154</a>
+      <a class="ti" href="tel:+919059341154"><span aria-hidden="true">📞</span> +91 90593 41154</a>
       <span class="sep hide-sm">|</span>
-      <span class="ti hide-sm">🕗 Open 24/7</span>
+      <span class="ti hide-sm"><span aria-hidden="true">🕗</span> Open 24/7</span>
     </div>
   </div>
 </div>
@@ -451,7 +451,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       </div>
       <a class="grating" href="https://g.page/r/CYPwyCtMe4PYEBM/review" target="_blank" rel="noopener" aria-label="Rated 4.9 out of 5 on Google">
         <span class="gnum">4.9</span>
-        <span class="gstars">★★★★★</span>
+        <span class="gstars" aria-hidden="true">★★★★★</span>
         <span class="glbl">Rated on <span class="gg"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span> by our patients</span>
       </a>
       <div class="assure">
@@ -629,7 +629,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       <p class="lead center">Genuine reviews from patients across Hyderabad. If Caspian has cared for you, a quick rating on Google helps other families find us.</p>
       <div style="margin-top:22px">
         <a class="btn btn-google" href="https://g.page/r/CYPwyCtMe4PYEBM/review" target="_blank" rel="noopener" aria-label="Rate Caspian Diagnostic Centre on Google">
-          <span style="color:#fbbc04;font-size:17px">&#9733;</span>&nbsp;Rate us on <span class="gg" style="margin-left:5px"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span>
+          <span style="color:#fbbc04;font-size:17px" aria-hidden="true">&#9733;</span>&nbsp;Rate us on <span class="gg" style="margin-left:5px"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span>
         </a>
       </div>
     </div>
@@ -904,7 +904,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-done h4{margin:0 0 6px;font-size:20px;color:#0f2444;font-weight:800}
   .bk-done p{margin:0 0 6px;color:#475569;font-size:14.5px;line-height:1.55}
   .bk-done .ref{display:inline-block;background:#eef4ff;color:#1a56db;font-weight:800;padding:6px 14px;border-radius:9px;margin:8px 0 4px;font-size:15px}
-  .bk-done .btn-wa2{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:11px;margin-top:14px;font-size:15px}
+  .bk-done .btn-wa2{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#0f8440;color:#fff;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:11px;margin-top:14px;font-size:15px}
   /* multi-test cart inside the modal */
   #bkItems{margin-bottom:14px}
   .bk-item{display:flex;align-items:center;gap:10px;background:#eef4ff;border:1px solid #d6e4ff;border-radius:12px;padding:10px 12px;margin-bottom:8px}
@@ -929,10 +929,10 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 <!-- SHARE POPOVER + TOAST -->
 <div id="sharePop" role="menu" aria-label="Share options">
   <div class="sp-title">Share this</div>
-  <button type="button" onclick="shareVia('copy')">🔗&nbsp; Copy link</button>
-  <button type="button" onclick="shareVia('whatsapp')">💬&nbsp; WhatsApp</button>
-  <button type="button" onclick="shareVia('email')">✉️&nbsp; Email</button>
-  <button type="button" id="spNative" onclick="shareVia('native')" style="display:none">📤&nbsp; More…</button>
+  <button type="button" role="menuitem" onclick="shareVia('copy')"><span aria-hidden="true">🔗</span>&nbsp; Copy link</button>
+  <button type="button" role="menuitem" onclick="shareVia('whatsapp')"><span aria-hidden="true">💬</span>&nbsp; WhatsApp</button>
+  <button type="button" role="menuitem" onclick="shareVia('email')"><span aria-hidden="true">✉️</span>&nbsp; Email</button>
+  <button type="button" role="menuitem" id="spNative" onclick="shareVia('native')" style="display:none"><span aria-hidden="true">📤</span>&nbsp; More…</button>
 </div>
 <div id="toast"></div>
 
@@ -945,7 +945,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="bk-body">
       <div id="bkFormWrap">
         <div id="bkItems"></div>
-        <div class="bk-err" id="bkErr"></div>
+        <div class="bk-err" id="bkErr" role="alert" aria-live="assertive"></div>
         <form id="bkForm" novalidate>
           <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><label for="bkHp">Company (leave blank)</label><input id="bkHp" name="website" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="bk-f"><label for="bkName">Full name <span class="req">*</span></label><input id="bkName" type="text" autocomplete="name" placeholder="Patient's full name" required></div>
@@ -1737,13 +1737,17 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       dateTime:document.getElementById('bkTime').value
     };
     var err = document.getElementById('bkErr');
-    function fail(m){ err.textContent = m; err.style.display="block"; }
-    if(!v.name){ return fail("Please enter the patient's full name."); }
-    if(!/^[6-9]\d{9}$/.test(v.mobile)){ return fail("Please enter a valid 10-digit Indian mobile number (starting 6–9)."); }
-    if(!document.getElementById('bkConsent').checked){ return fail("Please tick the consent box so we can proceed with your booking."); }
-    if(v.mode==='home' && !v.address){ return fail("Please add the home address for collection."); }
-    if(v.mode==='scheduled' && !v.dateTime){ return fail("Please pick your preferred date & time."); }
-    if(v.dateTime){ var dt=new Date(v.dateTime); if(!isNaN(dt) && dt.getTime() < Date.now()-60000){ return fail("Please choose a date & time in the future."); } }
+    ['bkName','bkMobile','bkConsent','bkAddr','bkTime'].forEach(function(id){ var el=document.getElementById(id); if(el) el.removeAttribute('aria-invalid'); });
+    function fail(m, fieldId){
+      err.textContent = m; err.style.display="block";
+      if(fieldId){ var f=document.getElementById(fieldId); if(f){ f.setAttribute('aria-invalid','true'); try{ f.focus(); }catch(e){} } }
+    }
+    if(!v.name){ return fail("Please enter the patient's full name.", 'bkName'); }
+    if(!/^[6-9]\d{9}$/.test(v.mobile)){ return fail("Please enter a valid 10-digit Indian mobile number (starting 6–9).", 'bkMobile'); }
+    if(!document.getElementById('bkConsent').checked){ return fail("Please tick the consent box so we can proceed with your booking.", 'bkConsent'); }
+    if(v.mode==='home' && !v.address){ return fail("Please add the home address for collection.", 'bkAddr'); }
+    if(v.mode==='scheduled' && !v.dateTime){ return fail("Please pick your preferred date & time.", 'bkTime'); }
+    if(v.dateTime){ var dt=new Date(v.dateTime); if(!isNaN(dt) && dt.getTime() < Date.now()-60000){ return fail("Please choose a date & time in the future.", 'bkTime'); } }
     err.style.display="none";
 
     var sub = document.getElementById('bkSub');
@@ -1826,5 +1830,8 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   /* ===== Restore any saved cart (survives refresh / shared-link navigation) ===== */
   loadCart(); updateSticky();
 </script>
+<!-- Phase 2: client-supplied content (reviews, credentials, coverage, TAT) -->
+<script src="/assets/phase2-data.js"></script>
+<script src="/assets/phase2.js"></script>
 </body>
 </html>
