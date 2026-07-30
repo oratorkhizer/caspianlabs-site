@@ -7,18 +7,11 @@
    ============================================================ */
 window.CDC_DATA = {
 
-  /* 2.1 — Real patient reviews (4–6, selected by Caspian).
-     Each: { name: "Reviewer Name", rating: 5, text: "…", when: "May 2026" (optional) } */
-  reviews: [],
-
-  /* Total live review count on the Google profile (number), e.g. 214 */
-  reviewCount: null,
-
-  /* Public Google reviews page for the badge link */
-  reviewsUrl: "https://g.page/r/CYPwyCtMe4PYEBM/review",
+  /* 2.1 — Reviews are shown via the embedded Elfsight Google-reviews widget
+     (client decision, 30 Jul 2026): no curated reviews on the site. */
 
   /* 2.3 — Consultant pathologist. { name: "Dr …", quals: "MD (Pathology), …" } */
-  pathologist: null,
+  pathologist: { name: "Dr Raheel Raza", quals: "Consultant Pathologist" },
 
   /* 2.3 — NABL: set ONLY when accreditation is confirmed. { certNo: "MC-…" } */
   nabl: null,

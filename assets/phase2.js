@@ -1,6 +1,7 @@
 /* ============================================================
    Caspian Diagnostic Centre — Phase 2 renderers
-   Reviews · pathologist credentials · pincode coverage · TAT
+   Pathologist credentials · pincode coverage · TAT
+   (Reviews stay on the Elfsight Google widget — client decision.)
    Every block is a no-op until its data exists in CDC_DATA
    (assets/phase2-data.js), so shipping this early is safe.
    ============================================================ */
@@ -18,50 +19,6 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function css(text) { var s = document.createElement('style'); s.textContent = text; document.head.appendChild(s); }
   function track(name, params) { if (typeof gtag === 'function') { try { gtag('event', name, params || {}); } catch (e) {} } }
-
-  /* ---------- 2.1 Real patient reviews ---------- */
-  (function reviews() {
-    var list = D.reviews;
-    if (!list || !list.length) return;
-    var sec = document.querySelector('#reviews .wrap');
-    if (!sec) return;
-
-    css('.cdc-rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:32px}' +
-      '.cdc-rev{background:#fff;border:1px solid var(--line,#e3ecf3);border-radius:16px;padding:20px 18px;box-shadow:0 2px 10px rgba(15,23,42,.05);display:flex;flex-direction:column;gap:8px}' +
-      '.cdc-rev .st{color:#b06000;font-weight:800;font-size:14px;letter-spacing:2px}' +
-      '.cdc-rev .tx{color:#33445c;font-size:14.5px;line-height:1.6;margin:0}' +
-      '.cdc-rev .nm{margin-top:auto;font-weight:700;color:#0f2444;font-size:13.5px}' +
-      '.cdc-rev .nm small{display:block;font-weight:600;color:#5b6b7a;font-size:12px;margin-top:1px}' +
-      '.cdc-rev-count{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:14px;color:#33445c;font-weight:600}');
-
-    // Hide the third-party widget once curated reviews are live
-    var widget = sec.querySelector('[class*="elfsight-app"]');
-    if (widget && widget.parentElement) widget.parentElement.style.display = 'none';
-
-    var grid = el('div', { class: 'cdc-rev-grid' });
-    list.slice(0, 6).forEach(function (r) {
-      var stars = '★★★★★'.slice(0, Math.max(1, Math.min(5, r.rating || 5)));
-      grid.appendChild(el('article', { class: 'cdc-rev' },
-        '<div class="st" aria-hidden="true">' + stars + '</div>' +
-        '<p class="tx">“' + esc(r.text) + '”</p>' +
-        '<div class="nm">' + esc(r.name) + (r.when ? '<small>' + esc(r.when) + ' · Google review</small>' : '<small>Google review</small>') + '</div>'));
-    });
-    sec.appendChild(grid);
-
-    // Review count beside the 4.9 badge(s), linked to the Google profile
-    if (D.reviewCount) {
-      var badge = document.querySelector('.grating');
-      if (badge) {
-        var lbl = badge.querySelector('.glbl');
-        if (lbl) lbl.innerHTML += ' · <b>' + esc(D.reviewCount) + ' reviews</b>';
-        badge.setAttribute('aria-label', 'Rated 4.9 out of 5 from ' + D.reviewCount + ' Google reviews — read them on Google');
-        if (D.reviewsUrl) badge.href = D.reviewsUrl;
-      }
-      var head = sec.querySelector('.center');
-      if (head) head.appendChild(el('div', { class: 'cdc-rev-count' },
-        '<span aria-hidden="true" style="color:#b06000">★</span> 4.9 from <a href="' + esc(D.reviewsUrl || '#') + '" target="_blank" rel="noopener" style="color:var(--blue,#1a56db);font-weight:700">' + esc(D.reviewCount) + ' Google reviews</a>'));
-    }
-  })();
 
   /* ---------- 2.3 Pathologist credentials / NABL ---------- */
   (function credentials() {
