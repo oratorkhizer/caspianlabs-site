@@ -8,6 +8,9 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/packages/:slug", "destination": "/api/page?kind=package&slug=:slug" },
+    { "source": "/tests/:slug", "destination": "/api/page?kind=test&slug=:slug" },
+    { "source": "/home-sample-collection-hyderabad", "destination": "/api/page?kind=home" }
   ]
 }
