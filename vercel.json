@@ -8,9 +8,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/", "destination": "/index (1).html" },
-    { "source": "/index.html", "destination": "/index (1).html" },
-    { "source": "/index-new", "destination": "/index (1).html" }
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
   ]
 }
