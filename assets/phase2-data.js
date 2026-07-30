@@ -11,7 +11,7 @@ window.CDC_DATA = {
      (client decision, 30 Jul 2026): no curated reviews on the site. */
 
   /* 2.3 — Consultant pathologist. { name: "Dr …", quals: "MD (Pathology), …" } */
-  pathologist: { name: "Dr Raheel Raza", quals: "Consultant Pathologist" },
+  pathologist: { name: "Dr Raheel Raza", quals: "MBBS, DCP (Gandhi) · Consultant Pathologist" },
 
   /* 2.3 — NABL: set ONLY when accreditation is confirmed. { certNo: "MC-…" } */
   nabl: null,
