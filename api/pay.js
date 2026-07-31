@@ -402,13 +402,23 @@ async function settleOrder(base, order, payment, res) {
 
   const billId = data.billId || data.orderId || null;
   const patientId = data.patientId || null;
+  console.log("Crelio register ok", JSON.stringify(data).slice(0, 400));
+  // Crelio's bill total can differ from the catalog MRP the patient was charged (seen live
+  // 31 Jul: FBS catalog ₹80 vs bill ₹50 — a Crelio data-hygiene issue). billPayment rejects
+  // amounts above the bill total ("Bill Advance cannot be greater than Bill Total Amount"),
+  // so cap the sync at the bill total when the response reveals it, and flag the mismatch.
+  const billTotal = Number(data.billTotalAmount ?? data.totalAmount ?? data.billAmount ?? data.total ?? NaN);
 
   // 3b. Record the payment against the bill — Crelio Bill Payment API (billPayment),
   //     paymentMode "Online". Amount = tests total only: that is the bill's own total in
   //     Crelio; the home-visit charge is not a Crelio line item and is already explained
   //     in the bill comment. NOT calling billComplete — sample not yet collected, the
   //     order must stay open (Dr Khizer, 31 Jul).
-  const payAmt = Math.round(Math.max(0, amountPaid - (Number(booking.vc) || 0)) * 100) / 100;
+  let payAmt = Math.round(Math.max(0, amountPaid - (Number(booking.vc) || 0)) * 100) / 100;
+  if (Number.isFinite(billTotal) && billTotal > 0 && payAmt > billTotal) {
+    console.error("pay.js: PRICE MISMATCH bill", billId, "- catalog charged", payAmt, "but Crelio bill total is", billTotal, "- fix the test's MRP/rate in Crelio");
+    payAmt = billTotal;
+  }
   let paySynced = false;
   if (billId && payAmt > 0) paySynced = await crelioBillPayment(base, billId, payAmt);
   if (!paySynced) console.error("pay.js: billPayment sync failed for bill", billId, "— payment noted in bill comments");
