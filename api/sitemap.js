@@ -10,6 +10,7 @@
 const PAGES = [
   { path: "/",                  changefreq: "weekly",  priority: "1.0" },
   { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.8" },
+  { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
   { path: "/about.html",        changefreq: "monthly", priority: "0.6" },
   { path: "/pricing.html",      changefreq: "monthly", priority: "0.7" },
   { path: "/contact.html",      changefreq: "monthly", priority: "0.6" },
@@ -31,6 +32,12 @@ const PACKAGE_SLUGS = [
   "heart-health-checkup-hyderabad",
   "premium-health-checkup-men-hyderabad",
   "haj-umrah-fitness-package-hyderabad",
+];
+
+// keep in sync with ARTICLES in api/blog.js
+const BLOG_SLUGS = [
+  "what-does-hba1c-mean",
+  "fasting-before-blood-test",
 ];
 
 const TEST_SLUGS = [
@@ -68,6 +75,7 @@ export default function handler(req, res) {
     ...PAGES,
     ...PACKAGE_SLUGS.map((s) => ({ path: "/packages/" + s, changefreq: "monthly", priority: "0.8" })),
     ...TEST_SLUGS.map((s) => ({ path: "/tests/" + s, changefreq: "monthly", priority: "0.7" })),
+    ...BLOG_SLUGS.map((s) => ({ path: "/blog/" + s, changefreq: "monthly", priority: "0.6" })),
   ];
   const urls = all.map(
     (p) =>
