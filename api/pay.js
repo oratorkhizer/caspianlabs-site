@@ -34,6 +34,8 @@
 //   RAZORPAY_KEY_SECRET   ...            (SECRET — never exposed to the browser)
 //   HOME_VISIT_CHARGE     100 (default)  — ₹ per home visit
 //   HOME_FREE_ABOVE       500 (default)  — first visit free when tests total ≥ this
+//   CRELIO_CITY           Hyderabad (default) — city sent on home-collection registrations
+//   CRELIO_AREA           defaults to CRELIO_CITY
 //   CRELIO_TOKEN, CRELIO_ORG_ID, CRELIO_BASE, ALLOW_ORIGIN — same as /api/book.js
 //
 // Until RAZORPAY_KEY_ID/SECRET are set, this returns notConfigured and the site silently
@@ -314,6 +316,12 @@ async function confirmPayment(body, res) {
   };
   if (booking.md === "home") {
     payload.isHomecollection = 1;
+    // Crelio's home-collection branch REQUIRES city (verified 31 Jul 2026: LHRegisterBillAPI
+    // returned 400 {"raw":"'city'"} — a KeyError — for every home booking, seen in Vercel logs;
+    // walk-in bills registered fine without it). Docs list city/area/pincode as top-level fields.
+    payload.city = process.env.CRELIO_CITY || "Hyderabad";
+    payload.area = process.env.CRELIO_AREA || payload.city;
+    payload.pincode = "";
     if (booking.dt) payload.homeCollectionDateTime = toIso(booking.dt);
     if (booking.ad) payload.address = booking.ad;
   } else if (booking.md === "scheduled") {
