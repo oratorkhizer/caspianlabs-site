@@ -3,24 +3,31 @@
 //
 // Architecture (2.4, decided 31 Jul 2026 after Balaji/Crelio confirmed LHRegisterBillAPI
 // returns no payment link): REQUIRED PREPAYMENT via direct Razorpay Checkout on the site,
-// then the bill is registered in Crelio ONLY AFTER payment succeeds, with the payment
-// recorded (advance = amount paid) so it reconciles automatically. If payment never
-// completes, no bill is ever created — a true hard gate.
+// then the bill is registered in Crelio ONLY AFTER payment succeeds, and the payment is
+// recorded against the bill via Crelio's Bill Payment API (billPayment, paymentMode
+// "Online" — per Balaji's 31 Jul links) so it reconciles as a proper online payment in
+// Crelio's payment reports. If payment never completes, no bill is ever created — a true
+// hard gate. The bill is deliberately NOT marked complete (billComplete): at this point
+// only the payment is received, the sample is not yet collected, so the order must stay
+// open for the lab workflow (Dr Khizer, 31 Jul).
 //
 //   action:"create"  → validates the booking, prices it from Crelio's live catalog
 //                      (getAllTestsAndProfiles MRP), creates a Razorpay Order with the
 //                      booking payload stored in the order's notes (server-side, tamper-proof),
 //                      returns { orderId, amount, keyId } for Checkout.
 //   action:"confirm" → verifies the Razorpay signature (HMAC-SHA256), double-checks the
-//                      payment with Razorpay's API, then registers the Crelio bill from the
-//                      order notes. Idempotent: the billId is written back into the order
-//                      notes, so a repeated confirm returns the same bill instead of
-//                      double-booking.
+//                      payment with Razorpay's API, registers the Crelio bill from the
+//                      order notes, then syncs the payment via billPayment. Idempotent: the
+//                      billId is written back into the order notes, so a repeated confirm
+//                      returns the same bill instead of double-booking — and re-attempts the
+//                      billPayment sync if it failed the first time.
 //
 // Payment-failure never strands a patient: if Crelio registration fails AFTER a captured
 // payment, we return { ok:true, pending:true } — the site tells the patient the payment is
 // received and the team will confirm (payment + full booking details remain visible in the
-// Razorpay dashboard notes; Dr Khizer also gets Razorpay's payment-success email).
+// Razorpay dashboard notes; Dr Khizer also gets Razorpay's payment-success email). If the
+// bill registers but the billPayment sync fails, the bill comment still says PAID ONLINE
+// with the Razorpay id, so staff can reconcile manually.
 //
 // Env vars (Vercel → Project → Settings → Environment Variables):
 //   RAZORPAY_KEY_ID       rzp_live_...   (from Razorpay Dashboard → Account & Settings → API Keys)
@@ -245,6 +252,8 @@ async function confirmPayment(body, res) {
   const signature = String(body.razorpay_signature || "");
   if (!orderId || !paymentId || !signature) return res.status(400).json({ ok: false, error: "Missing payment details" });
 
+  const base = (process.env.CRELIO_BASE || "https://livehealth.solutions").replace(/\/$/, "");
+
   // 1. Signature proves this payment belongs to this order and succeeded.
   const expected = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
     .update(orderId + "|" + paymentId).digest("hex");
@@ -256,8 +265,15 @@ async function confirmPayment(body, res) {
   const order = await rzp("GET", "/orders/" + orderId);
   if (!order || !order.id) return res.status(502).json({ ok: false, error: "Could not read payment order" });
 
-  // Idempotency: already registered? Return the same bill — never double-book.
+  // Idempotency: already registered? Return the same bill — never double-book. But if the
+  // billPayment sync failed last time, re-attempt it now (payAmt was stored in the notes).
   if (order.notes && order.notes.billId) {
+    if (order.notes.paid !== "1" && order.notes.billId !== "registered") {
+      const payAmt = Number(order.notes.payAmt || 0);
+      if (payAmt > 0 && (await crelioBillPayment(base, order.notes.billId, payAmt))) {
+        try { await rzp("PATCH", "/orders/" + orderId, { notes: Object.assign({}, order.notes, { paid: "1" }) }); } catch (e) { /* non-fatal */ }
+      }
+    }
     return res.status(200).json({ ok: true, billId: order.notes.billId, patientId: order.notes.patientId || null, amountPaid: order.amount / 100, already: true });
   }
 
@@ -274,10 +290,10 @@ async function confirmPayment(body, res) {
     return res.status(200).json({ ok: true, pending: true, paymentId, amountPaid });
   }
 
-  // 3. Register the PAID bill in Crelio (same contract as /api/book, plus the payment).
-  //    advance = amount paid → the bill shows the money received (per Balaji: advance is the
-  //    amount when the patient pays during billing). Razorpay reference goes in comments.
-  //    NOTE: to be refined against Crelio's Bill Payment API once the guide is confirmed.
+  // 3. Register the PAID bill in Crelio (same contract as /api/book). The payment itself is
+  //    recorded in step 3b via Crelio's Bill Payment API (per Balaji, 31 Jul 2026) — so
+  //    advance stays 0 here and the money is never double-counted. Razorpay reference goes
+  //    in comments either way, so staff can always reconcile.
   const payload = {
     fullName: booking.n, age: formatAge(booking.a), gender: normGender(booking.g),
     countryCode: "91", mobile: booking.m, email: booking.e,
@@ -287,9 +303,7 @@ async function confirmPayment(body, res) {
       organizationIdLH: String(process.env.CRELIO_ORG_ID || "539536"),
       referralName: "Self",
       paymentType: "Cash",
-      // advance = tests total only, so the bill's maths stay clean; the visit charge is
-      // collected in the same Razorpay payment and explained in the comment.
-      advance: String(Math.max(0, amountPaid - (Number(booking.vc) || 0))),
+      advance: "0",
       billConcession: "0",
       comments: "Online booking via caspianlabs.in — PAID ONLINE ₹" + amountPaid
         + (Number(booking.vc) > 0 ? " (incl ₹" + booking.vc + " home-visit charge)" : "")
@@ -307,7 +321,6 @@ async function confirmPayment(body, res) {
     if (booking.dt) { payload.startDate = toIso(booking.dt); payload.endDate = toIso(booking.dt); }
   }
 
-  const base = (process.env.CRELIO_BASE || "https://livehealth.solutions").replace(/\/$/, "");
   const url = `${base}/LHRegisterBillAPI/${encodeURIComponent(process.env.CRELIO_TOKEN)}/`;
 
   let data = null, registered = false;
@@ -330,9 +343,23 @@ async function confirmPayment(body, res) {
   const billId = data.billId || data.orderId || null;
   const patientId = data.patientId || null;
 
-  // 4. Write billId back into the order notes (idempotency + staff visibility). Best-effort.
+  // 3b. Record the payment against the bill — Crelio Bill Payment API (billPayment),
+  //     paymentMode "Online". Amount = tests total only: that is the bill's own total in
+  //     Crelio; the home-visit charge is not a Crelio line item and is already explained
+  //     in the bill comment. NOT calling billComplete — sample not yet collected, the
+  //     order must stay open (Dr Khizer, 31 Jul).
+  const payAmt = Math.round(Math.max(0, amountPaid - (Number(booking.vc) || 0)) * 100) / 100;
+  let paySynced = false;
+  if (billId && payAmt > 0) paySynced = await crelioBillPayment(base, billId, payAmt);
+  if (!paySynced) console.error("pay.js: billPayment sync failed for bill", billId, "— payment noted in bill comments");
+
+  // 4. Write billId back into the order notes (idempotency + staff visibility + payment-sync
+  //    retry state). Best-effort.
   try {
-    const newNotes = Object.assign({}, order.notes, { billId: String(billId || "registered"), patientId: String(patientId || "") });
+    const newNotes = Object.assign({}, order.notes, {
+      billId: String(billId || "registered"), patientId: String(patientId || ""),
+      paid: paySynced ? "1" : "0", payAmt: String(payAmt),
+    });
     await rzp("PATCH", "/orders/" + orderId, { notes: newNotes });
   } catch (e) { /* non-fatal */ }
 
@@ -340,6 +367,24 @@ async function confirmPayment(body, res) {
 }
 
 /* ───────────────────────── helpers ───────────────────────── */
+
+// Crelio Bill Payment API — POST {base}/billPayment/{token}/ with
+// { billId, paymentList: [{ paymentMode: "Online", amount }] }. Response: { code: 200 }.
+// (Doc: api.creliohealth.com "Bill Payment API", shared by Balaji 31 Jul 2026.)
+async function crelioBillPayment(base, billId, amount) {
+  const url = `${base}/billPayment/${encodeURIComponent(process.env.CRELIO_TOKEN)}/`;
+  const body = JSON.stringify({ billId: Number(billId), paymentList: [{ paymentMode: "Online", amount: Number(amount) }] });
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body });
+      const text = await r.text();
+      let d; try { d = JSON.parse(text); } catch { d = { raw: text }; }
+      if (r.ok && !(d && d.code && Number(d.code) >= 300 && Number(d.code) !== 200)) return true;
+      console.error("Crelio billPayment error", r.status, JSON.stringify(d).slice(0, 300));
+    } catch (e) { console.error("Crelio billPayment network error", String(e)); }
+  }
+  return false;
+}
 
 function rzpAuth() {
   return "Basic " + Buffer.from(process.env.RAZORPAY_KEY_ID + ":" + process.env.RAZORPAY_KEY_SECRET).toString("base64");
