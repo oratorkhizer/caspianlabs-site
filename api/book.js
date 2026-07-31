@@ -15,6 +15,8 @@
 //   CRELIO_TOKEN   404a428e-...            (SECRET — Dr Khizer pastes the value; goes in the URL path)
 //   CRELIO_ORG_ID  539536                  (Org ID "for booking" from Balaji; not secret)
 //   CRELIO_BASE    https://livehealth.solutions   (default; use https://uat.crelio.solutions to test)
+//   CRELIO_CITY    Hyderabad (default)     (city sent on home-collection registrations)
+//   CRELIO_AREA    defaults to CRELIO_CITY
 //   ALLOW_ORIGIN   https://www.caspianlabs.in     (optional; defaults to same-origin/*)
 
 export default async function handler(req, res) {
@@ -101,6 +103,12 @@ export default async function handler(req, res) {
   // ---- Mode-specific keys ----
   if (mode === "home") {
     payload.isHomecollection = 1;
+    // Crelio's home-collection branch REQUIRES city (verified 31 Jul 2026: LHRegisterBillAPI
+    // returned 400 {"raw":"'city'"} — a KeyError — for home bookings, seen in Vercel logs;
+    // walk-in bills registered fine without it). Docs list city/area/pincode as top-level fields.
+    payload.city = process.env.CRELIO_CITY || "Hyderabad";
+    payload.area = process.env.CRELIO_AREA || payload.city;
+    payload.pincode = "";
     if (body.dateTime) payload.homeCollectionDateTime = toIso(body.dateTime);
     if (body.address) payload.address = String(body.address).trim();
   } else if (mode === "scheduled") {
@@ -160,16 +168,16 @@ const CODE_MAP = {
   "Complete Metabolic Panel": { code: "Complete Metabolic Panel", type: "profile" },
   "Metabolic Wellness + InBody": { code: "RAMZAN FITNESS CHECKUP", type: "profile" },
   "Metabolic Wellness (without InBody)": { code: "Metabolic Wellness Checkup", type: "profile" },
-  "Premium Health Check \u2014 Men 45+": { code: "PREMIUM HEALTH CHECK FOR MEN ABOVE 45", type: "profile" },
+  "Premium Health Check — Men 45+": { code: "PREMIUM HEALTH CHECK FOR MEN ABOVE 45", type: "profile" },
   "Women's Health Profile": { code: "PHP03", type: "profile" },
   "Haj / Umrah Fitness": { code: "HAJI PROFILE", type: "profile" },
   "Comprehensive Diabetes Screening": { code: "COMPREHENSIVE DIABETES  SCREENING", type: "profile" },
   "Diabetes Monitoring Mini Profile": { code: "PD03", type: "profile" },
   "Diabetes Monitoring Maxi Profile": { code: "PD04", type: "profile" },
   "HbA1c (Glycated Haemoglobin)": { code: "H04CB", type: "test" },
-  "Blood Sugar \u2014 Fasting (FBS)": { code: "G20CB", type: "test" },
-  "Blood Sugar \u2014 Post Prandial (PPBS)": { code: "G21CB", type: "test" },
-  "Blood Sugar \u2014 Random (RBS)": { code: "G22CB", type: "test" },
+  "Blood Sugar — Fasting (FBS)": { code: "G20CB", type: "test" },
+  "Blood Sugar — Post Prandial (PPBS)": { code: "G21CB", type: "test" },
+  "Blood Sugar — Random (RBS)": { code: "G22CB", type: "test" },
   "Thyroid Profile (T3 T4 TSH)": { code: "PT07", type: "profile" },
   "Thyroid Panel I (T3 T4 TSH)": { code: "PT07", type: "profile" },
   "Thyroid Profile II": { code: "PT08", type: "profile" },
