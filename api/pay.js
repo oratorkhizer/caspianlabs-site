@@ -320,7 +320,9 @@ async function settleOrder(base, order, payment, res) {
   // billPayment sync failed last time, re-attempt it now (payAmt was stored in the notes).
   if (order.notes && order.notes.billId) {
     if (order.notes.paid !== "1" && order.notes.billId !== "registered") {
-      const payAmt = Number(order.notes.payAmt || 0);
+      let payAmt = Number(order.notes.payAmt || 0);
+      const bt = Number(order.notes.bt || 0);
+      if (bt > 0 && payAmt > bt) payAmt = bt;   // cap at the bill total learned at registration
       if (payAmt > 0 && (await crelioBillPayment(base, order.notes.billId, payAmt))) {
         try { await rzp("PATCH", "/orders/" + orderId, { notes: Object.assign({}, order.notes, { paid: "1" }) }); } catch (e) { /* non-fatal */ }
       }
@@ -407,7 +409,12 @@ async function settleOrder(base, order, payment, res) {
   // 31 Jul: FBS catalog ₹80 vs bill ₹50 — a Crelio data-hygiene issue). billPayment rejects
   // amounts above the bill total ("Bill Advance cannot be greater than Bill Total Amount"),
   // so cap the sync at the bill total when the response reveals it, and flag the mismatch.
-  const billTotal = Number(data.billTotalAmount ?? data.totalAmount ?? data.billAmount ?? data.total ?? NaN);
+  let billTotal = Number(data.billTotalAmount ?? data.totalAmount ?? data.billAmount ?? data.total ?? NaN);
+  if (!Number.isFinite(billTotal) && Array.isArray(data.reportDetails)) {
+    // No top-level total in the response — sum the line items (reportDetails[].testAmount).
+    const sum = data.reportDetails.reduce((s, rd) => s + (Number(String((rd && rd.testAmount) || 0).replace(/[^\d.]/g, "")) || 0), 0);
+    billTotal = sum > 0 ? sum : NaN;
+  }
 
   // 3b. Record the payment against the bill — Crelio Bill Payment API (billPayment),
   //     paymentMode "Online". Amount = tests total only: that is the bill's own total in
@@ -429,6 +436,7 @@ async function settleOrder(base, order, payment, res) {
     const newNotes = Object.assign({}, order.notes, {
       billId: String(billId || "registered"), patientId: String(patientId || ""),
       paid: paySynced ? "1" : "0", payAmt: String(payAmt),
+      bt: Number.isFinite(billTotal) ? String(billTotal) : "",
     });
     await rzp("PATCH", "/orders/" + orderId, { notes: newNotes });
   } catch (e) { /* non-fatal */ }
