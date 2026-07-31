@@ -104,8 +104,15 @@ const ARTICLES = [
 /* Template                                                            */
 /* ------------------------------------------------------------------ */
 
+// On-brand illustrated headers per article (inline SVG — self-contained, cacheable,
+// swappable for a real photo later). viewBox 880x220 (4:1 banner).
+const BANNERS = {
+  "what-does-hba1c-mean": `<svg viewBox="0 0 880 220" role="img" aria-label="Illustration representing HbA1c, the three-month blood sugar average" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A5C9E"/><stop offset="1" stop-color="#0f8fb0"/></linearGradient></defs><rect width="880" height="220" fill="url(#hb)"/><circle cx="800" cy="24" r="150" fill="#ffffff" opacity="0.06"/><circle cx="110" cy="210" r="120" fill="#14B8A6" opacity="0.16"/><text x="54" y="88" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="-0.5">HbA1c</text><text x="56" y="120" fill="#dbeafe" font-family="Segoe UI,Arial,sans-serif" font-size="17">Your 3-month blood sugar average</text><g transform="translate(56,138)"><rect x="0" y="34" width="26" height="34" rx="4" fill="#ffffff" opacity="0.5"/><rect x="40" y="20" width="26" height="48" rx="4" fill="#ffffff" opacity="0.68"/><rect x="80" y="4" width="26" height="64" rx="4" fill="#ffffff" opacity="0.9"/><polyline points="13,30 53,16 93,0" fill="none" stroke="#7fe3d4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="93" cy="0" r="5.5" fill="#ffffff"/></g><g transform="translate(686,44)"><path d="M64 6 C64 6 118 78 118 116 a54 54 0 1 1 -108 0 C10 78 64 6 64 6 Z" fill="#ffffff"/><path d="M64 92 v46 M41 115 h46" stroke="#e11d48" stroke-width="9" stroke-linecap="round"/></g></svg>`,
+  "fasting-before-blood-test": `<svg viewBox="0 0 880 220" role="img" aria-label="Illustration of a clock and water glass representing fasting before a blood test" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A5C9E"/><stop offset="1" stop-color="#0f8fb0"/></linearGradient></defs><rect width="880" height="220" fill="url(#fs)"/><circle cx="805" cy="200" r="150" fill="#14B8A6" opacity="0.16"/><circle cx="120" cy="10" r="120" fill="#ffffff" opacity="0.06"/><text x="54" y="92" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">Fasting before a</text><text x="54" y="128" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">blood test</text><text x="56" y="160" fill="#dbeafe" font-family="Segoe UI,Arial,sans-serif" font-size="16">Water is fine — 8 to 12 hours for sugar &amp; lipids</text><g transform="translate(628,42)"><circle cx="68" cy="68" r="66" fill="#ffffff"/><circle cx="68" cy="68" r="66" fill="none" stroke="#0a4f86" stroke-width="3" opacity="0.15"/><g stroke="#0A5C9E" stroke-width="3.5" stroke-linecap="round"><line x1="68" y1="14" x2="68" y2="24"/><line x1="68" y1="112" x2="68" y2="122"/><line x1="14" y1="68" x2="24" y2="68"/><line x1="112" y1="68" x2="122" y2="68"/></g><line x1="68" y1="68" x2="68" y2="34" stroke="#0A5C9E" stroke-width="5.5" stroke-linecap="round"/><line x1="68" y1="68" x2="96" y2="80" stroke="#14B8A6" stroke-width="5.5" stroke-linecap="round"/><circle cx="68" cy="68" r="6" fill="#0A5C9E"/></g><g transform="translate(792,60)"><path d="M6 4 h44 l-5 92 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#ffffff" opacity="0.92"/><path d="M9 40 h38 l-4 56 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#7fe3d4" opacity="0.85"/></g></svg>`
+};
+
 function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 function fmtDate(iso) {
   const d = new Date(iso + "T00:00:00Z");
@@ -129,6 +136,10 @@ header .w{max-width:820px;margin:0 auto;padding:14px 20px;display:flex;align-ite
 main{max-width:820px;margin:0 auto;padding:20px 20px 10px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 34px;box-shadow:0 4px 14px rgba(10,92,158,.06)}
 @media(max-width:560px){.card{padding:22px 20px}}
+.bhead{border-radius:14px;overflow:hidden;margin-bottom:20px;line-height:0;box-shadow:0 4px 14px rgba(10,92,158,.10)}
+.bhead svg{display:block;width:100%;height:auto}
+.post .pthumb{border-radius:10px;overflow:hidden;margin-bottom:14px;line-height:0}
+.post .pthumb svg{display:block;width:100%;height:auto}
 h1{font-size:30px;line-height:1.25;letter-spacing:-.01em;margin-bottom:10px}
 .byline{color:var(--muted);font-size:14px;margin-bottom:6px}
 .byline b{color:var(--ink)}
@@ -208,7 +219,8 @@ function plain(html) { return html.replace(/<[^>]+>/g, ""); }
 function renderArticle(a) {
   const url = `${BASE}/blog/${a.slug}`;
   const shareText = encodeURIComponent(a.title + " — " + url);
-  const body = `<article class="card">
+  const banner = BANNERS[a.slug] ? `<div class="bhead">${BANNERS[a.slug]}</div>` : "";
+  const body = `${banner}<article class="card">
 <h1>${esc(a.title)}</h1>
 <div class="byline">By <b>Dr Khizer Hussain Junaidy</b>, Diabetologist &amp; Obesity Specialist · ${fmtDate(a.date)} · ${a.readMins} min read</div>
 <p class="intro">${a.intro}</p>
@@ -264,6 +276,7 @@ function renderIndex() {
 <p style="color:#5b6b7a;font-size:16px;max-width:600px">Plain-language health guides from the doctors and lab team at Caspian Diagnostic Centre, Hyderabad.</p>
 </div>
 ${ARTICLES.map(a => `<a class="post" href="/blog/${a.slug}">
+${BANNERS[a.slug] ? `<div class="pthumb">${BANNERS[a.slug]}</div>` : ""}
 <h2>${esc(a.title)}</h2>
 <div class="pm">Dr Khizer Hussain Junaidy · ${fmtDate(a.date)} · ${a.readMins} min read</div>
 <p>${esc(a.desc)}</p>
