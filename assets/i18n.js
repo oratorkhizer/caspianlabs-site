@@ -75,6 +75,63 @@
         placeholder: "టెస్ట్ లేదా ప్రొఫైల్ శోధించండి — ఉదా. థైరాయిడ్, విటమిన్ డి, షుగర్, డెంగ్యూ…",
         portal: "✅ సెల్ఫ్-సర్వీస్ బుకింగ్ ఇక్కడే — ఏ టెస్ట్‌పైనైనా <b>Book</b> నొక్కి సెకన్లలో ఆన్‌లైన్ రిజర్వ్ చేయండి. ప్రస్తుతం సెంటర్‌లో లేదా ఇంటి వద్దే చెల్లించండి; సురక్షిత ఆన్‌లైన్ చెల్లింపు త్వరలో."
       },
+      why: {
+        eyebrow: "ఎందుకు క్యాస్పియన్",
+        h2: "సరైన విధంగా డయాగ్నోస్టిక్స్",
+        lead: "మా వాగ్దానం సులభం — <em>వేగం, ఖచ్చితత్వం కలిసే చోటు</em> — శిక్షణ పొందిన నిపుణులు, కఠినమైన ప్రక్రియలతో.",
+        cards: [
+          ["ముందుగా ఖచ్చితత్వం", "క్యాలిబ్రేటెడ్ ఎనలైజర్లు, బహుళ-స్థాయి క్వాలిటీ చెక్‌లు — మీరు, మీ డాక్టర్ ప్రతి ఫలితంపై నమ్మకం ఉంచవచ్చు."],
+          ["ఉచిత హోమ్ కలెక్షన్", "₹500 పైన ఆర్డర్లపై ఉచిత డోర్‌స్టెప్ శాంపిల్ కలెక్షన్ — శిక్షణ పొందిన ఫ్లెబోటమిస్టులు, మీకు అనుకూల సమయంలో."],
+          ["వాట్సాప్‌లో రిపోర్టులు", "మీ డిజిటల్ రిపోర్టులు వేగంగా మీ ఫోన్‌కే — తిరిగి సెంటర్‌కు రావాల్సిన అవసరం లేదు."],
+          ["నిపుణులచే ధృవీకరణ", "ప్రతి రిపోర్ట్ మీకు చేరేముందు అర్హత గల ప్యాథాలజిస్టులచే సమీక్షించి ధృవీకరించబడుతుంది."],
+          ["న్యాయమైన, పారదర్శక ధరలు", "దాచిన ఖర్చులు లేని నిజాయితీ ప్యాకేజీ ధరలు — నాణ్యమైన డయాగ్నోస్టిక్స్, అందుబాటు ధరలో."],
+          ["24/7 తెరిచి ఉంటాం", "మేము వారంలో ప్రతి రోజూ, పగలూ రాత్రీ తెరిచి ఉంటాం — ఎప్పుడైనా వాక్-ఇన్ చేయండి లేదా హోమ్ కలెక్షన్ బుక్ చేయండి."]
+        ]
+      },
+      reviews: {
+        eyebrow: "పేషెంట్లకు ఇష్టం",
+        h2: "హైదరాబాద్ అంతటా పేషెంట్ల నమ్మకం",
+        lead: "హైదరాబాద్ అంతటా పేషెంట్ల నిజమైన రివ్యూలు. క్యాస్పియన్ మీకు సేవ చేసి ఉంటే, Googleలో ఒక్క రేటింగ్ ఇతర కుటుంబాలకు మమ్మల్ని కనుగొనడంలో సహాయపడుతుంది.",
+        rateBtn: "మాకు రేటింగ్ ఇవ్వండి —"
+      },
+      about: {
+        eyebrow: "మా గురించి",
+        h2: "హైదరాబాద్ డయాగ్నోస్టిక్స్‌లో నమ్మకమైన పేరు",
+        paras: [
+          "క్యాస్పియన్ డయాగ్నోస్టిక్ సెంటర్ 2021 నుంచి విజయ్ నగర్ కాలనీ, గ్రేటర్ హైదరాబాద్‌కు సేవలందిస్తోంది — ఖచ్చితమైన ఫలితాలు, శ్రద్ధతో అందించడమే మా నిబద్ధత. ఆధునిక ల్యాబొరేటరీ టెక్నాలజీని పేషెంట్-ఫస్ట్ దృక్పథంతో మేళవిస్తాం.",
+          "<strong>తెలంగాణ ప్రభుత్వం-రిజిస్టర్డ్</strong> డయాగ్నోస్టిక్ సంస్థ (Regn. No. 07F-APMCE-1846) మరియు <strong>PCPNDT-రిజిస్టర్డ్</strong> ఇమేజింగ్ సెంటర్ (Regn. No. 0116A1337) గా, మేము కఠినమైన నాణ్యత, కంప్లయన్స్ ప్రమాణాలను పాటిస్తాం.",
+          "సాధారణ టెస్టుల నుంచి సమగ్ర హెల్త్ ప్యాకేజీల వరకు, మా అర్హత గల టీమ్ ప్రతి శాంపిల్‌ను ఖచ్చితత్వంతో నిర్వహిస్తుంది, ప్రతి రిపోర్ట్‌ను మీరు నమ్మదగినదిగా చేస్తుంది."
+        ],
+        chips: ["తెలంగాణ ప్రభుత్వం రిజిస్టర్డ్", "PCPNDT రిజిస్టర్డ్", "24/7 తెరిచి", "2021 నుంచి సేవలు", "శిక్షణ పొందిన నిపుణులు", "ఆధునిక పరికరాలు", "పేషెంట్-ఫస్ట్ కేర్"],
+        imgSub: "విజయ్ నగర్ కాలనీ, హైదరాబాద్"
+      },
+      doctors: {
+        eyebrow: "డాక్టర్‌ను సంప్రదించండి",
+        h2: "క్యాస్పియన్ హెల్త్‌కేర్‌లో OPD అపాయింట్‌మెంట్ బుక్ చేయండి",
+        lead: "డయాగ్నోస్టిక్స్‌తో పాటు, మా సిస్టర్ క్లినిక్ <strong>క్యాస్పియన్ హెల్త్‌కేర్</strong> ప్రత్యక్ష డాక్టర్ కన్సల్టేషన్లు అందిస్తుంది. ఒక స్పెషలిస్ట్‌ను ఎంచుకుని సెకన్లలో మీ స్లాట్ ఆన్‌లైన్ బుక్ చేయండి.",
+        docs: [
+          ["డయాబెటాలజిస్ట్ &amp; ఒబేసిటీ స్పెషలిస్ట్", "10 సంవత్సరాల అనుభవం"],
+          ["పీడియాట్రిషియన్", "9 సంవత్సరాల అనుభవం"],
+          ["ఇంటర్నల్ మెడిసిన్ &amp; కార్డియాలజీ", "11 సంవత్సరాల అనుభవం"],
+          ["సైకియాట్రిస్ట్", "11 సంవత్సరాల అనుభవం"]
+        ],
+        book: "అపాయింట్‌మెంట్ బుక్ చేయండి",
+        allLine: "మరో స్పెషలిస్ట్ కావాలా? <a href=\"https://www.eka.care/clinic/caspian-healthcare-1837-39245621\" target=\"_blank\" rel=\"noopener\">Ekaలో అన్ని క్యాస్పియన్ హెల్త్‌కేర్ డాక్టర్లను చూడండి →</a>"
+      },
+      contact: {
+        eyebrow: "సంప్రదించండి",
+        h2: "మమ్మల్ని సందర్శించండి లేదా బుక్ చేయండి",
+        lead: "బుకింగ్‌లు, హోమ్ కలెక్షన్, రిపోర్ట్ సందేహాల్లో మేము మీకు సహాయం చేయడానికి ఇక్కడ ఉన్నాం.",
+        labels: ["చిరునామా", "ఫోన్", "వాట్సాప్", "ఇమెయిల్", "పని గంటలు"],
+        waText: "టెస్ట్ బుక్ చేయడానికి మాకు మెసేజ్ చేయండి",
+        hours: "24/7 తెరిచి — ప్రతి రోజు, పగలూ రాత్రీ"
+      },
+      footer: {
+        ftag: "వేగం, ఖచ్చితత్వం కలిసే చోటు.",
+        desc: "వేగం, ఖచ్చితత్వం కలిసే చోటు. హైదరాబాద్ అంతటా హోమ్ శాంపిల్ కలెక్షన్‌తో నమ్మదగిన ప్యాథాలజీ టెస్టింగ్, హెల్త్ చెకప్‌లు.",
+        quick: "త్వరిత లింక్‌లు",
+        contact: "సంప్రదింపు"
+      },
       faq: {
         eyebrow: "తెలుసుకోవాల్సినవి",
         h2: "తరచుగా అడిగే ప్రశ్నలు",
@@ -153,6 +210,63 @@
         lead: "सिर्फ़ एक टेस्ट चाहिए — विटामिन D, थायरॉइड, शुगर या कोई खास प्रोफाइल? हमारा मेन्यू खोजें, दाम देखें, और एक टैप में ऑनलाइन बुक करें।",
         placeholder: "कोई टेस्ट या प्रोफाइल खोजें — जैसे थायरॉइड, विटामिन डी, शुगर, डेंगू…",
         portal: "✅ सेल्फ-सर्विस बुकिंग यहीं है — किसी भी टेस्ट पर <b>Book</b> दबाकर सेकंडों में ऑनलाइन रिज़र्व करें। फ़िलहाल सेंटर पर या घर पर भुगतान करें; सुरक्षित ऑनलाइन भुगतान जल्द आ रहा है।"
+      },
+      why: {
+        eyebrow: "क्यों कैस्पियन",
+        h2: "डायग्नोस्टिक्स, सही तरीके से",
+        lead: "हमारा वादा सरल है — <em>जहाँ रफ़्तार मिलती है सटीकता से</em> — प्रशिक्षित पेशेवरों और सख़्त प्रक्रियाओं के साथ।",
+        cards: [
+          ["सटीकता सबसे पहले", "कैलिब्रेटेड एनालाइज़र और बहु-स्तरीय क्वालिटी जाँच, ताकि आप और आपके डॉक्टर हर नतीजे पर भरोसा कर सकें।"],
+          ["मुफ़्त होम कलेक्शन", "₹500 से ऊपर के ऑर्डर पर मुफ़्त डोरस्टेप सैंपल कलेक्शन — प्रशिक्षित फ्लेबोटोमिस्ट, आपके सुविधाजनक समय पर।"],
+          ["WhatsApp पर रिपोर्ट", "अपनी डिजिटल रिपोर्ट जल्दी अपने फ़ोन पर पाएँ — लेने के लिए वापस आने की ज़रूरत नहीं।"],
+          ["विशेषज्ञ द्वारा सत्यापित", "हर रिपोर्ट आप तक पहुँचने से पहले योग्य पैथोलॉजिस्ट द्वारा जाँची और सत्यापित की जाती है।"],
+          ["उचित, पारदर्शी दाम", "बिना छिपे खर्च के ईमानदार पैकेज दाम — गुणवत्ता वाली जाँच, किफ़ायती दाम पर।"],
+          ["24/7 खुले", "हम हर दिन, दिन-रात खुले हैं — जब चाहें वॉक-इन करें या होम कलेक्शन बुक करें।"]
+        ]
+      },
+      reviews: {
+        eyebrow: "मरीज़ों का भरोसा",
+        h2: "हैदराबाद भर के मरीज़ों का भरोसा",
+        lead: "हैदराबाद भर के मरीज़ों की असली समीक्षाएँ। अगर कैस्पियन ने आपकी देखभाल की है, तो Google पर एक रेटिंग दूसरे परिवारों को हमें ढूँढने में मदद करती है।",
+        rateBtn: "हमें रेटिंग दें —"
+      },
+      about: {
+        eyebrow: "हमारे बारे में",
+        h2: "हैदराबाद डायग्नोस्टिक्स में एक भरोसेमंद नाम",
+        paras: [
+          "कैस्पियन डायग्नोस्टिक सेंटर 2021 से विजय नगर कॉलोनी और ग्रेटर हैदराबाद की सेवा कर रहा है — सटीक नतीजे, देखभाल के साथ, यही हमारा वादा है। हम आधुनिक लैबोरेटरी तकनीक को मरीज़-पहले दृष्टिकोण के साथ जोड़ते हैं।",
+          "<strong>तेलंगाना सरकार–पंजीकृत</strong> डायग्नोस्टिक संस्थान (Regn. No. 07F-APMCE-1846) और <strong>PCPNDT-पंजीकृत</strong> इमेजिंग सेंटर (Regn. No. 0116A1337) के रूप में, हम गुणवत्ता और अनुपालन के सख़्त मानक बनाए रखते हैं।",
+          "रूटीन टेस्ट से लेकर व्यापक हेल्थ पैकेज तक, हमारी योग्य टीम हर सैंपल को सटीकता से संभालती है और हर रिपोर्ट को भरोसेमंद बनाती है।"
+        ],
+        chips: ["तेलंगाना सरकार पंजीकृत", "PCPNDT पंजीकृत", "24/7 खुले", "2021 से सेवारत", "प्रशिक्षित पेशेवर", "आधुनिक उपकरण", "मरीज़-पहले देखभाल"],
+        imgSub: "विजय नगर कॉलोनी, हैदराबाद"
+      },
+      doctors: {
+        eyebrow: "डॉक्टर से सलाह लें",
+        h2: "कैस्पियन हेल्थकेयर में OPD अपॉइंटमेंट बुक करें",
+        lead: "डायग्नोस्टिक्स के अलावा, हमारी सिस्टर क्लिनिक <strong>कैस्पियन हेल्थकेयर</strong> रूबरू डॉक्टर परामर्श देती है। एक विशेषज्ञ चुनें और सेकंडों में अपना स्लॉट ऑनलाइन बुक करें।",
+        docs: [
+          ["डायबेटोलॉजिस्ट &amp; ओबेसिटी विशेषज्ञ", "10 वर्ष अनुभव"],
+          ["बाल रोग विशेषज्ञ", "9 वर्ष अनुभव"],
+          ["इंटरनल मेडिसिन &amp; कार्डियोलॉजी", "11 वर्ष अनुभव"],
+          ["मनोचिकित्सक", "11 वर्ष अनुभव"]
+        ],
+        book: "अपॉइंटमेंट बुक करें",
+        allLine: "किसी और विशेषज्ञ की तलाश है? <a href=\"https://www.eka.care/clinic/caspian-healthcare-1837-39245621\" target=\"_blank\" rel=\"noopener\">Eka पर सभी कैस्पियन हेल्थकेयर डॉक्टर देखें →</a>"
+      },
+      contact: {
+        eyebrow: "संपर्क करें",
+        h2: "हमसे मिलें या बुक करें",
+        lead: "बुकिंग, होम कलेक्शन और रिपोर्ट संबंधी सवालों में हम आपकी मदद के लिए यहाँ हैं।",
+        labels: ["पता", "फ़ोन", "WhatsApp", "ईमेल", "कार्य समय"],
+        waText: "टेस्ट बुक करने के लिए हमें मैसेज करें",
+        hours: "24/7 खुले — हर दिन, दिन-रात"
+      },
+      footer: {
+        ftag: "जहाँ रफ़्तार मिलती है सटीकता से।",
+        desc: "जहाँ रफ़्तार मिलती है सटीकता से। हैदराबाद भर में होम सैंपल कलेक्शन के साथ भरोसेमंद पैथोलॉजी जाँच और हेल्थ चेकअप।",
+        quick: "त्वरित लिंक",
+        contact: "संपर्क"
       },
       faq: {
         eyebrow: "जानने योग्य बातें",
@@ -233,6 +347,63 @@
         placeholder: "کوئی ٹیسٹ یا پروفائل تلاش کریں — مثلاً تھائرائیڈ، وٹامن ڈی، شوگر، ڈینگی…",
         portal: "✅ سیلف سروس بکنگ یہیں ہے — کسی بھی ٹیسٹ پر <b>Book</b> دبا کر سیکنڈوں میں آن لائن ریزرو کریں۔ فی الحال سینٹر پر یا گھر پر ادائیگی کریں؛ محفوظ آن لائن ادائیگی جلد آ رہی ہے۔"
       },
+      why: {
+        eyebrow: "کیوں کیسپین",
+        h2: "تشخیص، درست طریقے سے",
+        lead: "ہمارا وعدہ سادہ ہے — <em>جہاں رفتار اور درستگی ملتی ہیں</em> — تربیت یافتہ ماہرین اور سخت طریقہ کار کے ساتھ۔",
+        cards: [
+          ["درستگی سب سے پہلے", "کیلبریٹڈ اینالائزرز اور کثیر سطحی کوالٹی چیک، تاکہ آپ اور آپ کے ڈاکٹر ہر نتیجے پر بھروسہ کر سکیں۔"],
+          ["مفت ہوم کلیکشن", "₹500 سے زائد آرڈر پر مفت ڈور اسٹیپ سیمپل کلیکشن — تربیت یافتہ فلیبوٹومسٹ، آپ کے مناسب وقت پر۔"],
+          ["واٹس ایپ پر رپورٹس", "اپنی ڈیجیٹل رپورٹس جلدی اپنے فون پر حاصل کریں — لینے کے لیے واپس آنے کی ضرورت نہیں۔"],
+          ["ماہرین سے تصدیق شدہ", "ہر رپورٹ آپ تک پہنچنے سے پہلے مستند پیتھالوجسٹ سے جانچی اور تصدیق کی جاتی ہے۔"],
+          ["منصفانہ، شفاف قیمتیں", "بغیر چھپے اخراجات کے ایماندار پیکج قیمتیں — معیاری تشخیص، مناسب داموں پر۔"],
+          ["24/7 کھلے", "ہم ہر دن، دن رات کھلے ہیں — جب چاہیں واک اِن کریں یا ہوم کلیکشن بک کریں۔"]
+        ]
+      },
+      reviews: {
+        eyebrow: "مریضوں کا اعتماد",
+        h2: "حیدرآباد بھر کے مریضوں کا اعتماد",
+        lead: "حیدرآباد بھر کے مریضوں کے حقیقی جائزے۔ اگر کیسپین نے آپ کی دیکھ بھال کی ہے، تو Google پر ایک ریٹنگ دوسرے خاندانوں کو ہمیں تلاش کرنے میں مدد دیتی ہے۔",
+        rateBtn: "ہمیں ریٹنگ دیں —"
+      },
+      about: {
+        eyebrow: "ہمارے بارے میں",
+        h2: "حیدرآباد تشخیص میں ایک قابلِ اعتماد نام",
+        paras: [
+          "کیسپین ڈائیگناسٹک سینٹر 2021 سے وجے نگر کالونی اور گریٹر حیدرآباد کی خدمت کر رہا ہے — درست نتائج، خیال کے ساتھ، یہی ہمارا عہد ہے۔ ہم جدید لیبارٹری ٹیکنالوجی کو مریض اوّل نقطہ نظر کے ساتھ جوڑتے ہیں۔",
+          "<strong>حکومتِ تلنگانہ سے رجسٹرڈ</strong> ڈائیگناسٹک ادارہ (Regn. No. 07F-APMCE-1846) اور <strong>PCPNDT رجسٹرڈ</strong> امیجنگ سینٹر (Regn. No. 0116A1337) کے طور پر، ہم کوالٹی اور تعمیل کے سخت معیار برقرار رکھتے ہیں۔",
+          "روٹین ٹیسٹ سے لے کر جامع ہیلتھ پیکجز تک، ہماری مستند ٹیم ہر سیمپل کو درستگی سے سنبھالتی ہے اور ہر رپورٹ کو قابلِ اعتماد بناتی ہے۔"
+        ],
+        chips: ["حکومتِ تلنگانہ رجسٹرڈ", "PCPNDT رجسٹرڈ", "24/7 کھلے", "2021 سے خدمت", "تربیت یافتہ ماہرین", "جدید آلات", "مریض اوّل نگہداشت"],
+        imgSub: "وجے نگر کالونی، حیدرآباد"
+      },
+      doctors: {
+        eyebrow: "ڈاکٹر سے مشورہ کریں",
+        h2: "کیسپین ہیلتھ کیئر میں OPD اپائنٹمنٹ بک کریں",
+        lead: "تشخیص کے علاوہ، ہماری سسٹر کلینک <strong>کیسپین ہیلتھ کیئر</strong> بالمشافہ ڈاکٹر کنسلٹیشن پیش کرتی ہے۔ ایک ماہر منتخب کریں اور سیکنڈوں میں اپنا سلاٹ آن لائن بک کریں۔",
+        docs: [
+          ["ذیابیطس و موٹاپا ماہر", "10 سال تجربہ"],
+          ["ماہرِ اطفال", "9 سال تجربہ"],
+          ["انٹرنل میڈیسن و کارڈیالوجی", "11 سال تجربہ"],
+          ["ماہرِ نفسیات", "11 سال تجربہ"]
+        ],
+        book: "اپائنٹمنٹ بک کریں",
+        allLine: "کسی اور ماہر کی تلاش ہے؟ <a href=\"https://www.eka.care/clinic/caspian-healthcare-1837-39245621\" target=\"_blank\" rel=\"noopener\">Eka پر تمام کیسپین ہیلتھ کیئر ڈاکٹرز دیکھیں ←</a>"
+      },
+      contact: {
+        eyebrow: "رابطہ کریں",
+        h2: "ہم سے ملیں یا بک کریں",
+        lead: "بکنگ، ہوم کلیکشن اور رپورٹ سے متعلق سوالات میں ہم آپ کی مدد کے لیے حاضر ہیں۔",
+        labels: ["پتہ", "فون", "واٹس ایپ", "ای میل", "کام کے اوقات"],
+        waText: "ٹیسٹ بک کرنے کے لیے ہمیں میسج کریں",
+        hours: "24/7 کھلے — ہر دن، دن رات"
+      },
+      footer: {
+        ftag: "جہاں رفتار اور درستگی ملتی ہیں۔",
+        desc: "جہاں رفتار اور درستگی ملتی ہیں۔ حیدرآباد بھر میں ہوم سیمپل کلیکشن کے ساتھ قابلِ اعتماد پیتھالوجی ٹیسٹنگ اور ہیلتھ چیک اپ۔",
+        quick: "فوری لنکس",
+        contact: "رابطہ"
+      },
       faq: {
         eyebrow: "جاننے کی باتیں",
         h2: "اکثر پوچھے جانے والے سوالات",
@@ -302,6 +473,36 @@
       tstLead: q("#all-tests .lead"),
       tstInput: q("#dirInput"),
       tstPortal: q("#all-tests .dir-portal"),
+      whySec: q("#why"),
+      whyEyebrow: q("#why .eyebrow"),
+      whyH2: q("#why .center h2"),
+      whyLead: q("#why .lead"),
+      whyCards: qa("#why .feat-grid .frow"),
+      revSec: q("#reviews"),
+      revEyebrow: q("#reviews .eyebrow"),
+      revH2: q("#reviews .center h2"),
+      revLead: q("#reviews .lead"),
+      revBtn: q("#reviews .btn-google"),
+      abtSec: q("#about"),
+      abtEyebrow: q("#about .eyebrow"),
+      abtH2: q("#about h2"),
+      abtParas: qa("#about .about-grid > div:first-child > p"),
+      abtChips: qa("#about .chips .chip"),
+      abtImgSub: q("#about .imgbox span"),
+      docSec: q("#doctors"),
+      docEyebrow: q("#doctors .eyebrow"),
+      docH2: q("#doctors .center h2"),
+      docLead: q("#doctors .lead"),
+      docCards: qa("#doctors .doc-grid .doc"),
+      docAll: q("#doctors .doc-all"),
+      conSec: q("#contact"),
+      conEyebrow: q("#contact .eyebrow"),
+      conH2: q("#contact .center h2"),
+      conLead: q("#contact .lead"),
+      conRows: qa("#contact .cinfo .row"),
+      ftrDesc: q("footer .cols > div:first-child > p"),
+      ftrTag: q("footer .ftag"),
+      ftrHeads: qa("footer .cols h3"),
       faqSec: q("#faq"),
       faqEyebrow: q("#faq .eyebrow"),
       faqH2: q("#faq .center h2"),
@@ -343,6 +544,36 @@
         eyebrow: e.tstEyebrow ? e.tstEyebrow.textContent : "", h2: e.tstH2 ? e.tstH2.textContent : "", lead: e.tstLead ? e.tstLead.textContent : "",
         placeholder: e.tstInput ? e.tstInput.getAttribute("placeholder") : "",
         portal: e.tstPortal ? e.tstPortal.innerHTML : ""
+      },
+      why: {
+        eyebrow: e.whyEyebrow ? e.whyEyebrow.textContent : "", h2: e.whyH2 ? e.whyH2.textContent : "", lead: e.whyLead ? e.whyLead.innerHTML : "",
+        cards: e.whyCards.map(function (c) { var h = c.querySelector("h3"), p = c.querySelector("p"); return [h ? h.textContent : "", p ? p.innerHTML : ""]; })
+      },
+      reviews: {
+        eyebrow: e.revEyebrow ? e.revEyebrow.textContent : "", h2: e.revH2 ? e.revH2.textContent : "", lead: e.revLead ? e.revLead.textContent : "",
+        rateBtn: e.revBtn && lastTextNode(e.revBtn) ? lastTextNode(e.revBtn).textContent.trim() : ""
+      },
+      about: {
+        eyebrow: e.abtEyebrow ? e.abtEyebrow.textContent : "", h2: e.abtH2 ? e.abtH2.textContent : "",
+        paras: e.abtParas.map(function (p) { return p.innerHTML; }),
+        chips: e.abtChips.map(function (c) { return c.textContent; }),
+        imgSub: e.abtImgSub ? e.abtImgSub.textContent : ""
+      },
+      doctors: {
+        eyebrow: e.docEyebrow ? e.docEyebrow.textContent : "", h2: e.docH2 ? e.docH2.textContent : "", lead: e.docLead ? e.docLead.innerHTML : "",
+        docs: e.docCards.map(function (c) { var ds = c.querySelector(".ds"), de = c.querySelector(".de"); return [ds ? ds.innerHTML : "", de ? de.textContent : ""]; }),
+        book: "Book appointment",
+        allLine: e.docAll ? e.docAll.innerHTML : ""
+      },
+      contact: {
+        eyebrow: e.conEyebrow ? e.conEyebrow.textContent : "", h2: e.conH2 ? e.conH2.textContent : "", lead: e.conLead ? e.conLead.textContent : "",
+        labels: e.conRows.map(function (r) { var b = r.querySelector("b"); return b ? b.textContent : ""; }),
+        waText: (e.conRows[2] && e.conRows[2].querySelector("a")) ? e.conRows[2].querySelector("a").textContent : "",
+        hours: (e.conRows[4] && e.conRows[4].querySelector("span")) ? e.conRows[4].querySelector("span").textContent : ""
+      },
+      footer: {
+        ftag: e.ftrTag ? e.ftrTag.textContent : "", desc: e.ftrDesc ? e.ftrDesc.textContent : "",
+        quick: e.ftrHeads[0] ? e.ftrHeads[0].textContent : "", contact: e.ftrHeads[1] ? e.ftrHeads[1].textContent : ""
       },
       faq: {
         eyebrow: e.faqEyebrow ? e.faqEyebrow.textContent : "", h2: e.faqH2 ? e.faqH2.textContent : "", lead: e.faqLead ? e.faqLead.textContent : "",
@@ -425,6 +656,67 @@
       setHtml(e.tstPortal, dict.tests.portal);
     }
 
+    // why-us
+    if (dict.why) {
+      setTxt(e.whyEyebrow, dict.why.eyebrow);
+      setTxt(e.whyH2, dict.why.h2);
+      setHtml(e.whyLead, dict.why.lead);
+      e.whyCards.forEach(function (c, i) {
+        if (!dict.why.cards[i]) return;
+        setTxt(c.querySelector("h3"), dict.why.cards[i][0]);
+        setHtml(c.querySelector("p"), dict.why.cards[i][1]);
+      });
+    }
+
+    // reviews
+    if (dict.reviews) {
+      setTxt(e.revEyebrow, dict.reviews.eyebrow);
+      setTxt(e.revH2, dict.reviews.h2);
+      setTxt(e.revLead, dict.reviews.lead);
+      if (e.revBtn) { var rt = lastTextNode(e.revBtn); if (rt) rt.textContent = " " + dict.reviews.rateBtn + " "; }
+    }
+
+    // about
+    if (dict.about) {
+      setTxt(e.abtEyebrow, dict.about.eyebrow);
+      setTxt(e.abtH2, dict.about.h2);
+      e.abtParas.forEach(function (p, i) { if (dict.about.paras[i] != null) p.innerHTML = dict.about.paras[i]; });
+      e.abtChips.forEach(function (c, i) { if (dict.about.chips[i] != null) c.textContent = dict.about.chips[i]; });
+      setTxt(e.abtImgSub, dict.about.imgSub);
+    }
+
+    // doctors
+    if (dict.doctors) {
+      setTxt(e.docEyebrow, dict.doctors.eyebrow);
+      setTxt(e.docH2, dict.doctors.h2);
+      setHtml(e.docLead, dict.doctors.lead);
+      e.docCards.forEach(function (c, i) {
+        if (!dict.doctors.docs[i]) return;
+        setHtml(c.querySelector(".ds"), dict.doctors.docs[i][0]);
+        setTxt(c.querySelector(".de"), dict.doctors.docs[i][1]);
+        var a = c.querySelector(".db a"); if (a) { var bt = lastTextNode(a); if (bt) bt.textContent = dict.doctors.book; }
+      });
+      setHtml(e.docAll, dict.doctors.allLine);
+    }
+
+    // contact
+    if (dict.contact) {
+      setTxt(e.conEyebrow, dict.contact.eyebrow);
+      setTxt(e.conH2, dict.contact.h2);
+      setTxt(e.conLead, dict.contact.lead);
+      e.conRows.forEach(function (r, i) { if (dict.contact.labels[i] != null) setTxt(r.querySelector("b"), dict.contact.labels[i]); });
+      if (e.conRows[2]) setTxt(e.conRows[2].querySelector("a"), dict.contact.waText);
+      if (e.conRows[4]) setTxt(e.conRows[4].querySelector("span"), dict.contact.hours);
+    }
+
+    // footer (tagline + column headings only; links & legal stay English)
+    if (dict.footer) {
+      setTxt(e.ftrTag, dict.footer.ftag);
+      setTxt(e.ftrDesc, dict.footer.desc);
+      if (e.ftrHeads[0]) setTxt(e.ftrHeads[0], dict.footer.quick);
+      if (e.ftrHeads[1]) setTxt(e.ftrHeads[1], dict.footer.contact);
+    }
+
     // faq
     setTxt(e.faqEyebrow, dict.faq.eyebrow);
     setTxt(e.faqH2, dict.faq.h2);
@@ -440,7 +732,7 @@
     setDir(e.heroLeft, dict);
     setDir(e.card, dict);
     setDir(e.band, dict);
-    [e.svcSec, e.pkgSec, e.tstSec].forEach(function (sec) { if (sec) setDir(sec.querySelector(".wrap") || sec, dict); });
+    [e.svcSec, e.pkgSec, e.tstSec, e.whySec, e.revSec, e.abtSec, e.docSec, e.conSec].forEach(function (sec) { if (sec) setDir(sec.querySelector(".wrap") || sec, dict); });
     if (e.faqSec) setDir(e.faqSec.querySelector(".center"), dict);
 
     try { localStorage.setItem("cdc-lang", code); } catch (err) {}
