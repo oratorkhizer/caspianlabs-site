@@ -143,6 +143,7 @@ export default async function handler(req, res) {
 
   try {
     if (body.action === "confirm") return await confirmPayment(body, res);
+    if (body.action === "recover" || (body.event && body.payload)) return await recoverPayment(body, res);
     return await createOrder(body, res);
   } catch (e) {
     console.error("pay.js server error", String(e));
@@ -267,6 +268,54 @@ async function confirmPayment(body, res) {
   const order = await rzp("GET", "/orders/" + orderId);
   if (!order || !order.id) return res.status(502).json({ ok: false, error: "Could not read payment order" });
 
+  const payment = await rzp("GET", "/payments/" + paymentId);
+  const pStatus = payment && payment.status;
+  if (pStatus !== "captured" && pStatus !== "authorized") {
+    return res.status(400).json({ ok: false, error: "Payment not completed", status: pStatus || "unknown" });
+  }
+
+  return settleOrder(base, order, payment, res);
+}
+
+/* ─────────────── action: recover  (webhook / manual safety net) ───────────────
+   Covers the gap where Razorpay captures the payment but the browser never calls
+   confirm (patient approved UPI on their phone and closed the page — happened live
+   31 Jul 2026, pay_TK4HJ5OcXRqFmU). Accepts either:
+     • Razorpay webhook payload (event payment.captured) — configure the webhook to
+       POST https://www.caspianlabs.in/api/pay
+     • { action:"recover", paymentId:"pay_..." } (manual)
+   The payload is treated ONLY as a pointer: everything is re-fetched from Razorpay's
+   authenticated API before anything is registered, and settleOrder() is idempotent —
+   so a forged/replayed call can never double-book or fake a payment. */
+
+async function recoverPayment(body, res) {
+  const base = (process.env.CRELIO_BASE || "https://livehealth.solutions").replace(/\/$/, "");
+
+  let paymentId = String(body.paymentId || body.razorpay_payment_id || "");
+  const isWebhook = !!(body.event && body.payload);
+  if (isWebhook) {
+    if (body.event !== "payment.captured") return res.status(200).json({ ok: true, ignored: body.event });
+    try { paymentId = String(body.payload.payment.entity.id || ""); } catch (e) { paymentId = ""; }
+  }
+  if (!paymentId) return res.status(400).json({ ok: false, error: "paymentId required" });
+
+  const payment = await rzp("GET", "/payments/" + paymentId);
+  if (!payment || !payment.id) return res.status(502).json({ ok: false, error: "Could not read payment" });
+  if (payment.status !== "captured") return res.status(200).json({ ok: false, error: "Payment not captured", status: payment.status || "unknown" });
+  if (!payment.order_id) return res.status(200).json({ ok: false, error: "Payment has no order" });
+
+  const order = await rzp("GET", "/orders/" + payment.order_id);
+  if (!order || !order.id) return res.status(502).json({ ok: false, error: "Could not read order" });
+
+  return settleOrder(base, order, payment, res);
+}
+
+/* ─────────── shared settlement: register bill + sync payment (idempotent) ─────────── */
+
+async function settleOrder(base, order, payment, res) {
+  const orderId = order.id;
+  const paymentId = payment.id;
+
   // Idempotency: already registered? Return the same bill — never double-book. But if the
   // billPayment sync failed last time, re-attempt it now (payAmt was stored in the notes).
   if (order.notes && order.notes.billId) {
@@ -279,11 +328,6 @@ async function confirmPayment(body, res) {
     return res.status(200).json({ ok: true, billId: order.notes.billId, patientId: order.notes.patientId || null, amountPaid: order.amount / 100, already: true });
   }
 
-  const payment = await rzp("GET", "/payments/" + paymentId);
-  const pStatus = payment && payment.status;
-  if (pStatus !== "captured" && pStatus !== "authorized") {
-    return res.status(400).json({ ok: false, error: "Payment not completed", status: pStatus || "unknown" });
-  }
   const amountPaid = (payment.amount || order.amount) / 100;
 
   const booking = unchunkNotes(order.notes);
