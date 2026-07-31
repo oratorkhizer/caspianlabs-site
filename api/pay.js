@@ -360,12 +360,20 @@ async function settleOrder(base, order, payment, res) {
   };
   if (booking.md === "home") {
     payload.isHomecollection = 1;
-    // Crelio's home-collection branch REQUIRES city (verified 31 Jul 2026: LHRegisterBillAPI
-    // returned 400 {"raw":"'city'"} — a KeyError — for every home booking, seen in Vercel logs;
-    // walk-in bills registered fine without it). Docs list city/area/pincode as top-level fields.
+    // Crelio's home-collection branch REQUIRES several patient fields that walk-ins don't
+    // (verified 31 Jul 2026 via Vercel logs — LHRegisterBillAPI 400s with KeyError-style
+    // bodies: first {"raw":"'city'"}, then {"raw":"'designation'"} once city was sent).
+    // Send the full patient block from the docs so registration can't trip on a missing key.
     payload.city = process.env.CRELIO_CITY || "Hyderabad";
     payload.area = process.env.CRELIO_AREA || payload.city;
     payload.pincode = "";
+    payload.designation = payload.gender === "Female" ? "Ms." : "Mr.";
+    const nameParts = String(booking.n || "").trim().split(/\s+/);
+    payload.firstName = nameParts[0] || "";
+    payload.lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : "";
+    // Map-pin coordinates travel inside the address ("| Map: https://maps.google.com/?q=lat,lng")
+    const geo = /[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)/.exec(String(booking.ad || ""));
+    if (geo) { payload.latitude = geo[1]; payload.longitude = geo[2]; }
     if (booking.dt) payload.homeCollectionDateTime = toIso(booking.dt);
     if (booking.ad) payload.address = booking.ad;
   } else if (booking.md === "scheduled") {
