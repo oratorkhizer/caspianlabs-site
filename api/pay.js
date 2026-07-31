@@ -25,6 +25,8 @@
 // Env vars (Vercel → Project → Settings → Environment Variables):
 //   RAZORPAY_KEY_ID       rzp_live_...   (from Razorpay Dashboard → Account & Settings → API Keys)
 //   RAZORPAY_KEY_SECRET   ...            (SECRET — never exposed to the browser)
+//   HOME_VISIT_CHARGE     100 (default)  — ₹ per home visit
+//   HOME_FREE_ABOVE       500 (default)  — first visit free when tests total ≥ this
 //   CRELIO_TOKEN, CRELIO_ORG_ID, CRELIO_BASE, ALLOW_ORIGIN — same as /api/book.js
 //
 // Until RAZORPAY_KEY_ID/SECRET are set, this returns notConfigured and the site silently
@@ -186,15 +188,31 @@ async function createOrder(body, res) {
   }
   totalRupees = Math.round(totalRupees * 100) / 100;
 
+  // Home-collection visit charge (₹100/visit, first visit free on orders ≥ ₹500 — env-tunable).
+  // FBS + PPBS together need TWO visits (fasting draw, then post-meal draw) → second visit charged.
+  const VISIT_FEE = Number(process.env.HOME_VISIT_CHARGE || 100);
+  const FREE_ABOVE = Number(process.env.HOME_FREE_ABOVE || 500);
+  let visitCharge = 0;
+  if (String(body.mode || "now").trim() === "home") {
+    const lower = resolved.map((r) => r.name.toLowerCase());
+    const twoVisits = lower.some((n) => n.includes("fasting") || n.includes("(fbs)")) &&
+                      lower.some((n) => n.includes("post prandial") || n.includes("(ppbs)"));
+    const visits = twoVisits ? 2 : 1;
+    const freeVisits = totalRupees >= FREE_ABOVE ? 1 : 0;
+    visitCharge = VISIT_FEE * Math.max(0, visits - freeVisits);
+  }
+  const payableRupees = Math.round((totalRupees + visitCharge) * 100) / 100;
+
   // Booking payload for AFTER payment — stored server-side in the Razorpay order notes so the
   // confirm step can rebuild it without trusting the browser. Chunked (notes values max ~256 chars).
   const booking = {
     n: fullName, m: mobile, e: email,
     a: String(body.age || "").trim(), g: String(body.gender || "").trim(),
     md: String(body.mode || "now").trim(),
-    ad: String(body.address || "").trim().slice(0, 300),
+    ad: String(body.address || "").trim().slice(0, 400),
     dt: String(body.dateTime || "").trim(),
     it: resolved.map((r) => ({ n: r.name, c: r.code, p: r.price })),
+    vc: visitCharge,
   };
   const notes = chunkNotes(JSON.stringify(booking));
   if (!notes) return res.status(422).json({ ok: false, error: "Order too large — please book on WhatsApp" });
@@ -202,7 +220,7 @@ async function createOrder(body, res) {
   notes.mobile = mobile;
 
   const order = await rzp("POST", "/orders", {
-    amount: Math.round(totalRupees * 100),   // paise
+    amount: Math.round(payableRupees * 100),   // paise
     currency: "INR",
     receipt: "web-" + mobile.slice(-4) + "-" + crypto.randomBytes(4).toString("hex"),
     payment_capture: 1,
@@ -215,7 +233,7 @@ async function createOrder(body, res) {
 
   return res.status(200).json({
     ok: true, orderId: order.id, amount: order.amount, currency: "INR",
-    keyId: process.env.RAZORPAY_KEY_ID, total: totalRupees,
+    keyId: process.env.RAZORPAY_KEY_ID, total: payableRupees, testsTotal: totalRupees, visitCharge,
   });
 }
 
@@ -269,9 +287,13 @@ async function confirmPayment(body, res) {
       organizationIdLH: String(process.env.CRELIO_ORG_ID || "539536"),
       referralName: "Self",
       paymentType: "Cash",
-      advance: String(amountPaid),
+      // advance = tests total only, so the bill's maths stay clean; the visit charge is
+      // collected in the same Razorpay payment and explained in the comment.
+      advance: String(Math.max(0, amountPaid - (Number(booking.vc) || 0))),
       billConcession: "0",
-      comments: "Online booking via caspianlabs.in — PAID ONLINE ₹" + amountPaid + " (Razorpay " + paymentId + ")",
+      comments: "Online booking via caspianlabs.in — PAID ONLINE ₹" + amountPaid
+        + (Number(booking.vc) > 0 ? " (incl ₹" + booking.vc + " home-visit charge)" : "")
+        + " (Razorpay " + paymentId + ")",
       testList: (booking.it || []).map((r) => (r.c ? { testCode: String(r.c) } : null)).filter(Boolean),
       paymentList: [],
     },
