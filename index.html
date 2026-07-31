@@ -629,7 +629,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="dir-list" id="dirMore"></div>
     <div class="dir-empty" id="dirEmpty" style="display:none">No match found. Tap below and our team will help you find it.<br><br><a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27m%20looking%20for%20a%20test%20and%20need%20help." target="_blank" rel="noopener">Ask on WhatsApp</a></div>
 
-    <div class="dir-portal">✅ Self-service booking is here — tap <b>Book</b> on any test to reserve it online in seconds. Pay at the centre or at your doorstep for now; secure online payment is coming soon.</div>
+    <div class="dir-portal">✅ Book &amp; pay online — tap <b>Book</b> on any test to reserve it in seconds and pay securely by UPI, card or netbanking (Razorpay). Your slot is confirmed the moment you pay.</div>
   </div>
 </section>
 
@@ -956,6 +956,20 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-consent input{margin-top:2px;flex:0 0 auto;width:16px;height:16px;accent-color:#1a56db}
   .bk-consent a{color:#1a56db;font-weight:600}
   .bk-warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:0 0 13px;line-height:1.5}
+  .bk-loc{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .bk-loc-btn{border:1px solid #cbd5e1;background:#f8fafc;border-radius:9px;padding:8px 11px;font-size:13px;font-weight:700;color:#0f2444;cursor:pointer;font-family:inherit}
+  .bk-loc-btn:hover{background:#eef6f5;border-color:#0c776e}
+  .bk-loc-st{font-size:12.5px;color:#64748b;flex-basis:100%}
+  #bkMapOv{position:fixed;inset:0;z-index:10050;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;padding:14px}
+  .bk-map-card{background:#fff;border-radius:14px;width:100%;max-width:560px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.35);display:flex;flex-direction:column}
+  .bk-map-head{display:flex;gap:8px;padding:10px;border-bottom:1px solid #e2e8f0}
+  .bk-map-head input{flex:1;border:1.5px solid #d9e0ea;border-radius:9px;padding:9px 11px;font-size:14px;font-family:inherit;min-width:0}
+  .bk-map-head button{border:0;background:#0c776e;color:#fff;border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  #bkMapEl{height:min(50vh,340px);width:100%}
+  .bk-map-foot{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:10px}
+  .bk-map-foot .hint{font-size:12px;color:#64748b}
+  .bk-map-use{border:0;background:#0c776e;color:#fff;border-radius:9px;padding:10px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  .bk-map-x{border:1px solid #cbd5e1;background:#fff;border-radius:9px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#334155}
   .bk-overlap{background:#eef6ff;border:1px solid #cfe1f5;color:#1e4a72;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:2px 0 12px;line-height:1.5}
   .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
   @keyframes bkspin{to{transform:rotate(360deg)}}
@@ -1023,9 +1037,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
             <div class="bk-mode" data-mode="home"><span class="em" aria-hidden="true">🏠</span>Home collection</div>
             <div class="bk-mode" data-mode="scheduled"><span class="em" aria-hidden="true">🗓️</span>Pick a slot</div>
           </div>
-          <div class="bk-f" id="bkAddrWrap" style="display:none"><label for="bkAddr">Home address <span class="req">*</span></label><textarea id="bkAddr" rows="2" placeholder="Flat / house, area, landmark, Hyderabad"></textarea></div>
+          <div class="bk-f" id="bkAddrWrap" style="display:none"><label for="bkAddr">Home address <span class="req">*</span></label><textarea id="bkAddr" rows="2" placeholder="Flat / house, area, landmark, Hyderabad"></textarea>
+            <div class="bk-loc"><button type="button" class="bk-loc-btn" id="bkLocGps">📍 Use my current location</button><button type="button" class="bk-loc-btn" id="bkLocMap">🗺️ Choose on map</button><span class="bk-loc-st" id="bkLocSt"></span></div>
+          </div>
           <div class="bk-f" id="bkTimeWrap" style="display:none"><label for="bkTime">Preferred date &amp; time</label><input id="bkTime" type="datetime-local"></div>
-          <div class="bk-note">Free home collection on orders above ₹500. Payment is collected at the centre or at your doorstep — you don't pay online.</div>
+          <div class="bk-note">Pay securely online by UPI, card or netbanking (Razorpay) — your booking is confirmed instantly. Free home collection on orders above ₹500.</div>
           <div class="bk-warn" id="bkHomeWarn" style="display:none"></div>
           <label class="bk-consent"><input type="checkbox" id="bkConsent"> I agree to be contacted about this booking and accept Caspian's <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
           <button class="bk-sub" type="submit" id="bkSub">Confirm booking</button>
@@ -1675,6 +1691,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     try{ var d=new Date(); d.setSeconds(0,0); var pad=function(x){return(x<10?'0':'')+x;};
       document.getElementById('bkTime').min = d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes()); }catch(e){}
     var sub = document.getElementById('bkSub'); sub.disabled=false; sub.textContent="Confirm booking";
+    bkLoc=null; var _ls=document.getElementById('bkLocSt'); if(_ls){ _ls.textContent=''; }
     document.getElementById('bkOv').classList.add('on');
     document.body.style.overflow = "hidden";
     bkReturnFocus = document.activeElement;               // remember trigger to restore focus on close
@@ -1690,7 +1707,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   // close on backdrop click / Esc (Esc also closes the share popover)
   document.getElementById('bkOv').addEventListener('click', function(e){ if(e.target===this) closeBooking(); });
   document.addEventListener('keydown', function(e){
-    if(e.key==='Escape'){ closeSharePop(); if(document.getElementById('dtOv').classList.contains('on')) closeDetail(); if(document.getElementById('bkOv').classList.contains('on')) closeBooking(); }
+    if(e.key==='Escape'){ var _mo=document.getElementById('bkMapOv'); if(_mo && _mo.style.display!=='none' && _mo.style.display!==''){ bkCloseMap(); return; } closeSharePop(); if(document.getElementById('dtOv').classList.contains('on')) closeDetail(); if(document.getElementById('bkOv').classList.contains('on')) closeBooking(); }
   });
   // Simple focus trap: keep Tab within the open dialog
   document.getElementById('bkOv').addEventListener('keydown', function(e){
@@ -1703,14 +1720,100 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
   });
 
+  // FBS + PPBS at home need TWO phlebotomist visits (fasting draw, then post-meal draw).
+  function bkVisitCount(){
+    var hasF=false, hasP=false;
+    CART.forEach(function(it){ var n=(it.name||'').toLowerCase();
+      if(n.indexOf('fasting')>=0||n.indexOf('(fbs)')>=0) hasF=true;
+      if(n.indexOf('post prandial')>=0||n.indexOf('(ppbs)')>=0) hasP=true; });
+    return (hasF&&hasP)?2:1;
+  }
   function updateHomeWarn(){
     var w=document.getElementById('bkHomeWarn'); if(!w) return;
     if(bkState.mode!=='home'){ w.style.display='none'; return; }
-    var t=cartTotal();
-    if(t.unknown){ w.textContent='Home collection is free on orders above ₹500. If your order is below that, a small visit charge applies — our team will confirm.'; w.style.display=''; }
-    else if(t.t>0 && t.t<500){ w.textContent='Your order is '+inr(t.t)+'. Home collection is free above ₹500 — below that a small visit charge applies, which our team will confirm.'; w.style.display=''; }
-    else { w.style.display='none'; }
+    var t=cartTotal(), visits=bkVisitCount();
+    if(t.unknown){ w.textContent='Home collection is free on orders above ₹500; under ₹500 a ₹100 visit charge is added at payment.'; w.style.display=''; return; }
+    var charge = 100*Math.max(0, visits-(t.t>=500?1:0));
+    if(charge>0){
+      if(visits===2){
+        w.textContent = 'FBS + PPBS need two home visits (fasting draw, then after your meal). '
+          + (t.t>=500 ? 'Your first visit is free; a ₹100 charge for the second visit is added at payment.'
+                      : 'As your order is under ₹500, a ₹100 charge per visit ('+inr(charge)+' total) is added at payment.');
+      } else {
+        w.textContent = 'Your order is '+inr(t.t)+'. Home collection is free above ₹500 — a ₹100 visit charge is added at payment.';
+      }
+      w.style.display='';
+    } else { w.style.display='none'; }
   }
+
+  /* ===== Exact-location pin for home collection (GPS or free OpenStreetMap picker).
+     Sends a Google Maps link with the address so the phlebo navigates to the exact spot. ===== */
+  var bkLoc=null, bkMap=null, bkMk=null;
+  function bkSetLoc(lat,lng,acc,label){
+    bkLoc={lat:lat,lng:lng};
+    var st=document.getElementById('bkLocSt');
+    st.textContent=(label||'Location pinned')+' ✓'+(acc?' (±'+Math.round(acc)+' m)':'');
+    st.style.color='#0c776e';
+    if(typeof gtag==='function'){gtag('event','booking_location_pinned',{event_category:'booking'});}
+  }
+  document.getElementById('bkLocGps').addEventListener('click', function(){
+    var st=document.getElementById('bkLocSt');
+    if(!navigator.geolocation){ st.textContent='Location not supported on this device — try "Choose on map".'; st.style.color='#8f6410'; return; }
+    st.textContent='Getting your location…'; st.style.color='#64748b';
+    navigator.geolocation.getCurrentPosition(
+      function(p){ bkSetLoc(p.coords.latitude,p.coords.longitude,p.coords.accuracy,'Current location pinned'); },
+      function(){ st.textContent='Couldn\'t get your location — allow location permission, or use "Choose on map".'; st.style.color='#8f6410'; },
+      {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
+  });
+  document.getElementById('bkLocMap').addEventListener('click', function(){ bkOpenMap(); });
+  function bkLoadLeaflet(cb){
+    if(window.L) return cb();
+    var c=document.createElement('link'); c.rel='stylesheet';
+    c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(c);
+    var s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    s.onload=cb; s.onerror=function(){ var st=document.getElementById('bkLocSt'); st.textContent='Map couldn\'t load — please use "Use my current location" or describe a landmark in the address.'; st.style.color='#8f6410'; bkCloseMap(); };
+    document.head.appendChild(s);
+  }
+  function bkOpenMap(){
+    var ov=document.getElementById('bkMapOv');
+    if(!ov){
+      ov=document.createElement('div'); ov.id='bkMapOv'; ov.setAttribute('role','dialog'); ov.setAttribute('aria-label','Choose your location on the map');
+      ov.innerHTML='<div class="bk-map-card">'
+        +'<div class="bk-map-head"><input id="bkMapQ" type="text" placeholder="Search area / colony, Hyderabad" aria-label="Search location"><button type="button" id="bkMapGo">Search</button></div>'
+        +'<div id="bkMapEl"></div>'
+        +'<div class="bk-map-foot"><span class="hint">Tap the map or drag the pin to your doorstep</span><span><button type="button" class="bk-map-x" id="bkMapX">Cancel</button> <button type="button" class="bk-map-use" id="bkMapUse">Use this location</button></span></div>'
+        +'</div>';
+      document.body.appendChild(ov);
+      ov.addEventListener('click', function(e){ if(e.target===ov) bkCloseMap(); });
+      document.getElementById('bkMapX').addEventListener('click', bkCloseMap);
+      document.getElementById('bkMapUse').addEventListener('click', function(){
+        if(bkMk){ var ll=bkMk.getLatLng(); bkSetLoc(ll.lat,ll.lng,null,'Location pinned on map'); }
+        bkCloseMap();
+      });
+      function doSearch(){
+        var q=document.getElementById('bkMapQ').value.trim(); if(!q) return;
+        fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=in&q='+encodeURIComponent(q))
+          .then(function(r){return r.json();})
+          .then(function(a){ if(a&&a[0]&&bkMap){ var la=+a[0].lat, lo=+a[0].lon; bkMap.setView([la,lo],16); bkMk.setLatLng([la,lo]); } })
+          .catch(function(){});
+      }
+      document.getElementById('bkMapGo').addEventListener('click', doSearch);
+      document.getElementById('bkMapQ').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); doSearch(); } });
+    }
+    ov.style.display='flex';
+    bkLoadLeaflet(function(){
+      if(!bkMap){
+        bkMap=L.map('bkMapEl').setView(bkLoc?[bkLoc.lat,bkLoc.lng]:[17.3850,78.4867], bkLoc?16:11);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(bkMap);
+        bkMk=L.marker(bkMap.getCenter(),{draggable:true}).addTo(bkMap);
+        bkMap.on('click',function(e){ bkMk.setLatLng(e.latlng); });
+      } else {
+        if(bkLoc){ bkMap.setView([bkLoc.lat,bkLoc.lng],16); bkMk.setLatLng([bkLoc.lat,bkLoc.lng]); }
+        setTimeout(function(){ try{ bkMap.invalidateSize(); }catch(e){} },80);
+      }
+    });
+  }
+  function bkCloseMap(){ var ov=document.getElementById('bkMapOv'); if(ov) ov.style.display='none'; }
   function setMode(m){
     bkState.mode = m;
     Array.prototype.forEach.call(document.querySelectorAll('#bkModes .bk-mode'), function(el){
@@ -1809,6 +1912,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(v.mode==='scheduled' && !v.dateTime){ return fail("Please pick your preferred date & time.", 'bkTime'); }
     if(v.dateTime){ var dt=new Date(v.dateTime); if(!isNaN(dt) && dt.getTime() < Date.now()-60000){ return fail("Please choose a date & time in the future.", 'bkTime'); } }
     err.style.display="none";
+
+    // Attach the exact-location pin (Google Maps link) so the phlebo can navigate straight there.
+    if(v.mode==='home' && bkLoc){
+      v.address = v.address + ' | Map: https://maps.google.com/?q=' + bkLoc.lat.toFixed(6) + ',' + bkLoc.lng.toFixed(6);
+    }
 
     var sub = document.getElementById('bkSub');
     sub.disabled = true; sub.innerHTML = '<span class="bk-spin"></span> Booking…';
