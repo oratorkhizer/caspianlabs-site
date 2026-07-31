@@ -1820,6 +1820,10 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       items: CART.map(function(it){ return { name:it.name, code:it.code||undefined }; })
     };
 
+    /* ===== 2.4 Online payment: pay first via Razorpay, bill registers in Crelio only after
+       payment succeeds. Every failure path falls back so no patient is ever blocked. ===== */
+
+    function legacyBook(){   // original pay-at-centre flow (used when online payment isn't available)
     var timedOut = false;
     var ac = (typeof AbortController!=='undefined') ? new AbortController() : null;
     var timer = setTimeout(function(){ timedOut = true; if(ac){ try{ac.abort();}catch(e){} } bkTimeout(v); }, 15000);
@@ -1858,6 +1862,111 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       }
     })
     .catch(function(){ if(timedOut) return; clearTimeout(timer); bkFallback(v,'network'); });
+    }   // end legacyBook()
+
+    /* Paid-booking screens */
+    function paidSuccess(j){
+      if(typeof gtag==='function'){gtag('event','booking_paid_success',{event_category:'booking'});}
+      if(typeof fbq==='function'){fbq('track','Purchase',{value:(j.amountPaid||0),currency:'INR'});}
+      var done = document.getElementById('bkDone');
+      document.getElementById('bkFormWrap').style.display="none";
+      done.style.display="";
+      var ref = j.billId ? ('<div class="ref">Booking Ref #'+esc(String(j.billId))+'</div>') : '';
+      var _names = CART.map(function(it){return esc(it.name);}).join(", ");
+      var payLine = (j.amountPaid!=null) ? ('<p style="margin-top:6px"><b>'+inr(j.amountPaid)+' paid online</b>'+(j.paymentId?(' · Payment ID '+esc(String(j.paymentId))):'')+'</p>') : '';
+      done.innerHTML = '<div class="tick">✓</div>'
+        + '<h4>Payment received — booking confirmed!</h4>'
+        + '<p>Thank you, '+esc(v.name)+'. Your booking for <b>'+_names+'</b> is registered and paid.</p>'
+        + ref + payLine
+        + '<p style="margin-top:8px">'
+        + (v.mode==='now'
+            ? 'Show this Booking Ref at our centre — no payment is needed at the counter.'
+            : 'Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm '+(v.mode==='home'?'your home-collection slot':'your slot')+' — no payment is needed, you\'ve already paid.')
+        + '</p>'
+        + '<p style="margin-top:6px;color:#64748b;font-size:13.5px">Razorpay will send your payment receipt. You\'ll also receive a WhatsApp confirmation from our team.</p>';
+      CART = []; saveCart(); updateSticky();
+    }
+    function paidPending(j){
+      if(typeof gtag==='function'){gtag('event','booking_paid_pending',{event_category:'booking'});}
+      var pid = (j&&j.paymentId) ? String(j.paymentId) : '';
+      var msg = "Hi Caspian Diagnostic Centre, I just paid online for my booking (name: "+v.name+", mobile: "+v.mobile+(pid?(", payment ID: "+pid):"")+") but didn't see a booking reference. Could you please confirm my booking?";
+      var url = WA + encodeURIComponent(msg);
+      var done=document.getElementById('bkDone');
+      document.getElementById('bkFormWrap').style.display="none"; done.style.display="";
+      done.innerHTML = '<div class="tick">✓</div>'
+        + '<h4>Payment received!</h4>'
+        + '<p>Thank you, '+esc(v.name)+'. Your payment is received'+(pid?(' (Payment ID <b>'+esc(pid)+'</b>)'):'')+' and your booking is being registered. <b>Please don\'t book or pay again</b> — our team will confirm on <b>'+esc(v.mobile)+'</b> shortly.</p>'
+        + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Check status on WhatsApp</a>';
+      CART=[]; saveCart(); updateSticky();
+    }
+
+    /* Confirm payment server-side (verifies signature, registers the Crelio bill). One retry. */
+    function confirmPaid(resp, attempt){
+      sub.disabled=true; sub.innerHTML='<span class="bk-spin"></span> Confirming…';
+      fetch('/api/pay', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        action:'confirm',
+        razorpay_order_id:resp.razorpay_order_id,
+        razorpay_payment_id:resp.razorpay_payment_id,
+        razorpay_signature:resp.razorpay_signature })})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(j && j.ok && !j.pending){ paidSuccess(j); }
+        else if(j && j.ok && j.pending){ paidPending(j); }
+        else if(attempt<1){ setTimeout(function(){ confirmPaid(resp, attempt+1); }, 1200); }
+        else { paidPending({paymentId:resp.razorpay_payment_id}); }
+      })
+      .catch(function(){
+        if(attempt<1){ setTimeout(function(){ confirmPaid(resp, attempt+1); }, 1500); }
+        else { paidPending({paymentId:resp.razorpay_payment_id}); }
+      });
+    }
+
+    function openCheckout(o){
+      if(typeof gtag==='function'){gtag('event','booking_payment_started',{event_category:'booking'});}
+      sub.innerHTML='<span class="bk-spin"></span> Waiting for payment…';
+      var rz = new Razorpay({
+        key: o.keyId, order_id: o.orderId,
+        name: 'Caspian Diagnostic Centre',
+        description: CART.length + (CART.length>1?' items':' item'),
+        prefill: { name: v.name, contact: '+91'+v.mobile, email: v.email || undefined },
+        theme: { color: '#0c776e' },
+        modal: { ondismiss: function(){
+          sub.disabled=false; sub.textContent='Confirm booking';
+          err.textContent='Payment not completed — your booking is not confirmed yet. Tap "Confirm booking" to try again, or book on WhatsApp.';
+          err.style.display='block';
+          if(typeof gtag==='function'){gtag('event','booking_payment_dismissed',{event_category:'booking'});}
+        } },
+        handler: function(resp){ confirmPaid(resp, 0); }
+      });
+      rz.open();
+    }
+    function ensureRzpJs(okCb, failCb){
+      if(window.Razorpay) return okCb();
+      var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js';
+      s.async=true; s.onload=okCb; s.onerror=failCb; document.head.appendChild(s);
+    }
+
+    /* Try online payment first; every unavailable/error path falls back to the older flows. */
+    sub.innerHTML='<span class="bk-spin"></span> Preparing payment…';
+    var payTimedOut = false;
+    var payAc = (typeof AbortController!=='undefined') ? new AbortController() : null;
+    var payTimer = setTimeout(function(){ payTimedOut = true; if(payAc){ try{payAc.abort();}catch(e){} } legacyBook(); }, 15000);
+    fetch('/api/pay', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), signal: payAc?payAc.signal:undefined })
+    .then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j}; }); })
+    .then(function(res){
+      if(payTimedOut) return;
+      clearTimeout(payTimer);
+      var j = res.j || {};
+      if(j.ok && j.orderId){
+        ensureRzpJs(function(){ openCheckout(j); }, function(){ legacyBook(); });
+        return;
+      }
+      if(j.ok && j.skipped){ legacyBook(); return; }                       // honeypot
+      if(j.notMapped){ bkFallback(v,'not_mapped'); return; }               // can't book via API at all
+      if(res.status===400 && j.error){ sub.disabled=false; sub.textContent='Confirm booking'; fail(j.error); return; }
+      legacyBook();                                                        // notConfigured / noPrice / 5xx
+    })
+    .catch(function(){ if(payTimedOut) return; clearTimeout(payTimer); legacyBook(); });
   });
 
   /* ===== Conversion tracking: WhatsApp booking & phone clicks ===== */
