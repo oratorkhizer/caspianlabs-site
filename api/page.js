@@ -1,4 +1,4 @@
-// Caspian Diagnostic Centre — SEO landing pages (Phase 3, task 3.1/3.2)
+// Caspian Diagnostic Centre, SEO landing pages (Phase 3, task 3.1/3.2)
 // One serverless renderer serves every /packages/* and /tests/* page plus
 // /home-sample-collection-hyderabad, via rewrites in vercel.json.
 // Why a function and not 35 static files: one place to edit content/template,
@@ -12,6 +12,46 @@ const PHONE_DISPLAY = "+91 90593 41154";
 const PHONE_TEL = "+919059341154";
 const WA = "https://wa.me/919059341154";
 
+/* Exact names from the homepage TESTS array: /?test=NAME opens that item in the booking flow (pay online). */
+const BOOK_NAMES = {
+  "full-body-checkup-hyderabad": "Full Body Check Up",
+  "essential-health-checkup-hyderabad": "Caspian Essential Checkup",
+  "comprehensive-diabetes-screening-hyderabad": "Comprehensive Diabetes Screening",
+  "thyroid-profile-test-hyderabad": "Thyroid Profile (T3 T4 TSH)",
+  "metabolic-wellness-inbody-hyderabad": "Metabolic Wellness + InBody",
+  "womens-health-checkup-hyderabad": "Women's Health Profile",
+  "senior-citizen-health-checkup-hyderabad": "Senior Citizen Health — Male",
+  "heart-health-checkup-hyderabad": "Heart Health Check (Cardiologist)",
+  "premium-health-checkup-men-hyderabad": "Premium Health Check — Men 45+",
+  "haj-umrah-fitness-package-hyderabad": "Haj / Umrah Fitness",
+  "hba1c-test-hyderabad": "HbA1c (Glycated Haemoglobin)",
+  "blood-sugar-test-hyderabad": "Blood Sugar — Fasting (FBS)",
+  "cbc-test-hyderabad": "Complete Blood Count (CBC)",
+  "tsh-test-hyderabad": "TSH (single)",
+  "lipid-profile-test-hyderabad": "Lipid Profile (Cholesterol)",
+  "liver-function-test-hyderabad": "Liver Function Test (LFT)",
+  "kidney-function-test-hyderabad": "Kidney Function Mini Profile (KFT)",
+  "vitamin-d-test-hyderabad": "Vitamin D (25-OH)",
+  "vitamin-b12-test-hyderabad": "Vitamin B12",
+  "urine-routine-test-hyderabad": "Urine Routine (CUE)",
+  "crp-test-hyderabad": "CRP (C-Reactive Protein)",
+  "esr-test-hyderabad": "ESR",
+  "serum-creatinine-test-hyderabad": "Serum Creatinine",
+  "uric-acid-test-hyderabad": "Uric Acid",
+  "blood-urea-test-hyderabad": "Blood Urea",
+  "ferritin-test-hyderabad": "Serum Ferritin",
+  "blood-group-test-hyderabad": "Blood Group (ABO & Rh)",
+  "beta-hcg-test-hyderabad": "Beta HCG (Pregnancy)",
+  "psa-test-hyderabad": "PSA (Prostate)",
+  "dengue-test-hyderabad": "Dengue Profile",
+  "malaria-test-hyderabad": "Malaria Profile",
+  "typhoid-widal-test-hyderabad": "Widal (Typhoid)",
+  "electrolytes-test-hyderabad": "Electrolyte Profile (Na/K/Cl)",
+  "calcium-test-hyderabad": "Serum Calcium",
+  "chest-x-ray-hyderabad": "Chest X-ray (PA / AP)"
+};
+function bookHref(slug) { const n = BOOK_NAMES[slug]; return n ? "/?test=" + encodeURIComponent(n) + "#all-tests" : "/#all-tests"; }
+
 /* ------------------------------------------------------------------ */
 /* Package data                                                        */
 /* ------------------------------------------------------------------ */
@@ -22,10 +62,10 @@ const PACKAGES = [
     name: "Full Body Check Up",
     price: 1795,
     tagline: "60+ parameters · our most popular package",
-    desc: "Full body checkup in Hyderabad at ₹1,795 — 60+ parameters covering CBC, HbA1c, lipid, liver, kidney, thyroid, vitamins D & B12 and urine analysis. Free home sample collection above ₹500.",
+    desc: "Full body checkup in Hyderabad at ₹1,795: 60+ parameters covering CBC, HbA1c, lipid, liver, kidney, thyroid, vitamins D & B12 and urine analysis. Free home sample collection above ₹500.",
     about: [
-      "The Full Body Check Up is our most-ordered preventive package — a single visit (or a single home-collection appointment) that screens every major organ system: blood counts, three-month sugar control, cholesterol, liver, kidneys, thyroid, iron stores, key vitamins and a complete urine analysis.",
-      "It is designed as an annual health audit for adults of any age — especially useful if you have a family history of diabetes, heart disease or thyroid problems, or simply haven't been tested in over a year."
+      "The Full Body Check Up is our most-ordered preventive package, a single visit (or a single home-collection appointment) that screens every major organ system: blood counts, three-month sugar control, cholesterol, liver, kidneys, thyroid, iron stores, key vitamins and a complete urine analysis.",
+      "It is designed as an annual health audit for adults of any age, especially useful if you have a family history of diabetes, heart disease or thyroid problems, or simply haven't been tested in over a year."
     ],
     includes: ["Complete Blood Count (CBC)", "ESR", "HbA1c (3-month sugar)", "Lipid Profile", "Liver Function Test (LFT)", "Kidney Function Test (KFT)", "Iron Studies (TIBC)", "Thyroid Profile I", "Vitamin D (25-OH)", "Vitamin B12", "Serum Calcium", "Complete Urine Analysis (CUE)"],
     fasting: "yes",
@@ -38,9 +78,9 @@ const PACKAGES = [
     name: "Caspian Essential Checkup",
     price: 899,
     tagline: "Quick essential screening",
-    desc: "Essential health checkup in Hyderabad at ₹899 — CBC, blood sugar, lipid profile, liver function, TSH and complete urine analysis. Free home collection above ₹500 at Caspian Diagnostic Centre.",
+    desc: "Essential health checkup in Hyderabad at ₹899: CBC, blood sugar, lipid profile, liver function, TSH and complete urine analysis. Free home collection above ₹500 at Caspian Diagnostic Centre.",
     about: [
-      "The Caspian Essential Checkup covers the six investigations doctors ask for most often — blood counts, sugar, cholesterol, liver enzymes, thyroid (TSH) and urine — at a budget-friendly price.",
+      "The Caspian Essential Checkup covers the six investigations doctors ask for most often, blood counts, sugar, cholesterol, liver enzymes, thyroid (TSH) and urine, at a budget-friendly price.",
       "It is a sensible first checkup if you have never been tested before, or a quick interim screen between fuller annual checkups."
     ],
     includes: ["Complete Blood Count (CBC)", "Blood Sugar (Random)", "Lipid Profile", "Liver Function Test (LFT)", "TSH", "Complete Urine Analysis (CUE)"],
@@ -54,14 +94,14 @@ const PACKAGES = [
     name: "Comprehensive Diabetes Screening",
     price: 899,
     tagline: "Know your sugar control",
-    desc: "Diabetes screening package in Hyderabad at ₹899 — HbA1c, lipid profile, serum creatinine and urine albumin/creatinine ratio (UACR). Designed by a diabetologist. Free home collection above ₹500.",
+    desc: "Diabetes screening package in Hyderabad at ₹899: HbA1c, lipid profile, serum creatinine and urine albumin/creatinine ratio (UACR). Designed by a diabetologist. Free home collection above ₹500.",
     about: [
       "This screening panel checks the four numbers that matter most in diabetes care: HbA1c (your three-month average sugar), cholesterol, kidney function (creatinine) and early kidney damage (urine albumin/creatinine ratio, UACR).",
       "Caspian is led by a diabetologist, and this panel mirrors what we monitor in clinic: not just sugar control, but the heart and kidney complications diabetes can silently cause."
     ],
     includes: ["HbA1c (Glycated Haemoglobin)", "Lipid Profile", "Serum Creatinine", "Urine Albumin/Creatinine Ratio (UACR)"],
     fasting: "no",
-    idealFor: ["People living with diabetes — recommended every 3–6 months", "Prediabetes or family history of diabetes", "Annual complication screening"],
+    idealFor: ["People living with diabetes, recommended every 3–6 months", "Prediabetes or family history of diabetes", "Annual complication screening"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Comprehensive Diabetes Screening (₹899).",
     related: ["t:hba1c-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:lipid-profile-test-hyderabad"]
   },
@@ -70,12 +110,12 @@ const PACKAGES = [
     name: "Thyroid Profile (T3, T4, TSH)",
     price: 470,
     tagline: "Complete thyroid check",
-    desc: "Thyroid profile test in Hyderabad at ₹470 — T3, T4 and TSH from a single blood sample. Same-day reports on WhatsApp. Free home sample collection above ₹500.",
+    desc: "Thyroid profile test in Hyderabad at ₹470: T3, T4 and TSH from a single blood sample. Same-day reports on WhatsApp. Free home sample collection above ₹500.",
     about: [
-      "The thyroid profile measures the three key thyroid numbers — T3, T4 and TSH — from a single blood sample, giving a complete picture of whether your thyroid is underactive (hypothyroid), overactive (hyperthyroid) or normal.",
-      "Thyroid problems are extremely common — especially in women — and cause tiredness, weight change, hair fall, irregular periods and mood changes that are easy to miss."
+      "The thyroid profile measures the three key thyroid numbers, T3, T4 and TSH, from a single blood sample, giving a complete picture of whether your thyroid is underactive (hypothyroid), overactive (hyperthyroid) or normal.",
+      "Thyroid problems are extremely common, especially in women, and cause tiredness, weight change, hair fall, irregular periods and mood changes that are easy to miss."
     ],
-    includes: ["T3 — Total Tri-iodothyronine", "T4 — Total Thyroxine", "TSH — Thyroid Stimulating Hormone"],
+    includes: ["T3, Total Tri-iodothyronine", "T4, Total Thyroxine", "TSH, Thyroid Stimulating Hormone"],
     fasting: "no",
     idealFor: ["Tiredness, weight gain or hair fall", "Irregular periods or fertility concerns", "Monitoring thyroid medication (as advised)"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Thyroid Profile (₹470).",
@@ -86,10 +126,10 @@ const PACKAGES = [
     name: "Metabolic Wellness + InBody",
     price: 1795,
     tagline: "Full body checkup + body composition",
-    desc: "Metabolic wellness package in Hyderabad at ₹1,795 — every Full Body Check Up test plus InBody body-composition analysis mapping fat, muscle and metabolism. At Caspian Diagnostic Centre, Vijay Nagar.",
+    desc: "Metabolic wellness package in Hyderabad at ₹1,795: every Full Body Check Up test plus InBody body-composition analysis mapping fat, muscle and metabolism. At Caspian Diagnostic Centre, Vijay Nagar.",
     about: [
-      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an InBody body-composition analysis — a quick, painless scan that maps your body fat, muscle mass, and metabolic profile.",
-      "Blood tests tell you what is happening inside; the InBody scan tells you what your weight is actually made of. Together they are ideal for weight-loss programmes, fitness goals and metabolic health tracking — an approach designed by our obesity specialist."
+      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an InBody body-composition analysis, a quick, painless scan that maps your body fat, muscle mass, and metabolic profile.",
+      "Blood tests tell you what is happening inside; the InBody scan tells you what your weight is actually made of. Together they are ideal for weight-loss programmes, fitness goals and metabolic health tracking, an approach designed by our bariatric physician."
     ],
     includes: ["Everything in the Full Body Check Up", "InBody body-composition analysis", "Fat, muscle & metabolic mapping"],
     fasting: "yes",
@@ -102,9 +142,9 @@ const PACKAGES = [
     name: "Women's Health Profile",
     price: 3000,
     tagline: "Tailored for women",
-    desc: "Women's health checkup in Hyderabad at ₹3,000 — iron studies, vitamins D & B12, folic acid, calcium, CA-125, kidney & lipid profile, sugar and urine analysis. Free home collection above ₹500.",
+    desc: "Women's health checkup in Hyderabad at ₹3,000: iron studies, vitamins D & B12, folic acid, calcium, CA-125, kidney & lipid profile, sugar and urine analysis. Free home collection above ₹500.",
     about: [
-      "The Women's Health Profile screens the conditions that most commonly affect women — iron-deficiency anaemia, vitamin D and B12 deficiency, bone health markers, cholesterol and kidney function — plus CA-125, a marker used in ovarian health assessment.",
+      "The Women's Health Profile screens the conditions that most commonly affect women, iron-deficiency anaemia, vitamin D and B12 deficiency, bone health markers, cholesterol and kidney function, plus CA-125, a marker used in ovarian health assessment.",
       "Anaemia and vitamin deficiencies are widespread among Indian women and often go unnoticed for years behind everyday tiredness. A yearly panel like this catches them early, when they are easiest to correct."
     ],
     includes: ["Lipid Profile", "Kidney Function Test (KFT)", "Iron Studies (Iron, TIBC, Transferrin)", "Folic Acid", "Vitamin D (25-OH)", "Vitamin B12", "Serum Calcium", "Fasting Blood Sugar", "CA-125", "Complete Urine Analysis (CUE)"],
@@ -118,10 +158,10 @@ const PACKAGES = [
     name: "Senior Citizen Health Check",
     price: 3500,
     tagline: "Complete elder-care check (Male / Female)",
-    desc: "Senior citizen health checkup in Hyderabad at ₹3,500 — sugar & HbA1c, lipid & kidney profile, iron studies, vitamins D & B12, calcium, PSA (men) and urine tests. Home collection available.",
+    desc: "Senior citizen health checkup in Hyderabad at ₹3,500: sugar & HbA1c, lipid & kidney profile, iron studies, vitamins D & B12, calcium, PSA (men) and urine tests. Home collection available.",
     about: [
-      "A comprehensive annual panel designed for adults 60 and above, covering the areas that matter most with age: sugar control (HbA1c and fasting sugar), heart risk (lipids), kidney function, anaemia (iron studies and folic acid), bone health (vitamin D, calcium) and — for men — prostate screening (PSA).",
-      "Separate male and female versions are available at the same price. Home sample collection makes it easy for elders who prefer not to travel — our phlebotomist visits at a time that suits the family."
+      "A comprehensive annual panel designed for adults 60 and above, covering the areas that matter most with age: sugar control (HbA1c and fasting sugar), heart risk (lipids), kidney function, anaemia (iron studies and folic acid), bone health (vitamin D, calcium) and, for men, prostate screening (PSA).",
+      "Separate male and female versions are available at the same price. Home sample collection makes it easy for elders who prefer not to travel, our phlebotomist visits at a time that suits the family."
     ],
     includes: ["HbA1c & Fasting Sugar", "Lipid Profile", "Kidney Function Test (KFT)", "Iron Studies & Folic Acid", "Vitamin D & Vitamin B12", "Serum Calcium", "PSA (men) / relevant markers", "Urine ACR & Complete Urine Analysis"],
     fasting: "yes",
@@ -134,10 +174,10 @@ const PACKAGES = [
     name: "Heart Health Check",
     price: 999,
     tagline: "Cardiologist-led · ECG + 2D Echo + consult",
-    desc: "Heart health checkup in Hyderabad at ₹999 — ECG, blood sugar (GRBS), 2D Echo and a consultation with cardiologist Dr Sayyed Muzammil at Caspian, Vijay Nagar Colony.",
+    desc: "Heart health checkup in Hyderabad at ₹999: ECG, blood sugar (GRBS), 2D Echo and a consultation with cardiologist Dr Sayyed Muzammil at Caspian, Vijay Nagar Colony.",
     about: [
-      "The Heart Health Check bundles the two core cardiac investigations — an ECG and a 2D Echocardiogram — with a blood-sugar check and a face-to-face consultation with our cardiologist, Dr Sayyed Muzammil, who reviews your results the same visit.",
-      "At ₹999 including the specialist consult, it is one of the most accessible cardiac screening packages in Hyderabad — recommended if you have high BP, diabetes, chest discomfort, breathlessness, or a family history of heart disease."
+      "The Heart Health Check bundles the two core cardiac investigations, an ECG and a 2D Echocardiogram, with a blood-sugar check and a face-to-face consultation with our cardiologist, Dr Sayyed Muzammil, who reviews your results the same visit.",
+      "At ₹999 including the specialist consult, it is one of the most accessible cardiac screening packages in Hyderabad, recommended if you have high BP, diabetes, chest discomfort, breathlessness, or a family history of heart disease."
     ],
     includes: ["ECG (Electrocardiogram)", "GRBS (blood sugar)", "2D Echocardiogram", "Consultation with Dr Sayyed Muzammil (Cardiologist)"],
     fasting: "no",
@@ -149,13 +189,13 @@ const PACKAGES = [
   },
   {
     slug: "premium-health-checkup-men-hyderabad",
-    name: "Premium Health Check — Men 45+",
+    name: "Premium Health Check for Men 45+",
     price: 4399,
     tagline: "Our most thorough package",
-    desc: "Premium men's health checkup in Hyderabad at ₹4,399 — advanced lipids (ApoA1/ApoB, Lp(a)), HsCRP cardiac risk, PSA, HbA1c, liver, kidney, vitamins, cortisol and more. For men 45 and above.",
+    desc: "Premium men's health checkup in Hyderabad at ₹4,399: advanced lipids (ApoA1/ApoB, Lp(a)), HsCRP cardiac risk, PSA, HbA1c, liver, kidney, vitamins, cortisol and more. For men 45 and above.",
     about: [
-      "Our most thorough screening package, built for men 45 and above. Beyond the standard full-body panel, it adds advanced cardiac-risk markers — Apolipoprotein A1 and B, Lipoprotein(a) and high-sensitivity CRP — plus prostate screening (PSA), cortisol, amylase and rheumatoid factor.",
-      "These advanced lipid markers can reveal inherited heart risk that a routine cholesterol test misses — particularly relevant for South Asian men, who face higher cardiac risk at younger ages."
+      "Our most thorough screening package, built for men 45 and above. Beyond the standard full-body panel, it adds advanced cardiac-risk markers, Apolipoprotein A1 and B, Lipoprotein(a) and high-sensitivity CRP, plus prostate screening (PSA), cortisol, amylase and rheumatoid factor.",
+      "These advanced lipid markers can reveal inherited heart risk that a routine cholesterol test misses, particularly relevant for South Asian men, who face higher cardiac risk at younger ages."
     ],
     includes: ["CBC, ESR & HbA1c", "Full Lipid Profile + ApoA1/ApoB + Lp(a)", "HsCRP (cardiac risk)", "Liver & Kidney Function", "PSA (prostate)", "Vitamin D & B12", "Cortisol & Amylase", "Rheumatoid Factor", "Complete Urine Analysis"],
     fasting: "yes",
@@ -168,10 +208,10 @@ const PACKAGES = [
     name: "Haj / Umrah Fitness Package",
     price: 500,
     tagline: "Pilgrim medical fitness package",
-    desc: "Haj and Umrah medical fitness package in Hyderabad at ₹500 — CBC, blood sugar, kidney function, ECG, chest X-ray and blood grouping for pilgrims at Caspian Diagnostic Centre.",
+    desc: "Haj and Umrah medical fitness package in Hyderabad at ₹500: CBC, blood sugar, kidney function, ECG, chest X-ray and blood grouping for pilgrims at Caspian Diagnostic Centre.",
     about: [
-      "A compact fitness panel for pilgrims preparing for Haj or Umrah — covering the essential checks: blood counts, sugar, kidney function, an ECG, a chest X-ray and blood grouping (ABO & Rh).",
-      "The full package is completed in a single visit to our centre in Vijay Nagar Colony, with reports delivered on WhatsApp — handy for travel documentation and peace of mind before the journey."
+      "A compact fitness panel for pilgrims preparing for Haj or Umrah, covering the essential checks: blood counts, sugar, kidney function, an ECG, a chest X-ray and blood grouping (ABO & Rh).",
+      "The full package is completed in a single visit to our centre in Vijay Nagar Colony, with reports delivered on WhatsApp, handy for travel documentation and peace of mind before the journey."
     ],
     includes: ["Complete Blood Count (CBC)", "Blood Sugar (Random)", "Kidney Function Test", "ECG", "Chest X-ray", "Blood Group (ABO & Rh)"],
     fasting: "no",
@@ -189,30 +229,30 @@ const PACKAGES = [
 const TESTS = [
   {
     slug: "hba1c-test-hyderabad", name: "HbA1c Test (Glycated Haemoglobin)", short: "HbA1c", price: 600, sample: "Blood", fasting: "no",
-    desc: "HbA1c test in Hyderabad at ₹600 — measures your average blood sugar over the past 3 months. No fasting needed. Same-day report on WhatsApp from Caspian Diagnostic Centre.",
+    desc: "HbA1c test in Hyderabad at ₹600: measures your average blood sugar over the past 3 months. No fasting needed. Same-day report on WhatsApp from Caspian Diagnostic Centre.",
     about: [
-      "HbA1c (glycated haemoglobin) shows your average blood sugar over the past two to three months — a far more reliable picture of sugar control than a single day's reading.",
+      "HbA1c (glycated haemoglobin) shows your average blood sugar over the past two to three months, a far more reliable picture of sugar control than a single day's reading.",
       "It is the test doctors use both to diagnose diabetes and prediabetes and to track how well treatment is working. As a diabetologist-led lab, HbA1c is one of our most-run tests."
     ],
-    whoShould: ["People with diabetes — usually every 3 months", "Anyone with prediabetes or a family history of diabetes", "Symptoms like excessive thirst, frequent urination or unexplained weight loss"],
+    whoShould: ["People with diabetes, usually every 3 months", "Anyone with prediabetes or a family history of diabetes", "Symptoms like excessive thirst, frequent urination or unexplained weight loss"],
     related: ["p:comprehensive-diabetes-screening-hyderabad", "t:blood-sugar-test-hyderabad", "t:lipid-profile-test-hyderabad"]
   },
   {
     slug: "blood-sugar-test-hyderabad", name: "Blood Sugar Test (Fasting / PP / Random)", short: "Blood Sugar", price: 80, sample: "Blood", fasting: "depends",
-    desc: "Blood sugar test in Hyderabad at ₹80 — fasting (FBS), post-prandial (PPBS) or random (RBS) glucose. Quick same-day reports at Caspian Diagnostic Centre or with home collection.",
+    desc: "Blood sugar test in Hyderabad at ₹80: fasting (FBS), post-prandial (PPBS) or random (RBS) glucose. Quick same-day reports at Caspian Diagnostic Centre or with home collection.",
     about: [
       "Blood glucose can be measured three ways: fasting (FBS, after 8–12 hours without food), post-prandial (PPBS, 2 hours after a meal) and random (RBS, any time). Each costs ₹80.",
       "Fasting and post-prandial sugars together show how your body handles food, and are commonly ordered as a pair. For a three-month average, see the HbA1c test."
     ],
     whoShould: ["Routine diabetes screening and monitoring", "Symptoms of high or low sugar", "As part of pre-operative or annual checkups"],
-    faqExtra: [["What is the difference between FBS, PPBS and RBS?", "FBS is taken after an overnight fast, PPBS exactly 2 hours after a meal, and RBS at any time of day. Your doctor may ask for one or a combination — our team can guide you when you book."]],
+    faqExtra: [["What is the difference between FBS, PPBS and RBS?", "FBS is taken after an overnight fast, PPBS exactly 2 hours after a meal, and RBS at any time of day. Your doctor may ask for one or a combination, our team can guide you when you book."]],
     related: ["t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad"]
   },
   {
     slug: "cbc-test-hyderabad", name: "Complete Blood Count (CBC)", short: "CBC", price: 350, sample: "Blood", fasting: "no",
-    desc: "CBC test in Hyderabad at ₹350 — complete blood count covering haemoglobin, RBC, WBC and platelets. Same-day report on WhatsApp. Free home collection above ₹500.",
+    desc: "CBC test in Hyderabad at ₹350: complete blood count covering haemoglobin, RBC, WBC and platelets. Same-day report on WhatsApp. Free home collection above ₹500.",
     about: [
-      "The Complete Blood Count is the most commonly ordered blood test in medicine. It counts your red cells, white cells and platelets, and measures haemoglobin — screening for anaemia, infection, and many other conditions in one go.",
+      "The Complete Blood Count is the most commonly ordered blood test in medicine. It counts your red cells, white cells and platelets, and measures haemoglobin, screening for anaemia, infection, and many other conditions in one go.",
       "It is the starting point for investigating fever, fatigue, weakness, unusual bruising, or as part of any routine checkup."
     ],
     whoShould: ["Fever or suspected infection", "Tiredness, weakness or pale skin (anaemia)", "Routine annual screening"],
@@ -220,19 +260,19 @@ const TESTS = [
   },
   {
     slug: "tsh-test-hyderabad", name: "TSH Test (Thyroid Stimulating Hormone)", short: "TSH", price: 350, sample: "Blood", fasting: "no",
-    desc: "TSH test in Hyderabad at ₹350 — the single best screening test for thyroid function. Same-day report on WhatsApp from Caspian Diagnostic Centre, Vijay Nagar.",
+    desc: "TSH test in Hyderabad at ₹350: the single best screening test for thyroid function. Same-day report on WhatsApp from Caspian Diagnostic Centre, Vijay Nagar.",
     about: [
       "TSH is the single most sensitive screening test for thyroid problems. A high TSH usually points to an underactive thyroid (hypothyroidism); a low TSH to an overactive one (hyperthyroidism).",
-      "If your TSH is abnormal, your doctor may follow up with the full thyroid profile (T3, T4 and TSH) — available here at ₹470."
+      "If your TSH is abnormal, your doctor may follow up with the full thyroid profile (T3, T4 and TSH), available here at ₹470."
     ],
     whoShould: ["Tiredness, weight change or hair fall", "Monitoring thyroid medication doses", "Fertility or menstrual irregularity workup"],
     related: ["p:thyroid-profile-test-hyderabad", "t:cbc-test-hyderabad"]
   },
   {
     slug: "lipid-profile-test-hyderabad", name: "Lipid Profile (Cholesterol Test)", short: "Lipid Profile", price: 450, sample: "Blood", fasting: "yes",
-    desc: "Lipid profile test in Hyderabad at ₹450 — total cholesterol, HDL, LDL and triglycerides. Fasting sample, same-day report. Free home collection above ₹500.",
+    desc: "Lipid profile test in Hyderabad at ₹450: total cholesterol, HDL, LDL and triglycerides. Fasting sample, same-day report. Free home collection above ₹500.",
     about: [
-      "The lipid profile measures the fats in your blood: total cholesterol, HDL (protective cholesterol), LDL (the artery-clogging kind) and triglycerides — together the standard assessment of heart-disease risk.",
+      "The lipid profile measures the fats in your blood: total cholesterol, HDL (protective cholesterol), LDL (the artery-clogging kind) and triglycerides, together the standard assessment of heart-disease risk.",
       "High cholesterol has no symptoms; the only way to know is to test. Indian guidelines suggest adults check their lipids regularly from their 20s onwards, more often with diabetes, high BP or family history."
     ],
     whoShould: ["Adults screening heart-disease risk", "People with diabetes or high blood pressure", "Monitoring statin (cholesterol medicine) treatment"],
@@ -240,29 +280,29 @@ const TESTS = [
   },
   {
     slug: "liver-function-test-hyderabad", name: "Liver Function Test (LFT)", short: "LFT", price: 450, sample: "Blood", fasting: "confirm",
-    desc: "Liver function test (LFT) in Hyderabad at ₹450 — bilirubin, SGPT, SGOT, ALP, protein and albumin. Same-day report on WhatsApp. Free home collection above ₹500.",
+    desc: "Liver function test (LFT) in Hyderabad at ₹450: bilirubin, SGPT, SGOT, ALP, protein and albumin. Same-day report on WhatsApp. Free home collection above ₹500.",
     about: [
-      "The LFT panel measures bilirubin, liver enzymes (SGPT/ALT, SGOT/AST, ALP), total protein and albumin — together showing how well your liver is working and whether it is inflamed or damaged.",
-      "It is ordered for jaundice, suspected fatty liver, alcohol-related concerns, medication monitoring, and as part of routine checkups — fatty liver is increasingly common alongside diabetes and obesity."
+      "The LFT panel measures bilirubin, liver enzymes (SGPT/ALT, SGOT/AST, ALP), total protein and albumin, together showing how well your liver is working and whether it is inflamed or damaged.",
+      "It is ordered for jaundice, suspected fatty liver, alcohol-related concerns, medication monitoring, and as part of routine checkups, fatty liver is increasingly common alongside diabetes and obesity."
     ],
     whoShould: ["Yellowing of eyes/skin, dark urine or abdominal pain", "Fatty liver follow-up or alcohol-related screening", "People on long-term medication that affects the liver"],
     related: ["t:kidney-function-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad"]
   },
   {
     slug: "kidney-function-test-hyderabad", name: "Kidney Function Test (KFT)", short: "KFT", price: 400, sample: "Blood", fasting: "confirm",
-    desc: "Kidney function test (KFT) in Hyderabad at ₹400 — urea, creatinine and electrolytes (sodium, potassium, chloride). Same-day report. Free home collection above ₹500.",
+    desc: "Kidney function test (KFT) in Hyderabad at ₹400: urea, creatinine and electrolytes (sodium, potassium, chloride). Same-day report. Free home collection above ₹500.",
     about: [
-      "The KFT panel measures urea, creatinine and key electrolytes (sodium, potassium, chloride) — the standard screen of how well your kidneys are filtering waste and balancing salts.",
-      "Diabetes and high blood pressure are the two biggest causes of kidney damage in India, and early damage is silent — which is why regular KFT screening matters for anyone with either condition."
+      "The KFT panel measures urea, creatinine and key electrolytes (sodium, potassium, chloride), the standard screen of how well your kidneys are filtering waste and balancing salts.",
+      "Diabetes and high blood pressure are the two biggest causes of kidney damage in India, and early damage is silent, which is why regular KFT screening matters for anyone with either condition."
     ],
     whoShould: ["People with diabetes or high blood pressure", "Swelling of feet, reduced urine output or frothy urine", "Before starting certain medications, as advised"],
     related: ["t:serum-creatinine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-routine-test-hyderabad"]
   },
   {
     slug: "vitamin-d-test-hyderabad", name: "Vitamin D Test (25-OH)", short: "Vitamin D", price: 1350, sample: "Blood", fasting: "no",
-    desc: "Vitamin D (25-hydroxy) test in Hyderabad at ₹1,350 — checks vitamin D deficiency, a leading cause of bone pain and fatigue. No fasting needed. Report on WhatsApp.",
+    desc: "Vitamin D (25-hydroxy) test in Hyderabad at ₹1,350: checks vitamin D deficiency, a leading cause of bone pain and fatigue. No fasting needed. Report on WhatsApp.",
     about: [
-      "The 25-hydroxy vitamin D test is the standard way to measure your body's vitamin D stores. Deficiency is remarkably common in India despite abundant sunshine — indoor lifestyles and limited sun exposure are the usual culprits.",
+      "The 25-hydroxy vitamin D test is the standard way to measure your body's vitamin D stores. Deficiency is remarkably common in India despite abundant sunshine, indoor lifestyles and limited sun exposure are the usual culprits.",
       "Low vitamin D contributes to bone and back pain, muscle aches, fatigue and weakened bones (osteoporosis). Testing before supplementing helps your doctor pick the right dose."
     ],
     whoShould: ["Bone pain, back pain or muscle aches", "Fatigue or low mood", "Post-menopausal women and elders (bone health)"],
@@ -270,7 +310,7 @@ const TESTS = [
   },
   {
     slug: "vitamin-b12-test-hyderabad", name: "Vitamin B12 Test", short: "Vitamin B12", price: 800, sample: "Blood", fasting: "no",
-    desc: "Vitamin B12 test in Hyderabad at ₹800 — checks B12 deficiency, a common cause of fatigue, tingling and anaemia, especially in vegetarians. Report on WhatsApp same day.",
+    desc: "Vitamin B12 test in Hyderabad at ₹800: checks B12 deficiency, a common cause of fatigue, tingling and anaemia, especially in vegetarians. Report on WhatsApp same day.",
     about: [
       "Vitamin B12 is essential for nerves and blood formation. Deficiency is especially common in vegetarians (B12 comes mainly from animal foods) and in people on long-term acidity or diabetes medication.",
       "Symptoms build slowly: tiredness, tingling or numbness in hands and feet, memory issues and anaemia. A simple blood test confirms it, and treatment is straightforward."
@@ -280,9 +320,9 @@ const TESTS = [
   },
   {
     slug: "urine-routine-test-hyderabad", name: "Complete Urine Analysis (CUE)", short: "Urine Routine", price: 200, sample: "Urine", fasting: "no",
-    desc: "Complete urine examination (CUE) in Hyderabad at ₹200 — screens urine infection, kidney problems and diabetes-related changes. Same-day report at Caspian Diagnostic Centre.",
+    desc: "Complete urine examination (CUE) in Hyderabad at ₹200: screens urine infection, kidney problems and diabetes-related changes. Same-day report at Caspian Diagnostic Centre.",
     about: [
-      "The complete urine examination checks your urine physically, chemically and under the microscope — screening for urinary infection, kidney disease, sugar in urine and more.",
+      "The complete urine examination checks your urine physically, chemically and under the microscope, screening for urinary infection, kidney disease, sugar in urine and more.",
       "It is quick, painless and remarkably informative: burning urination, frequent urination, foul-smelling or cloudy urine, and routine diabetes checks are all common reasons to test."
     ],
     whoShould: ["Burning or frequent urination (suspected UTI)", "Routine diabetes and kidney screening", "Pregnancy-related routine checks"],
@@ -290,7 +330,7 @@ const TESTS = [
   },
   {
     slug: "crp-test-hyderabad", name: "CRP Test (C-Reactive Protein)", short: "CRP", price: 550, sample: "Blood", fasting: "no",
-    desc: "CRP test in Hyderabad at ₹550 — measures inflammation in the body, used in fever workups and infection monitoring. Same-day report on WhatsApp.",
+    desc: "CRP test in Hyderabad at ₹550: measures inflammation in the body, used in fever workups and infection monitoring. Same-day report on WhatsApp.",
     about: [
       "C-reactive protein rises quickly when there is inflammation or infection anywhere in the body, making it a useful marker for diagnosing infections and tracking whether treatment is working.",
       "It is commonly ordered alongside CBC and ESR in fever panels, joint pain workups, and post-infection monitoring."
@@ -300,9 +340,9 @@ const TESTS = [
   },
   {
     slug: "esr-test-hyderabad", name: "ESR Test", short: "ESR", price: 170, sample: "Blood", fasting: "no",
-    desc: "ESR test in Hyderabad at ₹170 — erythrocyte sedimentation rate, a simple marker of inflammation used in fever, arthritis and TB workups. Same-day report.",
+    desc: "ESR test in Hyderabad at ₹170: erythrocyte sedimentation rate, a simple marker of inflammation used in fever, arthritis and TB workups. Same-day report.",
     about: [
-      "The erythrocyte sedimentation rate is a time-tested marker of inflammation. A raised ESR signals that something inflammatory is going on — infection, arthritis, TB or other chronic conditions — and prompts further targeted testing.",
+      "The erythrocyte sedimentation rate is a time-tested marker of inflammation. A raised ESR signals that something inflammatory is going on, infection, arthritis, TB or other chronic conditions, and prompts further targeted testing.",
       "It is almost always interpreted together with CBC and CRP rather than alone."
     ],
     whoShould: ["Prolonged or unexplained fever", "Joint pains and suspected arthritis", "TB and chronic infection workups"],
@@ -310,19 +350,19 @@ const TESTS = [
   },
   {
     slug: "serum-creatinine-test-hyderabad", name: "Serum Creatinine Test", short: "Creatinine", price: 250, sample: "Blood", fasting: "no",
-    desc: "Serum creatinine test in Hyderabad at ₹250 — the key blood marker of kidney function. Same-day report on WhatsApp. Free home collection above ₹500.",
+    desc: "Serum creatinine test in Hyderabad at ₹250: the key blood marker of kidney function. Same-day report on WhatsApp. Free home collection above ₹500.",
     about: [
       "Creatinine is a waste product your kidneys filter out; when kidney function drops, blood creatinine rises. It is the single most-used marker of kidney health and the basis for calculating eGFR (your kidney filtration rate).",
-      "People with diabetes or high BP should check creatinine at least yearly — kidney damage caught early can often be slowed significantly."
+      "People with diabetes or high BP should check creatinine at least yearly, kidney damage caught early can often be slowed significantly."
     ],
     whoShould: ["Diabetes or high blood pressure (yearly screening)", "Before scans with contrast dye, as advised", "Monitoring known kidney disease"],
     related: ["t:kidney-function-test-hyderabad", "t:blood-urea-test-hyderabad", "t:urine-routine-test-hyderabad"]
   },
   {
     slug: "uric-acid-test-hyderabad", name: "Uric Acid Test", short: "Uric Acid", price: 160, sample: "Blood", fasting: "confirm",
-    desc: "Uric acid test in Hyderabad at ₹160 — checks for gout and high uric acid. Same-day report at Caspian Diagnostic Centre, Vijay Nagar, or with home collection.",
+    desc: "Uric acid test in Hyderabad at ₹160: checks for gout and high uric acid. Same-day report at Caspian Diagnostic Centre, Vijay Nagar, or with home collection.",
     about: [
-      "Uric acid builds up when the body makes too much or excretes too little — and high levels can crystallise in joints, causing gout: sudden, severe pain classically in the big toe.",
+      "Uric acid builds up when the body makes too much or excretes too little, and high levels can crystallise in joints, causing gout: sudden, severe pain classically in the big toe.",
       "High uric acid is also linked with kidney stones and often travels with diabetes and obesity, so it is worth checking as part of metabolic screening."
     ],
     whoShould: ["Sudden severe joint pain (classically the big toe)", "History of kidney stones", "Monitoring gout treatment"],
@@ -330,7 +370,7 @@ const TESTS = [
   },
   {
     slug: "blood-urea-test-hyderabad", name: "Blood Urea Test", short: "Blood Urea", price: 160, sample: "Blood", fasting: "no",
-    desc: "Blood urea test in Hyderabad at ₹160 — a kidney function marker usually tested along with creatinine. Same-day report on WhatsApp.",
+    desc: "Blood urea test in Hyderabad at ₹160: a kidney function marker usually tested along with creatinine. Same-day report on WhatsApp.",
     about: [
       "Urea is a protein-breakdown waste product cleared by the kidneys. Raised urea, read together with creatinine, helps assess kidney function and hydration status.",
       "It is part of every kidney panel and most pre-operative and hospital admission workups."
@@ -340,9 +380,9 @@ const TESTS = [
   },
   {
     slug: "ferritin-test-hyderabad", name: "Serum Ferritin Test", short: "Ferritin", price: 400, sample: "Blood", fasting: "no",
-    desc: "Ferritin test in Hyderabad at ₹400 — measures your body's iron stores, the key test for diagnosing iron-deficiency anaemia. Same-day report on WhatsApp.",
+    desc: "Ferritin test in Hyderabad at ₹400: measures your body's iron stores, the key test for diagnosing iron-deficiency anaemia. Same-day report on WhatsApp.",
     about: [
-      "Ferritin reflects your body's iron stores — low ferritin is the earliest and most specific sign of iron deficiency, often falling well before haemoglobin does.",
+      "Ferritin reflects your body's iron stores, low ferritin is the earliest and most specific sign of iron deficiency, often falling well before haemoglobin does.",
       "Iron deficiency is the most common nutritional deficiency in India, particularly in women, and shows up as tiredness, hair fall, breathlessness on climbing stairs and pale skin."
     ],
     whoShould: ["Women with heavy periods or hair fall", "Low haemoglobin on a CBC", "Unexplained fatigue"],
@@ -350,9 +390,9 @@ const TESTS = [
   },
   {
     slug: "blood-group-test-hyderabad", name: "Blood Group Test (ABO & Rh)", short: "Blood Group", price: 160, sample: "Blood", fasting: "no",
-    desc: "Blood group test in Hyderabad at ₹160 — ABO and Rh typing with same-day certificate-ready report. Walk in any time, we're open 24/7.",
+    desc: "Blood group test in Hyderabad at ₹160: ABO and Rh typing with same-day certificate-ready report. Walk in any time, we're open 24/7.",
     about: [
-      "ABO and Rh typing determines your blood group — needed for pregnancy records, surgery, blood donation, visa/travel documentation, and simply for everyone to know.",
+      "ABO and Rh typing determines your blood group, needed for pregnancy records, surgery, blood donation, visa/travel documentation, and simply for everyone to know.",
       "It is a quick test with a same-day report you can keep on record."
     ],
     whoShould: ["Pregnancy registration and antenatal records", "Pre-operative and admission requirements", "Travel, visa or ID documentation"],
@@ -360,9 +400,9 @@ const TESTS = [
   },
   {
     slug: "beta-hcg-test-hyderabad", name: "Beta HCG Test (Pregnancy)", short: "Beta HCG", price: 950, sample: "Blood", fasting: "no",
-    desc: "Beta HCG blood test in Hyderabad at ₹950 — the most sensitive pregnancy test, quantifying the pregnancy hormone. Confidential same-day report on WhatsApp.",
+    desc: "Beta HCG blood test in Hyderabad at ₹950: the most sensitive pregnancy test, quantifying the pregnancy hormone. Confidential same-day report on WhatsApp.",
     about: [
-      "The beta HCG blood test measures the exact level of the pregnancy hormone — far more sensitive than urine kits, detecting pregnancy earlier and tracking how levels rise in early pregnancy.",
+      "The beta HCG blood test measures the exact level of the pregnancy hormone, far more sensitive than urine kits, detecting pregnancy earlier and tracking how levels rise in early pregnancy.",
       "Doctors also use serial beta HCG values to monitor early-pregnancy health. Reports are handled confidentially and delivered directly to you."
     ],
     whoShould: ["Early pregnancy confirmation", "Serial monitoring advised by your gynaecologist", "Before certain medical procedures"],
@@ -370,30 +410,30 @@ const TESTS = [
   },
   {
     slug: "psa-test-hyderabad", name: "PSA Test (Prostate)", short: "PSA", price: 1200, sample: "Blood", fasting: "no",
-    desc: "PSA test in Hyderabad at ₹1,200 — prostate-specific antigen screening for men, usually from age 50 (earlier with family history). Same-day report on WhatsApp.",
+    desc: "PSA test in Hyderabad at ₹1,200: prostate-specific antigen screening for men, usually from age 50 (earlier with family history). Same-day report on WhatsApp.",
     about: [
-      "Prostate-specific antigen is a blood marker used to screen for prostate enlargement and prostate cancer in men — typically from age 50, or earlier with a family history.",
-      "A raised PSA does not by itself mean cancer — infections and benign enlargement also raise it — but it tells your doctor whether further evaluation is needed."
+      "Prostate-specific antigen is a blood marker used to screen for prostate enlargement and prostate cancer in men, typically from age 50, or earlier with a family history.",
+      "A raised PSA does not by itself mean cancer, infections and benign enlargement also raise it, but it tells your doctor whether further evaluation is needed."
     ],
-    whoShould: ["Men 50+ for routine screening", "Urinary difficulty — weak stream, frequent night urination", "Family history of prostate cancer (screen earlier)"],
+    whoShould: ["Men 50+ for routine screening", "Urinary difficulty, weak stream, frequent night urination", "Family history of prostate cancer (screen earlier)"],
     related: ["p:premium-health-checkup-men-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:urine-routine-test-hyderabad"]
   },
   {
     slug: "dengue-test-hyderabad", name: "Dengue Test (NS1, IgG & IgM)", short: "Dengue Profile", price: 2000, sample: "Blood", fasting: "no",
-    desc: "Dengue test in Hyderabad at ₹2,000 — NS1 antigen with IgG & IgM antibodies to detect dengue at any stage of fever. Urgent same-day reports; open 24/7.",
+    desc: "Dengue test in Hyderabad at ₹2,000: NS1 antigen with IgG & IgM antibodies to detect dengue at any stage of fever. Urgent same-day reports; open 24/7.",
     about: [
-      "Our dengue profile combines the NS1 antigen (positive in the first days of fever) with IgM and IgG antibodies (which rise later) — so dengue can be detected whatever day of illness you test on.",
+      "Our dengue profile combines the NS1 antigen (positive in the first days of fever) with IgM and IgG antibodies (which rise later), so dengue can be detected whatever day of illness you test on.",
       "During monsoon season, early confirmation matters: it tells your doctor to monitor platelets and hydration closely. We are open 24/7 for urgent fever testing."
     ],
     whoShould: ["High fever with body ache, headache or rash", "Fever during monsoon/dengue season", "Platelet monitoring alongside CBC"],
-    faqExtra: [["Which dengue test is right for my fever day?", "NS1 antigen is most useful in the first 1–5 days of fever; IgM/IgG antibodies from day 4–5 onwards. Our profile includes all three, so timing doesn't matter — one sample covers every stage."]],
+    faqExtra: [["Which dengue test is right for my fever day?", "NS1 antigen is most useful in the first 1–5 days of fever; IgM/IgG antibodies from day 4–5 onwards. Our profile includes all three, so timing doesn't matter, one sample covers every stage."]],
     related: ["t:cbc-test-hyderabad", "t:malaria-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
   },
   {
     slug: "malaria-test-hyderabad", name: "Malaria Test (Profile)", short: "Malaria", price: 500, sample: "Blood", fasting: "no",
-    desc: "Malaria test in Hyderabad at ₹500 — smear and antigen testing for falciparum and vivax malaria. Urgent same-day fever testing, open 24/7.",
+    desc: "Malaria test in Hyderabad at ₹500: smear and antigen testing for falciparum and vivax malaria. Urgent same-day fever testing, open 24/7.",
     about: [
-      "Our malaria profile identifies malaria parasites (both falciparum and vivax) by smear examination and antigen detection — confirming not just whether you have malaria, but which type, since treatment differs.",
+      "Our malaria profile identifies malaria parasites (both falciparum and vivax) by smear examination and antigen detection, confirming not just whether you have malaria, but which type, since treatment differs.",
       "Malaria fever classically comes in cycles with chills and sweating. Because falciparum malaria can turn serious quickly, we run fever tests around the clock."
     ],
     whoShould: ["Fever with chills and sweating episodes", "Fever after travel to malaria-prone areas", "Fever panels together with dengue and typhoid"],
@@ -401,9 +441,9 @@ const TESTS = [
   },
   {
     slug: "typhoid-widal-test-hyderabad", name: "Typhoid Test (Widal)", short: "Widal", price: 180, sample: "Blood", fasting: "no",
-    desc: "Widal typhoid test in Hyderabad at ₹180 — quick screening for typhoid fever. Same-day report; comprehensive typhoid profile also available. Open 24/7.",
+    desc: "Widal typhoid test in Hyderabad at ₹180: quick screening for typhoid fever. Same-day report; comprehensive typhoid profile also available. Open 24/7.",
     about: [
-      "The Widal test screens for antibodies against the typhoid bacteria — a quick, affordable first-line test when fever has lasted several days, especially with abdominal discomfort or loss of appetite.",
+      "The Widal test screens for antibodies against the typhoid bacteria, a quick, affordable first-line test when fever has lasted several days, especially with abdominal discomfort or loss of appetite.",
       "For more definitive answers, a comprehensive typhoid profile (₹2,000) including newer antibody tests is also available; our team can advise which suits your fever duration."
     ],
     whoShould: ["Fever lasting more than 3–4 days", "Fever with abdominal pain or poor appetite", "Suspected water/food-borne infection"],
@@ -411,9 +451,9 @@ const TESTS = [
   },
   {
     slug: "electrolytes-test-hyderabad", name: "Electrolyte Profile (Na / K / Cl)", short: "Electrolytes", price: 200, sample: "Blood", fasting: "no",
-    desc: "Serum electrolytes test in Hyderabad at ₹200 — sodium, potassium and chloride levels. Important for elders, BP patients and dehydration. Same-day report.",
+    desc: "Serum electrolytes test in Hyderabad at ₹200: sodium, potassium and chloride levels. Important for elders, BP patients and dehydration. Same-day report.",
     about: [
-      "The electrolyte panel measures sodium, potassium and chloride — salts that keep your heart rhythm, nerves and fluid balance working. Imbalances are common with vomiting, diarrhoea, kidney problems and certain BP medicines (diuretics).",
+      "The electrolyte panel measures sodium, potassium and chloride, salts that keep your heart rhythm, nerves and fluid balance working. Imbalances are common with vomiting, diarrhoea, kidney problems and certain BP medicines (diuretics).",
       "Low sodium in particular is a frequent, under-recognised cause of weakness and confusion in elders."
     ],
     whoShould: ["Elders with weakness, confusion or low intake", "People on diuretics or BP medication", "Vomiting, diarrhoea or dehydration"],
@@ -421,25 +461,42 @@ const TESTS = [
   },
   {
     slug: "calcium-test-hyderabad", name: "Serum Calcium Test", short: "Calcium", price: 160, sample: "Blood", fasting: "no",
-    desc: "Serum calcium test in Hyderabad at ₹160 — checks calcium levels for bone health, often tested with vitamin D. Same-day report on WhatsApp.",
+    desc: "Serum calcium test in Hyderabad at ₹160: checks calcium levels for bone health, often tested with vitamin D. Same-day report on WhatsApp.",
     about: [
-      "Serum calcium reflects the calcium available in your blood — essential for bones, muscles and nerves. It is usually interpreted together with vitamin D, which controls calcium absorption.",
+      "Serum calcium reflects the calcium available in your blood, essential for bones, muscles and nerves. It is usually interpreted together with vitamin D, which controls calcium absorption.",
       "Both low and high calcium cause problems: cramps, tingling and weak bones on one side; kidney stones and other issues on the other."
     ],
     whoShould: ["Bone pain or muscle cramps", "With vitamin D testing for bone health", "Kidney stone workups"],
     related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad"]
   },
   {
-    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging — done at our centre", fasting: "no",
-    desc: "Digital chest X-ray in Hyderabad at ₹300 — for cough, fever, TB screening and pre-op checks. Same-day film & report. Portable home chest X-ray available at ₹2,000.",
+    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging, done at our centre", fasting: "no",
+    desc: "Digital chest X-ray in Hyderabad at ₹300: for cough, fever, TB screening and pre-op checks. Same-day film & report. Portable home chest X-ray available at ₹2,000.",
     about: [
-      "Our digital chest X-ray (PA or AP view) is the most-requested imaging test — used for persistent cough, fever, breathlessness, TB screening and pre-operative fitness. Film and report are delivered the same day.",
-      "Can't travel? We also offer a portable chest X-ray at home (₹2,000) — our visiting X-ray team brings the equipment to your bedside, ideal for elderly or bedridden patients. Caspian is a PCPNDT-registered imaging centre."
+      "Our digital chest X-ray (PA or AP view) is the most-requested imaging test, used for persistent cough, fever, breathlessness, TB screening and pre-operative fitness. Film and report are delivered the same day.",
+      "Can't travel? We also offer a portable chest X-ray at home (₹2,000), our visiting X-ray team brings the equipment to your bedside, ideal for elderly or bedridden patients. Caspian is a PCPNDT-registered imaging centre."
     ],
     whoShould: ["Persistent cough or breathlessness", "TB screening and fever workups", "Pre-operative and employment fitness checks"],
-    faqExtra: [["Can I get a chest X-ray at home?", "Yes — a portable chest X-ray at home is available for ₹2,000 across Hyderabad. Our visiting team brings portable equipment to your bedside; ideal for elderly, bedridden or post-surgery patients. Message us on WhatsApp to schedule."]],
+    faqExtra: [["Can I get a chest X-ray at home?", "Yes, a portable chest X-ray at home is available for ₹2,000 across Hyderabad. Our visiting team brings portable equipment to your bedside; ideal for elderly, bedridden or post-surgery patients. Message us on WhatsApp to schedule."]],
     homeCollection: false,
     related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad"]
+  },
+  {
+    slug: "inbody-body-composition-test-hyderabad", name: "Body Composition Analysis (InBody-style BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
+    desc: "InBody-style body composition analysis in Hyderabad at ₹999: body fat %, muscle mass, visceral fat, BMR and metabolic age, with the report explained by a Certified Obesity Educator. Book a 20-minute slot at Caspian, Vijay Nagar Colony.",
+    about: [
+      "A body composition scan goes beyond the weighing scale. Using bio-electrical impedance (BIA), it measures how much of your weight is fat, muscle and water, estimates visceral (organ) fat, and calculates your basal metabolic rate (BMR) and metabolic age.",
+      "At Caspian the scan is not a print-and-go test. Every ₹999 slot includes a sit-down with one of our Certified Diabetes and Obesity Educators (MSc Nutrition), who explains your report and what to do about it. Add the Metabolic Wellness + InBody package (₹1,795) if you also want the blood work that goes with it."
+    ],
+    whoShould: ["You are trying to lose weight and want to track fat loss, not just kilos", "Diabetes, prediabetes, PCOS or fatty liver, where visceral fat matters", "Gym-goers and athletes tracking muscle gain", "Anyone whose BMI says 'normal' but who carries weight around the middle"],
+    faqExtra: [
+      ["Is this the same as an InBody scan?", "It is the same type of test: a bio-impedance body composition analysis that reports fat %, muscle mass, visceral fat, body water and BMR. Ask our team about the machine in use on the day."],
+      ["Do I need to prepare?", "For a consistent reading come 2 to 3 hours after a meal, avoid heavy exercise or alcohol the night before, and empty your bladder just before the scan. Not suitable in pregnancy or if you have a pacemaker."],
+      ["Can I combine it with blood tests?", "Yes. The Metabolic Wellness + InBody package (₹1,795) adds HbA1c, lipid profile, liver, kidney, thyroid, vitamin D and B12, so the educator can read your body composition alongside your blood work."]
+    ],
+    homeCollection: false,
+    extLink: "https://www.caspianhealthcare.in/body-composition", extLabel: "Book a 20-minute slot (₹999)",
+    related: ["p:metabolic-wellness-inbody-hyderabad", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad"]
   }
 ];
 
@@ -449,9 +506,9 @@ const TESTS = [
 
 const HOME_PAGE = {
   slug: "home-sample-collection-hyderabad",
-  title: "Home Sample Collection in Hyderabad — Free Above ₹500 | Caspian Diagnostic Centre",
-  h1: "Home Sample Collection in Hyderabad",
-  desc: "Book blood test home collection in Hyderabad. Trained phlebotomists visit your home, free on orders above ₹500. Reports on WhatsApp. Call or WhatsApp +91 90593 41154."
+  title: "Blood Sample Collection at Home in Hyderabad | Free Above ₹500 | Caspian Diagnostic Centre",
+  h1: "Blood Sample Collection at Home in Hyderabad",
+  desc: "Book blood test home sample collection in Hyderabad: Vijay Nagar Colony, Mehdipatnam, Masab Tank, Asif Nagar, Attapur, Tolichowki and nearby. Free above ₹500, ₹100 per visit otherwise. Same-day reports on WhatsApp."
 };
 
 /* ------------------------------------------------------------------ */
@@ -471,10 +528,10 @@ function findRef(ref) {
 }
 
 function fastingText(f) {
-  if (f === "yes") return "Yes — 8–12 hours of fasting is recommended. Water is fine. Book a morning slot and our team will remind you the evening before.";
+  if (f === "yes") return "Yes, 8–12 hours of fasting is recommended. Water is fine. Book a morning slot and our team will remind you the evening before.";
   if (f === "no") return "No special preparation or fasting is needed. You can give this sample at any time of day.";
   if (f === "depends") return "Fasting sugar (FBS) needs 8–12 hours of fasting; post-prandial (PPBS) is taken exactly 2 hours after a meal; random (RBS) needs no preparation. Our team will guide you when you book.";
-  return "Fasting is sometimes advised depending on the tests your doctor ordered — our team will confirm exactly what to do when you book.";
+  return "Fasting is sometimes advised depending on the tests your doctor ordered, our team will confirm exactly what to do when you book.";
 }
 
 const CSS = `:root{--blue:#0A5C9E;--blue-dark:#08487d;--teal:#0c776e;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f6f9fc;--wa:#0f8440}
@@ -489,6 +546,14 @@ header .w{max-width:900px;margin:0 auto;padding:14px 20px;display:flex;align-ite
 .brand b{color:var(--blue);font-size:18px;font-weight:800;letter-spacing:-.02em}
 .brand span{font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block}
 .home{font-size:14px;font-weight:600}
+.topnav{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;font-weight:600}
+.topnav a{color:var(--ink)}.topnav a.home{color:var(--blue)}
+@media(max-width:560px){.topnav{gap:10px;font-size:13px}}
+.hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;list-style:none;padding:0}
+.hub li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.hub li a{font-weight:700;display:block}
+.hub li .hp{color:var(--ink);font-weight:800;margin-top:4px}
+.hub li .hs{font-size:13px;color:var(--muted)}
 .crumbs{max-width:900px;margin:14px auto 0;padding:0 20px;font-size:13px;color:var(--muted)}
 .crumbs a{color:var(--muted)}
 .hero{background:linear-gradient(135deg,var(--blue),#0f8fb0);color:#fff;padding:30px 0;margin-top:14px}
@@ -549,12 +614,13 @@ function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bo
 <meta property="og:image" content="${BASE}/ogimage.png">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 ${ldTags}
 <style>${CSS}</style></head><body>
 <div class="top"><div class="w"><span>\u{1F4CD} 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad 500057</span><span>\u{1F557} Open 24/7 · \u{1F4DE} <a href="tel:${PHONE_TEL}" style="color:#eaf3fb">${PHONE_DISPLAY}</a></span></div></div>
 <header><div class="w">
   <a class="brand" href="/"><svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#14B8A6"/></svg><span><b>Caspian</b><span>Diagnostic Centre</span></span></a>
-  <a class="home" href="/">&larr; Back to site</a>
+  <nav class="topnav" aria-label="Site"><a href="/tests">All Tests</a><a href="/packages">Packages</a><a href="/home-sample-collection-hyderabad">Home Collection</a><a href="/blog">Blog</a><a class="home" href="/">Home</a></nav>
 </div></header>
 <nav class="crumbs" aria-label="Breadcrumb">${breadcrumbHtml}</nav>
 <div class="hero"><div class="w"><h1>${esc(heroH1)}</h1><p>${esc(heroSub)}</p></div></div>
@@ -562,7 +628,7 @@ ${ldTags}
 <footer><div class="w">
   <div class="legal">Caspian Lifesciences Private Limited</div>
   <div class="fine">Operating as Caspian Diagnostic Centre · 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad, Telangana 500057</div>
-  <div class="links"><a href="/">Home</a><a href="/home-sample-collection-hyderabad">Home Collection</a><a href="/about.html">About Us</a><a href="/pricing.html">Pricing</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refund.html">Refund Policy</a><a href="/contact.html">Contact Us</a></div>
+  <div class="links"><a href="/">Home</a><a href="/tests">All Tests</a><a href="/packages">Health Packages</a><a href="/home-sample-collection-hyderabad">Home Collection</a><a href="/blog">Blog</a><a href="/about.html">About Us</a><a href="/pricing.html">Pricing</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/refund.html">Refund Policy</a><a href="/contact.html">Contact Us</a></div>
   <div class="fine">\u{1F4DE} ${PHONE_DISPLAY}  ·  ✉️ <a href="mailto:info@caspianlabs.in" style="color:#cde2f2">info@caspianlabs.in</a>  ·  \u{1F4AC} <a href="${WA}" style="color:#cde2f2">WhatsApp</a></div>
   <div class="fine" style="margin-top:10px">© 2026 Caspian Lifesciences Private Limited. All rights reserved. · Govt. of Telangana Regn. 07F-APMCE-1846 · PCPNDT Regn. 0116A1337</div>
 </div></footer>
@@ -601,17 +667,19 @@ function relatedBlock(refs) {
   if (!links.length) return "";
   return `<h2>Related tests &amp; packages</h2><div class="rel">${links.map(l => `<a href="${l.href}">${esc(l.label)}</a>`).join("")}</div>`;
 }
-function sideCard({ price, priceNote, waText, ekaLink, homeCollection }) {
+function sideCard({ price, priceNote, waText, ekaLink, homeCollection, book, extLink, extLabel, priceLabel }) {
   const wa = `<a class="btn btn-wa" href="${waLink(waText)}" target="_blank" rel="noopener">\u{1F4AC} Book on WhatsApp</a>`;
   const eka = ekaLink ? `<a class="btn btn-blue" href="${ekaLink}" target="_blank" rel="noopener">Book cardiologist slot</a>` : "";
+  const primary = extLink
+    ? `<a class="btn btn-blue" href="${extLink}" target="_blank" rel="noopener">${esc(extLabel || "Book online")}</a>`
+    : `<a class="btn btn-blue" href="${book || "/#all-tests"}">Book &amp; pay online</a>`;
   return `<aside class="side">
-<div class="price-lbl">Price</div>
+<div class="price-lbl">${esc(priceLabel || "Price")}</div>
 <div class="price">${inr(price)}</div>
 <div class="meta">${priceNote}</div>
-${eka}${wa}
-<a class="btn btn-blue" href="/#all-tests">Book online</a>
+${eka}${primary}${wa}
 <a class="btn btn-line" href="tel:${PHONE_TEL}">\u{1F4DE} Call ${PHONE_DISPLAY}</a>
-<div class="fine">${homeCollection === false ? "<span class=\"tick\">✓</span>Done at our centre — Vijay Nagar Colony, open 24/7" : "<span class=\"tick\">✓</span>Free home collection on orders above ₹500"}<br><span class="tick">✓</span>Reports on WhatsApp<br><span class="tick">✓</span>Open 24/7, all days</div>
+<div class="fine">${homeCollection === false ? "<span class=\"tick\">✓</span>Done at our centre, Vijay Nagar Colony, open 24/7" : "<span class=\"tick\">✓</span>Free home collection on orders above ₹500"}<br><span class="tick">✓</span>Pay securely online (UPI, cards) or at the centre<br><span class="tick">✓</span>Reports on WhatsApp<br><span class="tick">✓</span>Open 24/7, all days</div>
 </aside>`;
 }
 
@@ -623,12 +691,12 @@ function commonFaqs(name, price, fasting, homeCollection) {
   const faqs = [
     [`How much does the ${name} cost in Hyderabad?`, `The ${name} costs ${inr(price)} at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad. There are no hidden charges, and home collection is free on orders above ₹500.`],
     ["Do I need to fast before this test?", fastingText(fasting)],
-    ["When will I get my report?", "Most routine reports are delivered the same day or within 24 hours, directly on WhatsApp. Timing can vary for specialised tests — our team will tell you the expected time when you book."]
+    ["When will I get my report?", "Most routine reports are delivered the same day or within 24 hours, directly on WhatsApp. Timing can vary for specialised tests, our team will tell you the expected time when you book."]
   ];
   if (homeCollection === false) {
-    faqs.push(["Where is this done?", "At Caspian Diagnostic Centre, 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad 500057. We are open 24/7 — walk in any time or book a slot on WhatsApp."]);
+    faqs.push(["Where is this done?", "At Caspian Diagnostic Centre, 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad 500057. We are open 24/7, walk in any time or book a slot on WhatsApp."]);
   } else {
-    faqs.push(["Can I book home sample collection?", "Yes — our trained phlebotomists collect samples at your home across Hyderabad, free on orders above ₹500. Choose Home Collection when booking online, or message us on WhatsApp with your area and preferred time."]);
+    faqs.push(["Can I book home sample collection?", "Yes, our trained phlebotomists collect samples at your home across Hyderabad, free on orders above ₹500. Choose Home Collection when booking online, or message us on WhatsApp with your area and preferred time."]);
   }
   return faqs;
 }
@@ -645,22 +713,22 @@ ${p.about.map(t => `<p>${esc(t)}</p>`).join("\n")}
 <ul>${p.idealFor.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
 <h2>Preparation</h2>
 <p>${esc(fastingText(p.fasting))}</p>
-<div class="note">\u{1F4A1} Not sure if this is the right package? Message us on <a href="${waLink("Hi Caspian Diagnostic Centre, I need help choosing a health package.")}" target="_blank" rel="noopener">WhatsApp</a> — our team (led by practising doctors) will help you choose.</div>
+<div class="note">\u{1F4A1} Not sure if this is the right package? Message us on <a href="${waLink("Hi Caspian Diagnostic Centre, I need help choosing a health package.")}" target="_blank" rel="noopener">WhatsApp</a>, our team (led by practising doctors) will help you choose.</div>
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 ${relatedBlock(p.related)}
 </div>
-${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.ekaLink, homeCollection: p.homeCollection })}</div>`;
+${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.ekaLink, homeCollection: p.homeCollection, book: bookHref(p.slug) })}</div>`;
   return pageShell({
-    title: `${p.name} in Hyderabad — ${inr(p.price)} | Caspian Diagnostic Centre`,
+    title: `${p.name} in Hyderabad at ${inr(p.price)} | Caspian Diagnostic Centre`,
     desc: p.desc,
     canonical: url,
-    breadcrumbHtml: `<a href="/">Home</a> › <a href="/#packages">Health Packages</a> › ${esc(p.name)}`,
+    breadcrumbHtml: `<a href="/">Home</a> › <a href="/packages">Health Packages</a> › ${esc(p.name)}`,
     heroH1: `${p.name} in Hyderabad`,
     heroSub: `${p.tagline} · ${inr(p.price)} · Reports on WhatsApp`,
     bodyHtml: body,
     ld: [
-      ldBreadcrumb([["Home", "/"], ["Health Packages", "/#packages"], [p.name, "/packages/" + p.slug]]),
+      ldBreadcrumb([["Home", "/"], ["Health Packages", "/packages"], [p.name, "/packages/" + p.slug]]),
       ldProduct(p.name, p.desc, p.price, url),
       ldFaq(faqs)
     ]
@@ -677,28 +745,28 @@ ${t.about.map(x => `<p>${esc(x)}</p>`).join("\n")}
 <table class="facts">
 <tr><td>Price</td><td>${inr(t.price)}</td></tr>
 <tr><td>Sample</td><td>${esc(t.sample)}</td></tr>
-<tr><td>Fasting</td><td>${t.fasting === "yes" ? "Yes — 8–12 hours" : t.fasting === "no" ? "Not required" : t.fasting === "depends" ? "Depends on type — see FAQ" : "Sometimes — we'll confirm"}</td></tr>
+<tr><td>Fasting</td><td>${t.fasting === "yes" ? "Yes, 8–12 hours" : t.fasting === "no" ? "Not required" : t.fasting === "depends" ? "Depends on type, see FAQ" : "Sometimes, we'll confirm"}</td></tr>
 <tr><td>Report</td><td>Same day / within 24 hours, on WhatsApp</td></tr>
-<tr><td>${t.homeCollection === false ? "Where" : "Home collection"}</td><td>${t.homeCollection === false ? "At our centre — Vijay Nagar Colony, open 24/7" : "Available across Hyderabad — free on orders above ₹500"}</td></tr>
+<tr><td>${t.homeCollection === false ? "Where" : "Home collection"}</td><td>${t.homeCollection === false ? "At our centre, Vijay Nagar Colony, open 24/7" : "Available across Hyderabad, free on orders above ₹500"}</td></tr>
 </table>
 <h2>When should you take it?</h2>
 <ul>${t.whoShould.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 ${relatedBlock(t.related)}
-<div class="note">This page is for general information and is not a substitute for medical advice. Please discuss your reports with your doctor — you can consult our physicians at Caspian Healthcare.</div>
+<div class="note">This page is for general information and is not a substitute for medical advice. Please discuss your reports with your doctor, you can consult our physicians at Caspian Healthcare.</div>
 </div>
-${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our centre · same-day report" : "Home collection available · same-day report"), waText: `Hi Caspian Diagnostic Centre, I'd like to book the ${t.name} (${inr(t.price)}).`, homeCollection: t.homeCollection })}</div>`;
+${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our centre · same-day report" : "Home collection available · same-day report"), waText: `Hi Caspian Diagnostic Centre, I'd like to book the ${t.name} (${inr(t.price)}).`, homeCollection: t.homeCollection, book: bookHref(t.slug), extLink: t.extLink, extLabel: t.extLabel })}</div>`;
   return pageShell({
-    title: `${t.name} in Hyderabad — ${inr(t.price)} | Caspian Diagnostic Centre`,
+    title: `${t.name} in Hyderabad at ${inr(t.price)} | Caspian Diagnostic Centre`,
     desc: t.desc,
     canonical: url,
-    breadcrumbHtml: `<a href="/">Home</a> › <a href="/#all-tests">All Tests</a> › ${esc(t.short)}`,
+    breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ${esc(t.short)}`,
     heroH1: `${t.name} in Hyderabad`,
-    heroSub: `${inr(t.price)} · ${t.fasting === "yes" ? "Fasting required" : t.fasting === "no" ? "No fasting needed" : "Preparation varies"} · Same-day report on WhatsApp`,
+    heroSub: t.extLink ? `${inr(t.price)} · 20-minute slot at our centre · Report explained on the spot` : `${inr(t.price)} · ${t.fasting === "yes" ? "Fasting required" : t.fasting === "no" ? "No fasting needed" : "Preparation varies"} · Same-day report on WhatsApp`,
     bodyHtml: body,
     ld: [
-      ldBreadcrumb([["Home", "/"], ["All Tests", "/#all-tests"], [t.short, "/tests/" + t.slug]]),
+      ldBreadcrumb([["Home", "/"], ["All Tests", "/tests"], [t.short, "/tests/" + t.slug]]),
       ldMedicalTest(t.name, t.desc, url),
       ldProduct(t.name, t.desc, t.price, url),
       ldFaq(faqs)
@@ -709,26 +777,28 @@ ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our ce
 function renderHome() {
   const url = `${BASE}/${HOME_PAGE.slug}`;
   const faqs = [
-    ["Is home sample collection really free?", "Yes — home collection is free anywhere in our Hyderabad coverage area on orders above ₹500. For smaller orders a small visit charge applies, which our team confirms before booking."],
-    ["Which areas of Hyderabad do you cover?", "We collect from homes across Hyderabad, centred on Vijay Nagar Colony, Masab Tank, Mehdipatnam, Asif Nagar and surrounding areas. Message us on WhatsApp with your area and we'll confirm your slot right away."],
-    ["How do I prepare for a home visit?", "If your test needs fasting (8–12 hours for fasting sugar or lipid profile), book a morning slot and don't eat after dinner — water is fine. Keep your doctor's prescription handy if you have one. Our phlebotomist carries everything else."],
-    ["When will I get my reports?", "Most routine reports are delivered the same day or within 24 hours, directly on WhatsApp — no need to visit the centre."],
-    ["Is home collection safe and hygienic?", "Yes — our trained phlebotomists use sterile, single-use equipment for every visit, and samples are transported to our lab under proper conditions for processing."],
+    ["Is home sample collection really free?", "Home collection is free on orders of ₹500 or more. Below ₹500 a flat ₹100 visit charge applies, shown before you pay. Fasting plus post-meal sugar (FBS + PPBS) needs two visits, so the second visit is charged ₹100."],
+    ["Which areas of Hyderabad do you cover?", "We collect from homes around our centre in Vijay Nagar Colony: Mehdipatnam, Masab Tank, Asif Nagar, Gudimalkapur, Attapur, Tolichowki, Lakdikapul, Nampally, Banjara Hills and nearby localities, and further across Hyderabad on request. Message us on WhatsApp with your area and we'll confirm your slot right away."],
+    ["How do I prepare for a home visit?", "If your test needs fasting (8–12 hours for fasting sugar or lipid profile), book a morning slot and don't eat after dinner, water is fine. Keep your doctor's prescription handy if you have one. Our phlebotomist carries everything else."],
+    ["When will I get my reports?", "Most routine reports are delivered the same day or within 24 hours, directly on WhatsApp, no need to visit the centre."],
+    ["Is home collection safe and hygienic?", "Yes, our trained phlebotomists use sterile, single-use equipment for every visit, and samples are transported to our lab under proper conditions for processing."],
     ["Can I get an X-ray or CGM at home too?", "Yes. We offer a portable chest X-ray at home (₹2,000) for patients who can't travel, and CGM (continuous glucose monitor) sensors fitted at home at MRP with no application charge."]
   ];
   const popular = ["t:cbc-test-hyderabad", "t:hba1c-test-hyderabad", "t:tsh-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:vitamin-d-test-hyderabad", "p:full-body-checkup-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "p:senior-citizen-health-checkup-hyderabad"];
   const body = `<div class="grid"><div class="card">
-<h2>Skip the travel — we come to you</h2>
-<p>Caspian Diagnostic Centre offers professional blood-sample collection at your home, anywhere in our Hyderabad coverage area. A trained phlebotomist visits at a time that suits you, collects the sample using sterile single-use equipment, and your report arrives on WhatsApp — usually the same day.</p>
-<p>Home collection is <b>free on orders above ₹500</b>, and is especially loved by elders, busy families, new mothers and anyone recovering from illness.</p>
+<h2>Skip the travel, we come to you</h2>
+<p>Caspian Diagnostic Centre offers professional blood-sample collection at your home, anywhere in our Hyderabad coverage area. A trained phlebotomist visits at a time that suits you, collects the sample using sterile single-use equipment, and your report arrives on WhatsApp, usually the same day.</p>
+<p>Home collection is <b>free on orders of ₹500 or more</b> (₹100 per visit below that, always shown before you pay), and is especially loved by elders, busy families, new mothers and anyone recovering from illness.</p>
+<h2>Areas we cover</h2>
+<p>Our phlebotomists start from Vijay Nagar Colony, so the fastest slots are in <b>Mehdipatnam, Masab Tank, Asif Nagar, Gudimalkapur, Attapur, Tolichowki, Lakdikapul, Nampally, Banjara Hills, Humayun Nagar, Langar Houz and Karwan</b>. We also cover the rest of Hyderabad on request; send your area on WhatsApp and we will confirm the earliest visit.</p>
 <h2>How it works</h2>
 <ul>
-<li><b>1. Book</b> — message us on WhatsApp, call ${PHONE_DISPLAY}, or book online and choose <em>Home collection</em>.</li>
-<li><b>2. We visit</b> — our phlebotomist arrives at your chosen time with everything needed.</li>
-<li><b>3. Report on WhatsApp</b> — most reports the same day or within 24 hours.</li>
+<li><b>1. Book</b>: <a href="/?test=Complete%20Blood%20Count%20(CBC)#all-tests">book and pay online</a> and choose <em>Home collection</em>, or message us on WhatsApp / call ${PHONE_DISPLAY}.</li>
+<li><b>2. We visit</b>: our phlebotomist arrives at your chosen time with everything needed.</li>
+<li><b>3. Report on WhatsApp</b>: most reports the same day or within 24 hours.</li>
 </ul>
 <h2>Beyond blood tests</h2>
-<p>We also bring imaging and monitoring home: a <a href="/tests/chest-x-ray-hyderabad">portable chest X-ray at home</a> (₹2,000) for bedridden or elderly patients, and CGM (continuous glucose monitoring) sensors — FreeStyle Libre 2+ and Guardian IV — fitted at home at MRP with no application charge.</p>
+<p>We also bring imaging and monitoring home: a <a href="/tests/chest-x-ray-hyderabad">portable chest X-ray at home</a> (₹2,000) for bedridden or elderly patients, and CGM (continuous glucose monitoring) sensors, FreeStyle Libre 2+ and Guardian IV, fitted at home at MRP with no application charge.</p>
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 <h2>Popular tests booked with home collection</h2>
@@ -750,6 +820,35 @@ ${sideCard({ price: 0, priceNote: "", waText: "Hi Caspian Diagnostic Centre, I'd
   });
 }
 
+
+function renderHub(kind) {
+  const isTests = kind === "tests";
+  const url = `${BASE}/${kind}`;
+  const items = isTests ? TESTS : PACKAGES;
+  const title = isTests ? "Blood Test Prices in Hyderabad: All Tests | Caspian Diagnostic Centre" : "Health Checkup Packages in Hyderabad with Prices | Caspian Diagnostic Centre";
+  const desc = isTests
+    ? "Blood test price list at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad: CBC ₹350, HbA1c ₹600, thyroid ₹470, lipid ₹450, vitamin D ₹1,350 and more. Open 24/7, home collection, book and pay online."
+    : "Full body checkup ₹1,795, essential checkup ₹899, diabetes screening ₹899, heart health ₹999, senior citizen and women's packages. Caspian Diagnostic Centre, Hyderabad. Open 24/7, home collection, book online.";
+  const li = items.map(x => `<li><a href="/${isTests ? "tests" : "packages"}/${x.slug}">${esc(x.name)}</a><div class="hp">${inr(x.price)}</div><div class="hs">${esc(isTests ? (x.fasting === "yes" ? "Fasting required" : x.fasting === "no" ? "No fasting" : "Preparation varies") : x.tagline)}</div></li>`).join("");
+  const body = `<div class="card">
+<p>${isTests ? "Every test below is done at our lab in Vijay Nagar Colony or collected from your home. Prices are the same online, at the centre and at home; the only extra is a ₹100 home-visit charge on orders below ₹500." : "Each package bundles the tests doctors ask for most often at a lower price than booking them one by one. Home collection is free on all packages above ₹500."} Tap a ${isTests ? "test" : "package"} for details, preparation and FAQs, then book and pay online in under a minute.</p>
+<ul class="hub">${li}</ul>
+<p style="margin-top:18px">Looking for something not listed? Our full menu has 1,400+ tests. <a href="/#all-tests">Search all tests</a> or <a href="${waLink("Hi Caspian Diagnostic Centre, I'm looking for a test: ")}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>
+</div>`;
+  const ld = [
+    ldBreadcrumb([["Home", "/"], [isTests ? "All Tests" : "Health Packages", "/" + kind]]),
+    { "@context": "https://schema.org", "@type": "ItemList", "name": isTests ? "Blood tests at Caspian Diagnostic Centre" : "Health checkup packages at Caspian Diagnostic Centre",
+      "itemListElement": items.map((x, i) => ({ "@type": "ListItem", "position": i + 1, "name": x.name, "url": `${BASE}/${isTests ? "tests" : "packages"}/${x.slug}` })) }
+  ];
+  return pageShell({
+    title, desc, canonical: url,
+    breadcrumbHtml: `<a href="/">Home</a> › ${isTests ? "All Tests" : "Health Packages"}`,
+    heroH1: isTests ? "Blood Tests and Prices in Hyderabad" : "Health Checkup Packages in Hyderabad",
+    heroSub: isTests ? "Transparent prices · Open 24/7 · Free home collection above ₹500" : "Doctor-designed bundles · Reports on WhatsApp · Free home collection",
+    bodyHtml: body, ld
+  });
+}
+
 function render404() {
   return pageShell({
     title: "Page not found | Caspian Diagnostic Centre",
@@ -758,7 +857,7 @@ function render404() {
     breadcrumbHtml: `<a href="/">Home</a>`,
     heroH1: "Page not found",
     heroSub: "The page you were looking for doesn't exist or has moved.",
-    bodyHtml: `<div class="card"><p>Sorry — we couldn't find that page. It may have moved.</p><p><a href="/">← Back to the homepage</a> · <a href="/#all-tests">Search all tests</a> · <a href="/#packages">Health packages</a></p></div>`,
+    bodyHtml: `<div class="card"><p>Sorry, we couldn't find that page. It may have moved.</p><p><a href="/">Back to the homepage</a> · <a href="/tests">All tests and prices</a> · <a href="/packages">Health packages</a> · <a href="/home-sample-collection-hyderabad">Home collection</a></p></div>`,
     ld: []
   });
 }
@@ -780,6 +879,8 @@ export default function handler(req, res) {
     html = t ? renderTest(t) : null;
   } else if (kind === "home") {
     html = renderHome();
+  } else if (kind === "tests" || kind === "packages") {
+    html = renderHub(kind);
   }
 
   if (!html) { html = render404(); status = 404; }
