@@ -9,13 +9,25 @@
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/favicon.ico", "destination": "/favicon.svg" },
+    { "source": "/tests", "destination": "/api/page?kind=tests" },
+    { "source": "/packages", "destination": "/api/page?kind=packages" },
     { "source": "/packages/:slug", "destination": "/api/page?kind=package&slug=:slug" },
     { "source": "/tests/:slug", "destination": "/api/page?kind=test&slug=:slug" },
     { "source": "/home-sample-collection-hyderabad", "destination": "/api/page?kind=home" },
     { "source": "/blog", "destination": "/api/blog" },
-    { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" }
+    { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" },
+    { "source": "/:path*", "destination": "/api/page?kind=404" }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
     {
       "source": "/assets/(.*)\\.(js|css)",
       "headers": [

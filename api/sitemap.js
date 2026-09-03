@@ -6,19 +6,28 @@
 // function guarantees Content-Type: application/xml; charset=utf-8 with no double compression.
 //
 // NOTE: keep PACKAGE_SLUGS / TEST_SLUGS in sync with the catalog in api/page.js.
+// lastmod: bump the relevant date constant when the content of that group actually changes.
+// (Google ignores lastmod that is always "today"; a truthful date helps recrawl prioritisation.)
+
+const LASTMOD_LANDING = "2026-09-03"; // tests/packages/hub/home-collection pages (api/page.js)
+const LASTMOD_HOMEPAGE = "2026-09-03"; // index.html
+const LASTMOD_BLOG = "2026-07-31";     // api/blog.js articles
+const LASTMOD_STATIC = "2026-07-31";   // about/pricing/contact/legal html files
 
 const PAGES = [
-  { path: "/",                  changefreq: "weekly",  priority: "1.0" },
-  { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.8" },
-  { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
-  { path: "/about.html",        changefreq: "monthly", priority: "0.6" },
-  { path: "/pricing.html",      changefreq: "monthly", priority: "0.7" },
-  { path: "/contact.html",      changefreq: "monthly", priority: "0.6" },
-  { path: "/terms.html",        changefreq: "yearly",  priority: "0.3" },
-  { path: "/privacy.html",      changefreq: "yearly",  priority: "0.3" },
-  { path: "/refund.html",       changefreq: "yearly",  priority: "0.3" },
-  { path: "/cancellation.html", changefreq: "yearly",  priority: "0.3" },
-  { path: "/shipping.html",     changefreq: "yearly",  priority: "0.3" },
+  { path: "/",                  changefreq: "weekly",  priority: "1.0", lastmod: LASTMOD_HOMEPAGE },
+  { path: "/tests",             changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
+  { path: "/packages",          changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
+  { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD_LANDING },
+  { path: "/blog",              changefreq: "weekly",  priority: "0.7", lastmod: LASTMOD_BLOG },
+  { path: "/about.html",        changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_STATIC },
+  { path: "/pricing.html",      changefreq: "monthly", priority: "0.7", lastmod: LASTMOD_STATIC },
+  { path: "/contact.html",      changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_STATIC },
+  { path: "/terms.html",        changefreq: "yearly",  priority: "0.3", lastmod: LASTMOD_STATIC },
+  { path: "/privacy.html",      changefreq: "yearly",  priority: "0.3", lastmod: LASTMOD_STATIC },
+  { path: "/refund.html",       changefreq: "yearly",  priority: "0.3", lastmod: LASTMOD_STATIC },
+  { path: "/cancellation.html", changefreq: "yearly",  priority: "0.3", lastmod: LASTMOD_STATIC },
+  { path: "/shipping.html",     changefreq: "yearly",  priority: "0.3", lastmod: LASTMOD_STATIC },
 ];
 
 const PACKAGE_SLUGS = [
@@ -66,20 +75,20 @@ const TEST_SLUGS = [
   "electrolytes-test-hyderabad",
   "calcium-test-hyderabad",
   "chest-x-ray-hyderabad",
+  "inbody-body-composition-test-hyderabad",
 ];
 
 export default function handler(req, res) {
   const base = "https://www.caspianlabs.in";
-  const lastmod = new Date().toISOString().slice(0, 10);
   const all = [
     ...PAGES,
-    ...PACKAGE_SLUGS.map((s) => ({ path: "/packages/" + s, changefreq: "monthly", priority: "0.8" })),
-    ...TEST_SLUGS.map((s) => ({ path: "/tests/" + s, changefreq: "monthly", priority: "0.7" })),
-    ...BLOG_SLUGS.map((s) => ({ path: "/blog/" + s, changefreq: "monthly", priority: "0.6" })),
+    ...PACKAGE_SLUGS.map((s) => ({ path: "/packages/" + s, changefreq: "monthly", priority: "0.8", lastmod: LASTMOD_LANDING })),
+    ...TEST_SLUGS.map((s) => ({ path: "/tests/" + s, changefreq: "monthly", priority: "0.7", lastmod: LASTMOD_LANDING })),
+    ...BLOG_SLUGS.map((s) => ({ path: "/blog/" + s, changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_BLOG })),
   ];
   const urls = all.map(
     (p) =>
-      `  <url>\n    <loc>${base}${p.path}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+      `  <url>\n    <loc>${base}${p.path}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>${p.changefreq}</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
   ).join("\n");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 
