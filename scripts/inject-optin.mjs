@@ -1,10 +1,21 @@
-// Build-time injector: adds the WhatsApp opt-in section to index.html.
-// Runs as the Vercel build command (see vercel.json). Idempotent: skips if already present.
+// Build step (see vercel.json buildCommand): copies the static site into public/ and
+// injects the WhatsApp opt-in section into public/index.html. Idempotent.
 // Why: index.html is too large to re-upload through the GitHub connector, so the section
-// lives here and is inserted at build time.
-import { readFileSync, writeFileSync } from "node:fs";
+// lives here and is inserted at build time. api/ is left in place; Vercel builds it as functions.
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 
-const FILE = "index.html";
+const OUT = "public";
+const SKIP = new Set(["api", "scripts", "node_modules", "public", ".git", ".github", ".vercel", "package.json", "package-lock.json", "vercel.json", "README.md"]);
+rmSync(OUT, { recursive: true, force: true });
+mkdirSync(OUT);
+for (const name of readdirSync(".")) {
+  if (SKIP.has(name) || name.startsWith(".")) continue;
+  cpSync(name, join(OUT, name), { recursive: true });
+}
+console.log("optin: copied static files to public/");
+
+const FILE = join(OUT, "index.html");
 let html = readFileSync(FILE, "utf8");
 if (html.includes('id="updates"')) { console.log("optin: already present"); process.exit(0); }
 

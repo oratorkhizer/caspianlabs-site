@@ -1,5 +1,6 @@
 {
   "buildCommand": "node scripts/inject-optin.mjs",
+  "outputDirectory": "public",
   "redirects": [
     {
       "source": "/(.*)",
