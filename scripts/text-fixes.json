@@ -1,0 +1,508 @@
+{
+ "unique": {
+  "public/index.html": [
+   [
+    "content=\"Caspian Diagnostic Centre, Hyderabad — accurate pathology testing",
+    "content=\"Caspian Diagnostic Centre, Hyderabad: accurate pathology testing"
+   ],
+   [
+    "og:title\" content=\"Caspian Diagnostic Centre — Diagnostic Lab in Hyderabad\"",
+    "og:title\" content=\"Caspian Diagnostic Centre, Diagnostic Lab in Hyderabad\""
+   ],
+   [
+    "twitter:title\" content=\"Caspian Diagnostic Centre — Diagnostic Lab in Hyderabad\"",
+    "twitter:title\" content=\"Caspian Diagnostic Centre, Diagnostic Lab in Hyderabad\""
+   ],
+   [
+    "aria-label=\"Caspian Diagnostic Centre — home\"",
+    "aria-label=\"Caspian Diagnostic Centre, home\""
+   ],
+   [
+    "doorstep sample collection — reports delivered straight to your WhatsApp.</p>",
+    "doorstep sample collection, with reports delivered straight to your WhatsApp.</p>"
+   ],
+   [
+    "<p>No queues, no hassle — from booking to report.</p>",
+    "<p>No queues, no hassle, from booking to report.</p>"
+   ],
+   [
+    "<span>Book online in seconds — or message us on WhatsApp.",
+    "<span>Book online in seconds, or message us on WhatsApp."
+   ],
+   [
+    "KUB &amp; more — <strong>from ₹300</strong> at our centre.",
+    "KUB &amp; more, <strong>from ₹300</strong> at our centre."
+   ],
+   [
+    "Continuous glucose monitoring fitted at your home — <strong>FreeStyle Libre 2+</strong>",
+    "Continuous glucose monitoring fitted at your home: <strong>FreeStyle Libre 2+</strong>"
+   ],
+   [
+    "Need just one test — a Vitamin D, thyroid, sugar or a specific profile?",
+    "Need just one test, such as a Vitamin D, thyroid, sugar or a specific profile?"
+   ],
+   [
+    "placeholder=\"Search a test or profile — e.g. thyroid",
+    "placeholder=\"Search a test or profile, e.g. thyroid"
+   ],
+   [
+    "✅ Book &amp; pay online — tap <b>Book</b>",
+    "✅ Book &amp; pay online: tap <b>Book</b>"
+   ],
+   [
+    "Our promise is simple — <em>Where Speed Meets Precision</em> — backed by trained professionals",
+    "Our promise is simple, <em>Where Speed Meets Precision</em>, backed by trained professionals"
+   ],
+   [
+    "Free doorstep sample collection on orders above ₹500 — trained phlebotomists, at a time that suits you.",
+    "Free doorstep sample collection on orders above ₹500, by trained phlebotomists at a time that suits you."
+   ],
+   [
+    "Get your digital reports delivered to your phone quickly — no need to travel back to collect them.",
+    "Get your digital reports delivered to your phone quickly, with no need to travel back to collect them."
+   ],
+   [
+    "Honest package pricing with no hidden costs — quality diagnostics that stay affordable.",
+    "Honest package pricing with no hidden costs: quality diagnostics that stay affordable."
+   ],
+   [
+    "We're open round the clock, every day — walk in or book a home collection",
+    "We're open round the clock, every day. Walk in or book a home collection"
+   ],
+   [
+    "with a simple commitment — accurate results, delivered with care.",
+    "with a simple commitment: accurate results, delivered with care."
+   ],
+   [
+    "Message us on WhatsApp — we're open 24/7.</p>",
+    "Message us on WhatsApp; we're open 24/7.</p>"
+   ],
+   [
+    "<p>Yes — our trained phlebotomists collect samples",
+    "<p>Yes. Our trained phlebotomists collect samples"
+   ],
+   [
+    "<p>Yes — doctor consultations are handled",
+    "<p>Yes. Doctor consultations are handled"
+   ],
+   [
+    "<span>Open 24/7 — every day, all day</span>",
+    "<span>Open 24/7, every day, all day</span>"
+   ],
+   [
+    "(Razorpay) — your booking is confirmed instantly.",
+    "(Razorpay), and your booking is confirmed instantly."
+   ],
+   [
+    "Your details go straight to Caspian — never shared.",
+    "Your details go straight to Caspian and are never shared."
+   ],
+   [
+    "\"Our most-requested X-ray — PA or AP chest view",
+    "\"Our most-requested X-ray: PA or AP chest view"
+   ],
+   [
+    "\"Any other view — elbow, thoracic spine",
+    "\"Any other view: elbow, thoracic spine"
+   ],
+   [
+    "taken at your home by our visiting X-ray team — ideal for elderly",
+    "taken at your home by our visiting X-ray team, ideal for elderly"
+   ],
+   [
+    "fitted at your home at MRP — no application charge. Read it on a compatible NFC smartphone",
+    "fitted at your home at MRP, with no application charge. Read it on a compatible NFC smartphone"
+   ],
+   [
+    "fitted at your home at MRP — no application charge. Read it on a compatible phone/receiver",
+    "fitted at your home at MRP, with no application charge. Read it on a compatible phone/receiver"
+   ],
+   [
+    "from our full lab menu — the complete catalogue our reception can order'",
+    "from our full lab menu, the complete catalogue our reception can order'"
+   ],
+   [
+    "encodeURIComponent('Caspian Diagnostic Centre — '+name)",
+    "encodeURIComponent('Caspian Diagnostic Centre: '+name)"
+   ],
+   [
+    "showToast('Added — '+CART.length",
+    "showToast('Added: '+CART.length"
+   ],
+   [
+    "needs 8–12 hours of fasting — our team will confirm when you book.'",
+    "needs 8–12 hours of fasting; our team will confirm when you book.'"
+   ],
+   [
+    "Home collection is free above ₹500 — a ₹100 visit charge is added at payment.'",
+    "Home collection is free above ₹500; a ₹100 visit charge is added at payment.'"
+   ],
+   [
+    "'Location not supported on this device — try \"Choose on map\".'",
+    "'Location not supported on this device. Try \"Choose on map\".'"
+   ],
+   [
+    "'Couldn\\'t get your location — allow location permission, or use \"Choose on map\".'",
+    "'Couldn\\'t get your location. Allow location permission, or use \"Choose on map\".'"
+   ],
+   [
+    "'Map couldn\\'t load — please use \"Use my current location\"",
+    "'Map couldn\\'t load. Please use \"Use my current location\""
+   ],
+   [
+    "send your booking to our team on WhatsApp — we\\'ll confirm your slot right away.",
+    "send your booking to our team on WhatsApp, and we\\'ll confirm your slot right away."
+   ],
+   [
+    "My page timed out — could you please confirm whether my booking went through?",
+    "My page timed out. Could you please confirm whether my booking went through?"
+   ],
+   [
+    "<b>Please don\\'t book again</b> — it may already be registered.",
+    "<b>Please don\\'t book again</b>; it may already be registered."
+   ],
+   [
+    "we\\'ll have your tests ready — payment is collected at the counter.'",
+    "we\\'ll have your tests ready; payment is collected at the counter.'"
+   ],
+   [
+    "'<h4>Payment received — booking confirmed!</h4>'",
+    "'<h4>Payment received, booking confirmed!</h4>'"
+   ],
+   [
+    "'Show this Booking Ref at our centre — no payment is needed at the counter.'",
+    "'Show this Booking Ref at our centre; no payment is needed at the counter.'"
+   ],
+   [
+    "'your slot')+' — no payment is needed, you\\'ve already paid.')",
+    "'your slot')+'. No payment is needed, you\\'ve already paid.')"
+   ],
+   [
+    "<b>Please don\\'t book or pay again</b> — our team will confirm on",
+    "<b>Please don\\'t book or pay again</b>; our team will confirm on"
+   ],
+   [
+    "'Payment not completed — your booking is not confirmed yet.",
+    "'Payment not completed. Your booking is not confirmed yet."
+   ]
+  ],
+  "public/assets/i18n.js": [
+   [
+    "శాంపిల్ కలెక్షన్ అందిస్తుంది — రిపోర్టులు నేరుగా",
+    "శాంపిల్ కలెక్షన్ అందిస్తుంది. రిపోర్టులు నేరుగా"
+   ],
+   [
+    "క్యూలు లేవు, ఇబ్బంది లేదు — బుకింగ్ నుంచి",
+    "క్యూలు లేవు, ఇబ్బంది లేదు, బుకింగ్ నుంచి"
+   ],
+   [
+    "బుకింగ్ — లేదా వాట్సాప్",
+    "బుకింగ్, లేదా వాట్సాప్"
+   ],
+   [
+    "ప్రత్యేక ప్రొఫైల్స్ వరకు — అన్నీ ఒకే చోట",
+    "ప్రత్యేక ప్రొఫైల్స్ వరకు, అన్నీ ఒకే చోట"
+   ],
+   [
+    "KUB &amp; మరిన్ని — మా సెంటర్",
+    "KUB &amp; మరిన్ని, మా సెంటర్"
+   ],
+   [
+    "మానిటరింగ్ మీ ఇంటి వద్దే — <strong>FreeStyle",
+    "మానిటరింగ్ మీ ఇంటి వద్దే: <strong>FreeStyle"
+   ],
+   [
+    "ప్రీమియం హెల్త్ చెక్ — పురుషులు 45+",
+    "ప్రీమియం హెల్త్ చెక్ (పురుషులు 45+)"
+   ],
+   [
+    "ఒకే టెస్ట్ కావాలా — విటమిన్ D,",
+    "ఒకే టెస్ట్ కావాలా, విటమిన్ D,"
+   ],
+   [
+    "ప్రొఫైల్ శోధించండి — ఉదా. థైరాయిడ్",
+    "ప్రొఫైల్ శోధించండి, ఉదా. థైరాయిడ్"
+   ],
+   [
+    "సర్వీస్ బుకింగ్ ఇక్కడే — ఏ టెస్ట్",
+    "సర్వీస్ బుకింగ్ ఇక్కడే: ఏ టెస్ట్"
+   ],
+   [
+    "మా వాగ్దానం సులభం — <em>వేగం, ఖచ్చితత్వం కలిసే చోటు</em> — శిక్షణ పొందిన",
+    "మా వాగ్దానం సులభం, <em>వేగం, ఖచ్చితత్వం కలిసే చోటు</em>, శిక్షణ పొందిన"
+   ],
+   [
+    " — మీరు, మీ డాక్టర్ ప్రతి ఫలితంపై",
+    "; మీరు, మీ డాక్టర్ ప్రతి ఫలితంపై"
+   ],
+   [
+    "శాంపిల్ కలెక్షన్ — శిక్షణ పొందిన ఫ్లెబోటమిస్టులు",
+    "శాంపిల్ కలెక్షన్, శిక్షణ పొందిన ఫ్లెబోటమిస్టులు"
+   ],
+   [
+    " — తిరిగి సెంటర్",
+    "; తిరిగి సెంటర్"
+   ],
+   [
+    "నిజాయితీ ప్యాకేజీ ధరలు — నాణ్యమైన",
+    "నిజాయితీ ప్యాకేజీ ధరలు: నాణ్యమైన"
+   ],
+   [
+    "పగలూ రాత్రీ తెరిచి ఉంటాం — ఎప్పుడైనా",
+    "పగలూ రాత్రీ తెరిచి ఉంటాం. ఎప్పుడైనా"
+   ],
+   [
+    "rateBtn: \"మాకు రేటింగ్ ఇవ్వండి —\"",
+    "rateBtn: \"మాకు రేటింగ్ ఇవ్వండి:\""
+   ],
+   [
+    "సేవలందిస్తోంది — ఖచ్చితమైన ఫలితాలు",
+    "సేవలందిస్తోంది: ఖచ్చితమైన ఫలితాలు"
+   ],
+   [
+    "hours: \"24/7 తెరిచి — ప్రతి రోజు",
+    "hours: \"24/7 తెరిచి, ప్రతి రోజు"
+   ],
+   [
+    "మెసేజ్ చేయండి — మేము 24/7",
+    "మెసేజ్ చేయండి; మేము 24/7"
+   ],
+   [
+    "మెసేజ్ చేయండి — ఉపవాసం అవసరమో",
+    "మెసేజ్ చేయండి; ఉపవాసం అవసరమో"
+   ],
+   [
+    "\"అవును — మా శిక్షణ పొందిన",
+    "\"అవును. మా శిక్షణ పొందిన"
+   ],
+   [
+    "\"అవును — డాక్టర్ కన్సల్టేషన్లు",
+    "\"అవును. డాక్టర్ కన్సల్టేషన్లు"
+   ],
+   [
+    "सैंपल कलेक्शन प्रदान करता है — रिपोर्ट सीधे",
+    "सैंपल कलेक्शन प्रदान करता है। रिपोर्ट सीधे"
+   ],
+   [
+    "न लाइन, न झंझट — बुकिंग से",
+    "न लाइन, न झंझट, बुकिंग से"
+   ],
+   [
+    "सेकंडों में ऑनलाइन बुक करें — या WhatsApp",
+    "सेकंडों में ऑनलाइन बुक करें, या WhatsApp"
+   ],
+   [
+    "विशेष प्रोफाइल तक — सब एक ही छत",
+    "विशेष प्रोफाइल तक, सब एक ही छत"
+   ],
+   [
+    "KUB व अधिक — हमारे सेंटर पर",
+    "KUB व अधिक, हमारे सेंटर पर"
+   ],
+   [
+    "मॉनिटरिंग आपके घर पर — <strong>FreeStyle",
+    "मॉनिटरिंग आपके घर पर: <strong>FreeStyle"
+   ],
+   [
+    "प्रीमियम हेल्थ चेक — पुरुष 45+",
+    "प्रीमियम हेल्थ चेक (पुरुष 45+)"
+   ],
+   [
+    "सिर्फ़ एक टेस्ट चाहिए — विटामिन D,",
+    "सिर्फ़ एक टेस्ट चाहिए, विटामिन D,"
+   ],
+   [
+    "प्रोफाइल खोजें — जैसे थायरॉइड",
+    "प्रोफाइल खोजें, जैसे थायरॉइड"
+   ],
+   [
+    "सर्विस बुकिंग यहीं है — किसी भी टेस्ट",
+    "सर्विस बुकिंग यहीं है: किसी भी टेस्ट"
+   ],
+   [
+    "हमारा वादा सरल है — <em>जहाँ रफ़्तार मिलती है सटीकता से</em> — प्रशिक्षित",
+    "हमारा वादा सरल है, <em>जहाँ रफ़्तार मिलती है सटीकता से</em>, प्रशिक्षित"
+   ],
+   [
+    "सैंपल कलेक्शन — प्रशिक्षित फ्लेबोटोमिस्ट",
+    "सैंपल कलेक्शन, प्रशिक्षित फ्लेबोटोमिस्ट"
+   ],
+   [
+    "अपने फ़ोन पर पाएँ — लेने के लिए",
+    "अपने फ़ोन पर पाएँ; लेने के लिए"
+   ],
+   [
+    "ईमानदार पैकेज दाम — गुणवत्ता वाली",
+    "ईमानदार पैकेज दाम: गुणवत्ता वाली"
+   ],
+   [
+    "दिन-रात खुले हैं — जब चाहें",
+    "दिन-रात खुले हैं। जब चाहें"
+   ],
+   [
+    "rateBtn: \"हमें रेटिंग दें —\"",
+    "rateBtn: \"हमें रेटिंग दें:\""
+   ],
+   [
+    "की सेवा कर रहा है — सटीक नतीजे",
+    "की सेवा कर रहा है: सटीक नतीजे"
+   ],
+   [
+    "hours: \"24/7 खुले — हर दिन",
+    "hours: \"24/7 खुले, हर दिन"
+   ],
+   [
+    "WhatsApp पर मैसेज करें — हम 24/7",
+    "WhatsApp पर मैसेज करें; हम 24/7"
+   ],
+   [
+    "WhatsApp पर भेजें — हम बता देंगे",
+    "WhatsApp पर भेजें; हम बता देंगे"
+   ],
+   [
+    "\"हाँ — हमारे प्रशिक्षित",
+    "\"हाँ। हमारे प्रशिक्षित"
+   ],
+   [
+    "\"हाँ — डॉक्टर परामर्श",
+    "\"हाँ। डॉक्टर परामर्श"
+   ],
+   [
+    "سیمپل کلیکشن فراہم کرتا ہے — رپورٹس سیدھی",
+    "سیمپل کلیکشن فراہم کرتا ہے۔ رپورٹس سیدھی"
+   ],
+   [
+    "نہ قطار، نہ جھنجھٹ — بکنگ سے",
+    "نہ قطار، نہ جھنجھٹ، بکنگ سے"
+   ],
+   [
+    "سیکنڈوں میں آن لائن بک کریں — یا واٹس ایپ",
+    "سیکنڈوں میں آن لائن بک کریں، یا واٹس ایپ"
+   ],
+   [
+    "خصوصی پروفائلز تک — سب ایک ہی چھت",
+    "خصوصی پروفائلز تک، سب ایک ہی چھت"
+   ],
+   [
+    "KUB و مزید — ہمارے سینٹر پر",
+    "KUB و مزید، ہمارے سینٹر پر"
+   ],
+   [
+    "مانیٹرنگ آپ کے گھر پر — <strong>FreeStyle",
+    "مانیٹرنگ آپ کے گھر پر: <strong>FreeStyle"
+   ],
+   [
+    "پریمیم ہیلتھ چیک — مرد 45+",
+    "پریمیم ہیلتھ چیک (مرد 45+)"
+   ],
+   [
+    "صرف ایک ٹیسٹ چاہیے — وٹامن D،",
+    "صرف ایک ٹیسٹ چاہیے، وٹامن D،"
+   ],
+   [
+    "پروفائل تلاش کریں — مثلاً تھائرائیڈ",
+    "پروفائل تلاش کریں، مثلاً تھائرائیڈ"
+   ],
+   [
+    "سروس بکنگ یہیں ہے — کسی بھی ٹیسٹ",
+    "سروس بکنگ یہیں ہے: کسی بھی ٹیسٹ"
+   ],
+   [
+    "ہمارا وعدہ سادہ ہے — <em>جہاں رفتار اور درستگی ملتی ہیں</em> — تربیت یافتہ",
+    "ہمارا وعدہ سادہ ہے، <em>جہاں رفتار اور درستگی ملتی ہیں</em>، تربیت یافتہ"
+   ],
+   [
+    "سیمپل کلیکشن — تربیت یافتہ فلیبوٹومسٹ",
+    "سیمپل کلیکشن، تربیت یافتہ فلیبوٹومسٹ"
+   ],
+   [
+    "اپنے فون پر حاصل کریں — لینے کے لیے",
+    "اپنے فون پر حاصل کریں؛ لینے کے لیے"
+   ],
+   [
+    "ایماندار پیکج قیمتیں — معیاری تشخیص",
+    "ایماندار پیکج قیمتیں: معیاری تشخیص"
+   ],
+   [
+    "دن رات کھلے ہیں — جب چاہیں",
+    "دن رات کھلے ہیں۔ جب چاہیں"
+   ],
+   [
+    "rateBtn: \"ہمیں ریٹنگ دیں —\"",
+    "rateBtn: \"ہمیں ریٹنگ دیں:\""
+   ],
+   [
+    "کی خدمت کر رہا ہے — درست نتائج",
+    "کی خدمت کر رہا ہے: درست نتائج"
+   ],
+   [
+    "hours: \"24/7 کھلے — ہر دن",
+    "hours: \"24/7 کھلے، ہر دن"
+   ],
+   [
+    "واٹس ایپ پر میسج کریں — ہم 24/7",
+    "واٹس ایپ پر میسج کریں؛ ہم 24/7"
+   ],
+   [
+    "واٹس ایپ پر بھیجیں — ہم بتا دیں گے",
+    "واٹس ایپ پر بھیجیں؛ ہم بتا دیں گے"
+   ],
+   [
+    "\"جی ہاں — ہمارے تربیت یافتہ",
+    "\"جی ہاں۔ ہمارے تربیت یافتہ"
+   ],
+   [
+    "\"جی ہاں — ڈاکٹر کنسلٹیشن",
+    "\"جی ہاں۔ ڈاکٹر کنسلٹیشن"
+   ]
+  ]
+ },
+ "global": {
+  "files": [
+   "public/index.html",
+   "public/assets/i18n.js",
+   "public/assets/phase2-data.js",
+   "api/page.js",
+   "api/pay.js",
+   "api/book.js"
+  ],
+  "pairs": [
+   [
+    "Premium Health Check — Men 45+",
+    "Premium Health Check for Men 45+"
+   ],
+   [
+    "Senior Citizen Health — Male",
+    "Senior Citizen Health (Male)"
+   ],
+   [
+    "Senior Citizen Health — Female",
+    "Senior Citizen Health (Female)"
+   ],
+   [
+    "Blood Sugar — Fasting (FBS)",
+    "Blood Sugar, Fasting (FBS)"
+   ],
+   [
+    "Blood Sugar — Post Prandial (PPBS)",
+    "Blood Sugar, Post Prandial (PPBS)"
+   ],
+   [
+    "Blood Sugar — Random (RBS)",
+    "Blood Sugar, Random (RBS)"
+   ],
+   [
+    "CGM at Home — FreeStyle Libre 2+",
+    "CGM at Home: FreeStyle Libre 2+"
+   ],
+   [
+    "CGM at Home — Guardian IV Sensor",
+    "CGM at Home: Guardian IV Sensor"
+   ],
+   [
+    "<h3 id=\"dtTitle\">—</h3>",
+    "<h3 id=\"dtTitle\">&nbsp;</h3>"
+   ]
+  ]
+ }
+}

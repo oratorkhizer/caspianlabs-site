@@ -40,3 +40,27 @@ html = insertBefore(html, "<!-- ALL TESTS DIRECTORY -->", SECTION + "\n", "all-t
 html = insertAfter(html, '<script src="/assets/i18n.js" defer></script>', "\n" + SCRIPT, "i18n script tag");
 writeFileSync(FILE, html);
 console.log("optin: injected");
+
+// Text fixes (scripts/text-fixes.json): the owner's no-em-dash rule, applied to files too large
+// to edit through the GitHub connector. "unique" pairs apply once and only when the match is unique;
+// "global" pairs (product names used as lookup keys) apply everywhere so all files stay consistent.
+import { existsSync } from "node:fs";
+const fixes = JSON.parse(readFileSync("scripts/text-fixes.json", "utf8"));
+let applied = 0, skipped = 0;
+for (const [file, pairs] of Object.entries(fixes.unique)) {
+  if (!existsSync(file)) { console.warn("text-fixes: missing " + file); continue; }
+  let t = readFileSync(file, "utf8");
+  for (const [find, rep] of pairs) {
+    const n = t.split(find).length - 1;
+    if (n === 1) { t = t.replace(find, rep); applied++; }
+    else { skipped++; console.warn("text-fixes: skipped (" + n + " matches) in " + file + ": " + find.slice(0, 60)); }
+  }
+  writeFileSync(file, t);
+}
+for (const file of fixes.global.files) {
+  if (!existsSync(file)) { console.warn("text-fixes: missing " + file); continue; }
+  let t = readFileSync(file, "utf8");
+  for (const [find, rep] of fixes.global.pairs) { const n = t.split(find).length - 1; if (n) { t = t.split(find).join(rep); applied += n; } }
+  writeFileSync(file, t);
+}
+console.log("text-fixes: applied " + applied + ", skipped " + skipped);
