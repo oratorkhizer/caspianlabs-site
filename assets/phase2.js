@@ -105,8 +105,8 @@
       if (!/^\d{6}$/.test(v)) { stop('Please enter the 6-digit pincode for the collection address.'); return; }
       if (codes.indexOf(v) === -1) {
         track('pincode_outside_coverage', { event_category: 'booking', event_label: v });
-        stop('We don’t cover pincode <b>' + esc(v) + '</b> for home collection yet — but we may still be able to help. ' +
-          '<a href="' + WA_HELP + encodeURIComponent('Hi Caspian Diagnostic Centre, I’d like a home collection at pincode ' + v + ' — is that possible?') + '" target="_blank" rel="noopener" style="font-weight:700">Message us on WhatsApp</a> or visit our centre — we’re open 24/7.');
+        stop('We don’t cover pincode <b>' + esc(v) + '</b> for home collection yet, but we may still be able to help. ' +
+          '<a href="' + WA_HELP + encodeURIComponent('Hi Caspian Diagnostic Centre, I’d like a home collection at pincode ' + v + '. Is that possible?') + '" target="_blank" rel="noopener" style="font-weight:700">Message us on WhatsApp</a> or visit our centre; we’re open 24/7.');
         return;
       }
     }, true); // capture: runs before the main booking handler
