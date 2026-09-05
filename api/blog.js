@@ -20,83 +20,83 @@ const ARTICLES = [
     slug: "what-does-hba1c-mean",
     title: "What does HbA1c mean? A diabetologist explains",
     metaTitle: "What Does HbA1c Mean? Normal Range & Results Explained | Caspian Labs Blog",
-    desc: "HbA1c explained simply by a Hyderabad diabetologist — what the test measures, normal and prediabetes ranges, why it beats a single sugar reading, and how often to test.",
+    desc: "HbA1c explained simply by a Hyderabad diabetologist: what the test measures, normal and prediabetes ranges, why it beats a single sugar reading, and how often to test.",
     date: "2026-07-31",
     readMins: 5,
-    intro: "If you or a family member has diabetes — or your doctor suspects it — you've probably seen “HbA1c” on a lab slip. It is the single most important number in diabetes care, yet most patients are never told what it actually means. Here is the plain-language version I give my own patients.",
+    intro: "If you or a family member has diabetes, or your doctor suspects it, you've probably seen “HbA1c” on a lab slip. It is the single most important number in diabetes care, yet most patients are never told what it actually means. Here is the plain-language version I give my own patients.",
     body: [
       ["h2", "HbA1c is your three-month sugar average"],
       ["p", "Glucose in your blood naturally sticks to haemoglobin, the protein inside red blood cells. The more sugar in your blood, the more of it gets stuck. HbA1c (glycated haemoglobin) measures what percentage of your haemoglobin has sugar attached."],
       ["p", "Because red blood cells live for about three months, HbA1c reflects your <b>average</b> blood sugar over roughly the past 8–12 weeks. That is what makes it special: a fasting sugar tells me about one morning; HbA1c tells me about your whole quarter."],
       ["h2", "What the numbers mean"],
       ["ul", [
-        "<b>Below 5.7%</b> — normal.",
-        "<b>5.7% to 6.4%</b> — prediabetes. Your sugar is running higher than it should, but there is still time to reverse course with diet, activity and weight management.",
-        "<b>6.5% or above</b> — in the diabetes range. Your doctor will usually confirm with a repeat test or a sugar reading before making the diagnosis."
+        "<b>Below 5.7%</b>: normal.",
+        "<b>5.7% to 6.4%</b>: prediabetes. Your sugar is running higher than it should, but there is still time to reverse course with diet, activity and weight management.",
+        "<b>6.5% or above</b>: in the diabetes range. Your doctor will usually confirm with a repeat test or a sugar reading before making the diagnosis."
       ]],
-      ["p", "For people already living with diabetes, the target is individual — commonly below 7%, but your doctor may set it higher or lower depending on your age, other conditions and risk of low sugar. Don't chase a number you saw online; chase the one your doctor set for you."],
-      ["h2", "Why one high reading isn't the full story — and one good reading isn't either"],
-      ["p", "Patients often eat carefully for two days before a sugar test and feel relieved by a good fasting number. HbA1c is honest: it averages the festival sweets, the skipped walks and the good weeks alike. The reverse is also true — a single high random sugar after a heavy biryani does not mean your control is poor. This is exactly why doctors rely on HbA1c to judge how treatment is really going."],
+      ["p", "For people already living with diabetes, the target is individual: commonly below 7%, but your doctor may set it higher or lower depending on your age, other conditions and risk of low sugar. Don't chase a number you saw online; chase the one your doctor set for you."],
+      ["h2", "Why one high reading isn't the full story, and one good reading isn't either"],
+      ["p", "Patients often eat carefully for two days before a sugar test and feel relieved by a good fasting number. HbA1c is honest: it averages the festival sweets, the skipped walks and the good weeks alike. The reverse is also true: a single high random sugar after a heavy biryani does not mean your control is poor. This is exactly why doctors rely on HbA1c to judge how treatment is really going."],
       ["h2", "How often should you test?"],
       ["ul", [
         "<b>Living with diabetes:</b> every 3 months if treatment is being adjusted or targets aren't met; every 6 months once stable.",
         "<b>Prediabetes:</b> at least once a year, alongside lifestyle changes.",
-        "<b>Family history of diabetes, over 35, or overweight:</b> screening every 1–3 years is sensible — diabetes is silent in its early years."
+        "<b>Family history of diabetes, over 35, or overweight:</b> screening every 1–3 years is sensible; diabetes is silent in its early years."
       ]],
       ["h2", "A few things that can affect the result"],
-      ["p", "Because the test rides on red blood cells, conditions that change those cells — significant anaemia, recent blood loss or transfusion, some haemoglobin variants — can nudge HbA1c up or down. If your HbA1c doesn't match your home sugar readings, tell your doctor; a simple CBC and iron check often explains the gap."],
+      ["p", "Because the test rides on red blood cells, conditions that change those cells (significant anaemia, recent blood loss or transfusion, some haemoglobin variants) can nudge HbA1c up or down. If your HbA1c doesn't match your home sugar readings, tell your doctor; a simple CBC and iron check often explains the gap."],
       ["h2", "The practical bits"],
-      ["p", "No fasting is needed — you can walk in any time of day. It's a simple blood sample, the report is ready the same day, and at Caspian it costs ₹600 with free home collection on orders above ₹500. If you're due for a fuller review, our <a href=\"/packages/comprehensive-diabetes-screening-hyderabad\">Comprehensive Diabetes Screening (₹899)</a> pairs HbA1c with cholesterol and early kidney checks — the complications worth catching early."],
-      ["note", "This article is general information, not personal medical advice. Discuss your own numbers with your doctor — every target should be individualised."]
+      ["p", "No fasting is needed; you can walk in any time of day. It's a simple blood sample, the report is ready the same day, and at Caspian it costs ₹600 with free home collection on orders above ₹500. If you're due for a fuller review, our <a href=\"/packages/comprehensive-diabetes-screening-hyderabad\">Comprehensive Diabetes Screening (₹899)</a> pairs HbA1c with cholesterol and early kidney checks, the complications worth catching early."],
+      ["note", "This article is general information, not personal medical advice. Discuss your own numbers with your doctor; every target should be individualised."]
     ],
     cta: { label: "Book an HbA1c test (₹600)", href: "/tests/hba1c-test-hyderabad" },
     related: ["/tests/hba1c-test-hyderabad", "/packages/comprehensive-diabetes-screening-hyderabad", "/tests/blood-sugar-test-hyderabad"],
-    relatedLabels: ["HbA1c Test — ₹600", "Diabetes Screening Package — ₹899", "Blood Sugar Test — ₹80"]
+    relatedLabels: ["HbA1c Test (₹600)", "Diabetes Screening Package (₹899)", "Blood Sugar Test (₹80)"]
   },
   {
     slug: "fasting-before-blood-test",
     title: "Fasting before a blood test: the rules, test by test",
-    metaTitle: "Fasting Before a Blood Test — Which Tests Need It & For How Long | Caspian Labs Blog",
-    desc: "Which blood tests need fasting and for how long? A Hyderabad lab explains fasting rules for lipid profile, blood sugar, thyroid, HbA1c and more — plus what you can drink.",
+    metaTitle: "Fasting Before a Blood Test: Which Tests Need It & For How Long | Caspian Labs Blog",
+    desc: "Which blood tests need fasting and for how long? A Hyderabad lab explains fasting rules for lipid profile, blood sugar, thyroid, HbA1c and more, plus what you can drink.",
     date: "2026-07-31",
     readMins: 4,
     intro: "“Should I come empty stomach?” is the question our phlebotomists hear most. Fast unnecessarily and you've skipped breakfast for nothing; eat before a fasting test and the sample may be wasted. Here are the actual rules, test by test.",
     body: [
       ["h2", "Tests that DO need fasting (8–12 hours)"],
       ["ul", [
-        "<b>Fasting blood sugar (FBS)</b> — the definition of the test. 8–12 hours without food; water is fine.",
-        "<b>Lipid profile (cholesterol)</b> — we advise 8–12 hours of fasting, mainly because triglycerides rise sharply after meals. (Some modern guidelines accept non-fasting lipids — if your doctor has said non-fasting is fine for you, follow their advice.)",
-        "<b>Full-body and metabolic packages</b> — because they include fasting sugar and lipids, the whole package is best done fasting, in the morning."
+        "<b>Fasting blood sugar (FBS)</b>: the definition of the test. 8–12 hours without food; water is fine.",
+        "<b>Lipid profile (cholesterol)</b>: we advise 8–12 hours of fasting, mainly because triglycerides rise sharply after meals. (Some modern guidelines accept non-fasting lipids; if your doctor has said non-fasting is fine for you, follow their advice.)",
+        "<b>Full-body and metabolic packages</b>: because they include fasting sugar and lipids, the whole package is best done fasting, in the morning."
       ]],
       ["h2", "Tests that do NOT need fasting"],
       ["ul", [
-        "<b>HbA1c</b> — measures a 3-month average; breakfast cannot change it.",
-        "<b>CBC, ESR, CRP</b> — blood counts and inflammation markers.",
-        "<b>Thyroid tests (TSH, T3, T4)</b> — food doesn't matter; morning samples are preferred if you're tracking values over time.",
-        "<b>Vitamin D and Vitamin B12</b>, <b>creatinine and urea</b>, <b>urine routine</b>, <b>blood group</b> — all fine after food."
+        "<b>HbA1c</b>: measures a 3-month average; breakfast cannot change it.",
+        "<b>CBC, ESR, CRP</b>: blood counts and inflammation markers.",
+        "<b>Thyroid tests (TSH, T3, T4)</b>: food doesn't matter; morning samples are preferred if you're tracking values over time.",
+        "<b>Vitamin D and Vitamin B12</b>, <b>creatinine and urea</b>, <b>urine routine</b>, <b>blood group</b>: all fine after food."
       ]],
       ["h2", "The in-between one: post-prandial sugar (PPBS)"],
-      ["p", "PPBS is not a fasting test — it's a <b>timed</b> one. Eat your normal meal, note the time you start eating, and give the sample exactly 2 hours later. Eating a deliberately light meal to “score better” only hides the truth from your doctor."],
+      ["p", "PPBS is not a fasting test; it's a <b>timed</b> one. Eat your normal meal, note the time you start eating, and give the sample exactly 2 hours later. Eating a deliberately light meal to “score better” only hides the truth from your doctor."],
       ["h2", "What counts as fasting?"],
       ["ul", [
-        "<b>Water is allowed</b> — and encouraged. Being well-hydrated actually makes the blood draw easier.",
+        "<b>Water is allowed</b>, and encouraged. Being well-hydrated actually makes the blood draw easier.",
         "<b>Not allowed:</b> tea, coffee (even black), milk, juice, gutka, and food of any kind. Smoking is best avoided too.",
-        "<b>Medicines:</b> most regular tablets can be taken with water, but ask your doctor — especially for diabetes medicines and insulin, which are usually taken <i>after</i> the fasting sample, with breakfast ready."
+        "<b>Medicines:</b> most regular tablets can be taken with water, but ask your doctor, especially for diabetes medicines and insulin, which are usually taken <i>after</i> the fasting sample, with breakfast ready."
       ]],
       ["h2", "Practical tips from our collection team"],
       ["ul", [
         "Book a morning slot: finish dinner by 10 pm, give the sample by 8–10 am, and the fast takes care of itself while you sleep.",
-        "Booking home collection? Keep your breakfast ready — you can eat the moment the sample is drawn.",
+        "Booking home collection? Keep your breakfast ready; you can eat the moment the sample is drawn.",
         "Don't fast much beyond 14 hours; very long fasts can themselves skew some results.",
-        "Not sure about your specific test? Message us on WhatsApp with the test name — we'll confirm in a minute."
+        "Not sure about your specific test? Message us on WhatsApp with the test name; we'll confirm in a minute."
       ]],
       ["h2", "The bottom line"],
-      ["p", "Only sugar (fasting/PP) and lipid tests routinely need preparation — most everything else can be done any time at our centre, which is open 24/7. When you book at Caspian, our team tells you the exact preparation for your tests, and reminds you the evening before a fasting appointment."],
+      ["p", "Only sugar (fasting/PP) and lipid tests routinely need preparation; most everything else can be done any time at our centre, which is open 24/7. When you book at Caspian, our team tells you the exact preparation for your tests, and reminds you the evening before a fasting appointment."],
       ["note", "This article is general information, not personal medical advice. For test choices and medicine timing during fasting, follow your own doctor's instructions."]
     ],
     cta: { label: "Book a fasting-friendly morning slot", href: "/#all-tests" },
     related: ["/tests/lipid-profile-test-hyderabad", "/tests/blood-sugar-test-hyderabad", "/home-sample-collection-hyderabad"],
-    relatedLabels: ["Lipid Profile — ₹450", "Blood Sugar Test — ₹80", "Home Sample Collection"]
+    relatedLabels: ["Lipid Profile (₹450)", "Blood Sugar Test (₹80)", "Home Sample Collection"]
   }
 ];
 
@@ -108,7 +108,7 @@ const ARTICLES = [
 // swappable for a real photo later). viewBox 880x220 (4:1 banner).
 const BANNERS = {
   "what-does-hba1c-mean": `<svg viewBox="0 0 880 220" role="img" aria-label="Illustration representing HbA1c, the three-month blood sugar average" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A5C9E"/><stop offset="1" stop-color="#0f8fb0"/></linearGradient></defs><rect width="880" height="220" fill="url(#hb)"/><circle cx="800" cy="24" r="150" fill="#ffffff" opacity="0.06"/><circle cx="110" cy="210" r="120" fill="#14B8A6" opacity="0.16"/><text x="54" y="88" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="-0.5">HbA1c</text><text x="56" y="120" fill="#dbeafe" font-family="Segoe UI,Arial,sans-serif" font-size="17">Your 3-month blood sugar average</text><g transform="translate(56,138)"><rect x="0" y="34" width="26" height="34" rx="4" fill="#ffffff" opacity="0.5"/><rect x="40" y="20" width="26" height="48" rx="4" fill="#ffffff" opacity="0.68"/><rect x="80" y="4" width="26" height="64" rx="4" fill="#ffffff" opacity="0.9"/><polyline points="13,30 53,16 93,0" fill="none" stroke="#7fe3d4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="93" cy="0" r="5.5" fill="#ffffff"/></g><g transform="translate(686,44)"><path d="M64 6 C64 6 118 78 118 116 a54 54 0 1 1 -108 0 C10 78 64 6 64 6 Z" fill="#ffffff"/><path d="M64 92 v46 M41 115 h46" stroke="#e11d48" stroke-width="9" stroke-linecap="round"/></g></svg>`,
-  "fasting-before-blood-test": `<svg viewBox="0 0 880 220" role="img" aria-label="Illustration of a clock and water glass representing fasting before a blood test" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A5C9E"/><stop offset="1" stop-color="#0f8fb0"/></linearGradient></defs><rect width="880" height="220" fill="url(#fs)"/><circle cx="805" cy="200" r="150" fill="#14B8A6" opacity="0.16"/><circle cx="120" cy="10" r="120" fill="#ffffff" opacity="0.06"/><text x="54" y="92" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">Fasting before a</text><text x="54" y="128" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">blood test</text><text x="56" y="160" fill="#dbeafe" font-family="Segoe UI,Arial,sans-serif" font-size="16">Water is fine — 8 to 12 hours for sugar &amp; lipids</text><g transform="translate(628,42)"><circle cx="68" cy="68" r="66" fill="#ffffff"/><circle cx="68" cy="68" r="66" fill="none" stroke="#0a4f86" stroke-width="3" opacity="0.15"/><g stroke="#0A5C9E" stroke-width="3.5" stroke-linecap="round"><line x1="68" y1="14" x2="68" y2="24"/><line x1="68" y1="112" x2="68" y2="122"/><line x1="14" y1="68" x2="24" y2="68"/><line x1="112" y1="68" x2="122" y2="68"/></g><line x1="68" y1="68" x2="68" y2="34" stroke="#0A5C9E" stroke-width="5.5" stroke-linecap="round"/><line x1="68" y1="68" x2="96" y2="80" stroke="#14B8A6" stroke-width="5.5" stroke-linecap="round"/><circle cx="68" cy="68" r="6" fill="#0A5C9E"/></g><g transform="translate(792,60)"><path d="M6 4 h44 l-5 92 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#ffffff" opacity="0.92"/><path d="M9 40 h38 l-4 56 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#7fe3d4" opacity="0.85"/></g></svg>`
+  "fasting-before-blood-test": `<svg viewBox="0 0 880 220" role="img" aria-label="Illustration of a clock and water glass representing fasting before a blood test" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A5C9E"/><stop offset="1" stop-color="#0f8fb0"/></linearGradient></defs><rect width="880" height="220" fill="url(#fs)"/><circle cx="805" cy="200" r="150" fill="#14B8A6" opacity="0.16"/><circle cx="120" cy="10" r="120" fill="#ffffff" opacity="0.06"/><text x="54" y="92" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">Fasting before a</text><text x="54" y="128" fill="#ffffff" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5">blood test</text><text x="56" y="160" fill="#dbeafe" font-family="Segoe UI,Arial,sans-serif" font-size="16">Water is fine. 8 to 12 hours for sugar &amp; lipids</text><g transform="translate(628,42)"><circle cx="68" cy="68" r="66" fill="#ffffff"/><circle cx="68" cy="68" r="66" fill="none" stroke="#0a4f86" stroke-width="3" opacity="0.15"/><g stroke="#0A5C9E" stroke-width="3.5" stroke-linecap="round"><line x1="68" y1="14" x2="68" y2="24"/><line x1="68" y1="112" x2="68" y2="122"/><line x1="14" y1="68" x2="24" y2="68"/><line x1="112" y1="68" x2="122" y2="68"/></g><line x1="68" y1="68" x2="68" y2="34" stroke="#0A5C9E" stroke-width="5.5" stroke-linecap="round"/><line x1="68" y1="68" x2="96" y2="80" stroke="#14B8A6" stroke-width="5.5" stroke-linecap="round"/><circle cx="68" cy="68" r="6" fill="#0A5C9E"/></g><g transform="translate(792,60)"><path d="M6 4 h44 l-5 92 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#ffffff" opacity="0.92"/><path d="M9 40 h38 l-4 56 a4 4 0 0 1 -4 3 h-22 a4 4 0 0 1 -4 -3 Z" fill="#7fe3d4" opacity="0.85"/></g></svg>`
 };
 
 function esc(s) {
@@ -218,7 +218,7 @@ function plain(html) { return html.replace(/<[^>]+>/g, ""); }
 
 function renderArticle(a) {
   const url = `${BASE}/blog/${a.slug}`;
-  const shareText = encodeURIComponent(a.title + " — " + url);
+  const shareText = encodeURIComponent(a.title + ": " + url);
   const banner = BANNERS[a.slug] ? `<div class="bhead">${BANNERS[a.slug]}</div>` : "";
   const body = `${banner}<article class="card">
 <h1>${esc(a.title)}</h1>
@@ -284,7 +284,7 @@ ${BANNERS[a.slug] ? `<div class="pthumb">${BANNERS[a.slug]}</div>` : ""}
 </a>`).join("\n")}`;
   return shell({
     title: "Health Blog | Caspian Diagnostic Centre, Hyderabad",
-    desc: "Plain-language health guides from Caspian Diagnostic Centre, Hyderabad — understanding your tests, fasting rules, diabetes care and preventive health.",
+    desc: "Plain-language health guides from Caspian Diagnostic Centre, Hyderabad: understanding your tests, fasting rules, diabetes care and preventive health.",
     canonical: url,
     crumbs: `<a href="/">Home</a> › Blog`,
     bodyHtml: body,
@@ -311,7 +311,7 @@ function render404() {
     desc: "The article you were looking for could not be found.",
     canonical: BASE + "/blog",
     crumbs: `<a href="/">Home</a> › <a href="/blog">Blog</a>`,
-    bodyHtml: `<div class="card"><h1>Article not found</h1><p style="margin-top:10px">Sorry — we couldn't find that article. <a href="/blog">Browse all articles →</a></p></div>`,
+    bodyHtml: `<div class="card"><h1>Article not found</h1><p style="margin-top:10px">Sorry, we couldn't find that article. <a href="/blog">Browse all articles →</a></p></div>`,
     ld: []
   });
 }

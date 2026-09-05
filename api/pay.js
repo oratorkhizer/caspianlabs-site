@@ -225,7 +225,7 @@ async function createOrder(body, res) {
     vc: visitCharge,
   };
   const notes = chunkNotes(JSON.stringify(booking));
-  if (!notes) return res.status(422).json({ ok: false, error: "Order too large — please book on WhatsApp" });
+  if (!notes) return res.status(422).json({ ok: false, error: "Order too large, please book on WhatsApp" });
   notes.patient = fullName.slice(0, 250);
   notes.mobile = mobile;
 
@@ -353,7 +353,7 @@ async function settleOrder(base, order, payment, res) {
       paymentType: "Cash",
       advance: "0",
       billConcession: "0",
-      comments: "Online booking via caspianlabs.in — PAID ONLINE ₹" + amountPaid
+      comments: "Online booking via caspianlabs.in: PAID ONLINE ₹" + amountPaid
         + (Number(booking.vc) > 0 ? " (incl ₹" + booking.vc + " home-visit charge)" : "")
         + " (Razorpay " + paymentId + ")",
       testList: (booking.it || []).map((r) => (r.c ? { testCode: String(r.c) } : null)).filter(Boolean),
