@@ -35,7 +35,7 @@ const PACKAGE_SLUGS = [
   "essential-health-checkup-hyderabad",
   "comprehensive-diabetes-screening-hyderabad",
   "thyroid-profile-test-hyderabad",
-  "metabolic-wellness-inbody-hyderabad",
+  "metabolic-wellness",
   "womens-health-checkup-hyderabad",
   "senior-citizen-health-checkup-hyderabad",
   "heart-health-checkup-hyderabad",
@@ -75,7 +75,7 @@ const TEST_SLUGS = [
   "electrolytes-test-hyderabad",
   "calcium-test-hyderabad",
   "chest-x-ray-hyderabad",
-  "body-composition-analysis-test-hyderabad",
+  "body-composition",
 ];
 
 export default function handler(req, res) {

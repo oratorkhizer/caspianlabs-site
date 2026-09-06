@@ -8,7 +8,10 @@
       "destination": "https://www.caspianlabs.in/$1",
       "permanent": true
     },
-    { "source": "/tests/inbody-body-composition-test-hyderabad", "destination": "/tests/body-composition-analysis-test-hyderabad", "permanent": true },
+    { "source": "/tests/inbody-body-composition-test-hyderabad", "destination": "/tests/body-composition", "permanent": true },
+    { "source": "/tests/body-composition-analysis-test-hyderabad", "destination": "/tests/body-composition", "permanent": true },
+    { "source": "/tests/bca", "destination": "/tests/body-composition", "permanent": true },
+    { "source": "/packages/metabolic-wellness-inbody-hyderabad", "destination": "/packages/metabolic-wellness", "permanent": true },
     { "source": "/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
     { "source": "/camps/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
     { "source": "/body-composition", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
