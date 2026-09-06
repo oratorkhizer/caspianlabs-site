@@ -184,6 +184,7 @@ const PACKAGES = [
     idealFor: ["High blood pressure or diabetes", "Chest discomfort, palpitations or breathlessness", "Family history of heart disease", "Fitness clearance before starting exercise"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Heart Health Check (₹999).",
     ekaLink: "https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist",
+    photo: "echo",
     homeCollection: false,
     related: ["t:lipid-profile-test-hyderabad", "t:hba1c-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad"]
   },
@@ -470,7 +471,7 @@ const TESTS = [
     related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad"]
   },
   {
-    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging, done at our centre", fasting: "no",
+    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging, done at our centre", fasting: "no", photo: "xray",
     desc: "Digital chest X-ray in Hyderabad at ₹300: for cough, fever, TB screening and pre-op checks. Same-day film & report. Portable home chest X-ray available at ₹2,000.",
     about: [
       "Our digital chest X-ray (PA or AP view) is the most-requested imaging test, used for persistent cough, fever, breathlessness, TB screening and pre-operative fitness. Film and report are delivered the same day.",
@@ -503,6 +504,26 @@ const TESTS = [
 /* ------------------------------------------------------------------ */
 /* Home-collection page data                                           */
 /* ------------------------------------------------------------------ */
+
+/* Site photos (Caspian staff shoot, Aug 2026) hosted on Supabase Storage, public bucket "caspianlabs" in project caspian-cme.
+   1600px JPEGs. Add a new photo: upload to site/<name>.jpg in that bucket, then reference it here. */
+const PHOTO_BASE = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
+const PHOTOS = {
+  lab: ["lab-analysers.jpg", "Caspian Diagnostic Centre laboratory: biochemistry analysers and sample racks"],
+  labWide: ["lab-wide.jpg", "Laboratory at Caspian Diagnostic Centre, Vijay Nagar Colony"],
+  technician: ["lab-technician.jpg", "Lab technician processing samples at Caspian Diagnostic Centre"],
+  xray: ["xray-room.jpg", "Digital X-ray room at Caspian Diagnostic Centre"],
+  echo: ["echo-cardiologist.jpg", "Cardiologist performing a 2D echo at Caspian"],
+  nurse: ["nurse-patient.jpg", "Nurse attending a patient at Caspian"],
+  reception: ["reception.jpg", "Reception at Caspian, Vijay Nagar Colony"],
+  team: ["team.jpg", "The Caspian team"],
+  ultrasound: ["ultrasound-scan.jpg", "Ultrasound scan at Caspian"]
+};
+function photoUrl(key) { return PHOTOS[key] ? PHOTO_BASE + PHOTOS[key][0] : ""; }
+function photoFig(key, caption) {
+  if (!PHOTOS[key]) return "";
+  return `<figure class="ph"><img src="${PHOTO_BASE + PHOTOS[key][0]}" alt="${esc(PHOTOS[key][1])}" width="1600" height="1067" loading="lazy" decoding="async">${caption ? `<figcaption>${esc(caption)}</figcaption>` : ""}</figure>`;
+}
 
 const HOME_PAGE = {
   slug: "home-sample-collection-hyderabad",
@@ -592,6 +613,7 @@ details.faq p{padding:0 16px 12px;font-size:14px}
 .rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .rel a{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600}
 .rel a:hover{text-decoration:none;border-color:var(--blue)}
+.ph{margin:0 0 18px;border-radius:12px;overflow:hidden;background:#eaf3fb}.ph img{width:100%;height:auto;display:block}.ph figcaption{font-size:12.5px;color:var(--muted);padding:6px 10px}
 .note{background:#eaf3fb;border:1px solid #cfe1f1;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
 footer{background:var(--blue-dark);color:#cde2f2;margin-top:34px;padding:30px 0 22px;font-size:13px}
 footer .w{max-width:900px;margin:0 auto;padding:0 20px}
@@ -600,7 +622,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0 12px}
 footer .links a{color:#cde2f2}
 footer .fine{color:#9cc0dd;line-height:1.6}`;
 
-function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bodyHtml, ld }) {
+function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bodyHtml, ld, ogImage }) {
   const ldTags = ld.map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join("\n");
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -611,7 +633,7 @@ function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bo
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${BASE}/ogimage.png">
+<meta property="og:image" content="${ogImage || (BASE + "/ogimage.png")}">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -705,7 +727,7 @@ function renderPackage(p) {
   const url = `${BASE}/packages/${p.slug}`;
   const faqs = commonFaqs(p.name + " package", p.price, p.fasting, p.homeCollection).concat(p.faqExtra || []);
   const body = `<div class="grid"><div class="card">
-<h2>About this package</h2>
+${photoFig(p.photo)}<h2>About this package</h2>
 ${p.about.map(t => `<p>${esc(t)}</p>`).join("\n")}
 <h2>What's included</h2>
 <ul class="inc">${p.includes.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
@@ -726,7 +748,7 @@ ${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/packages">Health Packages</a> › ${esc(p.name)}`,
     heroH1: `${p.name} in Hyderabad`,
     heroSub: `${p.tagline} · ${inr(p.price)} · Reports on WhatsApp`,
-    bodyHtml: body,
+    bodyHtml: body, ogImage: photoUrl(p.photo),
     ld: [
       ldBreadcrumb([["Home", "/"], ["Health Packages", "/packages"], [p.name, "/packages/" + p.slug]]),
       ldProduct(p.name, p.desc, p.price, url),
@@ -739,7 +761,7 @@ function renderTest(t) {
   const url = `${BASE}/tests/${t.slug}`;
   const faqs = commonFaqs(t.short + " test", t.price, t.fasting, t.homeCollection).concat(t.faqExtra || []);
   const body = `<div class="grid"><div class="card">
-<h2>What does this test check?</h2>
+${photoFig(t.photo)}<h2>What does this test check?</h2>
 ${t.about.map(x => `<p>${esc(x)}</p>`).join("\n")}
 <h2>Test details</h2>
 <table class="facts">
@@ -764,7 +786,7 @@ ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our ce
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ${esc(t.short)}`,
     heroH1: `${t.name} in Hyderabad`,
     heroSub: t.extLink ? `${inr(t.price)} · 20-minute slot at our centre · Report explained on the spot` : `${inr(t.price)} · ${t.fasting === "yes" ? "Fasting required" : t.fasting === "no" ? "No fasting needed" : "Preparation varies"} · Same-day report on WhatsApp`,
-    bodyHtml: body,
+    bodyHtml: body, ogImage: photoUrl(t.photo),
     ld: [
       ldBreadcrumb([["Home", "/"], ["All Tests", "/tests"], [t.short, "/tests/" + t.slug]]),
       ldMedicalTest(t.name, t.desc, url),
@@ -786,7 +808,7 @@ function renderHome() {
   ];
   const popular = ["t:cbc-test-hyderabad", "t:hba1c-test-hyderabad", "t:tsh-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:vitamin-d-test-hyderabad", "p:full-body-checkup-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "p:senior-citizen-health-checkup-hyderabad"];
   const body = `<div class="grid"><div class="card">
-<h2>Skip the travel, we come to you</h2>
+${photoFig("nurse", "Our nursing and phlebotomy team, Caspian, Vijay Nagar Colony")}<h2>Skip the travel, we come to you</h2>
 <p>Caspian Diagnostic Centre offers professional blood-sample collection at your home, anywhere in our Hyderabad coverage area. A trained phlebotomist visits at a time that suits you, collects the sample using sterile single-use equipment, and your report arrives on WhatsApp, usually the same day.</p>
 <p>Home collection is <b>free on orders of ₹500 or more</b> (₹100 per visit below that, always shown before you pay), and is especially loved by elders, busy families, new mothers and anyone recovering from illness.</p>
 <h2>Areas we cover</h2>
@@ -812,7 +834,7 @@ ${sideCard({ price: 0, priceNote: "", waText: "Hi Caspian Diagnostic Centre, I'd
     breadcrumbHtml: `<a href="/">Home</a> › Home Sample Collection`,
     heroH1: HOME_PAGE.h1,
     heroSub: "Free on orders above ₹500 · Trained phlebotomists · Reports on WhatsApp",
-    bodyHtml: body,
+    bodyHtml: body, ogImage: photoUrl("nurse"),
     ld: [
       ldBreadcrumb([["Home", "/"], ["Home Sample Collection", "/" + HOME_PAGE.slug]]),
       ldFaq(faqs)
@@ -831,7 +853,7 @@ function renderHub(kind) {
     : "Full body checkup ₹1,795, essential checkup ₹899, diabetes screening ₹899, heart health ₹999, senior citizen and women's packages. Caspian Diagnostic Centre, Hyderabad. Open 24/7, home collection, book online.";
   const li = items.map(x => `<li><a href="/${isTests ? "tests" : "packages"}/${x.slug}">${esc(x.name)}</a><div class="hp">${inr(x.price)}</div><div class="hs">${esc(isTests ? (x.fasting === "yes" ? "Fasting required" : x.fasting === "no" ? "No fasting" : "Preparation varies") : x.tagline)}</div></li>`).join("");
   const body = `<div class="card">
-<p>${isTests ? "Every test below is done at our lab in Vijay Nagar Colony or collected from your home. Prices are the same online, at the centre and at home; the only extra is a ₹100 home-visit charge on orders below ₹500." : "Each package bundles the tests doctors ask for most often at a lower price than booking them one by one. Home collection is free on all packages above ₹500."} Tap a ${isTests ? "test" : "package"} for details, preparation and FAQs, then book and pay online in under a minute.</p>
+${photoFig(isTests ? "lab" : "team", isTests ? "Our laboratory in Vijay Nagar Colony" : "The Caspian team")}<p>${isTests ? "Every test below is done at our lab in Vijay Nagar Colony or collected from your home. Prices are the same online, at the centre and at home; the only extra is a ₹100 home-visit charge on orders below ₹500." : "Each package bundles the tests doctors ask for most often at a lower price than booking them one by one. Home collection is free on all packages above ₹500."} Tap a ${isTests ? "test" : "package"} for details, preparation and FAQs, then book and pay online in under a minute.</p>
 <ul class="hub">${li}</ul>
 <p style="margin-top:18px">Looking for something not listed? Our full menu has 1,400+ tests. <a href="/#all-tests">Search all tests</a> or <a href="${waLink("Hi Caspian Diagnostic Centre, I'm looking for a test: ")}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>
 </div>`;
@@ -845,7 +867,7 @@ function renderHub(kind) {
     breadcrumbHtml: `<a href="/">Home</a> › ${isTests ? "All Tests" : "Health Packages"}`,
     heroH1: isTests ? "Blood Tests and Prices in Hyderabad" : "Health Checkup Packages in Hyderabad",
     heroSub: isTests ? "Transparent prices · Open 24/7 · Free home collection above ₹500" : "Doctor-designed bundles · Reports on WhatsApp · Free home collection",
-    bodyHtml: body, ld
+    bodyHtml: body, ld, ogImage: photoUrl(isTests ? "lab" : "team")
   });
 }
 
