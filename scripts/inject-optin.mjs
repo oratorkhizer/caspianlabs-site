@@ -41,9 +41,11 @@ html = insertAfter(html, '<script src="/assets/i18n.js" defer></script>', "\n" +
 // Photos (Caspian staff shoot, Aug 2026; hosted on Supabase Storage, public bucket "caspianlabs", project caspian-cme).
 // Injected here so the 160 KB index.html need not be re-uploaded. Idempotent via the id="gallery" check.
 const PB = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
-const PHOTO_CSS = "  /* Photos */\n.about-grid .imgbox-photo{padding:0;overflow:hidden;min-height:0;display:block;background:none}\n.imgbox-photo img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;border-radius:var(--radius)}\n.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}\n.gal figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}\n.gal img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}\n.gal figcaption{font-size:13px;color:var(--muted);padding:9px 12px}\n@media(max-width:820px){.gal{grid-template-columns:1fr 1fr}}\n@media(max-width:520px){.gal{grid-template-columns:1fr}}";
+const PHOTO_CSS = "  /* Photos */\n.about-grid .imgbox-photo{padding:0;overflow:hidden;min-height:0;display:block;background:none}\n.imgbox-photo img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;border-radius:var(--radius)}\n.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}\n@media(max-width:1100px){.gal{grid-template-columns:repeat(3,1fr)}}\n.gal figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}\n.gal img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}\n.gal figcaption{font-size:13px;color:var(--muted);padding:9px 12px}\n@media(max-width:820px){.gal{grid-template-columns:1fr 1fr}}\n@media(max-width:520px){.gal{grid-template-columns:1fr}}";
 const GALLERY = [
-  ["lab-analysers.jpg", "Laboratory", "Biochemistry and haematology analysers"],
+  ["biochemistry-analyser.jpg", "Biochemistry analyser", "Fully automated analyser for sugar, lipids, liver and kidney panels"],
+  ["haematology-analyser.jpg", "Haematology analyser", "Automated cell counter for complete blood counts"],
+  ["lab-analysers.jpg", "Laboratory", "Sample racks and bench analysers"],
   ["lab-technician.jpg", "Sample processing", "Every sample logged and processed in-house"],
   ["xray-room.jpg", "Digital X-ray", "Chest, spine, limbs and more, at the centre"],
   ["lab-wide.jpg", "Laboratory floor", "Analysers, centrifuges and cold storage in one room"],
