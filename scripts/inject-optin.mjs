@@ -57,6 +57,13 @@ if (!html.includes('id="gallery"')) {
   html = insertBefore(html, "<!-- FAQ -->", GALLERY_HTML, "FAQ comment (gallery)");
   console.log("photos: injected");
 }
+// Fifth doctor card (Dr Sameer Ahmed, pulmonologist), injected so index.html need not be re-uploaded. Idempotent.
+if (!html.includes("dr-sameer-ahmed")) {
+  const CAL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg>';
+  const SAMEER = '      <div class="doc">\n        <div class="av">SA</div>\n        <div class="dn"><a href="https://www.caspianhealthcare.in/doctors/dr-sameer-ahmed" style="color:inherit">Dr Mohammad Sameer Ahmed</a></div>\n        <div class="ds">Pulmonologist</div>\n        <div class="de">10 years experience</div>\n        <div class="db"><a href="https://www.eka.care/doctor/sameer-ahmed-1785177731" target="_blank" rel="noopener">' + CAL + 'Book appointment</a></div>\n      </div>\n';
+  html = insertBefore(html, '    <div class="doc-all">', SAMEER, "doc-all (Sameer card)");
+  console.log("doctors: Sameer card injected");
+}
 writeFileSync(FILE, html);
 console.log("optin: injected");
 
