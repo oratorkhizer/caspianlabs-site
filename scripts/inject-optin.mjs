@@ -45,7 +45,14 @@ console.log("optin: injected");
 // to edit through the GitHub connector. "unique" pairs apply once and only when the match is unique;
 // "global" pairs (product names used as lookup keys) apply everywhere so all files stay consistent.
 import { existsSync } from "node:fs";
-const fixes = JSON.parse(readFileSync("scripts/text-fixes.json", "utf8"));
+const fixes = { unique: {}, global: { files: [], pairs: [] } };
+for (const f of ["scripts/text-fixes.json", "scripts/text-fixes-2.json"]) {
+  if (!existsSync(f)) continue;
+  const x = JSON.parse(readFileSync(f, "utf8"));
+  for (const [file, pairs] of Object.entries(x.unique || {})) (fixes.unique[file] ||= []).push(...pairs);
+  for (const file of (x.global && x.global.files) || []) if (!fixes.global.files.includes(file)) fixes.global.files.push(file);
+  fixes.global.pairs.push(...((x.global && x.global.pairs) || []));
+}
 let applied = 0, skipped = 0;
 for (const [file, pairs] of Object.entries(fixes.unique)) {
   if (!existsSync(file)) { console.warn("text-fixes: missing " + file); continue; }

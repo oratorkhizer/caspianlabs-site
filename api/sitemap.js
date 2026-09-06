@@ -75,7 +75,7 @@ const TEST_SLUGS = [
   "electrolytes-test-hyderabad",
   "calcium-test-hyderabad",
   "chest-x-ray-hyderabad",
-  "inbody-body-composition-test-hyderabad",
+  "body-composition-analysis-test-hyderabad",
 ];
 
 export default function handler(req, res) {

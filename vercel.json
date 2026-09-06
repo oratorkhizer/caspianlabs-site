@@ -7,7 +7,12 @@
       "has": [{ "type": "host", "value": "caspianlabs.in" }],
       "destination": "https://www.caspianlabs.in/$1",
       "permanent": true
-    }
+    },
+    { "source": "/tests/inbody-body-composition-test-hyderabad", "destination": "/tests/body-composition-analysis-test-hyderabad", "permanent": true },
+    { "source": "/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
+    { "source": "/camps/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
+    { "source": "/body-composition", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
+    { "source": "/bca", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },

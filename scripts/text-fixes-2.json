@@ -1,0 +1,59 @@
+{
+ "_comment": "Second text-fixes file, merged by scripts/inject-optin.mjs after text-fixes.json. Keeps the big unicode file untouched. 'global' pairs are product names that double as lookup keys (index, i18n, page, pay, book), so they must stay identical everywhere.",
+ "unique": {
+  "api/page.js": [
+   [
+    "[\"Is this the same as an InBody scan?\", \"It is the same type of test: a bio-impedance body composition analysis that reports fat %, muscle mass, visceral fat, body water and BMR. Ask our team about the machine in use on the day.\"]",
+    "[\"Is this an InBody machine?\", \"No. We use a bio-impedance (BIA) body composition analyser, not the InBody brand. The report covers the same core numbers people look for in an InBody scan: fat %, muscle mass, visceral fat, body water and BMR, and a Certified Obesity Educator explains it to you.\"]"
+   ]
+  ]
+ },
+ "global": {
+  "files": [
+   "public/index.html",
+   "public/assets/i18n.js",
+   "public/assets/phase2-data.js",
+   "api/page.js",
+   "api/pay.js",
+   "api/book.js"
+  ],
+  "pairs": [
+   [
+    "Metabolic Wellness + InBody",
+    "Metabolic Wellness + Body Composition"
+   ],
+   [
+    "Metabolic Wellness (without InBody)",
+    "Metabolic Wellness (without Body Composition)"
+   ],
+   [
+    "InBody body-composition analysis",
+    "body composition analysis (BCA)"
+   ],
+   [
+    "+ InBody body-composition",
+    "+ Body composition scan (BCA)"
+   ],
+   [
+    "the InBody scan tells you",
+    "the body composition scan tells you"
+   ],
+   [
+    "Body Composition Analysis (InBody-style BIA scan)",
+    "Body Composition Analysis (BCA, BIA scan)"
+   ],
+   [
+    "InBody-style body composition analysis",
+    "Body composition analysis (BCA)"
+   ],
+   [
+    "inbody-body-composition-test-hyderabad",
+    "body-composition-analysis-test-hyderabad"
+   ],
+   [
+    "+ InBody\"",
+    "+ Body Composition\""
+   ]
+  ]
+ }
+}
