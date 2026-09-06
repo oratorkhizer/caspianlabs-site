@@ -38,6 +38,25 @@ function insertAfter(src, anchor, add, label) {
 html = insertBefore(html, "</style>", CSS + "\n", "first </style>");
 html = insertBefore(html, "<!-- ALL TESTS DIRECTORY -->", SECTION + "\n", "all-tests comment");
 html = insertAfter(html, '<script src="/assets/i18n.js" defer></script>', "\n" + SCRIPT, "i18n script tag");
+// Photos (Caspian staff shoot, Aug 2026; hosted on Supabase Storage, public bucket "caspianlabs", project caspian-cme).
+// Injected here so the 160 KB index.html need not be re-uploaded. Idempotent via the id="gallery" check.
+const PB = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
+const PHOTO_CSS = "  /* Photos */\n.about-grid .imgbox-photo{padding:0;overflow:hidden;min-height:0;display:block;background:none}\n.imgbox-photo img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;border-radius:var(--radius)}\n.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}\n.gal figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}\n.gal img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}\n.gal figcaption{font-size:13px;color:var(--muted);padding:9px 12px}\n@media(max-width:820px){.gal{grid-template-columns:1fr 1fr}}\n@media(max-width:520px){.gal{grid-template-columns:1fr}}";
+const GALLERY = [
+  ["lab-analysers.jpg", "Laboratory", "Biochemistry and haematology analysers"],
+  ["lab-technician.jpg", "Sample processing", "Every sample logged and processed in-house"],
+  ["xray-room.jpg", "Digital X-ray", "Chest, spine, limbs and more, at the centre"],
+  ["lab-wide.jpg", "Laboratory floor", "Analysers, centrifuges and cold storage in one room"],
+  ["reception.jpg", "Reception", "Open 24/7, walk in any time"],
+  ["team.jpg", "Our team", "Trained staff who handle every sample with care"]
+];
+const GALLERY_HTML = "<!-- GALLERY -->\n<section class=\"sec sec-soft\" id=\"gallery\">\n  <div class=\"wrap\">\n    <div class=\"center\" style=\"max-width:700px\">\n      <div class=\"eyebrow\">Inside Caspian</div>\n      <h2>A look inside our centre</h2>\n      <p class=\"lead center\">Photos from our laboratory, imaging rooms and front desk in Vijay Nagar Colony.</p>\n    </div>\n    <div class=\"gal\">\n" + GALLERY.map(([f, t, c]) => "      <figure><img src=\"" + PB + f + "\" alt=\"" + t + " at Caspian Diagnostic Centre\" width=\"1600\" height=\"1067\" loading=\"lazy\" decoding=\"async\"><figcaption><b>" + t + "</b> · " + c + "</figcaption></figure>\n").join("") + "    </div>\n  </div>\n</section>\n\n";
+if (!html.includes('id="gallery"')) {
+  html = insertBefore(html, "</style>", PHOTO_CSS + "\n", "first </style> (photos)");
+  html = html.replace(/<div class="imgbox">[\s\S]*?<\/div>\s*<\/div>/, '<div class="imgbox imgbox-photo"><img src="' + PB + 'lab-analysers.jpg" alt="Laboratory at Caspian Diagnostic Centre, Vijay Nagar Colony" width="1600" height="1067" loading="lazy" decoding="async"></div>');
+  html = insertBefore(html, "<!-- FAQ -->", GALLERY_HTML, "FAQ comment (gallery)");
+  console.log("photos: injected");
+}
 writeFileSync(FILE, html);
 console.log("optin: injected");
 
