@@ -27,6 +27,12 @@
     { "source": "/home-sample-collection-hyderabad", "destination": "/api/page?kind=home" },
     { "source": "/blog", "destination": "/api/blog" },
     { "source": "/blog/:slug", "destination": "/api/blog?slug=:slug" },
+    { "source": "/te", "destination": "/api/lang?l=te" },
+    { "source": "/te/:slug", "destination": "/api/lang?l=te&slug=:slug" },
+    { "source": "/ur", "destination": "/api/lang?l=ur" },
+    { "source": "/ur/:slug", "destination": "/api/lang?l=ur&slug=:slug" },
+    { "source": "/hi", "destination": "/api/lang?l=hi" },
+    { "source": "/hi/:slug", "destination": "/api/lang?l=hi&slug=:slug" },
     { "source": "/:path*", "destination": "/api/page?kind=404" }
   ],
   "headers": [
