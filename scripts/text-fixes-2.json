@@ -1,10 +1,22 @@
 {
- "_comment": "Second text-fixes file, merged by scripts/inject-optin.mjs after text-fixes.json. Keeps the big unicode file untouched. 'global' pairs are product names that double as lookup keys (index, i18n, page, pay, book), so they must stay identical everywhere.",
+ "_comment": "Second text-fixes file, merged by scripts/inject-optin.mjs after text-fixes.json. Keeps the big unicode file untouched. 'global' pairs are product names that double as lookup keys (index, i18n, page, pay, book), so they must stay identical everywhere. The three cardiac pairs added 11 Sep 2026 reframe the 999 Heart Health Check as a LIMITED-PERIOD OFFER with no end date set, per the owner. 1,200 is the standing price for the echo. They live here only because api/page.js is too large to push through the GitHub connector; move them into the source file when that changes.",
  "unique": {
   "api/page.js": [
    [
     "[\"Is this the same as an InBody scan?\", \"It is the same type of test: a bio-impedance body composition analysis that reports fat %, muscle mass, visceral fat, body water and BMR. Ask our team about the machine in use on the day.\"]",
     "[\"Is this an InBody machine?\", \"No. We use a bio-impedance (BIA) body composition analyser, not the InBody brand. The report covers the same core numbers people look for in an InBody scan: fat %, muscle mass, visceral fat, body water and BMR, and a Certified Obesity Educator explains it to you.\"]"
+   ],
+   [
+    "desc: \"2D Echo in Hyderabad at \\u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. The Heart Health Check at \\u20B9999 includes this echo plus an ECG and his consultation.\",",
+    "desc: \"2D Echo in Hyderabad at \\u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. A limited-period Heart Health Check at \\u20B9999 covers this echo with an ECG and his consultation.\","
+   ],
+   [
+    "[\"Is the Heart Health Check better value than the echo alone?\", \"For most people, yes, and we would rather say so than let you work it out afterwards. The Heart Health Check is \\u20B9999 and includes this echo, an ECG, a blood sugar and a consultation with the cardiologist. The echo booked by itself is \\u20B91,200. The separate price exists for people who have already been seen and have been sent specifically for a repeat echo.\"],",
+    "[\"Is the Heart Health Check better value than the echo alone?\", \"While the offer lasts, yes, and we would rather say so than let you work it out afterwards. \\u20B91,200 is the standing price for the echo on its own. The Heart Health Check is a limited-period offer at \\u20B9999 covering this echo, an ECG, a blood sugar and a consultation with the cardiologist, so for now it costs less than the echo booked by itself. No closing date has been set, and when it ends the echo stays at its own price. If you want the scan with a cardiologist reading it in the same visit, ask for the package while it is running.\"],"
+   ],
+   [
+    "[\"Is an ECG enough on its own?\", \"Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, the Heart Health Check at \\u20B9999 includes the ECG, the echo, a blood sugar and a consultation with our cardiologist, and costs less than the echo on its own.\"],",
+    "[\"Is an ECG enough on its own?\", \"Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, ask about the Heart Health Check: a limited-period offer at \\u20B9999 covering the ECG, the echo, a blood sugar and a consultation with our cardiologist. While it is running it costs less than the echo booked by itself.\"],"
    ]
   ]
  },
