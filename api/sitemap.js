@@ -9,7 +9,7 @@
 // lastmod: bump the relevant date constant when the content of that group actually changes.
 // (Google ignores lastmod that is always "today"; a truthful date helps recrawl prioritisation.)
 
-const LASTMOD_LANDING = "2026-09-03"; // tests/packages/hub/home-collection pages (api/page.js)
+const LASTMOD_LANDING = "2026-09-11"; // tests/packages/hub/home-collection pages (api/page.js)
 const LASTMOD_HOMEPAGE = "2026-09-03"; // index.html
 const LASTMOD_BLOG = "2026-07-31";     // api/blog.js articles
 const LASTMOD_STATIC = "2026-07-31";   // about/pricing/contact/legal html files
@@ -75,6 +75,8 @@ const TEST_SLUGS = [
   "electrolytes-test-hyderabad",
   "calcium-test-hyderabad",
   "chest-x-ray-hyderabad",
+  "ecg-test-hyderabad",
+  "2d-echo-test-hyderabad",
   "body-composition",
 ];
 

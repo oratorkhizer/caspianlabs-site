@@ -471,6 +471,46 @@ const TESTS = [
     related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad"]
   },
   {
+    slug: "ecg-test-hyderabad", name: "ECG (Electrocardiogram)", short: "ECG", price: 250,
+    sample: "Recording taken at our centre, about five minutes", fasting: "no", photo: "nurse",
+    heroSub: "\u20B9250 \u00B7 Walk in any time, we are open 24/7 \u00B7 Tracing the same visit",
+    desc: "ECG test in Hyderabad at \u20B9250: a 12-lead electrocardiogram, taken in about five minutes at Caspian Diagnostic Centre, Vijay Nagar Colony. Open 24/7, no appointment needed.",
+    about: [
+      "An ECG records the electrical activity of your heart through ten stickers placed on the chest, arms and legs. It takes about five minutes, nothing is injected, and you feel nothing at all.",
+      "It is the first test done for chest pain, palpitations and breathlessness, and the standard heart check before surgery, before starting at a gym, and for many employment and visa fitness certificates. It shows rhythm problems, evidence of a previous heart attack, and strain on the heart muscle.",
+      "An ECG is a snapshot of the minutes in which it was recorded. A normal ECG does not by itself rule out heart disease, which is why it is read alongside your symptoms, your blood pressure and, where indicated, an echo."
+    ],
+    whoShould: ["Chest pain, palpitations or breathlessness", "Before surgery, or fitness clearance before starting exercise", "High blood pressure, diabetes or a family history of heart disease", "Employment, visa and insurance medicals"],
+    faqExtra: [
+      ["Do I need an appointment for an ECG?", "No. We are open 24 hours, every day, and an ECG is a walk-in test that takes about five minutes."],
+      ["Is an ECG enough on its own?", "Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, the Heart Health Check at \u20B9999 includes the ECG, the echo, a blood sugar and a consultation with our cardiologist, and costs less than the echo on its own."],
+      ["Does it hurt?", "No. Ten stickers are placed on the skin and peeled off afterwards. Nothing is injected and no current is passed into you."]
+    ],
+    homeCollection: false,
+    related: ["p:heart-health-checkup-hyderabad", "t:2d-echo-test-hyderabad", "t:lipid-profile-test-hyderabad"]
+  },
+  {
+    slug: "2d-echo-test-hyderabad", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
+    sample: "Ultrasound scan of the heart, done at our centre", fasting: "no", photo: "echo",
+    heroSub: "\u20B91,200 \u00B7 Done by our cardiologist \u00B7 Explained to you the same visit",
+    desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. The Heart Health Check at \u20B9999 includes this echo plus an ECG and his consultation.",
+    about: [
+      "A 2D echocardiogram is an ultrasound scan of the heart. A probe is moved across your chest with gel, and the heart is watched beating on screen: the four chambers, the four valves, the thickness of the muscle and the sac around it.",
+      "Its single most useful number is the ejection fraction, the percentage of blood the main pumping chamber pushes out with each beat. That is the measurement that separates breathlessness caused by the heart from breathlessness caused by the lungs, weight or anaemia, and it is what heart-failure treatment is adjusted against.",
+      "There is no radiation, no injection and no preparation. It takes about twenty minutes and you can eat and drive as normal before and after."
+    ],
+    whoShould: ["Breathlessness on exertion, or swelling of the ankles", "A murmur heard by a doctor, or known valve disease", "After a heart attack, or with known heart failure", "Long-standing high blood pressure or diabetes, to check the heart muscle"],
+    faqExtra: [
+      ["Is the Heart Health Check better value than the echo alone?", "For most people, yes, and we would rather say so than let you work it out afterwards. The Heart Health Check is \u20B9999 and includes this echo, an ECG, a blood sugar and a consultation with the cardiologist. The echo booked by itself is \u20B91,200. The separate price exists for people who have already been seen and have been sent specifically for a repeat echo."],
+      ["Do I need to fast or prepare?", "No. Eat and drink normally, take your usual medicines, and wear something that opens at the front if you can. The scan takes about twenty minutes."],
+      ["Is it the same as an ECG?", "No, and the names being similar causes real confusion. An ECG is a five-minute recording of the heart's electrical activity and costs \u20B9250. An echo is an ultrasound scan showing the structure and pumping of the heart. Many people need both, which is what the Heart Health Check bundles."],
+      ["When can it be done?", "The echo is performed by our cardiologist, so it runs to his clinic hours rather than round the clock like our lab. Message us on WhatsApp and we will give you the next available slot."]
+    ],
+    homeCollection: false,
+    extLink: "https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist", extLabel: "Book a cardiologist slot",
+    related: ["p:heart-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad"]
+  },
+  {
     slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging, done at our centre", fasting: "no", photo: "xray",
     desc: "Digital chest X-ray in Hyderabad at ₹300: for cough, fever, TB screening and pre-op checks. Same-day film & report. Portable home chest X-ray available at ₹2,000.",
     about: [
@@ -785,7 +825,7 @@ ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our ce
     canonical: url,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ${esc(t.short)}`,
     heroH1: `${t.name} in Hyderabad`,
-    heroSub: t.extLink ? `${inr(t.price)} · 20-minute slot at our centre · Report explained on the spot` : `${inr(t.price)} · ${t.fasting === "yes" ? "Fasting required" : t.fasting === "no" ? "No fasting needed" : "Preparation varies"} · Same-day report on WhatsApp`,
+    heroSub: t.heroSub ? t.heroSub : t.extLink ? `${inr(t.price)} · 20-minute slot at our centre · Report explained on the spot` : `${inr(t.price)} · ${t.fasting === "yes" ? "Fasting required" : t.fasting === "no" ? "No fasting needed" : "Preparation varies"} · Same-day report on WhatsApp`,
     bodyHtml: body, ogImage: photoUrl(t.photo),
     ld: [
       ldBreadcrumb([["Home", "/"], ["All Tests", "/tests"], [t.short, "/tests/" + t.slug]]),
