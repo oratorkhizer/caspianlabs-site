@@ -19,7 +19,7 @@ const PRICE_HOME = 1499;  // collected at the patient's home, within 3 km
 const RADIUS = "3 km";
 const HERO_PHOTO = "technician";
 const NAME = "ABG Test (Arterial Blood Gas)";
-const DESC = "ABG and VBG (blood gas) testing in Hyderabad at ₹999, open 24/7, result in 20 minutes on our own analyser. Trained arterial sampling at Caspian Diagnostic Centre, Vijay Nagar Colony. Home collection within 3 km at ₹1,499.";
+const DESC = "ABG and VBG (blood gas) testing in Hyderabad at ₹999, open 24/7, result in 20 minutes on our own analyser. One sample also reports electrolytes, lactate, glucose and haemoglobin. Caspian Diagnostic Centre, Vijay Nagar Colony. Home collection within 3 km at ₹1,499.";
 
 const ABOUT = [
   "An arterial blood gas, or ABG, is a blood test taken from an artery, usually at the wrist. It is the quickest way to find out how well your lungs are moving oxygen into your blood and carbon dioxide out of it, and whether the acid level of your blood has gone off balance.",
@@ -27,13 +27,38 @@ const ABOUT = [
   "At Caspian the sample is run on our own blood gas analyser in the lab, so the result is ready in about 20 minutes and the doctor can act on it the same visit. We are open 24 hours, all seven days."
 ];
 
-const RANGES = [
-  ["pH", "7.35 to 7.45", "How acidic or alkaline your blood is"],
-  ["pCO₂ (carbon dioxide)", "35 to 45 mmHg", "How well the lungs are clearing carbon dioxide"],
-  ["pO₂ (oxygen)", "80 to 100 mmHg", "How much oxygen is dissolved in arterial blood"],
-  ["HCO₃⁻ (bicarbonate)", "22 to 26 mmol/L", "The body's acid buffer, largely handled by the kidneys"],
-  ["Base excess", "-2 to +2 mmol/L", "How far the buffer stores are above or below normal"],
-  ["SaO₂ (oxygen saturation)", "95 to 100%", "Percentage of haemoglobin carrying oxygen"]
+const PANEL = [
+  ["Blood gas", [
+    ["pH", "7.35 to 7.45"],
+    ["pCO₂, carbon dioxide", "35 to 45.5 mmHg"],
+    ["pO₂, oxygen", "80 to 100 mmHg"],
+    ["Bicarbonate (cHCO₃)", "22 to 28 mmol/L"],
+    ["Total CO₂ and base excess", "Calculated on the report"]
+  ]],
+  ["Oxygen handling", [
+    ["SO₂, oxygen saturation", "Measured on the sample"],
+    ["Oxygen content", "Calculated"],
+    ["A-a gradient (alveolar to arterial oxygen difference)", "Calculated"]
+  ]],
+  ["Haemoglobin", [
+    ["Haematocrit", "35 to 51%"],
+    ["Haemoglobin", "11.67 to 17 g/dl"]
+  ]],
+  ["Electrolytes", [
+    ["Sodium", "135 to 150 mmol/L"],
+    ["Potassium", "3.5 to 5.1 mmol/L"],
+    ["Ionised calcium", "1.10 to 1.35 mmol/L"],
+    ["Chloride", "92 to 110 mmol/L"]
+  ]],
+  ["Metabolites", [
+    ["Glucose", "80 to 140 mg/dl"],
+    ["Lactate", "0.50 to 2.00 mmol/L"]
+  ]],
+  ["Calculated", [
+    ["Anion gap", "Reported with and without potassium"],
+    ["Osmolality", "275 to 295 mmol/kg"],
+    ["Corrected and total calcium", "Calculated"]
+  ]]
 ];
 
 const WHO = [
@@ -65,13 +90,14 @@ const FAQS = [
 
 const DOC_POINTS = [
   ["Send us the patient", "Any hour, no appointment needed. Result in about 20 minutes, handed over or sent on WhatsApp, and we will call you directly if a value is critical."],
+  ["One sample, full panel", "Blood gas, sodium, potassium, ionised calcium, chloride, lactate, glucose, haemoglobin and haematocrit, with anion gap, osmolality and A-a gradient calculated. No separate electrolyte order needed."],
   ["Send us the sample", "If your nurse has drawn it, use a heparinised syringe, expel all air, cap it at once, label it with the patient's name, time of draw and the oxygen the patient is on, and get it to us within 15 minutes. Do not send a sample with a needle attached."],
   ["Standing rates", "If you run a nursing home, dialysis unit, polyclinic or home-care team and you send us volume, call us for a standing rate and a monthly account instead of paying per test."],
   ["Reachable at any hour", "One number, 24 hours: " + PHONE_DISPLAY + ". If our analyser is ever down for a cartridge change, we will tell you on the call rather than after you have sent the patient."]
 ];
 
-function ranges() {
-  return RANGES.map(r => `<tr><td>${r[0]}</td><td><b>${esc(r[1])}</b><br><span style="color:var(--muted);font-size:14px">${esc(r[2])}</span></td></tr>`).join("");
+function panel() {
+  return PANEL.map(g => `<tr><td>${esc(g[0])}</td><td>${g[1].map(x => `<b>${esc(x[0])}</b><span style="color:var(--muted)"> &middot; ${esc(x[1])}</span>`).join("<br>")}</td></tr>`).join("");
 }
 
 function renderAbg() {
@@ -86,7 +112,7 @@ function renderAbg() {
 <a class="btn btn-blue" href="tel:${PHONE_TEL}">\u{1F4DE} Call now, we are open 24/7</a>
 <a class="btn btn-wa" href="${waBook}" target="_blank" rel="noopener">\u{1F4AC} Book on WhatsApp</a>
 <a class="btn btn-line" href="${waHome}" target="_blank" rel="noopener">Ask for a home visit</a>
-<div class="fine"><span class="tick">✓</span>Result in about 20 minutes, on our own analyser<br><span class="tick">✓</span>Technicians trained and qualified in arterial sampling<br><span class="tick">✓</span>No fasting, no appointment needed<br><span class="tick">✓</span>Open 24/7, all days</div>
+<div class="fine"><span class="tick">✓</span>Result in about 20 minutes, on our own analyser<br><span class="tick">✓</span>Electrolytes, lactate and glucose on the same sample<br><span class="tick">✓</span>Technicians trained and qualified in arterial sampling<br><span class="tick">✓</span>No fasting, no appointment needed<br><span class="tick">✓</span>Open 24/7, all days</div>
 </aside>`;
 
   const body = `<div class="grid"><div class="card">
@@ -107,8 +133,9 @@ ${ABOUT.map(x => `<p>${esc(x)}</p>`).join("\n")}
 <p>This is why a blood gas reported the next day, or even later the same day, is a problem. A result like that has travelled in a bag to a central lab, and the numbers on the page are no longer the numbers in the patient. A doctor may then increase oxygen, or start a machine, on the strength of a value that drifted in transit.</p>
 <p>Our analyser is in our own lab, a few steps from where the sample is taken, and it is staffed at every hour. That is the whole reason we can say 20 minutes and mean it.</p>
 <h2>What the report shows</h2>
-<p>These are the usual adult values for an arterial sample. Normal ranges shift with age, with altitude, in pregnancy and when a patient is on oxygen, so read your own report against the ranges printed on it and discuss it with your doctor.</p>
-<table class="facts">${ranges()}</table>
+<p>One sample, one price, and a full panel. Our analyser reports the blood gas and, from the same syringe, your electrolytes, lactate, glucose and haemoglobin, with the anion gap and the oxygen gradient worked out for your doctor. There is no separate electrolyte test to order and no second prick.</p>
+<table class="facts">${panel()}</table>
+<p>Ranges shift with age, with altitude, in pregnancy and when a patient is on oxygen. Read your own report against the ranges printed on it and discuss it with your doctor.</p>
 <h2>ABG or VBG, which one do you need?</h2>
 <p>Your doctor decides, but it helps to know the difference.</p>
 <ul>
@@ -125,6 +152,7 @@ ${ABOUT.map(x => `<p>${esc(x)}</p>`).join("\n")}
 <li>Technicians trained and qualified in arterial sampling, doing it regularly, so the puncture is quick and clean</li>
 <li>Open 24 hours, every day of the year, with no appointment</li>
 <li>Result in about 20 minutes, while you wait</li>
+<li>A full panel on one sample: blood gas, electrolytes, lactate, glucose and haemoglobin</li>
 <li>One clear price, ${inr(PRICE)} at the centre and ${inr(PRICE_HOME)} at home within ${RADIUS}, with nothing added afterwards</li>
 </ul>
 <h2>Can it be done at home?</h2>
