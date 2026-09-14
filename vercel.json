@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node scripts/inject-optin.mjs",
+  "buildCommand": "node scripts/inject-optin.mjs && node scripts/address-fix.mjs",
   "outputDirectory": "public",
   "redirects": [
     {
