@@ -14,6 +14,8 @@
     { "source": "/packages/metabolic-wellness-inbody-hyderabad", "destination": "/packages/metabolic-wellness", "permanent": true },
     { "source": "/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
     { "source": "/camps/fibroscan", "destination": "https://www.caspianhealthcare.in/camps/fibroscan", "permanent": true },
+    { "source": "/abg", "destination": "/tests/abg-test-hyderabad", "permanent": true },
+    { "source": "/tests/arterial-blood-gas-test-hyderabad", "destination": "/tests/abg-test-hyderabad", "permanent": true },
     { "source": "/body-composition", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
     { "source": "/bca", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true }
   ],
@@ -23,6 +25,7 @@
     { "source": "/tests", "destination": "/api/page?kind=tests" },
     { "source": "/packages", "destination": "/api/page?kind=packages" },
     { "source": "/packages/:slug", "destination": "/api/page?kind=package&slug=:slug" },
+    { "source": "/tests/abg-test-hyderabad", "destination": "/api/abg" },
     { "source": "/tests/:slug", "destination": "/api/page?kind=test&slug=:slug" },
     { "source": "/home-sample-collection-hyderabad", "destination": "/api/page?kind=home" },
     { "source": "/blog", "destination": "/api/blog" },
