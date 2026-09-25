@@ -13,7 +13,7 @@
 <style>
   :root{
     --blue:#0A5C9E; --blue-dark:#08487d; --blue-800:#063a66;
-    --teal:#14B8A6; --teal-dark:#0c776e;
+    --teal:#F25C54; --teal-dark:#ad4c3f;
     --ink:#152b3c; --muted:#5b6b7a; --line:#e3ecf3;
     --bg:#ffffff; --bg-soft:#f2f8fd; --bg-blue:#eaf3fb;
     --shadow:0 10px 30px rgba(10,92,158,.10); --shadow-sm:0 4px 14px rgba(10,92,158,.08);
@@ -74,7 +74,7 @@
   /* hero */
   .hero{position:relative;background:linear-gradient(135deg,#0A5C9E 0%,#0b6fb8 55%,#0f8fb0 100%);color:#fff;overflow:hidden}
   .hero::after{content:"";position:absolute;right:-140px;top:-120px;width:460px;height:460px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);border-radius:50%}
-  .hero::before{content:"";position:absolute;left:-100px;bottom:-160px;width:420px;height:420px;background:radial-gradient(circle,rgba(20,184,166,.22),transparent 70%);border-radius:50%}
+  .hero::before{content:"";position:absolute;left:-100px;bottom:-160px;width:420px;height:420px;background:radial-gradient(circle,rgba(242,92,84,.22),transparent 70%);border-radius:50%}
   .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:66px;padding-bottom:72px}
   .hero h1{font-size:clamp(30px,4.6vw,50px);margin-bottom:16px}
   .hero p.sub{font-size:18px;color:#e6f2fb;max-width:520px;margin-bottom:26px}
@@ -959,17 +959,17 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   .bk-warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:0 0 13px;line-height:1.5}
   .bk-loc{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
   .bk-loc-btn{border:1px solid #cbd5e1;background:#f8fafc;border-radius:9px;padding:8px 11px;font-size:13px;font-weight:700;color:#0f2444;cursor:pointer;font-family:inherit}
-  .bk-loc-btn:hover{background:#eef6f5;border-color:#0c776e}
+  .bk-loc-btn:hover{background:#eef6f5;border-color:#ad4c3f}
   .bk-loc-st{font-size:12.5px;color:#64748b;flex-basis:100%}
   #bkMapOv{position:fixed;inset:0;z-index:10050;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;padding:14px}
   .bk-map-card{background:#fff;border-radius:14px;width:100%;max-width:560px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.35);display:flex;flex-direction:column}
   .bk-map-head{display:flex;gap:8px;padding:10px;border-bottom:1px solid #e2e8f0}
   .bk-map-head input{flex:1;border:1.5px solid #d9e0ea;border-radius:9px;padding:9px 11px;font-size:14px;font-family:inherit;min-width:0}
-  .bk-map-head button{border:0;background:#0c776e;color:#fff;border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .bk-map-head button{border:0;background:#ad4c3f;color:#fff;border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
   #bkMapEl{height:min(50vh,340px);width:100%}
   .bk-map-foot{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:10px}
   .bk-map-foot .hint{font-size:12px;color:#64748b}
-  .bk-map-use{border:0;background:#0c776e;color:#fff;border-radius:9px;padding:10px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+  .bk-map-use{border:0;background:#ad4c3f;color:#fff;border-radius:9px;padding:10px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
   .bk-map-x{border:1px solid #cbd5e1;background:#fff;border-radius:9px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#334155}
   .bk-overlap{background:#eef6ff;border:1px solid #cfe1f5;color:#1e4a72;font-size:12.5px;padding:10px 13px;border-radius:10px;margin:2px 0 12px;line-height:1.5}
   .bk-spin{width:17px;height:17px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bkspin .7s linear infinite;display:inline-block}
@@ -1754,7 +1754,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     bkLoc={lat:lat,lng:lng};
     var st=document.getElementById('bkLocSt');
     st.textContent=(label||'Location pinned')+' ✓'+(acc?' (±'+Math.round(acc)+' m)':'');
-    st.style.color='#0c776e';
+    st.style.color='#ad4c3f';
     if(typeof gtag==='function'){gtag('event','booking_location_pinned',{event_category:'booking'});}
   }
   document.getElementById('bkLocGps').addEventListener('click', function(){
@@ -2038,7 +2038,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         name: 'Caspian Diagnostic Centre',
         description: CART.length + (CART.length>1?' items':' item'),
         prefill: { name: v.name, contact: '+91'+v.mobile, email: v.email || undefined },
-        theme: { color: '#0c776e' },
+        theme: { color: '#ad4c3f' },
         modal: { ondismiss: function(){
           sub.disabled=false; sub.textContent='Confirm booking';
           err.textContent='Payment not completed — your booking is not confirmed yet. Tap "Confirm booking" to try again, or book on WhatsApp.';
