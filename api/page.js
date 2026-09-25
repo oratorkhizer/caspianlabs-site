@@ -595,7 +595,7 @@ function fastingText(f) {
   return "Fasting is sometimes advised depending on the tests your doctor ordered, our team will confirm exactly what to do when you book.";
 }
 
-const CSS = `:root{--blue:#0A5C9E;--blue-dark:#08487d;--teal:#0c776e;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f6f9fc;--wa:#0f8440}
+const CSS = `:root{--blue:#0A5C9E;--blue-dark:#08487d;--teal:#ad4c3f;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f6f9fc;--wa:#0f8440}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.7;background:var(--bg)}
 a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
@@ -681,7 +681,7 @@ ${ldTags}
 <style>${CSS}</style></head><body>
 <div class="top"><div class="w"><span>\u{1F4CD} 10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad 500057</span><span>\u{1F557} Open 24/7 · \u{1F4DE} <a href="tel:${PHONE_TEL}" style="color:#eaf3fb">${PHONE_DISPLAY}</a></span></div></div>
 <header><div class="w">
-  <a class="brand" href="/"><svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#14B8A6"/></svg><span><b>Caspian</b><span>Diagnostic Centre</span></span></a>
+  <a class="brand" href="/"><svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#F25C54"/></svg><span><b>Caspian</b><span>Diagnostic Centre</span></span></a>
   <nav class="topnav" aria-label="Site"><a href="/tests">All Tests</a><a href="/packages">Packages</a><a href="/home-sample-collection-hyderabad">Home Collection</a><a href="/blog">Blog</a><a class="home" href="/">Home</a></nav>
 </div></header>
 <nav class="crumbs" aria-label="Breadcrumb">${breadcrumbHtml}</nav>

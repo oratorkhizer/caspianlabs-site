@@ -124,7 +124,7 @@ function shapeError(lang, page) {
   return null;
 }
 
-const CSS = `:root{--blue:#0A5C9E;--blue-dark:#08487d;--teal:#0c776e;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f6f9fc;--wa:#0f8440}
+const CSS = `:root{--blue:#0A5C9E;--blue-dark:#08487d;--teal:#ad4c3f;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f6f9fc;--wa:#0f8440}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,'Noto Sans Telugu','Noto Sans Devanagari',Arial,sans-serif;color:var(--ink);line-height:1.8;background:var(--bg)}
 html[lang=ur] body{font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Noto Naskh Arabic','Segoe UI',Tahoma,sans-serif;line-height:2.2}
@@ -246,7 +246,7 @@ ${hreflang}
 ${indexable ? "" : `<div class="draft"><div class="w">${esc(en.ui.draftBanner)}${review ? " Grey boxes show the English original." : ""}</div></div>`}
 <div class="top"><div class="w"><span>10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad 500057</span><span>${esc(ui.open)} · <a href="tel:${PHONE_TEL}" class="num">${PHONE_DISPLAY}</a></span></div></div>
 <header><div class="w">
-<a class="brand" href="/${code}${q}"><svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#14B8A6"/></svg><span dir="ltr"><b>Caspian</b><small>Diagnostic Centre</small></span></a>
+<a class="brand" href="/${code}${q}"><svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#0A5C9E"/><path d="M24 10c5 6 8 10 8 14.5A8 8 0 0 1 16 24.5C16 20 19 16 24 10Z" fill="#fff"/><circle cx="24" cy="25" r="3.4" fill="#F25C54"/></svg><span dir="ltr"><b>Caspian</b><small>Diagnostic Centre</small></span></a>
 <nav class="langs" aria-label="Language">${langLinks}</nav>
 </div></header>
 <div class="hero"><div class="w"><h1>${esc(t.h1)}</h1>${review ? `<p class="en">${esc(s.h1)}</p>` : ""}<p>${esc(t.sub)}</p>${review ? `<p class="en">${esc(s.sub)}</p>` : ""}</div></div>
