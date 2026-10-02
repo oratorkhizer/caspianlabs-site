@@ -36,6 +36,7 @@
     { "source": "/ur/:slug", "destination": "/api/lang?l=ur&slug=:slug" },
     { "source": "/hi", "destination": "/api/lang?l=hi" },
     { "source": "/hi/:slug", "destination": "/api/lang?l=hi&slug=:slug" },
+    { "source": "/read-my-report", "destination": "/read-my-report.html" },
     { "source": "/:path*", "destination": "/api/page?kind=404" }
   ],
   "headers": [
@@ -45,6 +46,12 @@
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/vendor/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
       ]
     },
     {

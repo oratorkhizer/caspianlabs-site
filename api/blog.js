@@ -47,6 +47,7 @@ const ARTICLES = [
       ["p", "Because the test rides on red blood cells, conditions that change those cells (significant anaemia, recent blood loss or transfusion, some haemoglobin variants) can nudge HbA1c up or down. If your HbA1c doesn't match your home sugar readings, tell your doctor; a simple CBC and iron check often explains the gap."],
       ["h2", "The practical bits"],
       ["p", "No fasting is needed; you can walk in any time of day. It's a simple blood sample, the report is ready the same day, and at Caspian it costs ₹600 with free home collection on orders above ₹500. If you're due for a fuller review, our <a href=\"/packages/comprehensive-diabetes-screening-hyderabad\">Comprehensive Diabetes Screening (₹899)</a> pairs HbA1c with cholesterol and early kidney checks, the complications worth catching early."],
+      ["p", "<b>Have your HbA1c report already?</b> <a href=\"/read-my-report\">Read it here</a>: upload the PDF or a photo and see your value against these bands, along with everything else on the report. Nothing leaves your phone."],
       ["note", "This article is general information, not personal medical advice. Discuss your own numbers with your doctor; every target should be individualised."]
     ],
     cta: { label: "Book an HbA1c test (₹600)", href: "/tests/hba1c-test-hyderabad" },

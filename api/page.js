@@ -18,14 +18,14 @@ const BOOK_NAMES = {
   "essential-health-checkup-hyderabad": "Caspian Essential Checkup",
   "comprehensive-diabetes-screening-hyderabad": "Comprehensive Diabetes Screening",
   "thyroid-profile-test-hyderabad": "Thyroid Profile (T3 T4 TSH)",
-  "metabolic-wellness-inbody-hyderabad": "Metabolic Wellness + InBody",
+  "metabolic-wellness": "Metabolic Wellness + Body Composition",
   "womens-health-checkup-hyderabad": "Women's Health Profile",
-  "senior-citizen-health-checkup-hyderabad": "Senior Citizen Health — Male",
+  "senior-citizen-health-checkup-hyderabad": "Senior Citizen Health (Male)",
   "heart-health-checkup-hyderabad": "Heart Health Check (Cardiologist)",
-  "premium-health-checkup-men-hyderabad": "Premium Health Check — Men 45+",
+  "premium-health-checkup-men-hyderabad": "Premium Health Check for Men 45+",
   "haj-umrah-fitness-package-hyderabad": "Haj / Umrah Fitness",
   "hba1c-test-hyderabad": "HbA1c (Glycated Haemoglobin)",
-  "blood-sugar-test-hyderabad": "Blood Sugar — Fasting (FBS)",
+  "blood-sugar-test-hyderabad": "Blood Sugar, Fasting (FBS)",
   "cbc-test-hyderabad": "Complete Blood Count (CBC)",
   "tsh-test-hyderabad": "TSH (single)",
   "lipid-profile-test-hyderabad": "Lipid Profile (Cholesterol)",
@@ -71,7 +71,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Adults due for an annual health check", "Family history of diabetes, heart or thyroid disease", "Anyone with fatigue, weight change or low energy"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Full Body Check Up (₹1,795).",
-    related: ["t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness-inbody-hyderabad", "p:essential-health-checkup-hyderabad"]
+    related: ["t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness", "p:essential-health-checkup-hyderabad"]
   },
   {
     slug: "essential-health-checkup-hyderabad",
@@ -122,16 +122,16 @@ const PACKAGES = [
     related: ["t:tsh-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad"]
   },
   {
-    slug: "metabolic-wellness-inbody-hyderabad",
-    name: "Metabolic Wellness + InBody",
+    slug: "metabolic-wellness",
+    name: "Metabolic Wellness + Body Composition",
     price: 1795,
     tagline: "Full body checkup + body composition",
-    desc: "Metabolic wellness package in Hyderabad at ₹1,795: every Full Body Check Up test plus InBody body-composition analysis mapping fat, muscle and metabolism. At Caspian Diagnostic Centre, Vijay Nagar.",
+    desc: "Metabolic wellness package in Hyderabad at ₹1,795: every Full Body Check Up test plus body composition analysis (BCA) mapping fat, muscle and metabolism. At Caspian Diagnostic Centre, Vijay Nagar.",
     about: [
-      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an InBody body-composition analysis, a quick, painless scan that maps your body fat, muscle mass, and metabolic profile.",
-      "Blood tests tell you what is happening inside; the InBody scan tells you what your weight is actually made of. Together they are ideal for weight-loss programmes, fitness goals and metabolic health tracking, an approach designed by our bariatric physician."
+      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an body composition analysis (BCA), a quick, painless scan that maps your body fat, muscle mass, and metabolic profile.",
+      "Blood tests tell you what is happening inside; the body composition scan tells you what your weight is actually made of. Together they are ideal for weight-loss programmes, fitness goals and metabolic health tracking, an approach designed by our bariatric physician."
     ],
-    includes: ["Everything in the Full Body Check Up", "InBody body-composition analysis", "Fat, muscle & metabolic mapping"],
+    includes: ["Everything in the Full Body Check Up", "body composition analysis (BCA)", "Fat, muscle & metabolic mapping"],
     fasting: "yes",
     idealFor: ["Weight-loss or fitness programmes", "Tracking metabolic health over time", "Anyone curious what their weight is made of"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Metabolic Wellness Checkup (₹1,795).",
@@ -483,7 +483,7 @@ const TESTS = [
     whoShould: ["Chest pain, palpitations or breathlessness", "Before surgery, or fitness clearance before starting exercise", "High blood pressure, diabetes or a family history of heart disease", "Employment, visa and insurance medicals"],
     faqExtra: [
       ["Do I need an appointment for an ECG?", "No. We are open 24 hours, every day, and an ECG is a walk-in test that takes about five minutes."],
-      ["Is an ECG enough on its own?", "Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, the Heart Health Check at \u20B9999 includes the ECG, the echo, a blood sugar and a consultation with our cardiologist, and costs less than the echo on its own."],
+      ["Is an ECG enough on its own?", "Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, ask about the Heart Health Check: a limited-period offer at \u20B9999 covering the ECG, the echo, a blood sugar and a consultation with our cardiologist. While it is running it costs less than the echo booked by itself."],
       ["Does it hurt?", "No. Ten stickers are placed on the skin and peeled off afterwards. Nothing is injected and no current is passed into you."]
     ],
     homeCollection: false,
@@ -493,7 +493,7 @@ const TESTS = [
     slug: "2d-echo-test-hyderabad", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
     sample: "Ultrasound scan of the heart, done at our centre", fasting: "no", photo: "echo",
     heroSub: "\u20B91,200 \u00B7 Done by our cardiologist \u00B7 Explained to you the same visit",
-    desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. The Heart Health Check at \u20B9999 includes this echo plus an ECG and his consultation.",
+    desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. A limited-period Heart Health Check at \u20B9999 covers this echo with an ECG and his consultation.",
     about: [
       "A 2D echocardiogram is an ultrasound scan of the heart. A probe is moved across your chest with gel, and the heart is watched beating on screen: the four chambers, the four valves, the thickness of the muscle and the sac around it.",
       "Its single most useful number is the ejection fraction, the percentage of blood the main pumping chamber pushes out with each beat. That is the measurement that separates breathlessness caused by the heart from breathlessness caused by the lungs, weight or anaemia, and it is what heart-failure treatment is adjusted against.",
@@ -501,7 +501,7 @@ const TESTS = [
     ],
     whoShould: ["Breathlessness on exertion, or swelling of the ankles", "A murmur heard by a doctor, or known valve disease", "After a heart attack, or with known heart failure", "Long-standing high blood pressure or diabetes, to check the heart muscle"],
     faqExtra: [
-      ["Is the Heart Health Check better value than the echo alone?", "For most people, yes, and we would rather say so than let you work it out afterwards. The Heart Health Check is \u20B9999 and includes this echo, an ECG, a blood sugar and a consultation with the cardiologist. The echo booked by itself is \u20B91,200. The separate price exists for people who have already been seen and have been sent specifically for a repeat echo."],
+      ["Is the Heart Health Check better value than the echo alone?", "While the offer lasts, yes, and we would rather say so than let you work it out afterwards. \u20B91,200 is the standing price for the echo on its own. The Heart Health Check is a limited-period offer at \u20B9999 covering this echo, an ECG, a blood sugar and a consultation with the cardiologist, so for now it costs less than the echo booked by itself. No closing date has been set, and when it ends the echo stays at its own price. If you want the scan with a cardiologist reading it in the same visit, ask for the package while it is running."],
       ["Do I need to fast or prepare?", "No. Eat and drink normally, take your usual medicines, and wear something that opens at the front if you can. The scan takes about twenty minutes."],
       ["Is it the same as an ECG?", "No, and the names being similar causes real confusion. An ECG is a five-minute recording of the heart's electrical activity and costs \u20B9250. An echo is an ultrasound scan showing the structure and pumping of the heart. Many people need both, which is what the Heart Health Check bundles."],
       ["When can it be done?", "The echo is performed by our cardiologist, so it runs to his clinic hours rather than round the clock like our lab. Message us on WhatsApp and we will give you the next available slot."]
@@ -523,21 +523,21 @@ const TESTS = [
     related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad"]
   },
   {
-    slug: "inbody-body-composition-test-hyderabad", name: "Body Composition Analysis (InBody-style BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
-    desc: "InBody-style body composition analysis in Hyderabad at ₹999: body fat %, muscle mass, visceral fat, BMR and metabolic age, with the report explained by a Certified Obesity Educator. Book a 20-minute slot at Caspian, Vijay Nagar Colony.",
+    slug: "body-composition", name: "Body Composition Analysis (BCA, BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
+    desc: "Body composition analysis (BCA) in Hyderabad at ₹999: body fat %, muscle mass, visceral fat, BMR and metabolic age, with the report explained by a Certified Obesity Educator. Book a 20-minute slot at Caspian, Vijay Nagar Colony.",
     about: [
       "A body composition scan goes beyond the weighing scale. Using bio-electrical impedance (BIA), it measures how much of your weight is fat, muscle and water, estimates visceral (organ) fat, and calculates your basal metabolic rate (BMR) and metabolic age.",
-      "At Caspian the scan is not a print-and-go test. Every ₹999 slot includes a sit-down with one of our Certified Diabetes and Obesity Educators (MSc Nutrition), who explains your report and what to do about it. Add the Metabolic Wellness + InBody package (₹1,795) if you also want the blood work that goes with it."
+      "At Caspian the scan is not a print-and-go test. Every ₹999 slot includes a sit-down with one of our Certified Diabetes and Obesity Educators (MSc Nutrition), who explains your report and what to do about it. Add the Metabolic Wellness + Body Composition package (₹1,795) if you also want the blood work that goes with it."
     ],
     whoShould: ["You are trying to lose weight and want to track fat loss, not just kilos", "Diabetes, prediabetes, PCOS or fatty liver, where visceral fat matters", "Gym-goers and athletes tracking muscle gain", "Anyone whose BMI says 'normal' but who carries weight around the middle"],
     faqExtra: [
-      ["Is this the same as an InBody scan?", "It is the same type of test: a bio-impedance body composition analysis that reports fat %, muscle mass, visceral fat, body water and BMR. Ask our team about the machine in use on the day."],
+      ["Is this an InBody machine?", "No. We use a bio-impedance (BIA) body composition analyser, not the InBody brand. The report covers the same core numbers people look for in an InBody scan: fat %, muscle mass, visceral fat, body water and BMR, and a Certified Obesity Educator explains it to you."],
       ["Do I need to prepare?", "For a consistent reading come 2 to 3 hours after a meal, avoid heavy exercise or alcohol the night before, and empty your bladder just before the scan. Not suitable in pregnancy or if you have a pacemaker."],
-      ["Can I combine it with blood tests?", "Yes. The Metabolic Wellness + InBody package (₹1,795) adds HbA1c, lipid profile, liver, kidney, thyroid, vitamin D and B12, so the educator can read your body composition alongside your blood work."]
+      ["Can I combine it with blood tests?", "Yes. The Metabolic Wellness + Body Composition package (₹1,795) adds HbA1c, lipid profile, liver, kidney, thyroid, vitamin D and B12, so the educator can read your body composition alongside your blood work."]
     ],
     homeCollection: false,
     extLink: "https://www.caspianhealthcare.in/body-composition", extLabel: "Book a 20-minute slot (₹999)",
-    related: ["p:metabolic-wellness-inbody-hyderabad", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad"]
+    related: ["p:metabolic-wellness", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad"]
   }
 ];
 
@@ -816,6 +816,7 @@ ${t.about.map(x => `<p>${esc(x)}</p>`).join("\n")}
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 ${relatedBlock(t.related)}
+<div class="note"><b>Already have this report?</b> <a href="/read-my-report">Read it here</a>: upload the PDF or a photo and see each value against its usual range. Nothing leaves your phone.</div>
 <div class="note">This page is for general information and is not a substitute for medical advice. Please discuss your reports with your doctor, you can consult our physicians at Caspian Healthcare.</div>
 </div>
 ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our centre · same-day report" : "Home collection available · same-day report"), waText: `Hi Caspian Diagnostic Centre, I'd like to book the ${t.name} (${inr(t.price)}).`, homeCollection: t.homeCollection, book: bookHref(t.slug), extLink: t.extLink, extLabel: t.extLabel })}</div>`;

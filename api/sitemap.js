@@ -20,6 +20,7 @@ const PAGES = [
   { path: "/packages",          changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7", lastmod: LASTMOD_BLOG },
+  { path: "/read-my-report",    changefreq: "monthly", priority: "0.8", lastmod: "2026-10-02" },
   { path: "/about.html",        changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_STATIC },
   { path: "/pricing.html",      changefreq: "monthly", priority: "0.7", lastmod: LASTMOD_STATIC },
   { path: "/contact.html",      changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_STATIC },
