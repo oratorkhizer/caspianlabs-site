@@ -160,9 +160,10 @@
     tbi: { re: /\btbi\b|toe\s*-?\s*brachial/, min: 0.05, max: 1.6, pickMin: true },
     cac: { re: /agatston|calcium\s*score|\bcac\s*score|\bcacs\b|coronary\s*(?:artery\s*)?calcium/, not: /percentile|volume|mass/, min: 0, max: 20000, zeroOk: true },
     // body
-    ht: { re: /\bheight\b|\bht\.?\s*[:=]/, not: /sitting|knee|fundal|\bcm\s*\/|percentile/, min: 50, max: 250, conv: function (v, l) { if (v < 3) return v * 100; if (/\bft\b|feet|inch|\bin\b|'/.test(l) && v < 10) return null; return v; } },
+    ht: { re: /\bheight\b|\bht\.?\s*[:=]|\blength\b|\bstature\b/, not: /sitting|knee|fundal|\bcm\s*\/|percentile|arm\s*span|foot\s*length|crown[\s-]*rump|segment|cycle|\bqt\b|penile|femur|cervical|\bbpd\b|\bcrl\b|wave|pulse|time/, min: 35, max: 250, conv: function (v, l) { if (v < 3) return v * 100; if (/\bft\b|feet|inch|\bin\b|'/.test(l) && v < 10) return null; return v; } },
     wt: { re: /\bweight\b|\bwt\.?\s*[:=]/, not: /birth|dry\s*weight|molecular|target|ideal|loss|gain|change|\blbs?\b|pounds/, min: 2, max: 400 },
     bmi: { re: /\bbmi\b|body\s*mass\s*index/, not: /percentile|z\s*-?\s*score|target/, min: 8, max: 95 },
+    hc: { re: /head\s*circumference|\bhc\b\s*[:=]?\s*\d|\bofc\b|occipito/, not: /chest|mid\s*-?\s*arm|\bmuac\b|waist|hip/, min: 25, max: 62 },
     // blood gas (only read when the report is a blood gas)
     ph: { re: /\bph\b/, not: /urine|urinary|phos|\bph\s*of/, min: 6.6, max: 7.9, ctx: /pco2|paco2|\bpo2\b|pao2|hco3|bicarb|blood\s*gas|\babg\b|\bvbg\b/ },
     pco2: { re: /pa?co2|pco\s*2/, min: 8, max: 160, conv: function (v, l) { return /kpa/.test(l) ? v * 7.5 : v; } },
@@ -285,6 +286,14 @@
     });
 
     if (keys.indexOf('age') >= 0 || keys.indexOf('sex') >= 0) ageSex(low, lines, found);
+    if (keys.indexOf('dob') >= 0) {
+      for (var di = 0; di < low.length && !found.dob; di++) {
+        var dm = /\bdob\b|d\.o\.b|date\s*of\s*birth|\bborn\s*(?:on)?\b|birth\s*date/.exec(low[di]);
+        if (!dm) continue;
+        var dd = dateIn(low[di].slice(dm.index), true, popt.now) || dateIn(low[di], true, popt.now);
+        if (dd) found.dob = { v: dayKey(dd), src: lines[di] };
+      }
+    }
     if (keys.indexOf('tMal') >= 0) malaria(low, lines, found);
     if (keys.indexOf('tBC') >= 0) culture(low, lines, found);
     if (keys.indexOf('pus') >= 0) pus(low, lines, found);
