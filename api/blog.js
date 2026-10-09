@@ -223,7 +223,7 @@ function renderArticle(a) {
   const banner = BANNERS[a.slug] ? `<div class="bhead">${BANNERS[a.slug]}</div>` : "";
   const body = `${banner}<article class="card">
 <h1>${esc(a.title)}</h1>
-<div class="byline">By <b>Dr Khizer Hussain Junaidy</b>, Diabetologist &amp; Obesity Specialist · ${fmtDate(a.date)} · ${a.readMins} min read</div>
+<div class="byline">By <b>Dr Khizer Hussain Junaidy</b>, Diabetologist &amp; Bariatric Physician · ${fmtDate(a.date)} · ${a.readMins} min read</div>
 <p class="intro">${a.intro}</p>
 ${a.body.map(blockHtml).join("\n")}
 <div class="cta-box"><b>${esc(a.cta.label)}</b><span><a class="btn btn-white" href="${a.cta.href}">Book now</a> <a class="btn btn-wa" href="${WA}?text=${encodeURIComponent("Hi Caspian Diagnostic Centre, I read your article “" + a.title + "” and would like to book a test.")}" target="_blank" rel="noopener">WhatsApp us</a></span></div>
@@ -254,7 +254,7 @@ ${a.body.map(blockHtml).join("\n")}
         "image": BASE + "/ogimage.png",
         "datePublished": a.date,
         "dateModified": a.date,
-        "author": { "@type": "Person", "name": "Dr Khizer Hussain Junaidy", "jobTitle": "Diabetologist & Obesity Specialist", "worksFor": { "@type": "MedicalBusiness", "name": "Caspian Diagnostic Centre" } },
+        "author": { "@type": "Person", "name": "Dr Khizer Hussain Junaidy", "jobTitle": "Diabetologist & Bariatric Physician", "worksFor": { "@type": "MedicalBusiness", "name": "Caspian Diagnostic Centre" } },
         "publisher": { "@type": "Organization", "name": "Caspian Diagnostic Centre", "logo": { "@type": "ImageObject", "url": BASE + "/ogimage.png" } },
         "mainEntityOfPage": url
       },

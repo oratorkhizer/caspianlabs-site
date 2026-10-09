@@ -179,7 +179,7 @@ const PACKAGES = [
       "The Heart Health Check bundles the two core cardiac investigations, an ECG and a 2D Echocardiogram, with a blood-sugar check and a face-to-face consultation with our cardiologist, Dr Sayyed Muzammil, who reviews your results the same visit.",
       "At ₹999 including the specialist consult, it is one of the most accessible cardiac screening packages in Hyderabad, recommended if you have high BP, diabetes, chest discomfort, breathlessness, or a family history of heart disease."
     ],
-    includes: ["ECG (Electrocardiogram)", "GRBS (blood sugar)", "2D Echocardiogram", "Consultation with Dr Sayyed Muzammil (Cardiologist)"],
+    includes: ["ECG (Electrocardiogram)", "GRBS (blood sugar)", "2D Echocardiogram", "Consultation with Dr Sayyed Muzammil AK, Physician & Clinical Cardiologist (Non-Invasive)"],
     fasting: "no",
     idealFor: ["High blood pressure or diabetes", "Chest discomfort, palpitations or breathlessness", "Family history of heart disease", "Fitness clearance before starting exercise"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Heart Health Check (₹999).",
