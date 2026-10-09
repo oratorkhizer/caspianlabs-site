@@ -129,7 +129,7 @@ const FAQS = [
 function viewsLabel(n) { return typeof n === "string" ? "Series" : n === 1 ? "1 view" : n + " views"; }
 
 function renderXray() {
-  const title = "X-ray Price List in Hyderabad, from ₹350 | Caspian Diagnostic Centre";
+  const title = "X-ray Price List in Hyderabad, from ₹350 | Caspian Labs";
   const desc = "Digital X-ray prices in Hyderabad: chest X-ray ₹350, knee, spine, hip, hand, foot and 63 more from ₹350. Radiologist report the same day on WhatsApp. Walk in, Vijay Nagar Colony.";
 
   const rows = GROUPS.map(([g, tests]) => `<h3 class="xg">${esc(g)}</h3>

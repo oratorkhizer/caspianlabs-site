@@ -12,7 +12,9 @@
 const LASTMOD_LANDING = "2026-10-09"; // tests/packages/hub/home-collection pages (api/page.js)
 const LASTMOD_HOMEPAGE = "2026-10-09"; // index.html
 const LASTMOD_BLOG = "2026-07-31";     // api/blog.js articles
-const LASTMOD_STATIC = "2026-07-31";   // about/pricing/contact/legal html files
+const LASTMOD_STATIC = "2026-10-09";   // about/pricing/contact/legal html files
+const LASTMOD_LANG = "2026-10-09";     // Telugu/Urdu/Hindi pages (api/lang.js), approved 9 Oct 2026
+const LANG_PAGES = ["", "/home-sample-collection", "/diabetes-screening", "/full-body-checkup", "/hba1c-test"];
 
 const PAGES = [
   { path: "/",                  changefreq: "weekly",  priority: "1.0", lastmod: LASTMOD_HOMEPAGE },
@@ -90,6 +92,7 @@ export default function handler(req, res) {
     ...PACKAGE_SLUGS.map((s) => ({ path: "/packages/" + s, changefreq: "monthly", priority: "0.8", lastmod: LASTMOD_LANDING })),
     ...TEST_SLUGS.map((s) => ({ path: "/tests/" + s, changefreq: "monthly", priority: "0.7", lastmod: LASTMOD_LANDING })),
     ...BLOG_SLUGS.map((s) => ({ path: "/blog/" + s, changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_BLOG })),
+    ...["te", "ur", "hi"].flatMap((l) => LANG_PAGES.map((p) => ({ path: "/" + l + p, changefreq: "monthly", priority: "0.6", lastmod: LASTMOD_LANG }))),
   ];
   const urls = all.map(
     (p) =>

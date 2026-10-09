@@ -567,7 +567,7 @@ function photoFig(key, caption) {
 
 const HOME_PAGE = {
   slug: "home-sample-collection-hyderabad",
-  title: "Blood Sample Collection at Home in Hyderabad | Free Above ₹500 | Caspian Diagnostic Centre",
+  title: "Blood Sample Collection at Home in Hyderabad | Free Above ₹500 | Caspian Labs",
   h1: "Blood Sample Collection at Home in Hyderabad",
   desc: "Book blood test home sample collection in Hyderabad: Vijay Nagar Colony, Mehdipatnam, Masab Tank, Asif Nagar, Attapur, Tolichowki and nearby. Free above ₹500, ₹100 per visit otherwise. Same-day reports on WhatsApp."
 };
@@ -662,6 +662,24 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0 12px}
 footer .links a{color:#cde2f2}
 footer .fine{color:#9cc0dd;line-height:1.6}`;
 
+// English pages that have Telugu, Urdu and Hindi versions (api/lang.js). Google
+// honours hreflang only when both sides point at each other, so the English
+// side lists them too. Keep in step with PAGES[*].english in api/lang.js.
+const LANG_ALT = {
+  "/home-sample-collection-hyderabad": "home-sample-collection",
+  "/packages/comprehensive-diabetes-screening-hyderabad": "diabetes-screening",
+  "/packages/full-body-checkup-hyderabad": "full-body-checkup",
+  "/tests/hba1c-test-hyderabad": "hba1c-test",
+};
+function hreflangFor(canonical) {
+  const path = canonical.replace(BASE, "");
+  const slug = LANG_ALT[path];
+  if (!slug) return "";
+  return [`<link rel="alternate" hreflang="en-IN" href="${canonical}">`]
+    .concat(["te", "ur", "hi"].map((c) => `<link rel="alternate" hreflang="${c}-IN" href="${BASE}/${c}/${slug}">`))
+    .join("\n") + "\n";
+}
+
 function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bodyHtml, ld, ogImage }) {
   const ldTags = ld.map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join("\n");
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
@@ -669,7 +687,7 @@ function pageShell({ title, desc, canonical, breadcrumbHtml, heroH1, heroSub, bo
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
-<meta property="og:type" content="website">
+${hreflangFor(canonical)}<meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${canonical}">
@@ -763,6 +781,45 @@ function commonFaqs(name, price, fasting, homeCollection) {
   return faqs;
 }
 
+/**
+ * WHO REVIEWS EACH PAGE, 9 October 2026, Dr Khizer's instruction: lab test and
+ * package pages are reviewed by the consultant pathologist, Dr Raheel Raza.
+ * Following the group rule that each speciality reviews its own pages, the
+ * cardiac pages (ECG, 2D echo, Heart Health Check) are Dr Sayyed Muzammil AK's
+ * and body composition is Dr Khizer's. The chest X-ray page has no named
+ * reviewer until a radiologist is named. Credentials are printed exactly as
+ * each doctor states them; no registration number or date is invented.
+ */
+const REVIEWERS = {
+  pathology: { name: "Dr Raheel Raza", title: "MBBS, DCP (Gandhi), Consultant Pathologist" },
+  cardiology: { name: "Dr Sayyed Muzammil AK", title: "Physician & Clinical Cardiologist (Non-Invasive)", url: "https://www.caspianhealthcare.in/doctors/dr-sayyed-muzammil" },
+  obesity: { name: "Dr Khizer Hussain Junaidy", title: "Diabetologist & Bariatric Physician", url: "https://www.caspianhealthcare.in/doctors/dr-khizer-hussain-junaidy" },
+};
+const REVIEWER_BY_SLUG = {
+  "ecg-test-hyderabad": "cardiology",
+  "2d-echo-test-hyderabad": "cardiology",
+  "heart-health-checkup-hyderabad": "cardiology",
+  "body-composition": "obesity",
+  "chest-x-ray-hyderabad": null,
+};
+function reviewerFor(slug) {
+  const k = slug in REVIEWER_BY_SLUG ? REVIEWER_BY_SLUG[slug] : "pathology";
+  return k ? REVIEWERS[k] : null;
+}
+function reviewedHtml(slug) {
+  const r = reviewerFor(slug);
+  if (!r) return "";
+  const name = r.url ? `<a href="${r.url}">${esc(r.name)}</a>` : esc(r.name);
+  return `<p class="reviewed" style="font-size:14px;color:#5b6b7a;margin-top:14px">Medically reviewed by ${name}, ${esc(r.title)}.</p>`;
+}
+function ldReviewed(slug, url, name) {
+  const r = reviewerFor(slug);
+  if (!r) return null;
+  const who = { "@type": "Physician", name: r.name, jobTitle: r.title };
+  if (r.url) who.url = r.url;
+  return { "@context": "https://schema.org", "@type": "MedicalWebPage", name, url, inLanguage: "en-IN", reviewedBy: who };
+}
+
 function renderPackage(p) {
   const url = `${BASE}/packages/${p.slug}`;
   const faqs = commonFaqs(p.name + " package", p.price, p.fasting, p.homeCollection).concat(p.faqExtra || []);
@@ -779,10 +836,11 @@ ${p.about.map(t => `<p>${esc(t)}</p>`).join("\n")}
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 ${relatedBlock(p.related)}
+${reviewedHtml(p.slug)}
 </div>
 ${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.ekaLink, homeCollection: p.homeCollection, book: bookHref(p.slug) })}</div>`;
   return pageShell({
-    title: `${p.name} in Hyderabad at ${inr(p.price)} | Caspian Diagnostic Centre`,
+    title: `${p.name} in Hyderabad at ${inr(p.price)} | Caspian Labs`,
     desc: p.desc,
     canonical: url,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/packages">Health Packages</a> › ${esc(p.name)}`,
@@ -792,8 +850,9 @@ ${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.
     ld: [
       ldBreadcrumb([["Home", "/"], ["Health Packages", "/packages"], [p.name, "/packages/" + p.slug]]),
       ldProduct(p.name, p.desc, p.price, url),
-      ldFaq(faqs)
-    ]
+      ldFaq(faqs),
+      ldReviewed(p.slug, url, p.name)
+    ].filter(Boolean)
   });
 }
 
@@ -819,10 +878,11 @@ ${faqBlock(faqs)}
 ${relatedBlock(t.related)}
 <div class="note"><b>Already have this report?</b> <a href="/read-my-report">Read it here</a>: upload the PDF or a photo and see each value against its usual range. Nothing leaves your phone.</div>
 <div class="note">This page is for general information and is not a substitute for medical advice. Please discuss your reports with your doctor, you can consult our physicians at Caspian Healthcare.</div>
+${reviewedHtml(t.slug)}
 </div>
 ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our centre · same-day report" : "Home collection available · same-day report"), waText: `Hi Caspian Diagnostic Centre, I'd like to book the ${t.name} (${inr(t.price)}).`, homeCollection: t.homeCollection, book: bookHref(t.slug), extLink: t.extLink, extLabel: t.extLabel })}</div>`;
   return pageShell({
-    title: `${t.name} in Hyderabad at ${inr(t.price)} | Caspian Diagnostic Centre`,
+    title: `${t.name} in Hyderabad at ${inr(t.price)} | Caspian Labs`,
     desc: t.desc,
     canonical: url,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ${esc(t.short)}`,
@@ -833,8 +893,9 @@ ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our ce
       ldBreadcrumb([["Home", "/"], ["All Tests", "/tests"], [t.short, "/tests/" + t.slug]]),
       ldMedicalTest(t.name, t.desc, url),
       ldProduct(t.name, t.desc, t.price, url),
-      ldFaq(faqs)
-    ]
+      ldFaq(faqs),
+      ldReviewed(t.slug, url, t.name)
+    ].filter(Boolean)
   });
 }
 
@@ -889,7 +950,7 @@ function renderHub(kind) {
   const isTests = kind === "tests";
   const url = `${BASE}/${kind}`;
   const items = isTests ? TESTS : PACKAGES;
-  const title = isTests ? "Blood Test Prices in Hyderabad: All Tests | Caspian Diagnostic Centre" : "Health Checkup Packages in Hyderabad with Prices | Caspian Diagnostic Centre";
+  const title = isTests ? "Blood Test Prices in Hyderabad: All Tests | Caspian Labs" : "Health Checkup Packages in Hyderabad with Prices | Caspian Labs";
   const desc = isTests
     ? "Blood test price list at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad: CBC ₹350, HbA1c ₹600, thyroid ₹470, lipid ₹450, vitamin D ₹1,350 and more. Open 24/7, home collection, book and pay online."
     : "Full body checkup ₹1,795, essential checkup ₹899, diabetes screening ₹899, heart health ₹999, senior citizen and women's packages. Caspian Diagnostic Centre, Hyderabad. Open 24/7, home collection, book online.";
@@ -916,7 +977,7 @@ ${isTests ? `<p class="note" style="margin-top:18px">Looking for an X-ray? <a hr
 
 function render404() {
   return pageShell({
-    title: "Page not found | Caspian Diagnostic Centre",
+    title: "Page not found | Caspian Labs",
     desc: "The page you were looking for could not be found.",
     canonical: BASE + "/",
     breadcrumbHtml: `<a href="/">Home</a>`,

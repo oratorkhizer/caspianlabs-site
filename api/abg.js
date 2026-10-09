@@ -174,11 +174,12 @@ ${faqBlock(FAQS)}
 <h2>Related tests</h2>
 <div class="rel"><a href="/tests/chest-x-ray-hyderabad">Chest X-ray</a><a href="/tests/ecg-test-hyderabad">ECG</a><a href="/tests/electrolytes-test-hyderabad">Electrolytes Test</a><a href="/tests/cbc-test-hyderabad">CBC Test</a><a href="/tests">All tests</a></div>
 <div class="note">This page is for general information and is not a substitute for medical advice. A blood gas should be ordered and interpreted by a doctor. If you are struggling to breathe, do not wait for a test, go to the nearest emergency room.</div>
+<p class="reviewed" style="font-size:14px;color:#5b6b7a;margin-top:14px">Medically reviewed by Dr Raheel Raza, MBBS, DCP (Gandhi), Consultant Pathologist.</p>
 </div>
 ${side}</div>`;
 
   return pageShell({
-    title: `ABG Test (Arterial Blood Gas) in Hyderabad at ${inr(PRICE)} | 24/7 | Caspian Diagnostic Centre`,
+    title: `ABG Test (Arterial Blood Gas) in Hyderabad at ${inr(PRICE)} | 24/7 | Caspian Labs`,
     desc: DESC,
     canonical: URL,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ABG Test`,
@@ -190,7 +191,8 @@ ${side}</div>`;
       ldBreadcrumb([["Home", "/"], ["All Tests", "/tests"], ["ABG Test", "/tests/" + SLUG]]),
       ldMedicalTest(NAME, DESC, URL),
       ldProduct(NAME, DESC, PRICE, URL),
-      ldFaq(FAQS)
+      ldFaq(FAQS),
+      { "@context": "https://schema.org", "@type": "MedicalWebPage", name: NAME, url: URL, inLanguage: "en-IN", reviewedBy: { "@type": "Physician", name: "Dr Raheel Raza", jobTitle: "MBBS, DCP (Gandhi), Consultant Pathologist" } }
     ]
   });
 }
