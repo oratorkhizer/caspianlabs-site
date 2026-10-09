@@ -17,7 +17,10 @@
     { "source": "/abg", "destination": "/tests/abg-test-hyderabad", "permanent": true },
     { "source": "/tests/arterial-blood-gas-test-hyderabad", "destination": "/tests/abg-test-hyderabad", "permanent": true },
     { "source": "/body-composition", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
-    { "source": "/bca", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true }
+    { "source": "/bca", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
+    { "source": "/xray", "destination": "/x-ray", "permanent": true },
+    { "source": "/x-ray-hyderabad", "destination": "/x-ray", "permanent": true },
+    { "source": "/tests/x-ray-hyderabad", "destination": "/x-ray", "permanent": true }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
@@ -37,6 +40,7 @@
     { "source": "/hi", "destination": "/api/lang?l=hi" },
     { "source": "/hi/:slug", "destination": "/api/lang?l=hi&slug=:slug" },
     { "source": "/read-my-report", "destination": "/read-my-report.html" },
+    { "source": "/x-ray", "destination": "/api/xray" },
     { "source": "/:path*", "destination": "/api/page?kind=404" }
   ],
   "headers": [

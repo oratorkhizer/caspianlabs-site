@@ -9,8 +9,8 @@
 // lastmod: bump the relevant date constant when the content of that group actually changes.
 // (Google ignores lastmod that is always "today"; a truthful date helps recrawl prioritisation.)
 
-const LASTMOD_LANDING = "2026-09-14"; // tests/packages/hub/home-collection pages (api/page.js)
-const LASTMOD_HOMEPAGE = "2026-09-03"; // index.html
+const LASTMOD_LANDING = "2026-10-09"; // tests/packages/hub/home-collection pages (api/page.js)
+const LASTMOD_HOMEPAGE = "2026-10-09"; // index.html
 const LASTMOD_BLOG = "2026-07-31";     // api/blog.js articles
 const LASTMOD_STATIC = "2026-07-31";   // about/pricing/contact/legal html files
 
@@ -18,6 +18,7 @@ const PAGES = [
   { path: "/",                  changefreq: "weekly",  priority: "1.0", lastmod: LASTMOD_HOMEPAGE },
   { path: "/tests",             changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/packages",          changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
+  { path: "/x-ray",             changefreq: "monthly", priority: "0.9", lastmod: "2026-10-09" },
   { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7", lastmod: LASTMOD_BLOG },
   { path: "/read-my-report",    changefreq: "monthly", priority: "0.8", lastmod: "2026-10-02" },

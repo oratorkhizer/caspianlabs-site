@@ -511,14 +511,14 @@ const TESTS = [
     related: ["p:heart-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad"]
   },
   {
-    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 300, sample: "Imaging, done at our centre", fasting: "no", photo: "xray",
-    desc: "Digital chest X-ray in Hyderabad at ₹300: for cough, fever, TB screening and pre-op checks. Same-day film & report. Portable home chest X-ray available at ₹2,000.",
+    slug: "chest-x-ray-hyderabad", name: "Chest X-ray (PA / AP view)", short: "Chest X-ray", price: 350, sample: "Imaging, done at our centre", fasting: "no", photo: "xray",
+    desc: "Digital chest X-ray in Hyderabad at ₹350: for cough, fever, TB screening and pre-op checks. Same-day film and radiologist report. Home chest X-ray through our partner at ₹2,000.",
     about: [
       "Our digital chest X-ray (PA or AP view) is the most-requested imaging test, used for persistent cough, fever, breathlessness, TB screening and pre-operative fitness. Film and report are delivered the same day.",
-      "Can't travel? We also offer a portable chest X-ray at home (₹2,000), our visiting X-ray team brings the equipment to your bedside, ideal for elderly or bedridden patients. Caspian is a PCPNDT-registered imaging centre."
+      "Can't travel? A portable chest X-ray at home (₹2,000) can be arranged through our partner radiology team, ideal for elderly or bedridden patients."
     ],
     whoShould: ["Persistent cough or breathlessness", "TB screening and fever workups", "Pre-operative and employment fitness checks"],
-    faqExtra: [["Can I get a chest X-ray at home?", "Yes, a portable chest X-ray at home is available for ₹2,000 across Hyderabad. Our visiting team brings portable equipment to your bedside; ideal for elderly, bedridden or post-surgery patients. Message us on WhatsApp to schedule."]],
+    faqExtra: [["Can I get a chest X-ray at home?", "Yes, a portable chest X-ray at home can be arranged for ₹2,000 across Hyderabad through our partner radiology team, ideal for elderly, bedridden or post-surgery patients. Message us on WhatsApp to schedule."]],
     homeCollection: false,
     related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad"]
   },
@@ -803,6 +803,7 @@ function renderTest(t) {
   const body = `<div class="grid"><div class="card">
 ${photoFig(t.photo)}<h2>What does this test check?</h2>
 ${t.about.map(x => `<p>${esc(x)}</p>`).join("\n")}
+${t.photo === "xray" ? `<p class="note">Need a different X-ray? <a href="/x-ray">See prices for all 63 X-rays</a>, from ₹350.</p>` : ""}
 <h2>Test details</h2>
 <table class="facts">
 <tr><td>Price</td><td>${inr(t.price)}</td></tr>
@@ -845,7 +846,7 @@ function renderHome() {
     ["How do I prepare for a home visit?", "If your test needs fasting (8–12 hours for fasting sugar or lipid profile), book a morning slot and don't eat after dinner, water is fine. Keep your doctor's prescription handy if you have one. Our phlebotomist carries everything else."],
     ["When will I get my reports?", "Most routine reports are delivered the same day or within 24 hours, directly on WhatsApp, no need to visit the centre."],
     ["Is home collection safe and hygienic?", "Yes, our trained phlebotomists use sterile, single-use equipment for every visit, and samples are transported to our lab under proper conditions for processing."],
-    ["Can I get an X-ray or CGM at home too?", "Yes. We offer a portable chest X-ray at home (₹2,000) for patients who can't travel, and CGM (continuous glucose monitor) sensors fitted at home at MRP with no application charge."]
+    ["Can I get an X-ray or CGM at home too?", "Yes. A portable chest X-ray at home (₹2,000) can be arranged through our partner radiology team for patients who can't travel, and CGM (continuous glucose monitor) sensors fitted at home at MRP with no application charge."]
   ];
   const popular = ["t:cbc-test-hyderabad", "t:hba1c-test-hyderabad", "t:tsh-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:vitamin-d-test-hyderabad", "p:full-body-checkup-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "p:senior-citizen-health-checkup-hyderabad"];
   const body = `<div class="grid"><div class="card">
@@ -861,7 +862,7 @@ ${photoFig("nurse", "Our nursing and phlebotomy team, Caspian, Vijay Nagar Colon
 <li><b>3. Report on WhatsApp</b>: most reports the same day or within 24 hours.</li>
 </ul>
 <h2>Beyond blood tests</h2>
-<p>We also bring imaging and monitoring home: a <a href="/tests/chest-x-ray-hyderabad">portable chest X-ray at home</a> (₹2,000) for bedridden or elderly patients, and CGM (continuous glucose monitoring) sensors, FreeStyle Libre 2+ and Guardian IV, fitted at home at MRP with no application charge.</p>
+<p>We also bring imaging and monitoring home: a <a href="/tests/chest-x-ray-hyderabad">portable chest X-ray at home</a> (₹2,000, through our partner radiology team) for bedridden or elderly patients, and CGM (continuous glucose monitoring) sensors, FreeStyle Libre 2+ and Guardian IV, fitted at home at MRP with no application charge.</p>
 <h2>Frequently asked questions</h2>
 ${faqBlock(faqs)}
 <h2>Popular tests booked with home collection</h2>
@@ -896,6 +897,7 @@ function renderHub(kind) {
   const body = `<div class="card">
 ${photoFig(isTests ? "lab" : "team", isTests ? "Our laboratory in Vijay Nagar Colony" : "The Caspian team")}<p>${isTests ? "Every test below is done at our lab in Vijay Nagar Colony or collected from your home. Prices are the same online, at the centre and at home; the only extra is a ₹100 home-visit charge on orders below ₹500." : "Each package bundles the tests doctors ask for most often at a lower price than booking them one by one. Home collection is free on all packages above ₹500."} Tap a ${isTests ? "test" : "package"} for details, preparation and FAQs, then book and pay online in under a minute.</p>
 <ul class="hub">${li}</ul>
+${isTests ? `<p class="note" style="margin-top:18px">Looking for an X-ray? <a href="/x-ray">See prices for all 63 X-rays</a>, from ₹350 with a same-day radiologist report.</p>` : ""}
 <p style="margin-top:18px">Looking for something not listed? Our full menu has 1,400+ tests. <a href="/#all-tests">Search all tests</a> or <a href="${waLink("Hi Caspian Diagnostic Centre, I'm looking for a test: ")}" target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>
 </div>`;
   const ld = [
