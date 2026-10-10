@@ -76,19 +76,17 @@ const INDICATIONS = [
   ["Urology and kidney", [
     "Kidney stone surgery (PCNL, URS, RIRS)",
     "Prostate surgery (TURP)",
-    "Circumcision and hydrocele surgery in adults",
+    "Hydrocele surgery",
     "Dialysis fistula or catheter placement"
   ]],
-  ["Eyes, ENT and dental", [
-    "Cataract surgery",
+  ["ENT and dental", [
     "Tonsil, adenoid and sinus surgery (FESS)",
     "Septoplasty and ear surgery",
-    "Dental surgery under general anaesthesia, wisdom tooth removal"
+    "Dental surgery under general anaesthesia"
   ]],
-  ["Heart, scopes and other procedures", [
+  ["Heart and other procedures", [
     "Angiography and angioplasty, pacemaker",
-    "Endoscopy or colonoscopy under sedation",
-    "Biopsies (kidney, liver, breast, prostate)",
+    "Kidney or liver biopsy",
     "Varicose vein procedures",
     "Cosmetic and plastic surgery"
   ]]
@@ -140,7 +138,8 @@ ${photoFig(HERO_PHOTO)}<h2>What is a surgical profile?</h2>
 <h2>When is a surgical profile needed?</h2>
 <p>Any surgery or procedure done under general or spinal anaesthesia, or deep sedation, usually needs some or all of these tests. Common reasons people come to us:</p>
 ${INDICATIONS.map(g => `<h3 style="margin:18px 0 6px;font-size:17px">${esc(g[0])}</h3><ul>${g[1].map(i => `<li>${esc(i)}</li>`).join("")}</ul>`).join("\n")}
-<p>Your surgeon or anaesthetist decides the exact tests for your surgery. Some small procedures need only a few of them; some patients need extra tests such as a 2D echo, HbA1c or urine test. If you have been given a list, <a href="${waRx}" target="_blank" rel="noopener">send us a photo on WhatsApp</a> and we will tell you the total.</p>
+<div class="note"><b>Small procedures under local anaesthesia do not need this full profile.</b> For cataract surgery, endoscopy, small biopsies, wisdom tooth removal and similar procedures, most surgeons ask only for blood sugar and the infection tests (HIV, HBsAg, HCV), and an ECG in older patients. Do not pay for tests you do not need: send us your surgeon's list and we will do only those, at our standard prices.</div>
+<p>Your surgeon or anaesthetist decides the exact tests for your surgery. Some procedures need only a few of them; some patients need extra tests such as a 2D echo, HbA1c or urine test. If you have been given a list, <a href="${waRx}" target="_blank" rel="noopener">send us a photo on WhatsApp</a> and we will tell you the total.</p>
 <h2>Why 3 hours matters</h2>
 <ul>
 <li><b>No delayed admission.</b> Hospitals often will not book the theatre until the reports are in. A next-day report can push your surgery by a day.</li>
