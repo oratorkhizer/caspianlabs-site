@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node scripts/inject-optin.mjs && node scripts/address-fix.mjs && node scripts/illustrations.mjs && node scripts/egfr-link.mjs",
+  "buildCommand": "node scripts/inject-optin.mjs && node scripts/address-fix.mjs && node scripts/illustrations.mjs && node scripts/egfr-link.mjs && node scripts/surgical-profile.mjs",
   "outputDirectory": "public",
   "redirects": [
     {
@@ -18,6 +18,9 @@
     { "source": "/tests/arterial-blood-gas-test-hyderabad", "destination": "/tests/abg-test-hyderabad", "permanent": true },
     { "source": "/body-composition", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
     { "source": "/bca", "destination": "https://www.caspianhealthcare.in/body-composition", "permanent": true },
+    { "source": "/surgical-profile", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
+    { "source": "/pre-op", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
+    { "source": "/preop", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
     { "source": "/xray", "destination": "/x-ray", "permanent": true },
     { "source": "/x-ray-hyderabad", "destination": "/x-ray", "permanent": true },
     { "source": "/tests/x-ray-hyderabad", "destination": "/x-ray", "permanent": true }
@@ -27,6 +30,7 @@
     { "source": "/favicon.ico", "destination": "/favicon.svg" },
     { "source": "/tests", "destination": "/api/page?kind=tests" },
     { "source": "/packages", "destination": "/api/page?kind=packages" },
+    { "source": "/packages/surgical-profile-hyderabad", "destination": "/api/surgical" },
     { "source": "/packages/:slug", "destination": "/api/page?kind=package&slug=:slug" },
     { "source": "/tests/abg-test-hyderabad", "destination": "/api/abg" },
     { "source": "/tests/:slug", "destination": "/api/page?kind=test&slug=:slug" },
