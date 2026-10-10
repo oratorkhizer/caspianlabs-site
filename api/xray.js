@@ -248,9 +248,8 @@ none.style.display=n?'none':'block';});})();
   });
 }
 
-// Part pages whose illustration file is in /illus. Knee, shoulder and ankle were redrawn for
-// anatomy and are still to be uploaded; until then those pages show the X-ray room photo.
-const ILLUS_READY = new Set(["lumbar-spine", "cervical-spine", "kub", "pns-sinus", "hip-pelvis", "foot", "hand-wrist", "bone-age"]);
+// Part pages whose illustration file is in /illus (all 11 since 10 Oct 2026).
+const ILLUS_READY = new Set(Object.keys(PARTS));
 
 function renderPart(slug) {
   const p = PARTS[slug];
