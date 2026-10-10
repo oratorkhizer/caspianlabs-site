@@ -53,6 +53,25 @@ const ILLUS = {
   "404": ["not-found", "Illustration: a lab technician looking for a missing test tube"],
   "abg": ["abg", "Illustration: the lungs and an arterial blood sample syringe kept on ice"],
   "home-band": ["home-collection", "Illustration: our phlebotomist arriving at a patient's home for sample collection"],
+  "xray-knee": ["xray-knee", "Illustration: a side-view X-ray of the knee showing the thigh bone, shin bone and kneecap"], // wired directly in api/xray.js
+  "xray-lumbar-spine": ["xray-lumbar-spine", "Illustration: an adult holding the lower back, with the lumbar spine bones and their X-ray"], // wired directly in api/xray.js
+  "xray-cervical-spine": ["xray-cervical-spine", "Illustration: the seven neck bones inside the neck, and a person at a desk with a stiff neck"], // wired directly in api/xray.js
+  "xray-kub": ["xray-kub", "Illustration: the kidneys, ureters and bladder, with a small stone in one ureter"], // wired directly in api/xray.js
+  "xray-pns-sinus": ["xray-pns-sinus", "Illustration: the sinuses in the face with one cloudy cheek sinus, and a child snoring"], // wired directly in api/xray.js
+  "xray-shoulder": ["xray-shoulder", "Illustration: a shoulder X-ray showing the ball and socket joint and the collar bone"], // wired directly in api/xray.js
+  "xray-hip-pelvis": ["xray-hip-pelvis", "Illustration: the pelvis with both hip joints, and an elderly man walking with a stick"], // wired directly in api/xray.js
+  "xray-ankle": ["xray-ankle", "Illustration: a sprained ankle in a bandage, and a front-view ankle X-ray"], // wired directly in api/xray.js
+  "xray-foot": ["xray-foot", "Illustration: the bones of the foot with a dressing on a wound, and a glucometer"], // wired directly in api/xray.js
+  "xray-hand-wrist": ["xray-hand-wrist", "Illustration: a fall on an outstretched hand, and a hand and wrist X-ray with the scaphoid bone highlighted"], // wired directly in api/xray.js
+  "xray-bone-age": ["xray-bone-age", "Illustration: a child at a height chart, and an X-ray of the left hand and wrist showing growth plates"], // wired directly in api/xray.js
+  "xray-room": ["xray-room", "Illustration: the X-ray room"], // wired directly in api/xray.js (hub)
+  "about": ["about", "Illustration: the diagnostic centre and its team"], // wired directly in about.html
+  "contact": ["contact", "Illustration: chat, map and phone"], // contact.html
+  "pricing": ["pricing", "Illustration: clear pricing"], // pricing.html
+  "shipping": ["sample-journey", "Illustration: sample to report"], // shipping.html
+  "read-my-report": ["read-my-report", "Illustration: reading a report on a phone"], // read-my-report.html
+  "blog-hba1c": ["blog-hba1c", "Illustration: HbA1c explained"], // api/blog.js
+  "blog-fasting": ["blog-fasting", "Illustration: fasting before a test"], // api/blog.js
   "home-why": ["why-caspian", "Illustration: a lab scientist checking a sample beside an analyser"],
 };
 

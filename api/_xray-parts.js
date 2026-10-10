@@ -8,6 +8,7 @@
 
 export const PARTS = {
   "knee": {
+    illusAlt: "Illustration: a side-view X-ray of the knee showing the thigh bone, shin bone and kneecap",
     name: "Knee X-ray", h1: "Knee X-ray in Hyderabad",
     codes: ["XR-KN1", "XR-KN2", "XR-KNBAP", "XR-KNB", "XR-KNBS", "XR-PAT"],
     about: [
@@ -23,6 +24,7 @@ export const PARTS = {
     related: ["hip-pelvis", "ankle", "lumbar-spine"]
   },
   "lumbar-spine": {
+    illusAlt: "Illustration: an adult holding the lower back, with the lumbar spine bones and their X-ray",
     name: "Lumbar Spine X-ray", h1: "Lumbar Spine (Lower Back) X-ray in Hyderabad",
     codes: ["XR-LS1", "XR-LS2", "XR-LSFE", "XR-DLS", "XR-SAC", "XR-SIJ"],
     about: [
@@ -38,6 +40,7 @@ export const PARTS = {
     related: ["cervical-spine", "hip-pelvis", "knee"]
   },
   "cervical-spine": {
+    illusAlt: "Illustration: the seven neck bones inside the neck, and a person at a desk with a stiff neck",
     name: "Cervical Spine X-ray", h1: "Cervical Spine (Neck) X-ray in Hyderabad",
     codes: ["XR-CS1", "XR-CS2", "XR-CSFE"],
     about: [
@@ -52,6 +55,7 @@ export const PARTS = {
     related: ["lumbar-spine", "shoulder", "pns-sinus"]
   },
   "kub": {
+    illusAlt: "Illustration: the kidneys, ureters and bladder, with a small stone in one ureter",
     name: "KUB X-ray", h1: "KUB X-ray (Kidney, Ureter, Bladder) in Hyderabad",
     codes: ["XR-KUB", "XR-ABD"],
     about: [
@@ -67,6 +71,7 @@ export const PARTS = {
     related: ["lumbar-spine", "hip-pelvis"]
   },
   "pns-sinus": {
+    illusAlt: "Illustration: the sinuses in the face with one cloudy cheek sinus, and a child snoring",
     name: "PNS (Sinus) X-ray", h1: "PNS (Sinus) and Adenoid X-ray in Hyderabad",
     codes: ["XR-PNS", "XR-NPX", "XR-STN"],
     about: [
@@ -81,6 +86,7 @@ export const PARTS = {
     related: ["cervical-spine", "bone-age"]
   },
   "shoulder": {
+    illusAlt: "Illustration: a shoulder X-ray showing the ball and socket joint and the collar bone",
     name: "Shoulder X-ray", h1: "Shoulder X-ray in Hyderabad",
     codes: ["XR-SHO1", "XR-SHO2", "XR-SHOB", "XR-CLA"],
     about: [
@@ -95,6 +101,7 @@ export const PARTS = {
     related: ["cervical-spine", "hand-wrist"]
   },
   "hip-pelvis": {
+    illusAlt: "Illustration: the pelvis with both hip joints, and an elderly man walking with a stick",
     name: "Hip and Pelvis X-ray", h1: "Hip and Pelvis X-ray in Hyderabad",
     codes: ["XR-PEL", "XR-HIP1", "XR-HIP2", "XR-HIPB"],
     about: [
@@ -109,6 +116,7 @@ export const PARTS = {
     related: ["knee", "lumbar-spine", "kub"]
   },
   "ankle": {
+    illusAlt: "Illustration: a sprained ankle in a bandage, and a front-view ankle X-ray",
     name: "Ankle X-ray", h1: "Ankle X-ray in Hyderabad",
     codes: ["XR-ANK1", "XR-ANK2", "XR-ANKB"],
     about: [
@@ -123,6 +131,7 @@ export const PARTS = {
     related: ["foot", "knee"]
   },
   "foot": {
+    illusAlt: "Illustration: the bones of the foot with a dressing on a wound, and a glucometer",
     name: "Foot X-ray", h1: "Foot X-ray and Diabetic Foot X-ray in Hyderabad",
     codes: ["XR-FT1", "XR-FT2", "XR-FT3", "XR-FTB", "XR-CAL", "XR-TOE"],
     about: [
@@ -138,6 +147,7 @@ export const PARTS = {
     related: ["ankle", "knee"]
   },
   "hand-wrist": {
+    illusAlt: "Illustration: a fall on an outstretched hand, and a hand and wrist X-ray with the scaphoid bone highlighted",
     name: "Hand and Wrist X-ray", h1: "Hand and Wrist X-ray in Hyderabad",
     codes: ["XR-WR1", "XR-WR2", "XR-WRB", "XR-SCA", "XR-HD1", "XR-HD2", "XR-HDB", "XR-FNG"],
     about: [
@@ -152,6 +162,7 @@ export const PARTS = {
     related: ["bone-age", "shoulder"]
   },
   "bone-age": {
+    illusAlt: "Illustration: a child at a height chart, and an X-ray of the left hand and wrist showing growth plates",
     name: "Bone Age X-ray", h1: "Bone Age X-ray for Children in Hyderabad",
     codes: ["XR-BAGE"],
     about: [

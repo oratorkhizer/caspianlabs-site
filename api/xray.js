@@ -208,6 +208,7 @@ ${rows}
 <p class="note" style="margin-top:18px">Left or right: tell us the side when you book. The price is the same for either side. Tap <b>Share</b> on any X-ray to send its price and link on WhatsApp.</p>
 
 <h2>Before your X-ray</h2>
+<figure class="ph"><img src="/illus/xray-room.jpg" alt="Illustration: a patient standing at the X-ray panel while the radiographer positions the X-ray tube, with the image on a monitor" width="1400" height="781" loading="lazy" decoding="async"></figure>
 <dl class="prep">${PREP.map(p => `<dt>${esc(p[0])}</dt><dd>${esc(p[1])}</dd>`).join("")}</dl>
 
 <h2>X-ray at home</h2>
@@ -247,6 +248,10 @@ none.style.display=n?'none':'block';});})();
   });
 }
 
+// Part pages whose illustration file is in /illus. Knee, shoulder and ankle were redrawn for
+// anatomy and are still to be uploaded; until then those pages show the X-ray room photo.
+const ILLUS_READY = new Set(["lumbar-spine", "cervical-spine", "kub", "pns-sinus", "hip-pelvis", "foot", "hand-wrist", "bone-age"]);
+
 function renderPart(slug) {
   const p = PARTS[slug];
   const url = BASE + "/x-ray/" + slug;
@@ -263,7 +268,7 @@ function renderPart(slug) {
   const body = `<style>${ROW_CSS}
 @media(min-width:561px){.card .xl.pg li{grid-template-columns:1fr 70px 64px 64px}.card .xl.pg .xv{display:none}}</style>
 <div class="grid"><div class="card">
-${photoFig("xray", "The digital X-ray room at Caspian Diagnostic Centre")}
+${ILLUS_READY.has(slug) ? `<figure class="ph"><img src="/illus/xray-${slug}.jpg" alt="${esc(p.illusAlt || ("Illustration: " + p.name))}" width="1400" height="781" decoding="async"></figure>` : photoFig("xray", "The digital X-ray room at Caspian Diagnostic Centre")}
 <h2>Prices</h2>
 <ul class="xl pg">${tests.map(t => rowHtml(t, false)).join("")}</ul>
 <p class="note">Left or right: tell us the side when you book. The price is the same for either side.</p>
@@ -304,7 +309,7 @@ ${SHARE_JS}`;
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/x-ray">X-ray</a> › ${esc(p.name)}`,
     heroH1: `${p.h1}, from ${inr(from)}`,
     heroSub: `Digital X-ray · Radiologist report the same day on WhatsApp · Walk in, no appointment`,
-    bodyHtml: body, ld, ogImage: photoUrl("xray")
+    bodyHtml: body, ld, ogImage: ILLUS_READY.has(slug) ? BASE + "/illus/xray-" + slug + ".jpg" : photoUrl("xray")
   });
 }
 
