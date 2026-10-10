@@ -48,7 +48,29 @@ const BOOK_NAMES = {
   "typhoid-widal-test-hyderabad": "Widal (Typhoid)",
   "electrolytes-test-hyderabad": "Electrolyte Profile (Na/K/Cl)",
   "calcium-test-hyderabad": "Serum Calcium",
-  "chest-x-ray-hyderabad": "Chest X-ray (PA / AP)"
+  "chest-x-ray-hyderabad": "Chest X-ray (PA / AP)",
+  // Added 10 Oct 2026: exact names from the full Crelio menu (/api/tests); the homepage search finds them.
+  "insulin-fasting-test-hyderabad": "Insulin Fasting",
+  "homa-ir-test-hyderabad": "HOMA Index (Insulin/C-Peptide Resistance)",
+  "c-peptide-test-hyderabad": "C-Peptide fasting",
+  "urine-acr-test-hyderabad": "Albumin/Creatinine Ratio, Urine Spot (UACR)",
+  "anti-tpo-test-hyderabad": "Anti Thryroperoxidase Antibody (TPO)",
+  "prolactin-test-hyderabad": "Prolactin (PRL)",
+  "testosterone-test-hyderabad": "Testosterone Total",
+  "fsh-test-hyderabad": "FSH (Follicle Stimulating Hormone)",
+  "lh-test-hyderabad": "Luteinising Hormone (LH)",
+  "amh-test-hyderabad": "Anti Mullerian Hormone",
+  "hbsag-test-hyderabad": "Hepatitis B Surface Antigen (HBsAg)",
+  "hiv-test-hyderabad": "HIV-1&2 Antibody",
+  "ra-factor-test-hyderabad": "Rheumatoid Factor-RA Test",
+  "anti-ccp-test-hyderabad": "Anti CCP Cyclic Citrullinated Peptide Antibody , CLIA",
+  "ana-test-hyderabad": "Anti Nuclear Antibody, CLIA",
+  "stool-routine-test-hyderabad": "Stool Examination Routine",
+  "pt-inr-test-hyderabad": "Prothrombin Time (PT)",
+  "d-dimer-test-hyderabad": "D-Dimer",
+  "troponin-test-hyderabad": "Troponin - I",
+  "g6pd-test-hyderabad": "G6PD Quantitative",
+  "thalassemia-hba2-test-hyderabad": "HbA2 Hemoglobinopathy"
 };
 function bookHref(slug) { const n = BOOK_NAMES[slug]; return n ? "/?test=" + encodeURIComponent(n) + "#all-tests" : "/#all-tests"; }
 
@@ -103,7 +125,7 @@ const PACKAGES = [
     fasting: "no",
     idealFor: ["People living with diabetes, recommended every 3–6 months", "Prediabetes or family history of diabetes", "Annual complication screening"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Comprehensive Diabetes Screening (₹899).",
-    related: ["t:hba1c-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:lipid-profile-test-hyderabad"]
+    related: ["t:hba1c-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:urine-acr-test-hyderabad", "t:homa-ir-test-hyderabad"]
   },
   {
     slug: "thyroid-profile-test-hyderabad",
@@ -119,7 +141,7 @@ const PACKAGES = [
     fasting: "no",
     idealFor: ["Tiredness, weight gain or hair fall", "Irregular periods or fertility concerns", "Monitoring thyroid medication (as advised)"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Thyroid Profile (₹470).",
-    related: ["t:tsh-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["t:tsh-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:anti-tpo-test-hyderabad"]
   },
   {
     slug: "metabolic-wellness",
@@ -135,7 +157,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Weight-loss or fitness programmes", "Tracking metabolic health over time", "Anyone curious what their weight is made of"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Metabolic Wellness Checkup (₹1,795).",
-    related: ["p:full-body-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+    related: ["p:full-body-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:homa-ir-test-hyderabad", "t:insulin-fasting-test-hyderabad"]
   },
   {
     slug: "womens-health-checkup-hyderabad",
@@ -151,7 +173,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Tiredness, hair fall or heavy periods", "Annual screening for women 30+", "Bone and vitamin health after pregnancy or menopause"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Women's Health package (₹3,000).",
-    related: ["t:ferritin-test-hyderabad", "t:vitamin-d-test-hyderabad", "t:vitamin-b12-test-hyderabad", "p:thyroid-profile-test-hyderabad", "t:beta-hcg-test-hyderabad", "t:calcium-test-hyderabad"]
+    related: ["t:ferritin-test-hyderabad", "t:vitamin-d-test-hyderabad", "t:vitamin-b12-test-hyderabad", "p:thyroid-profile-test-hyderabad", "t:beta-hcg-test-hyderabad", "t:calcium-test-hyderabad", "t:amh-test-hyderabad", "t:prolactin-test-hyderabad", "t:fsh-test-hyderabad"]
   },
   {
     slug: "senior-citizen-health-checkup-hyderabad",
@@ -186,7 +208,7 @@ const PACKAGES = [
     ekaLink: "https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist",
     photo: "echo",
     homeCollection: false,
-    related: ["t:lipid-profile-test-hyderabad", "t:hba1c-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:2d-echo-test-hyderabad"]
+    related: ["t:lipid-profile-test-hyderabad", "t:hba1c-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:2d-echo-test-hyderabad", "t:troponin-test-hyderabad"]
   },
   {
     slug: "premium-health-checkup-men-hyderabad",
@@ -202,7 +224,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Men 45+ due for a thorough annual check", "Strong family history of early heart disease", "Executives wanting a single comprehensive screen"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Premium Health Check for Men 45+ (₹4,399).",
-    related: ["p:heart-health-checkup-hyderabad", "t:psa-test-hyderabad", "p:full-body-checkup-hyderabad", "t:ecg-test-hyderabad", "t:liver-function-test-hyderabad"]
+    related: ["p:heart-health-checkup-hyderabad", "t:psa-test-hyderabad", "p:full-body-checkup-hyderabad", "t:ecg-test-hyderabad", "t:liver-function-test-hyderabad", "t:testosterone-test-hyderabad"]
   },
   {
     slug: "haj-umrah-fitness-package-hyderabad",
@@ -236,7 +258,7 @@ const TESTS = [
       "It is the test doctors use both to diagnose diabetes and prediabetes and to track how well treatment is working. As a diabetologist-led lab, HbA1c is one of our most-run tests."
     ],
     whoShould: ["People with diabetes, usually every 3 months", "Anyone with prediabetes or a family history of diabetes", "Symptoms like excessive thirst, frequent urination or unexplained weight loss"],
-    related: ["p:comprehensive-diabetes-screening-hyderabad", "t:blood-sugar-test-hyderabad", "t:lipid-profile-test-hyderabad"]
+    related: ["p:comprehensive-diabetes-screening-hyderabad", "t:blood-sugar-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:insulin-fasting-test-hyderabad", "t:c-peptide-test-hyderabad", "t:urine-acr-test-hyderabad"]
   },
   {
     slug: "blood-sugar-test-hyderabad", name: "Blood Sugar Test (Fasting / PP / Random)", short: "Blood Sugar", price: 80, sample: "Blood", fasting: "depends",
@@ -257,7 +279,7 @@ const TESTS = [
       "It is the starting point for investigating fever, fatigue, weakness, unusual bruising, or as part of any routine checkup."
     ],
     whoShould: ["Fever or suspected infection", "Tiredness, weakness or pale skin (anaemia)", "Routine annual screening"],
-    related: ["t:esr-test-hyderabad", "t:crp-test-hyderabad", "p:full-body-checkup-hyderabad"]
+    related: ["t:esr-test-hyderabad", "t:crp-test-hyderabad", "p:full-body-checkup-hyderabad", "t:thalassemia-hba2-test-hyderabad", "t:g6pd-test-hyderabad", "t:stool-routine-test-hyderabad"]
   },
   {
     slug: "tsh-test-hyderabad", name: "TSH Test (Thyroid Stimulating Hormone)", short: "TSH", price: 350, sample: "Blood", fasting: "no",
@@ -267,7 +289,7 @@ const TESTS = [
       "If your TSH is abnormal, your doctor may follow up with the full thyroid profile (T3, T4 and TSH), available here at ₹470."
     ],
     whoShould: ["Tiredness, weight change or hair fall", "Monitoring thyroid medication doses", "Fertility or menstrual irregularity workup"],
-    related: ["p:thyroid-profile-test-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["p:thyroid-profile-test-hyderabad", "t:cbc-test-hyderabad", "t:anti-tpo-test-hyderabad", "t:prolactin-test-hyderabad"]
   },
   {
     slug: "lipid-profile-test-hyderabad", name: "Lipid Profile (Cholesterol Test)", short: "Lipid Profile", price: 450, sample: "Blood", fasting: "yes",
@@ -287,7 +309,7 @@ const TESTS = [
       "It is ordered for jaundice, suspected fatty liver, alcohol-related concerns, medication monitoring, and as part of routine checkups, fatty liver is increasingly common alongside diabetes and obesity."
     ],
     whoShould: ["Yellowing of eyes/skin, dark urine or abdominal pain", "Fatty liver follow-up or alcohol-related screening", "People on long-term medication that affects the liver"],
-    related: ["t:kidney-function-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness"]
+    related: ["t:kidney-function-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness", "t:hbsag-test-hyderabad", "t:pt-inr-test-hyderabad"]
   },
   {
     slug: "kidney-function-test-hyderabad", name: "Kidney Function Test (KFT)", short: "KFT", price: 400, sample: "Blood", fasting: "confirm",
@@ -297,7 +319,7 @@ const TESTS = [
       "Diabetes and high blood pressure are the two biggest causes of kidney damage in India, and early damage is silent, which is why regular KFT screening matters for anyone with either condition."
     ],
     whoShould: ["People with diabetes or high blood pressure", "Swelling of feet, reduced urine output or frothy urine", "Before starting certain medications, as advised"],
-    related: ["t:serum-creatinine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-routine-test-hyderabad", "t:calcium-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+    related: ["t:serum-creatinine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-routine-test-hyderabad", "t:calcium-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:urine-acr-test-hyderabad"]
   },
   {
     slug: "vitamin-d-test-hyderabad", name: "Vitamin D Test (25-OH)", short: "Vitamin D", price: 1350, sample: "Blood", fasting: "no",
@@ -327,7 +349,7 @@ const TESTS = [
       "It is quick, painless and remarkably informative: burning urination, frequent urination, foul-smelling or cloudy urine, and routine diabetes checks are all common reasons to test."
     ],
     whoShould: ["Burning or frequent urination (suspected UTI)", "Routine diabetes and kidney screening", "Pregnancy-related routine checks"],
-    related: ["t:kidney-function-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:urine-acr-test-hyderabad", "t:stool-routine-test-hyderabad"]
   },
   {
     slug: "crp-test-hyderabad", name: "CRP Test (C-Reactive Protein)", short: "CRP", price: 550, sample: "Blood", fasting: "no",
@@ -337,7 +359,7 @@ const TESTS = [
       "It is commonly ordered alongside CBC and ESR in fever panels, joint pain workups, and post-infection monitoring."
     ],
     whoShould: ["Fever or suspected infection", "Monitoring response to antibiotics", "Joint pain and inflammation workups"],
-    related: ["t:esr-test-hyderabad", "t:cbc-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:uric-acid-test-hyderabad"]
+    related: ["t:esr-test-hyderabad", "t:cbc-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:uric-acid-test-hyderabad", "t:ra-factor-test-hyderabad", "t:ana-test-hyderabad"]
   },
   {
     slug: "esr-test-hyderabad", name: "ESR Test", short: "ESR", price: 170, sample: "Blood", fasting: "no",
@@ -347,7 +369,7 @@ const TESTS = [
       "It is almost always interpreted together with CBC and CRP rather than alone."
     ],
     whoShould: ["Prolonged or unexplained fever", "Joint pains and suspected arthritis", "TB and chronic infection workups"],
-    related: ["t:crp-test-hyderabad", "t:cbc-test-hyderabad", "t:uric-acid-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
+    related: ["t:crp-test-hyderabad", "t:cbc-test-hyderabad", "t:uric-acid-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:ra-factor-test-hyderabad", "t:ana-test-hyderabad"]
   },
   {
     slug: "serum-creatinine-test-hyderabad", name: "Serum Creatinine Test", short: "Creatinine", price: 250, sample: "Blood", fasting: "no",
@@ -357,7 +379,7 @@ const TESTS = [
       "People with diabetes or high BP should check creatinine at least yearly, kidney damage caught early can often be slowed significantly."
     ],
     whoShould: ["Diabetes or high blood pressure (yearly screening)", "Before scans with contrast dye, as advised", "Monitoring known kidney disease"],
-    related: ["t:kidney-function-test-hyderabad", "t:blood-urea-test-hyderabad", "t:urine-routine-test-hyderabad", "t:electrolytes-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:blood-urea-test-hyderabad", "t:urine-routine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-acr-test-hyderabad"]
   },
   {
     slug: "uric-acid-test-hyderabad", name: "Uric Acid Test", short: "Uric Acid", price: 160, sample: "Blood", fasting: "confirm",
@@ -367,7 +389,7 @@ const TESTS = [
       "High uric acid is also linked with kidney stones and often travels with diabetes and obesity, so it is worth checking as part of metabolic screening."
     ],
     whoShould: ["Sudden severe joint pain (classically the big toe)", "History of kidney stones", "Monitoring gout treatment"],
-    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad", "t:ra-factor-test-hyderabad"]
   },
   {
     slug: "blood-urea-test-hyderabad", name: "Blood Urea Test", short: "Blood Urea", price: 160, sample: "Blood", fasting: "no",
@@ -387,7 +409,7 @@ const TESTS = [
       "Iron deficiency is the most common nutritional deficiency in India, particularly in women, and shows up as tiredness, hair fall, breathlessness on climbing stairs and pale skin."
     ],
     whoShould: ["Women with heavy periods or hair fall", "Low haemoglobin on a CBC", "Unexplained fatigue"],
-    related: ["t:cbc-test-hyderabad", "p:womens-health-checkup-hyderabad", "t:vitamin-b12-test-hyderabad"]
+    related: ["t:cbc-test-hyderabad", "p:womens-health-checkup-hyderabad", "t:vitamin-b12-test-hyderabad", "t:thalassemia-hba2-test-hyderabad"]
   },
   {
     slug: "blood-group-test-hyderabad", name: "Blood Group Test (ABO & Rh)", short: "Blood Group", price: 160, sample: "Blood", fasting: "no",
@@ -397,7 +419,7 @@ const TESTS = [
       "It is a quick test with a same-day report you can keep on record."
     ],
     whoShould: ["Pregnancy registration and antenatal records", "Pre-operative and admission requirements", "Travel, visa or ID documentation"],
-    related: ["t:cbc-test-hyderabad", "p:haj-umrah-fitness-package-hyderabad", "t:beta-hcg-test-hyderabad"]
+    related: ["t:cbc-test-hyderabad", "p:haj-umrah-fitness-package-hyderabad", "t:beta-hcg-test-hyderabad", "t:thalassemia-hba2-test-hyderabad"]
   },
   {
     slug: "beta-hcg-test-hyderabad", name: "Beta HCG Test (Pregnancy)", short: "Beta HCG", price: 950, sample: "Blood", fasting: "no",
@@ -407,7 +429,7 @@ const TESTS = [
       "Doctors also use serial beta HCG values to monitor early-pregnancy health. Reports are handled confidentially and delivered directly to you."
     ],
     whoShould: ["Early pregnancy confirmation", "Serial monitoring advised by your gynaecologist", "Before certain medical procedures"],
-    related: ["p:womens-health-checkup-hyderabad", "t:cbc-test-hyderabad", "t:blood-group-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+    related: ["p:womens-health-checkup-hyderabad", "t:cbc-test-hyderabad", "t:blood-group-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:hbsag-test-hyderabad", "t:thalassemia-hba2-test-hyderabad"]
   },
   {
     slug: "psa-test-hyderabad", name: "PSA Test (Prostate)", short: "PSA", price: 1200, sample: "Blood", fasting: "no",
@@ -417,7 +439,7 @@ const TESTS = [
       "A raised PSA does not by itself mean cancer, infections and benign enlargement also raise it, but it tells your doctor whether further evaluation is needed."
     ],
     whoShould: ["Men 50+ for routine screening", "Urinary difficulty, weak stream, frequent night urination", "Family history of prostate cancer (screen earlier)"],
-    related: ["p:premium-health-checkup-men-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:urine-routine-test-hyderabad"]
+    related: ["p:premium-health-checkup-men-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:urine-routine-test-hyderabad", "t:testosterone-test-hyderabad"]
   },
   {
     slug: "dengue-test-hyderabad", name: "Dengue Test (NS1, IgG & IgM)", short: "Dengue Profile", price: 2000, sample: "Blood", fasting: "no",
@@ -448,7 +470,7 @@ const TESTS = [
       "For more definitive answers, a comprehensive typhoid profile (₹2,000) including newer antibody tests is also available; our team can advise which suits your fever duration."
     ],
     whoShould: ["Fever lasting more than 3–4 days", "Fever with abdominal pain or poor appetite", "Suspected water/food-borne infection"],
-    related: ["t:dengue-test-hyderabad", "t:malaria-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad"]
+    related: ["t:dengue-test-hyderabad", "t:malaria-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad", "t:stool-routine-test-hyderabad"]
   },
   {
     slug: "electrolytes-test-hyderabad", name: "Electrolyte Profile (Na / K / Cl)", short: "Electrolytes", price: 200, sample: "Blood", fasting: "no",
@@ -487,7 +509,7 @@ const TESTS = [
       ["Does it hurt?", "No. Ten stickers are placed on the skin and peeled off afterwards. Nothing is injected and no current is passed into you."]
     ],
     homeCollection: false,
-    related: ["p:heart-health-checkup-hyderabad", "t:2d-echo-test-hyderabad", "t:lipid-profile-test-hyderabad"]
+    related: ["p:heart-health-checkup-hyderabad", "t:2d-echo-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:troponin-test-hyderabad"]
   },
   {
     slug: "2d-echo-test-hyderabad", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
@@ -537,7 +559,233 @@ const TESTS = [
     ],
     homeCollection: false,
     extLink: "https://www.caspianhealthcare.in/body-composition", extLabel: "Book a 20-minute slot (₹999)",
-    related: ["p:metabolic-wellness", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+    related: ["p:metabolic-wellness", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:homa-ir-test-hyderabad"]
+  },
+  // ---- Added 10 Oct 2026: 21 more test pages. Prices are the live Crelio MRP (/api/tests) on that date. ----
+  {
+    slug: "insulin-fasting-test-hyderabad", name: "Fasting Insulin Test", short: "Fasting Insulin", price: 950, sample: "Blood", fasting: "yes",
+    desc: "Fasting insulin test in Hyderabad at ₹950: shows how hard your pancreas is working to keep sugar normal, an early sign of insulin resistance. Report on WhatsApp.",
+    about: [
+      "Insulin is the hormone that moves sugar from the blood into the cells. In insulin resistance the body needs more and more insulin to keep sugar normal, so fasting insulin can be high for years before blood sugar rises.",
+      "Doctors use it in people with weight gain around the waist, fatty liver, PCOS, prediabetes or a strong family history of diabetes. It is read together with fasting sugar, often as the HOMA-IR score."
+    ],
+    whoShould: ["Weight gain around the waist", "PCOS or irregular periods", "Prediabetes or fatty liver", "Dark velvety skin on the neck (acanthosis)"],
+    faqExtra: [["Is fasting insulin the same as HOMA-IR?", "No. Fasting insulin is one number. HOMA-IR combines fasting insulin with fasting sugar to give an insulin resistance score. Many doctors order both together."]],
+    related: ["t:homa-ir-test-hyderabad", "t:c-peptide-test-hyderabad", "t:hba1c-test-hyderabad", "t:blood-sugar-test-hyderabad"]
+  },
+  {
+    slug: "homa-ir-test-hyderabad", name: "HOMA-IR Test (Insulin Resistance)", short: "HOMA-IR", price: 1600, sample: "Blood", fasting: "yes",
+    desc: "HOMA-IR insulin resistance test in Hyderabad at ₹1,600: fasting insulin and fasting sugar combined into one score. Useful in PCOS, fatty liver and prediabetes.",
+    about: [
+      "HOMA-IR (Homeostatic Model Assessment of Insulin Resistance) is a score worked out from your fasting insulin and fasting blood sugar. A higher score means your body needs more insulin to keep sugar normal.",
+      "It helps doctors spot insulin resistance early, before diabetes sets in, and to follow how it improves with weight loss, exercise and treatment. Your doctor reads the score along with your weight, waist size and other reports."
+    ],
+    whoShould: ["PCOS", "Fatty liver (MASLD)", "Prediabetes", "Weight gain that is hard to lose"],
+    faqExtra: [["What is a normal HOMA-IR score?", "Cut-offs differ between labs and populations, so your report will show the reference range used. Your doctor will interpret your score along with your sugar levels, weight and symptoms."]],
+    related: ["t:insulin-fasting-test-hyderabad", "t:hba1c-test-hyderabad", "p:metabolic-wellness", "t:liver-function-test-hyderabad"]
+  },
+  {
+    slug: "c-peptide-test-hyderabad", name: "C-Peptide Test (Fasting)", short: "C-Peptide", price: 930, sample: "Blood", fasting: "yes",
+    desc: "C-peptide test in Hyderabad at ₹930: shows how much insulin your own pancreas is still making. Helps tell type 1 from type 2 diabetes. Report on WhatsApp.",
+    about: [
+      "When the pancreas makes insulin, it releases C-peptide in equal amounts. Insulin injections do not contain C-peptide, so this test shows how much insulin your own body is producing, even if you already take insulin.",
+      "Diabetologists use it to help tell type 1 from type 2 diabetes, to check whether tablets may still work, and to plan treatment when diabetes is hard to control. Post-meal and random C-peptide can also be done."
+    ],
+    whoShould: ["Unclear type of diabetes", "Young adults with new diabetes", "People on insulin, before changing treatment", "Diabetes that is hard to control"],
+    faqExtra: [["Can I take C-peptide if I am on insulin?", "Yes. Injected insulin does not contain C-peptide, so the test still shows your own insulin production. Follow your doctor's advice on whether to skip the morning dose before the test."]],
+    related: ["t:insulin-fasting-test-hyderabad", "t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad"]
+  },
+  {
+    slug: "urine-acr-test-hyderabad", name: "Urine Albumin/Creatinine Ratio (UACR)", short: "Urine ACR", price: 650, sample: "Urine (spot sample)", fasting: "no",
+    desc: "Urine ACR (microalbumin) test in Hyderabad at ₹650: the earliest test for kidney damage from diabetes and high BP. One spot urine sample, report on WhatsApp.",
+    about: [
+      "Healthy kidneys keep albumin (a protein) in the blood. When diabetes or high BP starts to damage the kidney filters, small amounts of albumin leak into the urine. This is called microalbuminuria, and it appears years before creatinine rises.",
+      "The albumin/creatinine ratio (ACR) on a spot urine sample is the recommended way to check for it. People with diabetes are usually advised to do it at least once a year. Finding it early gives time to protect the kidneys."
+    ],
+    whoShould: ["Everyone with diabetes, once a year", "High blood pressure", "Swelling of feet or frothy urine", "Family history of kidney disease"],
+    faqExtra: [["Why might my doctor repeat a high ACR?", "Fever, heavy exercise, a urine infection or very high sugar on the day can raise ACR for a short time. Doctors usually confirm a high result with a repeat test before calling it kidney damage."]],
+    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:hba1c-test-hyderabad", "t:urine-routine-test-hyderabad"]
+  },
+  {
+    slug: "anti-tpo-test-hyderabad", name: "Anti-TPO Antibody Test", short: "Anti-TPO", price: 1000, sample: "Blood", fasting: "no",
+    desc: "Anti-TPO (thyroid peroxidase antibody) test in Hyderabad at ₹1,000: finds autoimmune thyroid disease such as Hashimoto's. Report on WhatsApp.",
+    about: [
+      "Anti-TPO antibodies are made when the immune system attacks the thyroid gland. A positive result is the most common sign of autoimmune thyroiditis (Hashimoto's), the leading cause of an underactive thyroid in India.",
+      "Doctors order it when TSH is high or borderline, when the thyroid is swollen, in pregnancy planning, and in people with other autoimmune conditions. A positive result means the thyroid should be checked regularly."
+    ],
+    whoShould: ["High or borderline TSH", "Swelling in the neck (goitre)", "Planning pregnancy with a thyroid problem", "Type 1 diabetes or other autoimmune conditions"],
+    related: ["t:tsh-test-hyderabad", "p:thyroid-profile-test-hyderabad", "p:womens-health-checkup-hyderabad"]
+  },
+  {
+    slug: "prolactin-test-hyderabad", name: "Prolactin Test", short: "Prolactin", price: 650, sample: "Blood", fasting: "morning",
+    desc: "Prolactin test in Hyderabad at ₹650: checks the hormone behind irregular periods, milk discharge and infertility. Morning sample, report on WhatsApp.",
+    about: [
+      "Prolactin is a hormone from the pituitary gland in the brain. Its main job is milk production after childbirth. High prolactin at other times can stop periods, cause milk discharge from the breasts, lower sex drive and affect fertility in both women and men.",
+      "Stress, poor sleep, some medicines and thyroid problems can also raise it. That is why the sample is taken in the morning, after rest, and your doctor may repeat a high result."
+    ],
+    whoShould: ["Irregular or missed periods", "Milk discharge from the breasts", "Difficulty conceiving", "Low sex drive or erection problems in men"],
+    faqExtra: [["Which medicines can raise prolactin?", "Some medicines for acidity, vomiting, depression and psychosis can raise prolactin. Tell your doctor about all the medicines you take; do not stop any on your own."]],
+    related: ["t:tsh-test-hyderabad", "t:fsh-test-hyderabad", "t:lh-test-hyderabad", "p:womens-health-checkup-hyderabad"]
+  },
+  {
+    slug: "testosterone-test-hyderabad", name: "Testosterone Test (Total)", short: "Testosterone", price: 800, sample: "Blood", fasting: "morning",
+    desc: "Total testosterone test in Hyderabad at ₹800: checks the main male hormone, linked to energy, sex drive, weight and diabetes. Morning sample, report on WhatsApp.",
+    about: [
+      "Testosterone is the main male sex hormone. Low levels can cause tiredness, low sex drive, erection problems, loss of muscle and weight gain. Low testosterone is more common in men with obesity and type 2 diabetes.",
+      "Levels are highest in the morning, so the sample is taken early, ideally before 10 am. In women, testosterone is checked when PCOS or excess facial hair is suspected. Free testosterone can also be done if your doctor asks."
+    ],
+    whoShould: ["Men with low energy or low sex drive", "Men with obesity or type 2 diabetes", "Women with PCOS or excess facial hair", "Difficulty conceiving"],
+    related: ["p:premium-health-checkup-men-hyderabad", "t:psa-test-hyderabad", "t:homa-ir-test-hyderabad", "t:lh-test-hyderabad"]
+  },
+  {
+    slug: "fsh-test-hyderabad", name: "FSH Test (Follicle Stimulating Hormone)", short: "FSH", price: 1050, sample: "Blood", fasting: "cycle",
+    desc: "FSH test in Hyderabad at ₹1,050: checks the hormone that controls egg and sperm production. Used in fertility, PCOS and menopause. Report on WhatsApp.",
+    about: [
+      "FSH comes from the pituitary gland and tells the ovaries to grow eggs and the testes to make sperm. It is one of the first tests in fertility workup for both partners.",
+      "In women it is usually taken on day 2 to 5 of the period. High FSH can point to low egg reserve or menopause; together with LH it also helps doctors assess PCOS."
+    ],
+    whoShould: ["Difficulty conceiving", "Irregular or missed periods", "Suspected early menopause", "Low sperm count"],
+    related: ["t:lh-test-hyderabad", "t:amh-test-hyderabad", "t:prolactin-test-hyderabad", "p:womens-health-checkup-hyderabad"]
+  },
+  {
+    slug: "lh-test-hyderabad", name: "LH Test (Luteinising Hormone)", short: "LH", price: 750, sample: "Blood", fasting: "cycle",
+    desc: "LH test in Hyderabad at ₹750: checks the hormone that triggers ovulation and testosterone production. Used in PCOS and fertility. Report on WhatsApp.",
+    about: [
+      "LH (luteinising hormone) comes from the pituitary gland. In women it triggers the release of an egg each month; in men it tells the testes to make testosterone.",
+      "Doctors usually order it with FSH, on day 2 to 5 of the period. A raised LH compared with FSH is one of the patterns seen in PCOS. In men, LH helps find the cause of low testosterone."
+    ],
+    whoShould: ["PCOS or irregular periods", "Difficulty conceiving", "Low testosterone in men"],
+    related: ["t:fsh-test-hyderabad", "t:testosterone-test-hyderabad", "t:amh-test-hyderabad", "t:prolactin-test-hyderabad"]
+  },
+  {
+    slug: "amh-test-hyderabad", name: "AMH Test (Anti-Mullerian Hormone)", short: "AMH", price: 2670, sample: "Blood", fasting: "no",
+    desc: "AMH test in Hyderabad at ₹2,670: estimates a woman's egg reserve. Used in fertility planning and PCOS. Can be done on any day of the cycle.",
+    about: [
+      "AMH is made by the small follicles in the ovaries that hold eggs. Its level gives an estimate of how many eggs are left (ovarian reserve). It does not measure egg quality and cannot predict exactly when menopause will start.",
+      "AMH is often high in PCOS and low as egg reserve falls with age. Unlike FSH, it can be checked on any day of the menstrual cycle."
+    ],
+    whoShould: ["Planning pregnancy after 30", "Before IVF or fertility treatment", "PCOS", "Before treatment that can affect the ovaries"],
+    related: ["t:fsh-test-hyderabad", "t:lh-test-hyderabad", "t:prolactin-test-hyderabad", "p:womens-health-checkup-hyderabad"]
+  },
+  {
+    slug: "hbsag-test-hyderabad", name: "HBsAg Test (Hepatitis B)", short: "HBsAg", price: 600, sample: "Blood", fasting: "no",
+    desc: "HBsAg hepatitis B test in Hyderabad at ₹600: the standard screening test for hepatitis B infection. Needed before surgery, in pregnancy and for jaundice.",
+    about: [
+      "HBsAg is a part of the hepatitis B virus. If it is found in the blood, the person currently has hepatitis B infection. Many people with long-standing hepatitis B have no symptoms but can still pass the virus on and develop liver damage over the years.",
+      "The test is routine before surgery, in pregnancy, before dialysis or blood donation, and when liver tests are abnormal. A positive result needs further tests and a doctor's review; hepatitis B can be monitored and treated."
+    ],
+    whoShould: ["Before surgery or a procedure", "Pregnancy", "Jaundice or abnormal liver tests", "Family member with hepatitis B"],
+    faqExtra: [["Is my result confidential?", "Yes. Your report is shared only with you and the doctor you name. If the result is positive, our team will guide you to a doctor for the next steps."]],
+    related: ["t:liver-function-test-hyderabad", "t:hiv-test-hyderabad", "t:cbc-test-hyderabad"]
+  },
+  {
+    slug: "hiv-test-hyderabad", name: "HIV 1 & 2 Antibody Test", short: "HIV", price: 210, sample: "Blood", fasting: "no",
+    desc: "HIV 1 & 2 antibody test in Hyderabad at ₹210. Confidential, with your consent. Needed before surgery, in pregnancy and after a possible exposure.",
+    about: [
+      "This test looks for antibodies to HIV types 1 and 2 in the blood. It is a routine screening test before surgery and in pregnancy, and anyone can choose to be tested.",
+      "After a new exposure, the body takes some weeks to make antibodies, so a test done too early can be negative. If you have had a possible exposure, your doctor may advise repeating the test later. A positive screening result is always confirmed with further tests."
+    ],
+    whoShould: ["Before surgery or a procedure", "Pregnancy", "After a possible exposure", "Anyone who wants to know their status"],
+    faqExtra: [
+      ["Is my HIV test confidential?", "Yes. The test is done only with your consent, and your result is shared only with you and the doctor you name. In India, HIV testing and results are protected by law."],
+      ["What if the result is positive?", "A positive screening test is confirmed with further tests before any diagnosis. HIV is a treatable condition, and free treatment is available at government ART centres. Our team will guide you to the right doctor."]
+    ],
+    related: ["t:hbsag-test-hyderabad", "t:cbc-test-hyderabad"]
+  },
+  {
+    slug: "ra-factor-test-hyderabad", name: "RA Factor Test (Rheumatoid Factor)", short: "RA Factor", price: 650, sample: "Blood", fasting: "no",
+    desc: "RA factor test in Hyderabad at ₹650: a first test for rheumatoid arthritis in people with painful, swollen joints. Report on WhatsApp.",
+    about: [
+      "Rheumatoid factor is an antibody found in many people with rheumatoid arthritis, a condition where the immune system attacks the joints. It is usually ordered for painful, swollen joints, especially of the hands, with morning stiffness.",
+      "A positive RA factor does not prove rheumatoid arthritis, and a negative one does not rule it out. Doctors read it with Anti-CCP, ESR, CRP and the pattern of joint symptoms."
+    ],
+    whoShould: ["Painful, swollen finger or wrist joints", "Morning stiffness lasting over 30 minutes", "Joint pain on both sides of the body"],
+    related: ["t:anti-ccp-test-hyderabad", "t:ana-test-hyderabad", "t:esr-test-hyderabad", "t:crp-test-hyderabad"]
+  },
+  {
+    slug: "anti-ccp-test-hyderabad", name: "Anti-CCP Antibody Test", short: "Anti-CCP", price: 1600, sample: "Blood", fasting: "no",
+    desc: "Anti-CCP test in Hyderabad at ₹1,600: the most specific blood test for rheumatoid arthritis, often positive early. Report on WhatsApp.",
+    about: [
+      "Anti-CCP (anti-cyclic citrullinated peptide) antibodies are found in most people with rheumatoid arthritis and are rare in people without it. That makes it more specific than RA factor.",
+      "It can be positive early in the disease, sometimes before the joints are badly affected, which helps doctors start treatment sooner and protect the joints."
+    ],
+    whoShould: ["Joint pain and swelling with suspected rheumatoid arthritis", "Positive RA factor", "Early arthritis of the hands"],
+    related: ["t:ra-factor-test-hyderabad", "t:ana-test-hyderabad", "t:esr-test-hyderabad"]
+  },
+  {
+    slug: "ana-test-hyderabad", name: "ANA Test (Antinuclear Antibody)", short: "ANA", price: 350, sample: "Blood", fasting: "no",
+    desc: "ANA test in Hyderabad from ₹350: a screening test for autoimmune diseases such as lupus. ANA by IFA with titres is also available.",
+    about: [
+      "Antinuclear antibodies are made when the immune system attacks the body's own cells. ANA is the first screening test when doctors suspect an autoimmune disease such as lupus (SLE), Sjogren's syndrome or scleroderma.",
+      "A low positive ANA is common in healthy people, especially women and older adults, so the result is always read with symptoms. The ANA by CLIA costs ₹350; ANA by IFA (the reference method, with pattern) costs ₹950 if your doctor asks for it."
+    ],
+    whoShould: ["Joint pain with rash or fever", "Rash on the face that gets worse in sunlight", "Unexplained long-standing fever or tiredness", "Dry eyes and mouth"],
+    related: ["t:ra-factor-test-hyderabad", "t:anti-ccp-test-hyderabad", "t:esr-test-hyderabad", "t:crp-test-hyderabad"]
+  },
+  {
+    slug: "stool-routine-test-hyderabad", name: "Stool Routine Test", short: "Stool Routine", price: 490, sample: "Stool (container given by us)", fasting: "no",
+    desc: "Stool routine test in Hyderabad at ₹490: checks for infection, worms, blood and digestion problems. Sterile container provided, report on WhatsApp.",
+    about: [
+      "A stool routine examination looks at the colour and consistency of the stool and checks under the microscope for pus cells, red cells, worms, their eggs and parasites such as amoeba and giardia.",
+      "It is ordered for loose motions, stomach pain, blood or mucus in the stool and suspected worm infection in children. Stool culture can be added if your doctor suspects a bacterial infection."
+    ],
+    whoShould: ["Loose motions or stomach pain", "Blood or mucus in stool", "Suspected worms in children", "Unexplained anaemia"],
+    faqExtra: [["How do I collect the stool sample?", "Use the clean container we give you. Collect a small amount (about the size of a peanut) without urine or water mixing in, close it tightly and bring it within 1 to 2 hours."]],
+    related: ["t:cbc-test-hyderabad", "t:urine-routine-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
+  },
+  {
+    slug: "pt-inr-test-hyderabad", name: "PT / INR Test (Prothrombin Time)", short: "PT/INR", price: 450, sample: "Blood", fasting: "no",
+    desc: "PT/INR test in Hyderabad at ₹450: checks how fast blood clots. Needed on warfarin, before surgery and in liver disease. Report the same day.",
+    about: [
+      "Prothrombin time (PT) measures how long blood takes to clot. The INR is the same result expressed on a standard scale, so it can be compared between labs.",
+      "People on warfarin or acenocoumarol need regular INR checks to keep the dose safe. The test is also done before surgery or procedures, and in liver disease, because the liver makes the clotting factors."
+    ],
+    whoShould: ["People on warfarin or acenocoumarol", "Before surgery or a procedure", "Liver disease", "Easy bruising or bleeding"],
+    faqExtra: [["I am on warfarin. Should I take my dose before the test?", "Follow your doctor's instructions. Most patients take the test before their usual daily dose. Bring your current dose details so your doctor can adjust it from the INR."]],
+    related: ["t:liver-function-test-hyderabad", "t:cbc-test-hyderabad", "t:d-dimer-test-hyderabad"]
+  },
+  {
+    slug: "d-dimer-test-hyderabad", name: "D-Dimer Test", short: "D-Dimer", price: 1500, sample: "Blood", fasting: "no",
+    desc: "D-dimer test in Hyderabad at ₹1,500: helps rule out a blood clot in the leg or lung. Open 24/7. For sudden breathlessness, go to an emergency first.",
+    about: [
+      "D-dimer is a substance released when a blood clot breaks down. A normal D-dimer makes a clot in the leg veins (DVT) or lung (pulmonary embolism) unlikely in people at low risk.",
+      "A raised D-dimer does not prove a clot: it also rises after surgery, in pregnancy, infection and older age. Doctors use it together with a scan when needed."
+    ],
+    whoShould: ["Swelling and pain in one leg", "On your doctor's advice after long travel or surgery", "Follow-up advised by your doctor"],
+    faqExtra: [["I have sudden chest pain or breathlessness. Should I come for a D-dimer?", "No. Sudden chest pain or breathlessness can be an emergency. Go to the nearest hospital emergency or call 108 straight away; do not wait for a lab test."]],
+    related: ["t:pt-inr-test-hyderabad", "t:troponin-test-hyderabad", "t:cbc-test-hyderabad"]
+  },
+  {
+    slug: "troponin-test-hyderabad", name: "Troponin I Test", short: "Troponin I", price: 1600, sample: "Blood", fasting: "no",
+    desc: "Troponin I test in Hyderabad at ₹1,600: the blood test for heart muscle damage. Lab open 24/7. For chest pain, go to an emergency first.",
+    about: [
+      "Troponin is a protein released into the blood when heart muscle is damaged, as in a heart attack. A raised troponin, with symptoms and ECG changes, helps doctors diagnose a heart attack.",
+      "Troponin can take a few hours to rise after symptoms start, so doctors often repeat it. It can also rise in kidney disease, severe infection and after heavy exercise. High-sensitivity troponin is also available on your doctor's advice."
+    ],
+    whoShould: ["As advised by your doctor after chest pain has been assessed", "Follow-up of a heart condition", "Breathlessness being investigated by a doctor"],
+    faqExtra: [["I have chest pain right now. Should I come to the lab?", "No. Chest pain can be a heart attack. Go to the nearest hospital emergency or call 108 immediately. Treatment in the first hours saves heart muscle; do not wait for a lab test."]],
+    related: ["t:ecg-test-hyderabad", "t:2d-echo-test-hyderabad", "p:heart-health-checkup-hyderabad", "t:lipid-profile-test-hyderabad"]
+  },
+  {
+    slug: "g6pd-test-hyderabad", name: "G6PD Test (Quantitative)", short: "G6PD", price: 1950, sample: "Blood", fasting: "no",
+    desc: "G6PD test in Hyderabad at ₹1,950: checks for G6PD deficiency, which can cause anaemia after certain medicines or foods. Report on WhatsApp.",
+    about: [
+      "G6PD is an enzyme that protects red blood cells. People with G6PD deficiency, an inherited condition, can have their red cells break down (haemolysis) after some medicines, infections or eating fava beans.",
+      "Doctors test for it in newborns with jaundice, in people with unexplained anaemia or dark urine, and before starting medicines such as primaquine or dapsone."
+    ],
+    whoShould: ["Newborn jaundice, on your paediatrician's advice", "Anaemia with dark urine after a medicine", "Before primaquine, dapsone or similar medicines", "Family history of G6PD deficiency"],
+    related: ["t:cbc-test-hyderabad", "t:thalassemia-hba2-test-hyderabad", "t:ferritin-test-hyderabad"]
+  },
+  {
+    slug: "thalassemia-hba2-test-hyderabad", name: "Thalassaemia Screening (HbA2)", short: "Thalassaemia Screening", price: 2500, sample: "Blood", fasting: "no",
+    desc: "Thalassaemia trait screening (HbA2) in Hyderabad at ₹2,500: finds thalassaemia carriers before marriage or pregnancy. Report on WhatsApp.",
+    about: [
+      "Thalassaemia is an inherited blood disorder. A person who carries one gene (thalassaemia trait or minor) is usually healthy but may have mild anaemia with small red cells. If both parents are carriers, each child has a 1 in 4 chance of thalassaemia major.",
+      "This test measures HbA2 and other haemoglobin types. A raised HbA2 points to beta-thalassaemia trait. It is advised for couples before marriage or pregnancy, and for anaemia with small red cells that does not improve with iron."
+    ],
+    whoShould: ["Couples before marriage or pregnancy", "Anaemia with small red cells (low MCV)", "Anaemia not improving with iron", "Family history of thalassaemia"],
+    faqExtra: [["Should I take iron tablets before this test?", "Tell your doctor if you are low on iron. Severe iron deficiency can lower HbA2 and hide the trait, so doctors sometimes correct iron first and then test."]],
+    related: ["t:cbc-test-hyderabad", "t:ferritin-test-hyderabad", "t:g6pd-test-hyderabad"]
   }
 ];
 
@@ -591,6 +839,8 @@ function findRef(ref) {
 function fastingText(f) {
   if (f === "yes") return "Yes, 8–12 hours of fasting is recommended. Water is fine. Book a morning slot and our team will remind you the evening before.";
   if (f === "no") return "No special preparation or fasting is needed. You can give this sample at any time of day.";
+  if (f === "morning") return "No fasting is needed, but the sample is best given in the morning, ideally before 10 am, after a normal night's sleep, because this hormone changes through the day.";
+  if (f === "cycle") return "No fasting is needed. Women are usually tested on day 2 to 5 of the period (day 1 is the first day of bleeding), unless the doctor advises a different day. Men can test on any day.";
   if (f === "depends") return "Fasting sugar (FBS) needs 8–12 hours of fasting; post-prandial (PPBS) is taken exactly 2 hours after a meal; random (RBS) needs no preparation. Our team will guide you when you book.";
   return "Fasting is sometimes advised depending on the tests your doctor ordered, our team will confirm exactly what to do when you book.";
 }
