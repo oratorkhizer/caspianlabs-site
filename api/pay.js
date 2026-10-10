@@ -119,6 +119,7 @@ const CODE_MAP = {
   "Hepatitis B Marker Profile": { code: "PH5", type: "profile" },
   "Pre-Operative Mini Profile": { code: "PP10", type: "profile" },
   "Pre-Operative Maxi Profile": { code: "PP11", type: "profile" },
+  "Major Surgical Profile": { code: "major surgical profile", type: "profile" }, // Crelio profile code, 11 Oct 2026
   "Stone Screening Mini Profile": { code: "PS06", type: "profile" },
   "Hypertension Profile": { code: "PH13", type: "profile" },
   "Asthma Health Camp": { code: "ASTHMA HEALTH CAMP", type: "profile" },

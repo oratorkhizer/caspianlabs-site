@@ -8,6 +8,7 @@
 // Maxi profiles were retired the same day (scripts/surgical-profile.mjs removes them
 // from the homepage catalogue). No Crelio code yet, so booking is call, WhatsApp or
 // walk in rather than pay-online. ASCII-safe prose, no em dashes.
+import { PREOP_SURGERIES } from "./preop.js";
 import {
   BASE, PHONE_DISPLAY, PHONE_TEL,
   esc, inr, waLink, photoFig, photoUrl,
@@ -114,6 +115,7 @@ function renderSurgical() {
 <div class="price">${inr(PRICE)}</div>
 <div class="meta">Report in <b>${TAT}</b>, day or night<br>ECG and chest X-ray included</div>
 <a class="btn btn-blue" href="tel:${PHONE_TEL}">\u{1F4DE} Call now, we are open 24/7</a>
+<a class="btn btn-blue" href="/?test=${encodeURIComponent("Major Surgical Profile")}#all-tests" style="background:#08487d">Book &amp; pay online</a>
 <a class="btn btn-wa" href="${waBook}" target="_blank" rel="noopener">\u{1F4AC} Book on WhatsApp</a>
 <a class="btn btn-line" href="${waRx}" target="_blank" rel="noopener">Send your surgeon's test list</a>
 <div class="fine"><span class="tick">✓</span>Report in 3 hours, at any hour<br><span class="tick">✓</span>All tests, ECG and X-ray in one visit<br><span class="tick">✓</span>No fasting needed<br><span class="tick">✓</span>Report on WhatsApp and in print<br><span class="tick">✓</span>Open 24/7, all days</div>
@@ -140,6 +142,9 @@ ${photoFig(HERO_PHOTO)}<h2>What is a surgical profile?</h2>
 ${INDICATIONS.map(g => `<h3 style="margin:18px 0 6px;font-size:17px">${esc(g[0])}</h3><ul>${g[1].map(i => `<li>${esc(i)}</li>`).join("")}</ul>`).join("\n")}
 <div class="note"><b>Small procedures under local anaesthesia do not need this full profile.</b> For cataract surgery, endoscopy, small biopsies, wisdom tooth removal and similar procedures, most surgeons ask only for blood sugar and the infection tests (HIV, HBsAg, HCV), and an ECG in older patients. Do not pay for tests you do not need: send us your surgeon's list and we will do only those, at our standard prices.</div>
 <p>Your surgeon or anaesthetist decides the exact tests for your surgery. Some procedures need only a few of them; some patients need extra tests such as a 2D echo, HbA1c or urine test. If you have been given a list, <a href="${waRx}" target="_blank" rel="noopener">send us a photo on WhatsApp</a> and we will tell you the total.</p>
+<h2>Tests before your surgery</h2>
+<p>Some operations need a few extra tests on top of this profile. See what surgeons usually add for:</p>
+<div class="rel">${PREOP_SURGERIES.map(x => `<a href="/pre-op-tests/${x.slug}">${esc(x.title.replace(/^Tests Before /, "").replace(/ in Hyderabad$/, ""))}</a>`).join("")}</div>
 <h2>Why 3 hours matters</h2>
 <ul>
 <li><b>No delayed admission.</b> Hospitals often will not book the theatre until the reports are in. A next-day report can push your surgery by a day.</li>
@@ -167,11 +172,11 @@ ${faqBlock(FAQS)}
 ${side}</div>`;
 
   return pageShell({
-    title: `Surgical Profile (Pre-Op Tests) in Hyderabad at ${inr(PRICE)} | Report in 3 Hours | Caspian Labs`,
+    title: `Surgical Profile Test Price in Hyderabad: ${inr(PRICE)} | Report in 3 Hours | Caspian Labs`,
     desc: DESC,
     canonical: URL,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/packages">Health Packages</a> › Surgical Profile`,
-    heroH1: "Pre-Operative Surgical Profile in Hyderabad, Report in 3 Hours",
+    heroH1: "Surgical Profile Test in Hyderabad, Report in 3 Hours",
     heroSub: `16 tests including ECG and chest X-ray · ${inr(PRICE)} · Open 24/7, day or night`,
     bodyHtml: body,
     ogImage: photoUrl(HERO_PHOTO),

@@ -21,6 +21,7 @@
     { "source": "/surgical-profile", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
     { "source": "/pre-op", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
     { "source": "/preop", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
+    { "source": "/pre-op-tests", "destination": "/packages/surgical-profile-hyderabad", "permanent": true },
     { "source": "/xray", "destination": "/x-ray", "permanent": true },
     { "source": "/x-ray-hyderabad", "destination": "/x-ray", "permanent": true },
     { "source": "/tests/x-ray-hyderabad", "destination": "/x-ray", "permanent": true }
@@ -31,6 +32,7 @@
     { "source": "/tests", "destination": "/api/page?kind=tests" },
     { "source": "/packages", "destination": "/api/page?kind=packages" },
     { "source": "/packages/surgical-profile-hyderabad", "destination": "/api/surgical" },
+    { "source": "/pre-op-tests/:slug", "destination": "/api/preop?slug=:slug" },
     { "source": "/packages/:slug", "destination": "/api/page?kind=package&slug=:slug" },
     { "source": "/tests/abg-test-hyderabad", "destination": "/api/abg" },
     { "source": "/tests/:slug", "destination": "/api/page?kind=test&slug=:slug" },
