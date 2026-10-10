@@ -21,6 +21,7 @@ const PAGES = [
   { path: "/tests",             changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/packages",          changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/x-ray",             changefreq: "monthly", priority: "0.9", lastmod: "2026-10-09" },
+  ...["knee", "lumbar-spine", "cervical-spine", "kub", "pns-sinus", "shoulder", "hip-pelvis", "ankle", "foot", "hand-wrist", "bone-age"].map((s) => ({ path: "/x-ray/" + s, changefreq: "monthly", priority: "0.8", lastmod: "2026-10-10" })), // keep in sync with PARTS in api/_xray-parts.js
   { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7", lastmod: LASTMOD_BLOG },
   { path: "/read-my-report",    changefreq: "monthly", priority: "0.8", lastmod: "2026-10-02" },

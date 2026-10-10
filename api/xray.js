@@ -11,6 +11,7 @@ import {
   esc, inr, waLink, photoFig, photoUrl,
   pageShell, ldBreadcrumb, ldFaq, faqBlock
 } from "./_shell.js";
+import { PARTS } from "./_xray-parts.js";
 
 const URL = BASE + "/x-ray";
 const HOME_XRAY = 2000;
@@ -98,6 +99,14 @@ const GROUPS = [
   ]]
 ];
 const ALL = GROUPS.flatMap(g => g[1]);
+const BY_CODE = Object.fromEntries(ALL.map(t => [t[0], t]));
+const CHEST_PAGE = "/tests/chest-x-ray-hyderabad";
+const PART_OF = {};
+for (const [slug, p] of Object.entries(PARTS)) for (const c of p.codes) PART_OF[c] = "/x-ray/" + slug;
+for (const c of ["XR-CHE1", "XR-CHEL", "XR-CHE2", "XR-RIB"]) PART_OF[c] = CHEST_PAGE;
+function anchor(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+const SEEN = new Set();
+for (const t of ALL) { const a = anchor(t[1]); if (SEEN.has(a)) throw new Error("duplicate X-ray anchor " + a); SEEN.add(a); }
 
 const INCLUDED = [
   "Digital X-ray at our centre in Vijay Nagar Colony",
@@ -126,6 +135,37 @@ const FAQS = [
   ["Which side should I mention, left or right?", "Tell us the side when you book or at the counter. The price is the same for either side; X-rays of both sides are listed separately."]
 ];
 
+function rowHtml(t, linkPart) {
+  const [code, name, used, views, price, words] = t;
+  const k = (name + " " + used + " " + words + " xray x-ray").toLowerCase();
+  const id = anchor(name);
+  const href = PART_OF[code];
+  const title = linkPart && href ? `<a href="${href}">${esc(name)}</a>` : esc(name);
+  const shareText = `X-ray ${name}: ${inr(price)} at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad. Same-day report.`;
+  return `<li id="${id}" data-k="${esc(k)}"><div class="xn"><b>${title}</b><span>${esc(used)}</span></div><div class="xv">${viewsLabel(views)}</div><div class="xp">${inr(price)}</div><a class="xb" href="${waLink("Hi Caspian Diagnostic Centre, I want an X-ray: " + name + " (" + inr(price) + "). Side (left/right): ")}" target="_blank" rel="noopener" aria-label="Book ${esc(name)} on WhatsApp">Book</a><button type="button" class="xsh" data-u="${URL}#${id}" data-t="${esc(shareText)}" aria-label="Share ${esc(name)}">Share</button></li>`;
+}
+
+const ROW_CSS = `.card .xl{list-style:none;padding:0;margin:0}
+.card .xl li{display:grid;grid-template-columns:1fr 64px 70px 64px 64px;gap:10px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line);margin:0;scroll-margin-top:130px;border-radius:8px}
+.card .xl li:target{background:#fff4d6;box-shadow:0 0 0 2px #e8b23a inset}
+.xn b{display:block;font-size:14.5px;color:var(--ink)}
+.xn b a{color:var(--ink)}.xn b a:hover{color:var(--blue)}
+.xn span{display:block;font-size:13px;color:var(--muted);line-height:1.45}
+.xv{font-size:12.5px;color:var(--muted)}
+.xp{font-weight:800;font-size:15px;text-align:right}
+.xb{background:var(--wa);color:#fff;border-radius:8px;padding:6px 0;text-align:center;font-weight:700;font-size:13px}
+.xb:hover{text-decoration:none;filter:brightness(1.06)}
+.xsh{background:#fff;border:1.5px solid var(--blue);color:var(--blue);border-radius:8px;padding:5px 0;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.xsh:hover{background:#eaf3fb}
+@media(max-width:560px){.card .xl li{grid-template-columns:1fr 54px 52px 54px;gap:8px}.xv{display:none}}`;
+
+const SHARE_JS = `<script>
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.xsh');if(!b)return;var u=b.getAttribute('data-u'),t=b.getAttribute('data-t');
+if(navigator.share){navigator.share({title:'Caspian X-ray',text:t,url:u}).catch(function(){});return;}
+window.open('https://wa.me/?text='+encodeURIComponent(t+' '+u),'_blank','noopener');
+try{if(window.gtag)gtag('event','xray_share',{item:u})}catch(_){}});
+</script>`;
+
 function viewsLabel(n) { return typeof n === "string" ? "Series" : n === 1 ? "1 view" : n + " views"; }
 
 function renderXray() {
@@ -133,31 +173,20 @@ function renderXray() {
   const desc = "Digital X-ray prices in Hyderabad: chest X-ray ₹350, knee, spine, hip, hand, foot and 63 more from ₹350. Radiologist report the same day on WhatsApp. Walk in, Vijay Nagar Colony.";
 
   const rows = GROUPS.map(([g, tests]) => `<h3 class="xg">${esc(g)}</h3>
-<ul class="xl">${tests.map(t => {
-    const [code, name, used, views, price, words] = t;
-    const k = (name + " " + used + " " + words + " xray x-ray").toLowerCase();
-    return `<li data-k="${esc(k)}"><div class="xn"><b>${esc(name)}</b><span>${esc(used)}</span></div><div class="xv">${viewsLabel(views)}</div><div class="xp">${inr(price)}</div><a class="xb" href="${waLink("Hi Caspian Diagnostic Centre, I want an X-ray: " + name + " (" + inr(price) + "). Side (left/right): ")}" target="_blank" rel="noopener" aria-label="Book ${esc(name)} on WhatsApp">Book</a></li>`;
-  }).join("")}</ul>`).join("\n");
+<ul class="xl">${tests.map(t => rowHtml(t, true)).join("")}</ul>`).join("\n");
 
   const body = `<style>
 .xs{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:10px;font-size:15px;margin:4px 0 6px}
 .xs:focus{outline:none;border-color:var(--blue)}
 .xg{color:var(--ink);font-size:16px;margin:22px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--line)}
-.card .xl{list-style:none;padding:0;margin:0}
-.card .xl li{display:grid;grid-template-columns:1fr 64px 70px 64px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);margin:0}
-.xn b{display:block;font-size:14.5px;color:var(--ink)}
-.xn span{display:block;font-size:13px;color:var(--muted);line-height:1.45}
-.xv{font-size:12.5px;color:var(--muted)}
-.xp{font-weight:800;font-size:15px;text-align:right}
-.xb{background:var(--wa);color:#fff;border-radius:8px;padding:6px 0;text-align:center;font-weight:700;font-size:13px}
-.xb:hover{text-decoration:none;filter:brightness(1.06)}
+${ROW_CSS}
 .xnone{display:none;color:var(--muted);font-size:14px;padding:12px 0}
 .xrule{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 4px}
 .xrule div{background:#f2f8fd;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-size:13px;color:var(--muted)}
 .xrule b{display:block;font-size:18px;color:var(--ink)}
 .prep dt{font-weight:700;color:var(--ink);font-size:15px;margin-top:10px}
 .prep dd{color:#33465a;font-size:15px;margin:2px 0 0}
-@media(max-width:560px){.card .xl li{grid-template-columns:1fr 64px 58px}.xv{display:none}.xrule{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.xrule{grid-template-columns:repeat(2,1fr)}}
 </style>
 <div class="card">
 ${photoFig("xray", "The digital X-ray room at Caspian Diagnostic Centre")}
@@ -167,12 +196,16 @@ ${photoFig("xray", "The digital X-ray room at Caspian Diagnostic Centre")}
 <h2>What every X-ray includes</h2>
 <ul class="inc">${INCLUDED.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
 
+<h2>X-ray guides by body part</h2>
+<p>What each X-ray shows, which one to ask for, and its prices.</p>
+<div class="rel"><a href="${CHEST_PAGE}">Chest X-ray</a>${Object.entries(PARTS).map(([s, p]) => `<a href="/x-ray/${s}">${esc(p.name)}</a>`).join("")}</div>
+
 <h2 id="price-list">All X-ray prices</h2>
 <label for="xs" class="price-lbl">Search by body part or problem, for example "knee", "back pain" or "kidney stone"</label>
 <input id="xs" class="xs" type="search" placeholder="Search X-rays" autocomplete="off">
 <p class="xnone" id="xnone">No match. <a href="${waLink("Hi Caspian Diagnostic Centre, which X-ray do I need? My prescription says: ")}" target="_blank" rel="noopener">Send us your prescription on WhatsApp</a> and we will tell you the X-ray and price.</p>
 ${rows}
-<p class="note" style="margin-top:18px">Left or right: tell us the side when you book. The price is the same for either side.</p>
+<p class="note" style="margin-top:18px">Left or right: tell us the side when you book. The price is the same for either side. Tap <b>Share</b> on any X-ray to send its price and link on WhatsApp.</p>
 
 <h2>Before your X-ray</h2>
 <dl class="prep">${PREP.map(p => `<dt>${esc(p[0])}</dt><dd>${esc(p[1])}</dd>`).join("")}</dl>
@@ -190,7 +223,7 @@ s.addEventListener('input',function(){var q=s.value.toLowerCase().trim().split(/
 li.forEach(function(x){var k=x.getAttribute('data-k'),ok=q.every(function(w){return k.indexOf(w)>-1});x.style.display=ok?'':'none';if(ok)n++});
 hs.forEach(function(h){var u=h.nextElementSibling,v=[].some.call(u.children,function(c){return c.style.display!=='none'});h.style.display=v?'':'none';u.style.display=v?'':'none'});
 none.style.display=n?'none':'block';});})();
-</script>`;
+</script>${SHARE_JS}`;
 
   const ld = [
     ldBreadcrumb([["Home", "/"], ["X-ray", "/x-ray"]]),
@@ -214,8 +247,75 @@ none.style.display=n?'none':'block';});})();
   });
 }
 
+function renderPart(slug) {
+  const p = PARTS[slug];
+  const url = BASE + "/x-ray/" + slug;
+  const tests = p.codes.map(c => BY_CODE[c]);
+  const from = Math.min(...tests.map(t => t[4]));
+  const title = `${p.name} Price in Hyderabad, from ${inr(from)} | Caspian Labs`;
+  const desc = `${p.name} in Hyderabad from ${inr(from)} at Caspian Diagnostic Centre, Vijay Nagar Colony. ${tests.length > 1 ? tests.length + " views and prices, " : ""}what it shows, how to prepare. Radiologist report the same day on WhatsApp.`;
+  const faqs = p.faqs.concat([
+    [`How much does a ${p.name.toLowerCase()} cost at Caspian?`, tests.map(t => `${t[1]}: ${inr(t[4])}`).join("; ") + "."],
+    ["Do I need an appointment, and when is the report ready?", "No appointment is needed; walk in with your prescription. A radiologist reports the X-ray the same day and the report is sent to you on WhatsApp. The printed film is included."]
+  ]);
+  const rel = p.related.filter(r => PARTS[r]).map(r => `<a href="/x-ray/${r}">${esc(PARTS[r].name)}</a>`).join("") + `<a href="${CHEST_PAGE}">Chest X-ray</a><a href="/x-ray">All 63 X-ray prices</a>`;
+  const first = tests[0];
+  const body = `<style>${ROW_CSS}
+@media(min-width:561px){.card .xl.pg li{grid-template-columns:1fr 70px 64px 64px}.card .xl.pg .xv{display:none}}</style>
+<div class="grid"><div class="card">
+${photoFig("xray", "The digital X-ray room at Caspian Diagnostic Centre")}
+<h2>Prices</h2>
+<ul class="xl pg">${tests.map(t => rowHtml(t, false)).join("")}</ul>
+<p class="note">Left or right: tell us the side when you book. The price is the same for either side.</p>
+<h2>What does a ${esc(p.name.toLowerCase())} show?</h2>
+${p.about.map(x => `<p>${esc(x)}</p>`).join("\n")}
+<h2>When do doctors ask for it?</h2>
+<ul>${p.uses.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+<h2>Before your X-ray</h2>
+<dl class="prep">${PREP.map(x => `<dt>${esc(x[0])}</dt><dd>${esc(x[1])}</dd>`).join("")}</dl>
+<h2>Frequently asked questions</h2>
+${faqBlock(faqs)}
+<h2>Other X-rays</h2>
+<div class="rel">${rel}</div>
+</div>
+<aside class="side">
+<div class="price-lbl">${tests.length > 1 ? "Starts at" : "Price"}</div>
+<div class="price">${inr(from)}</div>
+<div class="meta">Same-day radiologist report on WhatsApp · Walk in, no appointment</div>
+<a class="btn btn-wa" href="${waLink("Hi Caspian Diagnostic Centre, I want a " + p.name + ". Views / side: ")}" target="_blank" rel="noopener">Book on WhatsApp</a>
+<a class="btn btn-line" href="tel:${PHONE_TEL}">Call ${PHONE_DISPLAY}</a>
+<button type="button" class="btn btn-line xsh" style="width:100%;font-size:15px" data-u="${url}" data-t="${esc(p.name + " at Caspian Diagnostic Centre, Hyderabad, from " + inr(from) + ". Same-day report.")}">Share this page</button>
+<p class="fine">Caspian Diagnostic Centre, 10-3-761/8, Opposite Post Office, Vijay Nagar Colony, Hyderabad 500057.</p>
+</aside></div>
+<style>.prep dt{font-weight:700;color:var(--ink);font-size:15px;margin-top:10px}.prep dd{color:#33465a;font-size:15px;margin:2px 0 0}</style>
+${SHARE_JS}`;
+  const ld = [
+    ldBreadcrumb([["Home", "/"], ["X-ray", "/x-ray"], [p.name, "/x-ray/" + slug]]),
+    { "@context": "https://schema.org", "@type": "MedicalWebPage", "name": p.h1, "url": url, "description": desc,
+      "about": { "@type": "MedicalTest", "name": p.name, "usedToDiagnose": p.uses.map(u => ({ "@type": "MedicalCondition", "name": u })) } },
+    { "@context": "https://schema.org", "@type": "OfferCatalog", "name": p.name + " prices, Caspian Diagnostic Centre", "url": url,
+      "itemListElement": tests.map(t => ({ "@type": "Offer", "price": String(t[4]), "priceCurrency": "INR", "url": url + "#" + anchor(t[1]),
+        "itemOffered": { "@type": "MedicalTest", "name": "X-ray " + t[1], "description": t[2] },
+        "seller": { "@type": "MedicalClinic", "name": "Caspian Diagnostic Centre", "url": BASE } })) },
+    ldFaq(faqs)
+  ];
+  return pageShell({
+    title, desc, canonical: url,
+    breadcrumbHtml: `<a href="/">Home</a> › <a href="/x-ray">X-ray</a> › ${esc(p.name)}`,
+    heroH1: `${p.h1}, from ${inr(from)}`,
+    heroSub: `Digital X-ray · Radiologist report the same day on WhatsApp · Walk in, no appointment`,
+    bodyHtml: body, ld, ogImage: photoUrl("xray")
+  });
+}
+
 export default function handler(req, res) {
+  const part = req.query && req.query.part;
   res.setHeader("Content-Type", "text/html; charset=utf-8");
+  if (part) {
+    if (!PARTS[part]) { res.setHeader("Location", "/x-ray"); res.setHeader("Cache-Control", "public, s-maxage=3600"); return res.status(301).send(""); }
+    res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+    return res.status(200).send(renderPart(part));
+  }
   res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
   res.status(200).send(renderXray());
 }
