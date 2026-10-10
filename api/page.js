@@ -71,7 +71,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Adults due for an annual health check", "Family history of diabetes, heart or thyroid disease", "Anyone with fatigue, weight change or low energy"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Full Body Check Up (₹1,795).",
-    related: ["t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness", "p:essential-health-checkup-hyderabad"]
+    related: ["t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness", "p:essential-health-checkup-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:calcium-test-hyderabad"]
   },
   {
     slug: "essential-health-checkup-hyderabad",
@@ -87,7 +87,7 @@ const PACKAGES = [
     fasting: "confirm",
     idealFor: ["First-time health screening", "Young adults on a budget", "Quick pre-consultation workup"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Caspian Essential Checkup (₹899).",
-    related: ["p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:tsh-test-hyderabad"]
+    related: ["p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:tsh-test-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:esr-test-hyderabad"]
   },
   {
     slug: "comprehensive-diabetes-screening-hyderabad",
@@ -135,7 +135,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Weight-loss or fitness programmes", "Tracking metabolic health over time", "Anyone curious what their weight is made of"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Metabolic Wellness Checkup (₹1,795).",
-    related: ["p:full-body-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad"]
+    related: ["p:full-body-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad"]
   },
   {
     slug: "womens-health-checkup-hyderabad",
@@ -151,7 +151,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Tiredness, hair fall or heavy periods", "Annual screening for women 30+", "Bone and vitamin health after pregnancy or menopause"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Women's Health package (₹3,000).",
-    related: ["t:ferritin-test-hyderabad", "t:vitamin-d-test-hyderabad", "t:vitamin-b12-test-hyderabad", "p:thyroid-profile-test-hyderabad"]
+    related: ["t:ferritin-test-hyderabad", "t:vitamin-d-test-hyderabad", "t:vitamin-b12-test-hyderabad", "p:thyroid-profile-test-hyderabad", "t:beta-hcg-test-hyderabad", "t:calcium-test-hyderabad"]
   },
   {
     slug: "senior-citizen-health-checkup-hyderabad",
@@ -167,7 +167,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Adults 60+ due for an annual check", "Elders on long-term medication", "Families arranging home-collection checkups for parents"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Senior Citizen Health Check (₹3,500). Please note male/female version needed.",
-    related: ["p:full-body-checkup-hyderabad", "t:psa-test-hyderabad", "t:vitamin-d-test-hyderabad", "p:heart-health-checkup-hyderabad"]
+    related: ["p:full-body-checkup-hyderabad", "t:psa-test-hyderabad", "t:vitamin-d-test-hyderabad", "p:heart-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:electrolytes-test-hyderabad", "t:calcium-test-hyderabad"]
   },
   {
     slug: "heart-health-checkup-hyderabad",
@@ -186,7 +186,7 @@ const PACKAGES = [
     ekaLink: "https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist",
     photo: "echo",
     homeCollection: false,
-    related: ["t:lipid-profile-test-hyderabad", "t:hba1c-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad"]
+    related: ["t:lipid-profile-test-hyderabad", "t:hba1c-test-hyderabad", "p:senior-citizen-health-checkup-hyderabad", "t:ecg-test-hyderabad", "t:2d-echo-test-hyderabad"]
   },
   {
     slug: "premium-health-checkup-men-hyderabad",
@@ -202,7 +202,7 @@ const PACKAGES = [
     fasting: "yes",
     idealFor: ["Men 45+ due for a thorough annual check", "Strong family history of early heart disease", "Executives wanting a single comprehensive screen"],
     waText: "Hi Caspian Diagnostic Centre, I'd like to book the Premium Health Check for Men 45+ (₹4,399).",
-    related: ["p:heart-health-checkup-hyderabad", "t:psa-test-hyderabad", "p:full-body-checkup-hyderabad"]
+    related: ["p:heart-health-checkup-hyderabad", "t:psa-test-hyderabad", "p:full-body-checkup-hyderabad", "t:ecg-test-hyderabad", "t:liver-function-test-hyderabad"]
   },
   {
     slug: "haj-umrah-fitness-package-hyderabad",
@@ -247,7 +247,7 @@ const TESTS = [
     ],
     whoShould: ["Routine diabetes screening and monitoring", "Symptoms of high or low sugar", "As part of pre-operative or annual checkups"],
     faqExtra: [["What is the difference between FBS, PPBS and RBS?", "FBS is taken after an overnight fast, PPBS exactly 2 hours after a meal, and RBS at any time of day. Your doctor may ask for one or a combination, our team can guide you when you book."]],
-    related: ["t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad"]
+    related: ["t:hba1c-test-hyderabad", "p:comprehensive-diabetes-screening-hyderabad", "t:urine-routine-test-hyderabad", "p:full-body-checkup-hyderabad"]
   },
   {
     slug: "cbc-test-hyderabad", name: "Complete Blood Count (CBC)", short: "CBC", price: 350, sample: "Blood", fasting: "no",
@@ -277,7 +277,7 @@ const TESTS = [
       "High cholesterol has no symptoms; the only way to know is to test. Indian guidelines suggest adults check their lipids regularly from their 20s onwards, more often with diabetes, high BP or family history."
     ],
     whoShould: ["Adults screening heart-disease risk", "People with diabetes or high blood pressure", "Monitoring statin (cholesterol medicine) treatment"],
-    related: ["p:heart-health-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:full-body-checkup-hyderabad"]
+    related: ["p:heart-health-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:full-body-checkup-hyderabad", "t:ecg-test-hyderabad", "t:liver-function-test-hyderabad"]
   },
   {
     slug: "liver-function-test-hyderabad", name: "Liver Function Test (LFT)", short: "LFT", price: 450, sample: "Blood", fasting: "confirm",
@@ -287,7 +287,7 @@ const TESTS = [
       "It is ordered for jaundice, suspected fatty liver, alcohol-related concerns, medication monitoring, and as part of routine checkups, fatty liver is increasingly common alongside diabetes and obesity."
     ],
     whoShould: ["Yellowing of eyes/skin, dark urine or abdominal pain", "Fatty liver follow-up or alcohol-related screening", "People on long-term medication that affects the liver"],
-    related: ["t:kidney-function-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "p:full-body-checkup-hyderabad", "t:cbc-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:metabolic-wellness"]
   },
   {
     slug: "kidney-function-test-hyderabad", name: "Kidney Function Test (KFT)", short: "KFT", price: 400, sample: "Blood", fasting: "confirm",
@@ -297,7 +297,7 @@ const TESTS = [
       "Diabetes and high blood pressure are the two biggest causes of kidney damage in India, and early damage is silent, which is why regular KFT screening matters for anyone with either condition."
     ],
     whoShould: ["People with diabetes or high blood pressure", "Swelling of feet, reduced urine output or frothy urine", "Before starting certain medications, as advised"],
-    related: ["t:serum-creatinine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-routine-test-hyderabad"]
+    related: ["t:serum-creatinine-test-hyderabad", "t:electrolytes-test-hyderabad", "t:urine-routine-test-hyderabad", "t:calcium-test-hyderabad", "t:blood-sugar-test-hyderabad"]
   },
   {
     slug: "vitamin-d-test-hyderabad", name: "Vitamin D Test (25-OH)", short: "Vitamin D", price: 1350, sample: "Blood", fasting: "no",
@@ -337,7 +337,7 @@ const TESTS = [
       "It is commonly ordered alongside CBC and ESR in fever panels, joint pain workups, and post-infection monitoring."
     ],
     whoShould: ["Fever or suspected infection", "Monitoring response to antibiotics", "Joint pain and inflammation workups"],
-    related: ["t:esr-test-hyderabad", "t:cbc-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
+    related: ["t:esr-test-hyderabad", "t:cbc-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:uric-acid-test-hyderabad"]
   },
   {
     slug: "esr-test-hyderabad", name: "ESR Test", short: "ESR", price: 170, sample: "Blood", fasting: "no",
@@ -347,7 +347,7 @@ const TESTS = [
       "It is almost always interpreted together with CBC and CRP rather than alone."
     ],
     whoShould: ["Prolonged or unexplained fever", "Joint pains and suspected arthritis", "TB and chronic infection workups"],
-    related: ["t:crp-test-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["t:crp-test-hyderabad", "t:cbc-test-hyderabad", "t:uric-acid-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
   },
   {
     slug: "serum-creatinine-test-hyderabad", name: "Serum Creatinine Test", short: "Creatinine", price: 250, sample: "Blood", fasting: "no",
@@ -357,7 +357,7 @@ const TESTS = [
       "People with diabetes or high BP should check creatinine at least yearly, kidney damage caught early can often be slowed significantly."
     ],
     whoShould: ["Diabetes or high blood pressure (yearly screening)", "Before scans with contrast dye, as advised", "Monitoring known kidney disease"],
-    related: ["t:kidney-function-test-hyderabad", "t:blood-urea-test-hyderabad", "t:urine-routine-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:blood-urea-test-hyderabad", "t:urine-routine-test-hyderabad", "t:electrolytes-test-hyderabad"]
   },
   {
     slug: "uric-acid-test-hyderabad", name: "Uric Acid Test", short: "Uric Acid", price: 160, sample: "Blood", fasting: "confirm",
@@ -367,7 +367,7 @@ const TESTS = [
       "High uric acid is also linked with kidney stones and often travels with diabetes and obesity, so it is worth checking as part of metabolic screening."
     ],
     whoShould: ["Sudden severe joint pain (classically the big toe)", "History of kidney stones", "Monitoring gout treatment"],
-    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad"]
   },
   {
     slug: "blood-urea-test-hyderabad", name: "Blood Urea Test", short: "Blood Urea", price: 160, sample: "Blood", fasting: "no",
@@ -377,7 +377,7 @@ const TESTS = [
       "It is part of every kidney panel and most pre-operative and hospital admission workups."
     ],
     whoShould: ["Kidney function screening with creatinine", "Swelling, reduced urine output or dehydration", "Pre-operative workups"],
-    related: ["t:serum-creatinine-test-hyderabad", "t:kidney-function-test-hyderabad"]
+    related: ["t:serum-creatinine-test-hyderabad", "t:kidney-function-test-hyderabad", "t:electrolytes-test-hyderabad", "t:liver-function-test-hyderabad"]
   },
   {
     slug: "ferritin-test-hyderabad", name: "Serum Ferritin Test", short: "Ferritin", price: 400, sample: "Blood", fasting: "no",
@@ -397,7 +397,7 @@ const TESTS = [
       "It is a quick test with a same-day report you can keep on record."
     ],
     whoShould: ["Pregnancy registration and antenatal records", "Pre-operative and admission requirements", "Travel, visa or ID documentation"],
-    related: ["t:cbc-test-hyderabad", "p:haj-umrah-fitness-package-hyderabad"]
+    related: ["t:cbc-test-hyderabad", "p:haj-umrah-fitness-package-hyderabad", "t:beta-hcg-test-hyderabad"]
   },
   {
     slug: "beta-hcg-test-hyderabad", name: "Beta HCG Test (Pregnancy)", short: "Beta HCG", price: 950, sample: "Blood", fasting: "no",
@@ -407,7 +407,7 @@ const TESTS = [
       "Doctors also use serial beta HCG values to monitor early-pregnancy health. Reports are handled confidentially and delivered directly to you."
     ],
     whoShould: ["Early pregnancy confirmation", "Serial monitoring advised by your gynaecologist", "Before certain medical procedures"],
-    related: ["p:womens-health-checkup-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["p:womens-health-checkup-hyderabad", "t:cbc-test-hyderabad", "t:blood-group-test-hyderabad", "t:blood-sugar-test-hyderabad"]
   },
   {
     slug: "psa-test-hyderabad", name: "PSA Test (Prostate)", short: "PSA", price: 1200, sample: "Blood", fasting: "no",
@@ -428,7 +428,7 @@ const TESTS = [
     ],
     whoShould: ["High fever with body ache, headache or rash", "Fever during monsoon/dengue season", "Platelet monitoring alongside CBC"],
     faqExtra: [["Which dengue test is right for my fever day?", "NS1 antigen is most useful in the first 1–5 days of fever; IgM/IgG antibodies from day 4–5 onwards. Our profile includes all three, so timing doesn't matter, one sample covers every stage."]],
-    related: ["t:cbc-test-hyderabad", "t:malaria-test-hyderabad", "t:typhoid-widal-test-hyderabad"]
+    related: ["t:cbc-test-hyderabad", "t:malaria-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:liver-function-test-hyderabad", "t:crp-test-hyderabad"]
   },
   {
     slug: "malaria-test-hyderabad", name: "Malaria Test (Profile)", short: "Malaria", price: 500, sample: "Blood", fasting: "no",
@@ -438,7 +438,7 @@ const TESTS = [
       "Malaria fever classically comes in cycles with chills and sweating. Because falciparum malaria can turn serious quickly, we run fever tests around the clock."
     ],
     whoShould: ["Fever with chills and sweating episodes", "Fever after travel to malaria-prone areas", "Fever panels together with dengue and typhoid"],
-    related: ["t:dengue-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:cbc-test-hyderabad"]
+    related: ["t:dengue-test-hyderabad", "t:typhoid-widal-test-hyderabad", "t:cbc-test-hyderabad", "t:liver-function-test-hyderabad"]
   },
   {
     slug: "typhoid-widal-test-hyderabad", name: "Typhoid Test (Widal)", short: "Widal", price: 180, sample: "Blood", fasting: "no",
@@ -448,7 +448,7 @@ const TESTS = [
       "For more definitive answers, a comprehensive typhoid profile (₹2,000) including newer antibody tests is also available; our team can advise which suits your fever duration."
     ],
     whoShould: ["Fever lasting more than 3–4 days", "Fever with abdominal pain or poor appetite", "Suspected water/food-borne infection"],
-    related: ["t:dengue-test-hyderabad", "t:malaria-test-hyderabad", "t:crp-test-hyderabad"]
+    related: ["t:dengue-test-hyderabad", "t:malaria-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad"]
   },
   {
     slug: "electrolytes-test-hyderabad", name: "Electrolyte Profile (Na / K / Cl)", short: "Electrolytes", price: 200, sample: "Blood", fasting: "no",
@@ -458,7 +458,7 @@ const TESTS = [
       "Low sodium in particular is a frequent, under-recognised cause of weakness and confusion in elders."
     ],
     whoShould: ["Elders with weakness, confusion or low intake", "People on diuretics or BP medication", "Vomiting, diarrhoea or dehydration"],
-    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad"]
+    related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:ecg-test-hyderabad", "t:calcium-test-hyderabad"]
   },
   {
     slug: "calcium-test-hyderabad", name: "Serum Calcium Test", short: "Calcium", price: 160, sample: "Blood", fasting: "no",
@@ -468,7 +468,7 @@ const TESTS = [
       "Both low and high calcium cause problems: cramps, tingling and weak bones on one side; kidney stones and other issues on the other."
     ],
     whoShould: ["Bone pain or muscle cramps", "With vitamin D testing for bone health", "Kidney stone workups"],
-    related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad"]
+    related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad", "t:electrolytes-test-hyderabad", "t:kidney-function-test-hyderabad"]
   },
   {
     slug: "ecg-test-hyderabad", name: "ECG (Electrocardiogram)", short: "ECG", price: 250,
@@ -520,7 +520,7 @@ const TESTS = [
     whoShould: ["Persistent cough or breathlessness", "TB screening and fever workups", "Pre-operative and employment fitness checks"],
     faqExtra: [["Can I get a chest X-ray at home?", "Yes, a portable chest X-ray at home can be arranged for ₹2,000 across Hyderabad through our partner radiology team, ideal for elderly, bedridden or post-surgery patients. Message us on WhatsApp to schedule."]],
     homeCollection: false,
-    related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad"]
+    related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad", "t:ecg-test-hyderabad", "t:crp-test-hyderabad"]
   },
   {
     slug: "body-composition", name: "Body Composition Analysis (BCA, BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
@@ -537,7 +537,7 @@ const TESTS = [
     ],
     homeCollection: false,
     extLink: "https://www.caspianhealthcare.in/body-composition", extLabel: "Book a 20-minute slot (₹999)",
-    related: ["p:metabolic-wellness", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad"]
+    related: ["p:metabolic-wellness", "t:hba1c-test-hyderabad", "t:lipid-profile-test-hyderabad", "p:full-body-checkup-hyderabad", "t:liver-function-test-hyderabad", "t:blood-sugar-test-hyderabad"]
   }
 ];
 
