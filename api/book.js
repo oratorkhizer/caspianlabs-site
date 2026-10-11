@@ -225,7 +225,6 @@ const CODE_MAP = {
   "Typhoid Profile": { code: "PT19", type: "profile" },
   "Widal (Typhoid)": { code: "W09IS", type: "test" },
   "CRP (C-Reactive Protein)": { code: "C160CB", type: "test" },
-  "Urine Infection Screen": { code: "PU01", type: "profile" },
   "Urine Routine (CUE)": { code: "C151CP", type: "test" },
   "Hepatitis B Marker Profile": { code: "PH5", type: "profile" },
   "Pre-Operative Mini Profile": { code: "PP10", type: "profile" },
