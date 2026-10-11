@@ -23,7 +23,7 @@ const PROFILE_TESTS = "CBC, ESR, LFT, blood urea, serum creatinine, electrolytes
 const ADDONS = {
   hba1c: ["HbA1c", 600, "/tests/hba1c-test-hyderabad"],
   cue: ["Urine routine (CUE)", 200, "/tests/urine-routine-test-hyderabad"],
-  culture: ["Urine culture", null, null],
+  culture: ["Urine culture", 1100, null],
   psa: ["PSA", 1200, "/tests/psa-test-hyderabad"],
   lipid: ["Lipid profile", 450, "/tests/lipid-profile-test-hyderabad"],
   vitd: ["Vitamin D", 1350, "/tests/vitamin-d-test-hyderabad"],
