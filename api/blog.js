@@ -97,7 +97,7 @@ const ARTICLES = [
     ],
     cta: { label: "Book a fasting-friendly morning slot", href: "/#all-tests" },
     related: ["/tests/lipid-profile-test-hyderabad", "/tests/blood-sugar-test-hyderabad", "/home-sample-collection-hyderabad"],
-    relatedLabels: ["Lipid Profile (₹450)", "Blood Sugar Test (₹80)", "Home Sample Collection"]
+    relatedLabels: ["Lipid Profile (₹650)", "Blood Sugar Test (₹80)", "Home Sample Collection"]
   }
 ];
 

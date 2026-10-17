@@ -25,7 +25,7 @@ const ADDONS = {
   cue: ["Urine routine (CUE)", 200, "/tests/urine-routine-test-hyderabad"],
   culture: ["Urine culture", 1100, null],
   psa: ["PSA", 1200, "/tests/psa-test-hyderabad"],
-  lipid: ["Lipid profile", 450, "/tests/lipid-profile-test-hyderabad"],
+  lipid: ["Lipid profile", 650, "/tests/lipid-profile-test-hyderabad"],
   vitd: ["Vitamin D", 1350, "/tests/vitamin-d-test-hyderabad"],
   b12: ["Vitamin B12", 800, "/tests/vitamin-b12-test-hyderabad"],
   iron: ["Iron deficiency profile", 1000, null],

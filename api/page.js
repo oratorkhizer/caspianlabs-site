@@ -292,8 +292,8 @@ const TESTS = [
     related: ["p:thyroid-profile-test-hyderabad", "t:cbc-test-hyderabad", "t:anti-tpo-test-hyderabad", "t:prolactin-test-hyderabad"]
   },
   {
-    slug: "lipid-profile-test-hyderabad", name: "Lipid Profile (Cholesterol Test)", short: "Lipid Profile", price: 450, sample: "Blood", fasting: "yes",
-    desc: "Lipid profile test in Hyderabad at ₹450: total cholesterol, HDL, LDL and triglycerides. Fasting sample, same-day report. Free home collection above ₹500.",
+    slug: "lipid-profile-test-hyderabad", name: "Lipid Profile (Cholesterol Test)", short: "Lipid Profile", price: 650, sample: "Blood", fasting: "yes",
+    desc: "Lipid profile test in Hyderabad at ₹650: total cholesterol, HDL, LDL and triglycerides. Fasting sample, same-day report. Free home collection above ₹500.",
     about: [
       "The lipid profile measures the fats in your blood: total cholesterol, HDL (protective cholesterol), LDL (the artery-clogging kind) and triglycerides, together the standard assessment of heart-disease risk.",
       "High cholesterol has no symptoms; the only way to know is to test. Indian guidelines suggest adults check their lipids regularly from their 20s onwards, more often with diabetes, high BP or family history."
@@ -1202,7 +1202,7 @@ function renderHub(kind) {
   const items = isTests ? TESTS : PACKAGES;
   const title = isTests ? "Blood Test Prices in Hyderabad: All Tests | Caspian Labs" : "Health Checkup Packages in Hyderabad with Prices | Caspian Labs";
   const desc = isTests
-    ? "Blood test price list at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad: CBC ₹350, HbA1c ₹600, thyroid ₹470, lipid ₹450, vitamin D ₹1,350 and more. Open 24/7, home collection, book and pay online."
+    ? "Blood test price list at Caspian Diagnostic Centre, Vijay Nagar Colony, Hyderabad: CBC ₹350, HbA1c ₹600, thyroid ₹470, lipid ₹650, vitamin D ₹1,350 and more. Open 24/7, home collection, book and pay online."
     : "Full body checkup ₹1,795, essential checkup ₹899, diabetes screening ₹899, heart health ₹999, senior citizen and women's packages. Caspian Diagnostic Centre, Hyderabad. Open 24/7, home collection, book online.";
   const li = items.map(x => `<li><a href="/${isTests ? "tests" : "packages"}/${x.slug}">${esc(x.name)}</a><div class="hp">${inr(x.price)}</div><div class="hs">${esc(isTests ? (x.fasting === "yes" ? "Fasting required" : x.fasting === "no" ? "No fasting" : "Preparation varies") : x.tagline)}</div></li>`).join("");
   const body = `<div class="card">
