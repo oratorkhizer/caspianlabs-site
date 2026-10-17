@@ -42,6 +42,7 @@
 // falls back to the existing pay-at-centre flow — safe to deploy any time.
 
 import crypto from "node:crypto";
+import { check, HUMAN_MSG } from "./_bot.js";
 
 const RZP = "https://api.razorpay.com/v1";
 
@@ -144,7 +145,7 @@ export default async function handler(req, res) {
   try {
     if (body.action === "confirm") return await confirmPayment(body, res);
     if (body.action === "recover" || (body.event && body.payload)) return await recoverPayment(body, res);
-    return await createOrder(body, res);
+    return await createOrder(body, res, req);
   } catch (e) {
     console.error("pay.js server error", String(e));
     return res.status(500).json({ ok: false, error: "Payment server error" });
@@ -153,11 +154,13 @@ export default async function handler(req, res) {
 
 /* ───────────────────────── action: create ───────────────────────── */
 
-async function createOrder(body, res) {
-  // Honeypot — quietly skip: the client falls back and no order is created.
-  if (body.website || body.company_url) {
-    return res.status(200).json({ ok: true, skipped: true });
-  }
+async function createOrder(body, res, req) {
+  // Bot checks (honeypot, fill time, random name, Turnstile). A drop quietly skips:
+  // the client falls back and no order is created. Only this human step is checked;
+  // confirm and recover (payment callbacks) are never blocked.
+  const verdict = await check(req, { honeypot: body.website || body.company_url, ms: body.ms, name: body.fullName || body.name, email: body.email, token: body.turnstile });
+  if (verdict === "drop") return res.status(200).json({ ok: true, skipped: true });
+  if (verdict === "reject") return res.status(400).json({ ok: false, error: HUMAN_MSG, human: false });
 
   const errors = [];
   const fullName = String(body.fullName || body.name || "").trim();

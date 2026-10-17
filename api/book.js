@@ -19,6 +19,8 @@
 //   CRELIO_AREA    defaults to CRELIO_CITY
 //   ALLOW_ORIGIN   https://www.caspianlabs.in     (optional; defaults to same-origin/*)
 
+import { check, HUMAN_MSG } from "./_bot.js";
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", process.env.ALLOW_ORIGIN || "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -37,10 +39,13 @@ export default async function handler(req, res) {
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = {}; } }
   body = body || {};
 
-  // ---- Honeypot: bots fill hidden fields humans never see. Pretend success, create no bill. ----
-  if (body.website || body.company_url) {
+  // ---- Bot checks: honeypot, fill time, random name (pretend success, create no bill),
+  //      then Cloudflare Turnstile when TURNSTILE_SECRET_KEY is set. ----
+  const verdict = await check(req, { honeypot: body.website || body.company_url, ms: body.ms, name: body.fullName || body.name, email: body.email, token: body.turnstile });
+  if (verdict === "drop") {
     return res.status(200).json({ ok: true, billId: null, patientId: null, skipped: true });
   }
+  if (verdict === "reject") return res.status(400).json({ ok: false, error: HUMAN_MSG, human: false });
 
   // ---- Validate ----
   const errors = [];

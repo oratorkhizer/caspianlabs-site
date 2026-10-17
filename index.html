@@ -1027,6 +1027,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         <div id="bkItems"></div>
         <div class="bk-err" id="bkErr" role="alert" aria-live="assertive"></div>
         <form id="bkForm" novalidate>
+          <div id="bkTs" style="display:contents"></div>
           <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"><label for="bkHp">Company (leave blank)</label><input id="bkHp" name="website" type="text" tabindex="-1" autocomplete="off"></div>
           <div class="bk-f"><label for="bkName">Full name <span class="req">*</span></label><input id="bkName" type="text" autocomplete="name" placeholder="Patient's full name" required></div>
           <div class="bk-row">
@@ -1107,6 +1108,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   </div>
 </div>
 
+<script src="/assets/turnstile.js"></script>
 <script>
   function toggleMenu(){var m=document.getElementById('menu');var open=m.classList.toggle('open');var b=document.querySelector('.menu-btn');if(b)b.setAttribute('aria-expanded',open?'true':'false');}
   function closeMenu(){document.getElementById('menu').classList.remove('open');var b=document.querySelector('.menu-btn');if(b)b.setAttribute('aria-expanded','false');}
@@ -1682,9 +1684,15 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     openCart();
   }
 
+  // Bot protection: invisible Turnstile check plus fill time, started when the form first opens.
+  var bkG=null;
+  function bkGuard(){ if(!bkG&&window.BotGuard) bkG=window.BotGuard(document.getElementById('bkTs')); return bkG; }
+  function bkToken(){ var g=bkGuard(); return g?g.wait():Promise.resolve(''); }
+
   // Open the checkout modal showing every test in the cart.
   function openCart(){
     if(!CART.length){ scrollToTests(); return; }
+    bkGuard();
     bkState.mode = "now";
     document.getElementById('bkTitle').textContent = CART.length>1 ? "Book your tests" : "Book your test";
     document.getElementById('bkErr').style.display = "none";
@@ -1937,7 +1945,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     /* ===== 2.4 Online payment: pay first via Razorpay, bill registers in Crelio only after
        payment succeeds. Every failure path falls back so no patient is ever blocked. ===== */
 
-    function legacyBook(){   // original pay-at-centre flow (used when online payment isn't available)
+    function legacyBook(){   // a Turnstile token is single use, so fetch a fresh one first
+      if(bkG) bkG.reset();
+      bkToken().then(function(tk){ payload.turnstile=tk; payload.ms=bkG?bkG.ms():''; legacyBookNow(); });
+    }
+    function legacyBookNow(){   // original pay-at-centre flow (used when online payment isn't available)
     var timedOut = false;
     var ac = (typeof AbortController!=='undefined') ? new AbortController() : null;
     var timer = setTimeout(function(){ timedOut = true; if(ac){ try{ac.abort();}catch(e){} } bkTimeout(v); }, 15000);
@@ -1948,6 +1960,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     .then(function(res){
       if(timedOut) return;
       clearTimeout(timer);
+      if(bkG) bkG.reset();   // tokens are single use
       var j = res.j || {};
       if(res.status>=200 && res.status<300 && j.ok){
         if(typeof gtag==='function'){gtag('event','booking_success',{event_category:'booking'});}  // no test name (health-data privacy)
@@ -1970,6 +1983,9 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           + '<p style="margin-top:6px;color:#64748b;font-size:13.5px">You\'ll also receive a WhatsApp confirmation from our team within 15 minutes.</p>'
           + '<a class="btn-wa2" href="'+_waUrl+'" target="_blank" rel="noopener">Message us on WhatsApp</a>';
         CART = []; saveCart(); updateSticky();   // order placed — clear the cart
+      } else if(j.human===false){
+        // bot check failed: say so honestly and let the patient retry
+        sub.disabled=false; sub.textContent='Confirm booking'; fail(j.error);
       } else {
         // notConfigured / notMapped / any API error → WhatsApp, no dead ends
         bkFallback(v, j.notConfigured ? 'not_configured' : (j.notMapped ? 'not_mapped' : ('http_'+res.status)));
@@ -2064,12 +2080,17 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     sub.innerHTML='<span class="bk-spin"></span> Preparing payment…';
     var payTimedOut = false;
     var payAc = (typeof AbortController!=='undefined') ? new AbortController() : null;
-    var payTimer = setTimeout(function(){ payTimedOut = true; if(payAc){ try{payAc.abort();}catch(e){} } legacyBook(); }, 15000);
-    fetch('/api/pay', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), signal: payAc?payAc.signal:undefined })
+    var payTimer;
+    bkToken().then(function(tk){
+      payload.turnstile=tk; payload.ms=bkG?bkG.ms():'';
+      payTimer = setTimeout(function(){ payTimedOut = true; if(payAc){ try{payAc.abort();}catch(e){} } legacyBook(); }, 15000);
+      return fetch('/api/pay', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), signal: payAc?payAc.signal:undefined });
+    })
     .then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j}; }); })
     .then(function(res){
       if(payTimedOut) return;
       clearTimeout(payTimer);
+      if(bkG) bkG.reset();   // tokens are single use
       var j = res.j || {};
       if(j.ok && j.orderId){
         ensureRzpJs(function(){ openCheckout(j); }, function(){ legacyBook(); });
