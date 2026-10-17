@@ -302,8 +302,8 @@ const TESTS = [
     related: ["p:heart-health-checkup-hyderabad", "t:hba1c-test-hyderabad", "p:full-body-checkup-hyderabad", "t:ecg-test-hyderabad", "t:liver-function-test-hyderabad"]
   },
   {
-    slug: "liver-function-test-hyderabad", name: "Liver Function Test (LFT)", short: "LFT", price: 450, sample: "Blood", fasting: "confirm",
-    desc: "Liver function test (LFT) in Hyderabad at ₹450: bilirubin, SGPT, SGOT, ALP, protein and albumin. Same-day report on WhatsApp. Free home collection above ₹500.",
+    slug: "liver-function-test-hyderabad", name: "Liver Function Test (LFT)", short: "LFT", price: 650, sample: "Blood", fasting: "confirm",
+    desc: "Liver function test (LFT) in Hyderabad at ₹650: bilirubin, SGPT, SGOT, ALP, protein and albumin. Same-day report on WhatsApp. Free home collection above ₹500.",
     about: [
       "The LFT panel measures bilirubin, liver enzymes (SGPT/ALT, SGOT/AST, ALP), total protein and albumin, together showing how well your liver is working and whether it is inflamed or damaged.",
       "It is ordered for jaundice, suspected fatty liver, alcohol-related concerns, medication monitoring, and as part of routine checkups, fatty liver is increasingly common alongside diabetes and obesity."
@@ -392,8 +392,8 @@ const TESTS = [
     related: ["t:kidney-function-test-hyderabad", "t:serum-creatinine-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad", "t:ra-factor-test-hyderabad"]
   },
   {
-    slug: "blood-urea-test-hyderabad", name: "Blood Urea Test", short: "Blood Urea", price: 160, sample: "Blood", fasting: "no",
-    desc: "Blood urea test in Hyderabad at ₹160: a kidney function marker usually tested along with creatinine. Same-day report on WhatsApp.",
+    slug: "blood-urea-test-hyderabad", name: "Blood Urea Test", short: "Blood Urea", price: 110, sample: "Blood", fasting: "no",
+    desc: "Blood urea test in Hyderabad at ₹110: a kidney function marker usually tested along with creatinine. Same-day report on WhatsApp.",
     about: [
       "Urea is a protein-breakdown waste product cleared by the kidneys. Raised urea, read together with creatinine, helps assess kidney function and hydration status.",
       "It is part of every kidney panel and most pre-operative and hospital admission workups."
@@ -1265,3 +1265,6 @@ export default function handler(req, res) {
   res.setHeader("Cache-Control", status === 200 ? "public, s-maxage=3600, stale-while-revalidate=86400" : "no-store");
   res.status(status).send(html);
 }
+
+// Shared with /api/whatsapp-catalog (Meta catalog feed) so the feed prices from the same data as these pages.
+export { PACKAGES, TESTS, BOOK_NAMES, fastingText };

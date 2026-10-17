@@ -194,3 +194,6 @@ export default function handler(req, res) {
   res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
   res.status(200).send(renderSurgical());
 }
+
+// Shared with /api/whatsapp-catalog (Meta catalog feed).
+export const SURGICAL = { slug: SLUG, name: NAME, price: PRICE, url: URL };

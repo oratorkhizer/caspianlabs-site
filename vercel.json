@@ -28,6 +28,7 @@
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/catalog.csv", "destination": "/api/whatsapp-catalog" },
     { "source": "/favicon.ico", "destination": "/favicon.svg" },
     { "source": "/tests", "destination": "/api/page?kind=tests" },
     { "source": "/packages", "destination": "/api/page?kind=packages" },
