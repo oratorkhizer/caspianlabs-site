@@ -20,6 +20,14 @@
 import { PACKAGES, TESTS } from "./page.js";
 import { SURGICAL } from "./surgical.js";
 import { IMG_PRICES } from "./_catalog-img.js";
+import { DEMAND } from "./_demand.js";
+
+// DEMAND (api/_demand.js, written by scripts/lab-demand.py from Crelio exports) decides what WhatsApp
+// shows and in what order: busiest first, and anything ordered less than MIN_PER_MONTH times a month
+// (over the whole period and over the last 3 months) is left out. The website still lists everything.
+// PIN keeps an item in the catalog regardless of demand (for example a new package being launched).
+const MIN_PER_MONTH = 1;
+const PIN = [];
 
 const BASE = "https://www.caspianlabs.in";
 const BRAND = "Caspian Diagnostic Centre";
@@ -152,9 +160,18 @@ export function toCsv(items) {
   return rows.join("\r\n") + "\r\n";
 }
 
+// The items Meta gets: in demand (or pinned), busiest first. Without demand data, everything in page order.
+export function feedItems() {
+  const items = buildItems();
+  if (!DEMAND || !Object.keys(DEMAND).length) return items;
+  const d = (id) => DEMAND[id] || { pm: 0, pm3: 0, score: 0 };
+  const keep = (x) => PIN.includes(x.id) || d(x.id).pm >= MIN_PER_MONTH || d(x.id).pm3 >= MIN_PER_MONTH;
+  return items.filter(keep).sort((a, b) => d(b.id).score - d(a.id).score);
+}
+
 export default function handler(req, res) {
   if (req.method !== "GET" && req.method !== "HEAD") return res.status(405).send("Method not allowed");
-  const csv = toCsv(buildItems());
+  const csv = toCsv(feedItems());
   res.setHeader("Content-Type", "text/csv; charset=utf-8");
   res.setHeader("Content-Disposition", 'inline; filename="caspianlabs-catalog.csv"');
   res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
