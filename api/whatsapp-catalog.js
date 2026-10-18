@@ -13,7 +13,8 @@
 // feed sends the plain logo card (catalog-img/_generic.png) for that item instead of a wrong price.
 // Redraw with:  python3 scripts/catalog-images.py   (then commit catalog-img/ and api/_catalog-img.js)
 //
-// Columns: id, title, description, availability, condition, price, link, image_link, brand.
+// Columns: id, title, description, availability, condition, price, link, image_link, brand, origin_country
+// (origin_country IN: WhatsApp catalog messages sent through Interakt require country of origin).
 // Descriptions are plain Indian English, under 200 characters: what it checks, sample, fasting.
 // No em dashes anywhere (owner's rule).
 
@@ -149,13 +150,13 @@ export function buildItems() {
   return out.filter((x) => Number.isFinite(x.price) && x.price > 0);
 }
 
-const COLS = ["id", "title", "description", "availability", "condition", "price", "link", "image_link", "brand"];
+const COLS = ["id", "title", "description", "availability", "condition", "price", "link", "image_link", "brand", "origin_country"];
 const q = (v) => '"' + String(v).replace(/"/g, '""').replace(/[\r\n]+/g, " ") + '"';
 
 export function toCsv(items) {
   const rows = [COLS.join(",")];
   for (const it of items) {
-    rows.push([it.id, it.title, it.description, "in stock", "new", it.price.toFixed(2) + " INR", it.link, it.image, BRAND].map(q).join(","));
+    rows.push([it.id, it.title, it.description, "in stock", "new", it.price.toFixed(2) + " INR", it.link, it.image, BRAND, "IN"].map(q).join(","));
   }
   return rows.join("\r\n") + "\r\n";
 }
