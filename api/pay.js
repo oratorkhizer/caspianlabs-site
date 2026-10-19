@@ -458,7 +458,7 @@ async function settleOrder(base, order, payment, res) {
    /pay?o=<orderId> (pay.html), which uses the normal confirm flow; the Razorpay webhook +
    recover path covers closed pages. After settlement we ping wa-flow with the order id only:
    it is a pointer, wa-flow re-checks the order through wa_status before telling the patient. */
-const WA_KEY_SHA256 = "${h}";
+const WA_KEY_SHA256 = "e856a0d352a01074ba5a127b2c8f00a48f1bf24f57e4b6fe3e7ff445e48e055b";
 const WA_FLOW_URL = "https://gjpbiiqkvzysmdpioexk.supabase.co/functions/v1/wa-flow";
 function waKeyOk(k) {
   const got = crypto.createHash("sha256").update(String(k || "")).digest("hex");
