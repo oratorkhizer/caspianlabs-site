@@ -209,7 +209,8 @@ async function createOrder(body, res, req, wa) {
   const VISIT_FEE = Number(process.env.HOME_VISIT_CHARGE || 100);
   const FREE_ABOVE = Number(process.env.HOME_FREE_ABOVE || 500);
   let visitCharge = 0;
-  if (String(body.mode || "now").trim() === "home") {
+  // A family member added in WhatsApp to an already-paid home visit (same address and slot) pays no second visit charge.
+  if (String(body.mode || "now").trim() === "home" && !(wa && body.noVisitCharge === true)) {
     const lower = resolved.map((r) => r.name.toLowerCase());
     const twoVisits = lower.some((n) => n.includes("fasting") || n.includes("(fbs)")) &&
                       lower.some((n) => n.includes("post prandial") || n.includes("(ppbs)"));
