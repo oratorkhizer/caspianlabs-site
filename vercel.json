@@ -47,6 +47,7 @@
     { "source": "/hi", "destination": "/api/lang?l=hi" },
     { "source": "/hi/:slug", "destination": "/api/lang?l=hi&slug=:slug" },
     { "source": "/read-my-report", "destination": "/read-my-report.html" },
+    { "source": "/pay", "destination": "/pay.html" },
     { "source": "/x-ray", "destination": "/api/xray" },
     { "source": "/x-ray/:part", "destination": "/api/xray?part=:part" },
     { "source": "/:path*", "destination": "/api/page?kind=404" }

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pay for your booking · Caspian Diagnostic Centre</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg">
+<style>
+:root{--blue:#0A5C9E;--blue-dark:#08487d;--coral:#F25C54;--ink:#152b3c;--muted:#5b6b7a;--line:#e3ecf3;--bg:#f2f8fd;--ok:#0f8440}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg);min-height:100vh}
+header{background:#fff;border-bottom:1px solid var(--line)}
+header .w{max-width:520px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:10px}
+header img{width:34px;height:34px;object-fit:contain}
+header b{font-size:15px;color:var(--blue-dark)}
+header span{display:block;font-size:12px;color:var(--muted);font-weight:400}
+main{max-width:520px;margin:0 auto;padding:18px 16px 40px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+h1{font-size:20px;margin-bottom:4px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+.row:last-child{border-bottom:0}
+.row .p{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tot{font-weight:700;font-size:17px;border-top:2px solid var(--ink);margin-top:4px}
+.meta{margin-top:14px;font-size:14px;color:var(--muted)}
+.meta div{margin:2px 0}
+.meta b{color:var(--ink);font-weight:600}
+button{width:100%;margin-top:18px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:17px;font-weight:600;padding:15px;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.fine{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+.msg{margin-top:12px;font-size:14px;color:#a33}
+.done{text-align:center}
+.done .tick{width:56px;height:56px;border-radius:50%;background:var(--ok);color:#fff;font-size:30px;line-height:56px;margin:4px auto 10px}
+.wa{display:inline-block;margin-top:16px;background:var(--ok);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none;font-weight:600}
+.skel{color:var(--muted)}
+</style></head><body>
+<header><div class="w"><img src="/logo.webp" alt=""><div><b>Caspian Diagnostic Centre</b><span>Vijay Nagar Colony, Hyderabad · open 24x7</span></div></div></header>
+<main><div class="card" id="box"><p class="skel">Loading your booking…</p></div></main>
+<script>
+(function(){
+  var box = document.getElementById('box');
+  var WA = 'https://wa.me/919059341154';
+  var o = new URLSearchParams(location.search).get('o') || '';
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function rs(n){return '₹' + Number(n).toLocaleString('en-IN');}
+  function api(b){return fetch('/api/pay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function done(bill){
+    box.innerHTML = '<div class="done"><div class="tick" aria-hidden="true">✓</div><h1>Payment received</h1>'
+      + '<p class="sub">' + (bill ? 'Your booking is confirmed. Bill number <b>' + esc(bill) + '</b>.' : 'Your booking is being confirmed now.')
+      + ' We will message you on WhatsApp with the details.</p><a class="wa" href="' + WA + '">Back to WhatsApp</a></div>';
+  }
+  function fail(t){ box.innerHTML = '<h1>We could not open this payment</h1><p class="sub">' + esc(t) + '</p><a class="wa" href="' + WA + '">Message us on WhatsApp</a>'; }
+  if (!/^order_[A-Za-z0-9]{6,40}$/.test(o)) return fail('This link looks incomplete. Please tap the link in WhatsApp again.');
+  api({action:'wa_info', orderId:o}).then(function(d){
+    if (!d || !d.ok) return fail((d && d.error) || 'Please try again.');
+    if (d.paid) return done(d.billId);
+    var rows = d.items.map(function(i){return '<div class="row"><span>' + esc(i.name) + '</span><span class="p">' + rs(i.price) + '</span></div>';}).join('');
+    if (d.visitCharge > 0) rows += '<div class="row"><span>Home visit charge</span><span class="p">' + rs(d.visitCharge) + '</span></div>';
+    rows += '<div class="row tot"><span>Total</span><span class="p">' + rs(d.amount/100) + '</span></div>';
+    var when = d.dateTime ? new Date(d.dateTime + ':00+05:30').toLocaleString('en-IN',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kolkata'}) : '';
+    box.innerHTML = '<h1>Pay for your booking</h1><p class="sub">For ' + esc(d.name) + '</p>' + rows
+      + '<div class="meta"><div><b>' + (d.mode === 'home' ? 'Home collection' : 'At the centre') + '</b>' + (when ? ', from ' + esc(when) : '') + '</div>'
+      + (d.address ? '<div>' + esc(d.address) + '</div>' : '') + '</div>'
+      + '<button id="pay">Pay ' + rs(d.amount/100) + '</button><p class="msg" id="msg" role="alert"></p>'
+      + '<p class="fine">Secure payment by Razorpay: UPI, card or netbanking. Caspian Lifesciences Pvt. Ltd.</p>';
+    var btn = document.getElementById('pay'), msg = document.getElementById('msg');
+    btn.onclick = function(){
+      btn.disabled = true; msg.textContent = '';
+      var s = document.createElement('script'); s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      s.onerror = function(){ btn.disabled = false; msg.textContent = 'Payment page did not load. Check your internet and try again.'; };
+      s.onload = function(){
+        var rz = new window.Razorpay({
+          key: d.keyId, order_id: d.orderId, amount: d.amount, currency: 'INR', name: 'Caspian Diagnostic Centre',
+          description: 'Lab booking', prefill: { name: d.name, contact: d.mobile ? '+91' + d.mobile : '' }, theme: { color: '#0A5C9E' },
+          handler: function(r){
+            box.innerHTML = '<p class="skel">Confirming your payment…</p>';
+            api({action:'confirm', razorpay_order_id:r.razorpay_order_id, razorpay_payment_id:r.razorpay_payment_id, razorpay_signature:r.razorpay_signature})
+              .then(function(c){ done(c && c.billId); }).catch(function(){ done(null); });
+          },
+          modal: { ondismiss: function(){ btn.disabled = false; msg.textContent = 'Payment not completed. Tap Pay to try again.'; } }
+        });
+        rz.open();
+      };
+      document.head.appendChild(s);
+    };
+  }).catch(function(){ fail('Please check your internet and try again.'); });
+})();
+</script>
+</body></html>

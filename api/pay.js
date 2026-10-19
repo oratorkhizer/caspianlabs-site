@@ -143,6 +143,9 @@ export default async function handler(req, res) {
   body = body || {};
 
   try {
+    if (body.action === "wa_order") return await waOrder(body, res, req);
+    if (body.action === "wa_info") return await waInfo(body, res);
+    if (body.action === "wa_status") return await waStatus(body, res);
     if (body.action === "confirm") return await confirmPayment(body, res);
     if (body.action === "recover" || (body.event && body.payload)) return await recoverPayment(body, res);
     return await createOrder(body, res, req);
@@ -154,11 +157,11 @@ export default async function handler(req, res) {
 
 /* ───────────────────────── action: create ───────────────────────── */
 
-async function createOrder(body, res, req) {
+async function createOrder(body, res, req, wa) {
   // Bot checks (honeypot, fill time, random name, Turnstile). A drop quietly skips:
   // the client falls back and no order is created. Only this human step is checked;
   // confirm and recover (payment callbacks) are never blocked.
-  const verdict = await check(req, { honeypot: body.website || body.company_url, ms: body.ms, name: body.fullName || body.name, email: body.email, token: body.turnstile });
+  const verdict = wa ? "ok" : await check(req, { honeypot: body.website || body.company_url, ms: body.ms, name: body.fullName || body.name, email: body.email, token: body.turnstile });
   if (verdict === "drop") return res.status(200).json({ ok: true, skipped: true });
   if (verdict === "reject") return res.status(400).json({ ok: false, error: HUMAN_MSG, human: false });
 
@@ -231,11 +234,12 @@ async function createOrder(body, res, req) {
   if (!notes) return res.status(422).json({ ok: false, error: "Order too large, please book on WhatsApp" });
   notes.patient = fullName.slice(0, 250);
   notes.mobile = mobile;
+  if (wa) { notes.src = "wa"; notes.wb = String(wa.bookingId || ""); }
 
   const order = await rzp("POST", "/orders", {
     amount: Math.round(payableRupees * 100),   // paise
     currency: "INR",
-    receipt: "web-" + mobile.slice(-4) + "-" + crypto.randomBytes(4).toString("hex"),
+    receipt: (wa ? "wa-" : "web-") + mobile.slice(-4) + "-" + crypto.randomBytes(4).toString("hex"),
     payment_capture: 1,
     notes,
   });
@@ -444,7 +448,53 @@ async function settleOrder(base, order, payment, res) {
     await rzp("PATCH", "/orders/" + orderId, { notes: newNotes });
   } catch (e) { /* non-fatal */ }
 
+  if (order.notes && order.notes.src === "wa") await notifyWa(orderId);
   return res.status(200).json({ ok: true, billId, patientId, amountPaid, paymentId });
+}
+
+/* ─────────── WhatsApp booking (lab line, added 19 Oct 2026) ───────────
+   The WhatsApp assistant (Supabase function wa-flow) builds a booking in chat and asks for an
+   order here with a shared key (only its SHA-256 is in this public repo). The patient pays on
+   /pay?o=<orderId> (pay.html), which uses the normal confirm flow; the Razorpay webhook +
+   recover path covers closed pages. After settlement we ping wa-flow with the order id only:
+   it is a pointer, wa-flow re-checks the order through wa_status before telling the patient. */
+const WA_KEY_SHA256 = "${h}";
+const WA_FLOW_URL = "https://gjpbiiqkvzysmdpioexk.supabase.co/functions/v1/wa-flow";
+function waKeyOk(k) {
+  const got = crypto.createHash("sha256").update(String(k || "")).digest("hex");
+  return got.length === WA_KEY_SHA256.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(WA_KEY_SHA256));
+}
+const ORDER_RE = /^order_[A-Za-z0-9]{6,40}$/;
+async function waOrder(body, res, req) {
+  if (!waKeyOk(body.key)) return res.status(401).json({ ok: false, error: "unauthorized" });
+  return createOrder(body, res, req, { bookingId: body.bookingId });
+}
+async function waInfo(body, res) {
+  const id = String(body.orderId || "");
+  if (!ORDER_RE.test(id)) return res.status(400).json({ ok: false, error: "Bad link" });
+  const order = await rzp("GET", "/orders/" + id);
+  if (!order || !order.id || !order.notes || order.notes.src !== "wa") return res.status(404).json({ ok: false, error: "This payment link is not valid" });
+  const b = unchunkNotes(order.notes) || {};
+  const paid = order.status === "paid" || !!order.notes.billId;
+  return res.status(200).json({
+    ok: true, keyId: process.env.RAZORPAY_KEY_ID, orderId: order.id, amount: order.amount, paid,
+    billId: order.notes.billId || null, name: String(b.n || ""), mobile: String(b.m || ""),
+    items: (b.it || []).map((r) => ({ name: r.n, price: r.p })), visitCharge: Number(b.vc || 0),
+    mode: b.md || "now", dateTime: b.dt || "", address: b.ad ? String(b.ad).replace(/\s*\|\s*Map:.*$/, "") : "",
+  });
+}
+async function waStatus(body, res) {
+  if (!waKeyOk(body.key)) return res.status(401).json({ ok: false, error: "unauthorized" });
+  const id = String(body.orderId || "");
+  if (!ORDER_RE.test(id)) return res.status(400).json({ ok: false, error: "bad order id" });
+  const order = await rzp("GET", "/orders/" + id);
+  if (!order || !order.id) return res.status(404).json({ ok: false, error: "not found" });
+  return res.status(200).json({ ok: true, status: order.status, paid: order.status === "paid", billId: (order.notes && order.notes.billId) || null, amount: order.amount / 100, amountPaid: (order.amount_paid || 0) / 100 });
+}
+async function notifyWa(orderId) {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 4000);
+  try { await fetch(WA_FLOW_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ event: "paid", orderId }), signal: ctl.signal }); }
+  catch (e) { /* the 5-minute check in wa-flow catches it */ } finally { clearTimeout(t); }
 }
 
 /* ───────────────────────── helpers ───────────────────────── */
