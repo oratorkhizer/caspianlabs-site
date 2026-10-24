@@ -28,6 +28,7 @@
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/r/:t", "destination": "https://gjpbiiqkvzysmdpioexk.supabase.co/functions/v1/lab-report?t=:t" },
     { "source": "/catalog.csv", "destination": "/api/whatsapp-catalog" },
     { "source": "/favicon.ico", "destination": "/favicon.svg" },
     { "source": "/tests", "destination": "/api/page?kind=tests" },
