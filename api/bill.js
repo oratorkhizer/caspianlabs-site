@@ -79,7 +79,8 @@ export default async function handler(req, res) {
   const tests = reports.map((r) => ({
     name: String(r["Test Name"] || r.testName || "").trim(),
     status: String(r.status || ""),
-    reported: /sign|approv|final|complete|submit|report/i.test(String(r.status || "")) || !!r["Approval Date"] || (Array.isArray(r.fileAttachments) && r.fileAttachments.length > 0),
+    // Crelio's status reads "Report ready" or "Report not ready"
+    reported: !/not/i.test(String(r.status || "")) && /ready|sign|approv|final|complete/i.test(String(r.status || "")),
   }));
   const attachments = [];
   for (const r of reports) for (const a of (Array.isArray(r.fileAttachments) ? r.fileAttachments : [])) { const u = typeof a === "string" ? a : (a && (a.url || a.link || a.fileUrl)); if (u) attachments.push({ test: String(r["Test Name"] || "").trim(), url: String(u) }); }
