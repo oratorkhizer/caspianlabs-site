@@ -89,7 +89,7 @@ export default async function handler(req, res) {
 
   // ?pdf=1 returns the PDF itself (binary is a quarter smaller than base64 in JSON, and Vercel caps a reply at 4.5 MB).
   if (String(req.query.pdf || "") === "1") {
-    if (!pdf) return res.status(404).json({ ok: false, error: "no report PDF on this bill yet", reported: tests.filter((t) => t.reported).length, total_tests: tests.length });
+    if (!pdf) return res.status(404).json({ ok: false, error: "no report PDF on this bill yet", crelio_message: typeof data?.Message === "string" ? data.Message.slice(0, 300) : null, reported: tests.filter((t) => t.reported).length, total_tests: tests.length });
     const buf = Buffer.from(pdf, "base64");
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("X-Bill-Patient", encodeURIComponent(String(first["Patient Name"] || "").trim()));
@@ -104,6 +104,6 @@ export default async function handler(req, res) {
     phone10: phone.length === 10 ? phone : null,
     pay: { ...payState(money), fields: money },
     tests, total_tests: tests.length, reported: tests.filter((t) => t.reported).length,
-    has_pdf: !!pdf, attachments,
+    has_pdf: !!pdf, attachments, crelio_message: typeof data?.Message === "string" ? data.Message.slice(0, 300) : null,
   });
 }
