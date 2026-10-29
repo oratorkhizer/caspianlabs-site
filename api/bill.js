@@ -8,7 +8,7 @@
 // Not for the browser: it needs the header  x-catalog-key: <LAB_CATALOG_KEY>  (same key as /api/catalog).
 //
 // GET ?bill=<id>            -> { ok, bill, patient, phone10, pay, tests: [{ name, reported }], reported, total_tests, has_pdf, attachments }
-// GET ?bill=<id>&pdf=1      -> same, plus pdf_base64 (Crelio's consolidated report) when Crelio has one
+// GET ?bill=<id>&pdf=1      -> the consolidated report PDF itself (application/pdf); patient, phone and test counts in X-Bill-* headers
 // GET ?bill=<id>&shape=1    -> the response's field names and value types only, no values (to map Crelio's fields)
 //
 // Payment: Crelio's documented response has no payment block, so every field whose name speaks of money
@@ -78,7 +78,8 @@ export default async function handler(req, res) {
   const first = reports[0] || {};
   const tests = reports.map((r) => ({
     name: String(r["Test Name"] || r.testName || "").trim(),
-    reported: !!(r["Report Id"] || r.reportId) && (Array.isArray(r.reportFormatAndValues) ? r.reportFormatAndValues.length > 0 : true) || (Array.isArray(r.fileAttachments) && r.fileAttachments.length > 0),
+    status: String(r.status || ""),
+    reported: /sign|approv|final|complete|submit|report/i.test(String(r.status || "")) || !!r["Approval Date"] || (Array.isArray(r.fileAttachments) && r.fileAttachments.length > 0),
   }));
   const attachments = [];
   for (const r of reports) for (const a of (Array.isArray(r.fileAttachments) ? r.fileAttachments : [])) { const u = typeof a === "string" ? a : (a && (a.url || a.link || a.fileUrl)); if (u) attachments.push({ test: String(r["Test Name"] || "").trim(), url: String(u) }); }
@@ -86,6 +87,17 @@ export default async function handler(req, res) {
   const pdf = typeof data?.reportsData === "string" && data.reportsData.length > 100 ? data.reportsData : "";
   const phone = String(first["Contact No"] || first.patientContact || first.mobile || "").replace(/\D/g, "").slice(-10);
 
+  // ?pdf=1 returns the PDF itself (binary is a quarter smaller than base64 in JSON, and Vercel caps a reply at 4.5 MB).
+  if (String(req.query.pdf || "") === "1") {
+    if (!pdf) return res.status(404).json({ ok: false, error: "no report PDF on this bill yet", reported: tests.filter((t) => t.reported).length, total_tests: tests.length });
+    const buf = Buffer.from(pdf, "base64");
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("X-Bill-Patient", encodeURIComponent(String(first["Patient Name"] || "").trim()));
+    res.setHeader("X-Bill-Phone10", phone.length === 10 ? phone : "");
+    res.setHeader("X-Bill-Reported", String(tests.filter((t) => t.reported).length));
+    res.setHeader("X-Bill-Tests", String(tests.length));
+    return res.status(200).send(buf);
+  }
   return res.status(200).json({
     ok: true, bill,
     patient: String(first["Patient Name"] || "").trim() || null,
@@ -93,6 +105,5 @@ export default async function handler(req, res) {
     pay: { ...payState(money), fields: money },
     tests, total_tests: tests.length, reported: tests.filter((t) => t.reported).length,
     has_pdf: !!pdf, attachments,
-    ...(String(req.query.pdf || "") === "1" && pdf ? { pdf_base64: pdf } : {}),
   });
 }
