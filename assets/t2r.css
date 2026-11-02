@@ -1,0 +1,151 @@
+/* Signature scroll moment (Nov 2026): "From a tube to a report you can understand".
+   A sample tube on a lab bench; on scroll its label peels away and unfolds into a sample
+   smart report card, then the booking button. Everything is scoped under .t2r.
+   Default (no JS, or reduced motion) is a flat, readable layout. JS adds .t2r-on to animate. */
+.t2r{--hdr:66px;--bar:0px;--ok:#0c776e;--ok-bg:#e3f3f1;--warn:#8f6410;--warn-bg:#fbf0dc;--high:#ad4c3f;--high-bg:#fde8e6;
+  position:relative;background:var(--blue-800,#063a66);color:#fff}
+.t2r *{box-sizing:border-box}
+/* The site sets overflow-x:hidden on html AND body, which turns body into a scroll container and
+   stops every position:sticky on the page (the nav's too). clip hides sideways overflow the same
+   way without that side effect. Older browsers keep hidden, and t2r.js then keeps the flat layout. */
+@supports (overflow-x:clip){html,body{overflow-x:clip}}
+
+/* ---------- flat layout (default) ---------- */
+.t2r-stage{position:relative;max-width:1160px;margin:0 auto;padding:40px 22px 56px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.t2r-photo{margin:0;position:relative;border-radius:16px;overflow:hidden;grid-column:1;grid-row:1}
+.t2r-photo img{display:block;width:100%;height:340px;object-fit:cover}
+.t2r-photo figcaption{position:absolute;left:10px;bottom:8px;font-size:11.5px;color:#fff;background:rgba(6,58,102,.72);padding:3px 8px;border-radius:6px;letter-spacing:.02em}
+.t2r-shade,.t2r-label,.t2r-hint,.t2r-skip,.t2r-prog,.t2r-crease{display:none}
+.t2r-intro{grid-column:2;grid-row:1}
+.t2r-eyebrow{color:#ffb4ae;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.t2r-intro h2{font-size:clamp(28px,3.6vw,44px);line-height:1.15;margin:0 0 14px;color:#fff;letter-spacing:-.015em}
+.t2r-intro p{margin:0;font-size:17px;line-height:1.6;color:#dbeafe;max-width:520px}
+.t2r-cardwrap{grid-column:1 / -1;display:flex;justify-content:center}
+
+/* ---------- the report card ---------- */
+.t2r-card{position:relative;width:min(560px,100%);background:#fff;color:var(--ink,#152b3c);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden;text-align:left}
+.t2r-head{display:flex;align-items:center;gap:12px;height:62px;padding:0 16px;background:#fff;border-bottom:2px solid var(--blue,#0A5C9E)}
+.t2r-logo{width:92px;height:34px;flex:0 0 92px;background:var(--logo) left center/contain no-repeat}
+.t2r-ht{flex:1;min-width:0;line-height:1.2}
+.t2r-ht b{display:block;font-size:14px;color:var(--blue,#0A5C9E)}
+.t2r-ht span{font-size:12px;color:var(--muted,#5b6b7a)}
+.t2r-code{flex:0 0 64px;height:30px;background:repeating-linear-gradient(90deg,#152b3c 0 2px,transparent 2px 4px,#152b3c 4px 5px,transparent 5px 8px,#152b3c 8px 11px,transparent 11px 12px)}
+.t2r-body{padding:14px 18px 18px}
+.t2r-sample{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin-bottom:10px}
+.t2r-badge{display:inline-block;font-size:12.5px;font-weight:800;color:var(--high);background:var(--high-bg);border:1.5px dashed var(--high);border-radius:8px;padding:4px 9px;letter-spacing:.01em}
+.t2r-who{font-size:12px;color:var(--muted,#5b6b7a)}
+.t2r-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0 0 6px;padding:0;list-style:none;font-size:12px;color:var(--muted,#5b6b7a)}
+.t2r-legend li{display:inline-flex;align-items:center;gap:6px}
+.t2r-legend i{width:12px;height:8px;border-radius:3px;display:inline-block}
+.t2r-rows{list-style:none;margin:0;padding:0}
+.t2r-row{padding:11px 0;border-top:1px solid var(--line,#e3ecf3)}
+.t2r-rtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.t2r-name{font-weight:700;font-size:14.5px;line-height:1.3}
+.t2r-name small{display:block;font-weight:500;font-size:12px;color:var(--muted,#5b6b7a)}
+.t2r-val{font-weight:800;font-size:18px;white-space:nowrap}
+.t2r-val small{font-weight:600;font-size:12px;color:var(--muted,#5b6b7a)}
+.t2r-bar{position:relative;display:flex;gap:2px;height:9px;margin:8px 0 7px;border-radius:5px;overflow:visible}
+.t2r-bar i{display:block;height:100%}
+.t2r-bar i:first-child{border-radius:5px 0 0 5px}.t2r-bar i:last-of-type{border-radius:0 5px 5px 0}
+.b-ok{background:#7cc7bd}.b-warn{background:#f0c56c}.b-high{background:#f59a93}
+.t2r-legend .b-ok{background:#7cc7bd}.t2r-legend .b-warn{background:#f0c56c}.t2r-legend .b-high{background:#f59a93}
+.t2r-pin{position:absolute;top:-5px;left:calc(var(--pos) * 100%);width:4px;height:19px;margin-left:-2px;border-radius:3px;background:var(--ink,#152b3c);box-shadow:0 0 0 2px #fff}
+.t2r-rbot{font-size:13.5px;line-height:1.45;color:#33475a}
+.t2r-tag{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+.t2r-ok .t2r-tag{color:var(--ok);background:var(--ok-bg)}
+.t2r-warn .t2r-tag{color:var(--warn);background:var(--warn-bg)}
+.t2r-high .t2r-tag{color:var(--high);background:var(--high-bg)}
+.t2r-note{font-size:12px;line-height:1.5;color:var(--muted,#5b6b7a);margin:8px 0 12px;padding-top:10px;border-top:1px solid var(--line,#e3ecf3)}
+.t2r-cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.t2r-cta .btn{position:relative}
+.t2r-cta .t2r-alt{position:relative;font-size:14px;font-weight:600;color:var(--blue,#0A5C9E);text-decoration:underline;text-underline-offset:3px}
+
+@media(max-width:760px){
+  .t2r-stage{grid-template-columns:1fr;padding:28px 16px 40px;gap:20px}
+  .t2r-photo,.t2r-intro{grid-column:1;grid-row:auto}
+  .t2r-photo img{height:260px}
+  .t2r-intro p{font-size:15.5px}
+}
+@media(max-width:420px){
+  .t2r-body{padding:12px 14px 14px}
+  .t2r-name{font-size:13.5px}.t2r-val{font-size:16px}.t2r-rbot{font-size:13px}
+  .t2r-logo{width:78px;flex-basis:78px}.t2r-code{flex-basis:46px}
+}
+
+/* ---------- animated mode ---------- */
+.t2r.t2r-on{height:520vh}
+@media(max-width:760px){.t2r.t2r-on{height:580vh}}
+.t2r-on .t2r-stage{position:sticky;top:var(--hdr);height:calc(100vh - var(--hdr));height:calc(100dvh - var(--hdr));max-width:none;margin:0;padding:0;display:block;overflow:hidden;background:#0b2033}
+.t2r-on .t2r-photo{position:absolute;inset:0;border-radius:0;overflow:hidden}
+.t2r-on .t2r-photo img{transform:scale(var(--zoom,1));transform-origin:40% 70%}
+.t2r-on .t2r-photo img{height:100%}
+.t2r-on .t2r-photo figcaption{left:12px;top:10px;bottom:auto;z-index:6}
+.t2r-on .t2r-shade{display:block;position:absolute;inset:0;pointer-events:none;background:rgba(6,40,70,var(--dim,0))}
+.t2r-on .t2r-shade::before{content:"";position:absolute;inset:0;opacity:var(--introo,1);
+  background:linear-gradient(270deg,rgba(6,58,102,.92) 0%,rgba(6,58,102,.78) 34%,rgba(6,58,102,0) 58%)}
+.t2r-on .t2r-intro{position:absolute;z-index:3;right:max(4vw,22px);top:50%;width:min(440px,36vw);transform:translateY(calc(-50% + var(--introy,0px)));opacity:var(--introo,1)}
+.t2r-on .t2r-hint{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;opacity:var(--hint,1)}
+.t2r-on .t2r-hint::after{content:"";width:2px;height:26px;background:linear-gradient(#fff,rgba(255,255,255,0));animation:t2rhint 1.6s ease-in-out infinite}
+@keyframes t2rhint{0%,100%{transform:translateY(-4px);opacity:.5}50%{transform:translateY(4px);opacity:1}}
+.t2r-on .t2r-skip{display:block;position:absolute;z-index:20;right:12px;top:8px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 10px;background:rgba(6,58,102,.55);border-radius:8px}
+.t2r-on .t2r-skip:hover,.t2r-on .t2r-skip:focus-visible{background:rgba(6,58,102,.9);text-decoration:underline}
+.t2r-on .t2r-prog{display:block;position:absolute;z-index:19;left:0;top:0;height:3px;width:100%;background:var(--teal,#F25C54);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+
+/* the label that peels off the tube */
+.t2r-on .t2r-label{display:block;position:absolute;left:0;top:0;z-index:4;pointer-events:none;transform-origin:50% 50%;perspective:700px;will-change:transform}
+.t2r-lab-in{position:absolute;inset:0;transform-origin:0 50%;transform:rotateY(var(--peel,0deg));border-radius:6px;overflow:hidden;
+  box-shadow:0 calc(var(--lift,0) * 18px) calc(var(--lift,0) * 30px + 2px) rgba(0,0,0,calc(.18 + var(--lift,0) * .3))}
+.t2r-lab-in .t2r-head{height:100%;border-bottom:0}
+.t2r-lab-in .t2r-ht,.t2r-lab-in .t2r-logo{opacity:var(--labtxt,0)}
+.t2r-lab-in::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 30%,transparent 62%,rgba(255,255,255,.55) 78%,rgba(0,0,0,.16));opacity:var(--curl,.6)}
+.t2r-lab-stripe{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--blue,#0A5C9E)}
+
+.t2r-on .t2r-cardwrap{position:absolute;z-index:5;left:0;right:0;top:44px;bottom:var(--bar);display:flex;align-items:center;justify-content:center;padding:4px 16px 12px;pointer-events:none}
+.t2r-on .t2r-card{pointer-events:auto;visibility:var(--cardv,hidden);clip-path:inset(0 0 var(--clipb,100%) 0 round 16px);-webkit-clip-path:inset(0 0 var(--clipb,100%) 0 round 16px)}
+.t2r-on .t2r-crease{display:block;position:absolute;left:0;right:0;height:26px;margin-top:-13px;top:var(--crease,62px);pointer-events:none;opacity:var(--creaseo,0);
+  background:linear-gradient(rgba(10,92,158,0),rgba(10,92,158,.16) 48%,rgba(21,43,60,.28) 50%,rgba(10,92,158,0))}
+.t2r-on .t2r-row{opacity:var(--k,0);transform:translateY(calc((1 - var(--k,0)) * 10px))}
+.t2r-on .t2r-note,.t2r-on .t2r-cta{opacity:var(--ctao,0);transform:translateY(calc((1 - var(--ctao,0)) * 8px))}
+.t2r-on .t2r-cta{visibility:var(--ctav,hidden)}
+
+@media(max-width:760px){
+  .t2r-on .t2r-shade::before{background:linear-gradient(180deg,rgba(6,58,102,.94) 0%,rgba(6,58,102,.8) 30%,rgba(6,58,102,0) 52%)}
+  .t2r-on .t2r-intro{left:16px;right:16px;top:50px;width:auto;transform:translateY(var(--introy,0px))}
+  .t2r-on .t2r-intro h2{font-size:28px;margin-bottom:10px}
+  .t2r-on .t2r-intro p{font-size:15px}
+  .t2r-on .t2r-hint{margin-top:12px}
+  .t2r-on .t2r-cardwrap{padding:2px 12px 10px}
+}
+/* short screens: tighten the card so it fits without scrolling inside */
+@media(max-height:760px){
+  .t2r-on .t2r-head{height:52px}
+  .t2r-on .t2r-body{padding:10px 14px 12px}
+  .t2r-on .t2r-row{padding:7px 0}
+  .t2r-on .t2r-bar{margin:6px 0 5px;height:8px}
+  .t2r-on .t2r-rbot{font-size:12.5px;line-height:1.4}
+  .t2r-on .t2r-note{margin:6px 0 8px;padding-top:7px;font-size:11.5px}
+  .t2r-on .t2r-sample{margin-bottom:6px}
+  .t2r-on .t2r-cta .btn{padding:10px 18px;font-size:14px}
+}
+@media(max-height:620px){
+  .t2r-on .t2r-legend,.t2r-on .t2r-who{display:none}
+  .t2r-on .t2r-rbot{font-size:12px}
+}
+
+/* added by t2r.js when the full card would not fit the screen: compact, then scaled if still needed */
+.t2r-on .t2r-tight .t2r-head{height:48px}
+.t2r-on .t2r-tight .t2r-body{padding:8px 14px 10px}
+.t2r-on .t2r-tight .t2r-legend,.t2r-on .t2r-tight .t2r-who{display:none}
+.t2r-on .t2r-tight .t2r-name small{display:inline;font-size:11.5px}
+.t2r-on .t2r-tight .t2r-name small::before{content:" \00b7  "}
+.t2r-on .t2r-tight .t2r-sample{margin-bottom:2px}
+.t2r-on .t2r-tight .t2r-row{padding:6px 0}
+.t2r-on .t2r-tight .t2r-bar{margin:5px 0 4px;height:7px}
+.t2r-on .t2r-tight .t2r-name{font-size:13px}.t2r-on .t2r-tight .t2r-val{font-size:15px}
+.t2r-on .t2r-tight .t2r-rbot{font-size:12.5px;line-height:1.35}
+.t2r-on .t2r-tight .t2r-note{margin:5px 0 7px;padding-top:6px;font-size:11px;line-height:1.4}
+.t2r-on .t2r-tight .t2r-cta .btn{padding:9px 16px;font-size:14px}
+.t2r-on .t2r-tight .t2r-cta .t2r-alt{font-size:13px}
+.t2r-on .t2r-card{transform-origin:50% 50%;transform:scale(var(--fit,1))}
+@media(max-width:640px){.t2r-on .t2r-cta{padding-right:62px}}
