@@ -42,7 +42,11 @@
   });
   function markSeen() { try { localStorage.setItem(KEY, "1"); } catch (e) {} }
   var skip = root.querySelector(".t2r-skip");
-  if (skip) skip.addEventListener("click", function () { markSeen(); track("skip"); });
+  if (skip) skip.addEventListener("click", function () {
+    markSeen(); track("skip");
+    // jump as the link says, then drop the #home from the address bar
+    setTimeout(function () { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }, 0);
+  });
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var clipOk = window.CSS && CSS.supports && (CSS.supports("clip-path", "inset(0 0 0 0)") || CSS.supports("-webkit-clip-path", "inset(0 0 0 0)"));

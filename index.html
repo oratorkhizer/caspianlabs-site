@@ -273,6 +273,20 @@
   :root{--logo:url("/logo.webp")}
   .brand .logo-img{height:48px;width:135px;background:var(--logo) left center/contain no-repeat;display:block}
   @media(max-width:640px){.brand .logo-img{height:40px;width:112px}}
+  /* Phone header fit (Nov 2026): logo, language select, Book Online and the menu button must fit
+     inside 320 to 414px with no part cut off. Desktop is untouched. The select gets its size from
+     inline styles set by i18n.js, so those need !important here. */
+  @media(max-width:640px){
+    .nav .wrap{padding:10px 12px;gap:6px}
+    .brand{flex:0 1 auto;min-width:0}
+    .brand .logo-img{height:34px;width:96px}
+    .nav-cta{gap:6px;flex:0 0 auto}
+    #cdcLangSel{max-width:78px!important;font-size:12.5px!important;padding:6px 1px!important}
+    .nav-cta .btn-primary{padding:9px 12px;font-size:13.5px;width:auto}
+    .menu-btn{padding:6px 2px}
+  }
+  /* very narrow phones: the fixed bottom bar already carries "Book a test", so the header drops its copy */
+  @media(max-width:359px){.nav-cta .btn-primary{display:none}}
   .foot-logo{background:#fff;padding:10px 16px;border-radius:11px;display:inline-block}
   .foot-logo .li{height:46px;width:127px;background:var(--logo) center/contain no-repeat;display:block}
 
@@ -2217,6 +2231,6 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 <script src="/assets/phase2-data.js"></script>
 <script src="/assets/phase2.js"></script>
 <script src="/assets/i18n.js?v=2" defer></script>
-<script src="/assets/t2r.js?v=2" defer></script>
+<script src="/assets/t2r.js?v=3" defer></script>
 </body>
 </html>
