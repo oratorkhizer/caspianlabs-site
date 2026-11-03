@@ -37,7 +37,9 @@ function insertAfter(src, anchor, add, label) {
 
 html = insertBefore(html, "</style>", CSS + "\n", "first </style>");
 html = insertBefore(html, "<!-- ALL TESTS DIRECTORY -->", SECTION + "\n", "all-tests comment");
-html = insertAfter(html, '<script src="/assets/i18n.js" defer></script>', "\n" + SCRIPT, "i18n script tag");
+// the i18n tag may carry a cache-busting version (?v=N), so find it whatever the version
+const I18N_TAG = (html.match(/<script src="\/assets\/i18n\.js(\?v=[^"]*)?" defer><\/script>/) || [""])[0] || '<script src="/assets/i18n.js" defer></script>';
+html = insertAfter(html, I18N_TAG, "\n" + SCRIPT, "i18n script tag");
 // Photos (Caspian staff shoot, Aug 2026; hosted on Supabase Storage, public bucket "caspianlabs", project caspian-cme).
 // Injected here so the 160 KB index.html need not be re-uploaded. Idempotent via the id="gallery" check.
 const PB = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
