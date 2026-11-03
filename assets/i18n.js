@@ -14,6 +14,7 @@
   var I18N = {
     te: {
       name: "తెలుగు", dir: "ltr", lang: "te",
+      moment: { call: "కాల్ చేయండి", replay: "మళ్ళీ చూడండి" },
       hero: {
         h1: "విజయ్ నగర్ కాలనీ, హైదరాబాద్‌లో 24/7 డయాగ్నోస్టిక్ సెంటర్, ఇంటి వద్దే శాంపిల్ కలెక్షన్‌తో.",
         sub: "క్యాస్పియన్ డయాగ్నోస్టిక్ సెంటర్ ఖచ్చితమైన ప్యాథాలజీ పరీక్షలు, ఎక్స్-రే, బాడీ కంపొజిషన్ అనాలిసిస్, అందుబాటు ధరలో హెల్త్ చెకప్ ప్యాకేజీలు అందిస్తుంది. మెహదీపట్నం, మాసబ్ ట్యాంక్, ఆసిఫ్ నగర్, చుట్టుపక్కల ప్రాంతాల్లో ఇంటి వద్దే శాంపిల్ కలెక్షన్ ఉంది. ఆన్‌లైన్‌లో బుక్ చేసి చెల్లించండి; రిపోర్టులు నేరుగా మీ వాట్సాప్‌కే వస్తాయి.",
@@ -150,6 +151,7 @@
     },
     hi: {
       name: "हिंदी", dir: "ltr", lang: "hi",
+      moment: { call: "कॉल करें", replay: "फिर से देखें" },
       hero: {
         h1: "विजय नगर कॉलोनी, हैदराबाद में 24/7 डायग्नोस्टिक सेंटर, घर से सैंपल कलेक्शन की सुविधा के साथ।",
         sub: "कैस्पियन डायग्नोस्टिक सेंटर में सटीक पैथोलॉजी जाँच, एक्स-रे और बॉडी कंपोज़िशन एनालिसिस, किफ़ायती हेल्थ चेकअप पैकेज, और मेहदीपटनम, मासाब टैंक, आसिफ़ नगर और आसपास के इलाक़ों में घर से सैंपल कलेक्शन। ऑनलाइन बुक करें और भुगतान करें; रिपोर्ट सीधे आपके WhatsApp पर आती है।",
@@ -286,6 +288,7 @@
     },
     ur: {
       name: "اردو", dir: "rtl", lang: "ur",
+      moment: { call: "کال کریں", replay: "دوبارہ دیکھیں" },
       hero: {
         h1: "وجے نگر کالونی، حیدرآباد میں 24/7 ڈائیگناسٹک سینٹر، گھر سے سیمپل کلیکشن کے ساتھ۔",
         sub: "کیسپین ڈائیگناسٹک سینٹر میں درست پیتھالوجی ٹیسٹ، ایکس رے اور باڈی کمپوزیشن جانچ، مناسب قیمت کے ہیلتھ چیک اپ پیکیج، اور مہدی پٹنم، ماصاب ٹینک، آصف نگر اور آس پاس گھر سے سیمپل کلیکشن۔ آن لائن بک کریں اور ادائیگی کریں؛ رپورٹ سیدھی آپ کے واٹس ایپ پر آتی ہے۔",
@@ -444,7 +447,10 @@
     var band = q("#home-collection .band");
     return {
       heroLeft: heroLeft,
-      h1: q(".hero h1"),
+      h1: q(".hero .hero-h1, .hero h1"),
+      // scroll moment first frame (assets/t2r.js): it repeats the hero H1, two assure lines and the hero buttons
+      mHero: q("#t2r .t2r-hero"), mH1: q("#t2r .t2r-h1"), mSub: qa("#t2r .t2r-sub .t2r-s"),
+      mBook: q("#t2r .t2r-acts .btn-primary"), mWa: q("#t2r .t2r-acts .btn-wa"), mCall: q("#t2r .t2r-call"), mReplay: q("#t2r .t2r-replay"),
       sub: q(".hero p.sub"),
       ctaBook: q(".hero .cta .btn-primary"),
       ctaWa: q(".hero .cta .btn-wa"),
@@ -523,6 +529,7 @@
         ctaWa: e.ctaWa && lastTextNode(e.ctaWa) ? lastTextNode(e.ctaWa).textContent.trim() : "",
         assure: e.assure.map(function (x) { var t = lastTextNode(x); return t ? t.textContent.trim() : ""; })
       },
+      moment: { call: e.mCall ? e.mCall.textContent.trim() : "Call", replay: e.mReplay ? e.mReplay.textContent.trim() : "Replay" },
       card: {
         h3: e.cardH3 ? e.cardH3.textContent : "", p: e.cardP ? e.cardP.textContent : "",
         steps: e.steps.map(function (s) { var b = s.querySelector("b"), sp = s.querySelector("span"); return [b ? b.textContent : "", sp ? sp.textContent : ""]; }),
@@ -604,6 +611,15 @@
     setTxt(e.ctaBook, dict.hero.ctaBook);
     if (e.ctaWa) { var wt = lastTextNode(e.ctaWa); if (wt) wt.textContent = " " + dict.hero.ctaWa; }
     e.assure.forEach(function (x, i) { var t = lastTextNode(x); if (t && dict.hero.assure[i]) t.textContent = " " + dict.hero.assure[i]; });
+
+    // scroll moment first frame
+    setTxt(e.mH1, dict.hero.h1);
+    setTxt(e.mBook, dict.hero.ctaBook);
+    if (e.mWa) { var mw = lastTextNode(e.mWa); if (mw) mw.textContent = " " + dict.hero.ctaWa; }
+    if (e.mSub[0]) setTxt(e.mSub[0], dict.hero.assure[1]);
+    if (e.mSub[1]) setTxt(e.mSub[1], dict.hero.assure[2]);
+    if (dict.moment) { setTxt(e.mCall, dict.moment.call); setTxt(e.mReplay, dict.moment.replay); }
+    setDir(e.mHero, dict);
 
     // hero-card
     setTxt(e.cardH3, dict.card.h3);
