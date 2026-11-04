@@ -264,6 +264,7 @@ ${side}
 <div class="fine" style="margin-top:8px"><a href="/">English website</a> · <a href="/tests">All tests</a> · <a href="/packages">Packages</a> · <a href="/privacy.html">Privacy</a> · <a href="/refund.html">Refund policy</a></div>
 <div class="fine" style="margin-top:8px">Govt. of Telangana Regn. 07F-APMCE-1846 · PCPNDT Regn. 0116A1337</div>
 </div></footer>
+<script src="/assets/clarity.js?v=1" defer></script>
 </body></html>`;
 }
 

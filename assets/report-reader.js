@@ -641,6 +641,7 @@
   function attach(opt) {
     var root = typeof opt.mount === 'string' ? document.querySelector(opt.mount) : opt.mount;
     if (!root) return;
+    try { root.setAttribute('data-clarity-mask', 'True'); } catch (e) {}
     style();
     var fields = opt.fields || {};
     var keys = Object.keys(fields);
