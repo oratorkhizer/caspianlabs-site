@@ -470,6 +470,10 @@ const TESTS = [
       "For more definitive answers, a comprehensive typhoid profile (₹2,000) including newer antibody tests is also available; our team can advise which suits your fever duration."
     ],
     whoShould: ["Fever lasting more than 3–4 days", "Fever with abdominal pain or poor appetite", "Suspected water/food-borne infection"],
+    faqExtra: [
+      ["Typhoid test kitne ka hai? (How much is the typhoid test?)", "The Widal typhoid test costs ₹180 at Caspian Diagnostic Centre, Vijay Nagar Colony. No fasting is needed, the lab is open 24/7 and the report comes the same day on WhatsApp."],
+      ["What does a Widal result of 1:80 mean?", "1:80 is a low titre. In India many healthy people show 1:80 because of past infection or vaccination, so on its own it usually does not confirm typhoid. Doctors give more weight to higher titres (often 1:160 or above) or to a titre that rises on a repeat test after a week. Always show the report to your doctor, who will read it with your symptoms."]
+    ],
     related: ["t:dengue-test-hyderabad", "t:malaria-test-hyderabad", "t:crp-test-hyderabad", "t:esr-test-hyderabad", "t:stool-routine-test-hyderabad"]
   },
   {
@@ -493,7 +497,7 @@ const TESTS = [
     related: ["t:vitamin-d-test-hyderabad", "p:womens-health-checkup-hyderabad", "t:electrolytes-test-hyderabad", "t:kidney-function-test-hyderabad"]
   },
   {
-    slug: "ecg-test-hyderabad", name: "ECG (Electrocardiogram)", short: "ECG", price: 250,
+    slug: "ecg-test-hyderabad", seoName: "ECG Test", name: "ECG (Electrocardiogram)", short: "ECG", price: 250,
     sample: "Recording taken at our centre, about five minutes", fasting: "no", photo: "nurse",
     heroSub: "\u20B9250 \u00B7 Walk in any time, we are open 24/7 \u00B7 Tracing the same visit",
     desc: "ECG test in Hyderabad at \u20B9250: a 12-lead electrocardiogram, taken in about five minutes at Caspian Diagnostic Centre, Vijay Nagar Colony. Open 24/7, no appointment needed.",
@@ -512,7 +516,7 @@ const TESTS = [
     related: ["p:heart-health-checkup-hyderabad", "t:2d-echo-test-hyderabad", "t:lipid-profile-test-hyderabad", "t:troponin-test-hyderabad"]
   },
   {
-    slug: "2d-echo-test-hyderabad", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
+    slug: "2d-echo-test-hyderabad", seoName: "2D Echo Test", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
     sample: "Ultrasound scan of the heart, done at our centre", fasting: "no", photo: "echo",
     heroSub: "\u20B91,200 \u00B7 Done by our cardiologist \u00B7 Explained to you the same visit",
     desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. A limited-period Heart Health Check at \u20B9999 covers this echo with an ECG and his consultation.",
@@ -545,7 +549,7 @@ const TESTS = [
     related: ["p:haj-umrah-fitness-package-hyderabad", "t:cbc-test-hyderabad", "t:esr-test-hyderabad", "t:ecg-test-hyderabad", "t:crp-test-hyderabad"]
   },
   {
-    slug: "body-composition", name: "Body Composition Analysis (BCA, BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
+    slug: "body-composition", seoName: "BCA Test (Body Composition)", name: "Body Composition Analysis (BCA, BIA scan)", short: "Body Composition", price: 999, sample: "Bio-impedance scan, done at our centre (about 5 minutes)", fasting: "confirm",
     desc: "Body composition analysis (BCA) in Hyderabad at ₹999: body fat %, muscle mass, visceral fat, BMR and metabolic age, with the report explained by a Certified Obesity Educator. Book a 20-minute slot at Caspian, Vijay Nagar Colony.",
     about: [
       "A body composition scan goes beyond the weighing scale. Using bio-electrical impedance (BIA), it measures how much of your weight is fat, muscle and water, estimates visceral (organ) fat, and calculates your basal metabolic rate (BMR) and metabolic age.",
@@ -1091,7 +1095,7 @@ ${reviewedHtml(p.slug)}
 </div>
 ${sideCard({ price: p.price, priceNote: p.tagline, waText: p.waText, ekaLink: p.ekaLink, homeCollection: p.homeCollection, book: bookHref(p.slug) })}</div>`;
   return pageShell({
-    title: `${p.name} in Hyderabad at ${inr(p.price)} | Caspian Labs`,
+    title: `${p.seoName || p.name} Price in Hyderabad: ${inr(p.price)} | Caspian Labs`,
     desc: p.desc,
     canonical: url,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/packages">Health Packages</a> › ${esc(p.name)}`,
@@ -1133,7 +1137,7 @@ ${reviewedHtml(t.slug)}
 </div>
 ${sideCard({ price: t.price, priceNote: (t.homeCollection === false ? "At our centre · same-day report" : "Home collection available · same-day report"), waText: `Hi Caspian Diagnostic Centre, I'd like to book the ${t.name} (${inr(t.price)}).`, homeCollection: t.homeCollection, book: bookHref(t.slug), extLink: t.extLink, extLabel: t.extLabel })}</div>`;
   return pageShell({
-    title: `${t.name} in Hyderabad at ${inr(t.price)} | Caspian Labs`,
+    title: `${t.seoName || t.name} Price in Hyderabad: ${inr(t.price)} | Caspian Labs`,
     desc: t.desc,
     canonical: url,
     breadcrumbHtml: `<a href="/">Home</a> › <a href="/tests">All Tests</a> › ${esc(t.short)}`,

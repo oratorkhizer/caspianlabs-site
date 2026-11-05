@@ -33,6 +33,7 @@ export const PARTS = {
     ],
     uses: ["Lower back pain lasting more than a few weeks", "Back pain after a fall or injury", "Back pain in older adults, to look for spondylosis or a compression fracture", "Checking for a slipped vertebra (listhesis)", "Tailbone pain (sacrum and coccyx views)"],
     faqs: [
+      ["Kamar ka X-ray kitne ka hai? (How much is a lower back X-ray?)", "A lower back (lumbar spine) X-ray costs ₹350 for one view and ₹600 for the usual pair, AP and Lateral. Walk in with your prescription; the radiologist report comes the same day on WhatsApp."],
       ["Will a lumbar X-ray show a slipped disc?", "No. Discs are soft tissue and do not show on an X-ray. The X-ray shows the bones and the space between them; a narrowed space can suggest disc wear. Your doctor will ask for an MRI if a disc problem is suspected."],
       ["What are flexion and extension views?", "Two side views taken while you bend forward and then lean back. They show whether a spine bone slides out of place on movement. Ask for them only if your doctor has written them."],
       ["Can I have a back X-ray if I am pregnant?", "Tell the technician before the X-ray. A back X-ray points at the pelvis, so it is usually postponed during pregnancy unless your doctor says it is urgent."]
@@ -163,7 +164,7 @@ export const PARTS = {
   },
   "bone-age": {
     illusAlt: "Illustration: a child at a height chart, and an X-ray of the left hand and wrist showing growth plates",
-    name: "Bone Age X-ray", h1: "Bone Age X-ray for Children in Hyderabad",
+    name: "Bone Age X-ray", seoName: "Bone Age (Growth Plate) X-ray", h1: "Bone Age (Growth Plate) X-ray for Children in Hyderabad",
     codes: ["XR-BAGE"],
     about: [
       "A bone age X-ray is a single X-ray of the left hand and wrist. The radiologist compares the child's growth plates with standard reference pictures and reports the skeletal age, which may be ahead of or behind the child's actual age.",

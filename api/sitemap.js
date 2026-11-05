@@ -9,7 +9,7 @@
 // lastmod: bump the relevant date constant when the content of that group actually changes.
 // (Google ignores lastmod that is always "today"; a truthful date helps recrawl prioritisation.)
 
-const LASTMOD_LANDING = "2026-10-09"; // tests/packages/hub/home-collection pages (api/page.js)
+const LASTMOD_LANDING = "2026-11-06"; // tests/packages/hub/home-collection pages (api/page.js)
 const LASTMOD_HOMEPAGE = "2026-10-11"; // index.html
 const LASTMOD_BLOG = "2026-07-31";     // api/blog.js articles
 const LASTMOD_STATIC = "2026-10-09";   // about/pricing/contact/legal html files
@@ -21,7 +21,7 @@ const PAGES = [
   { path: "/tests",             changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/packages",          changefreq: "weekly",  priority: "0.9", lastmod: LASTMOD_LANDING },
   { path: "/x-ray",             changefreq: "monthly", priority: "0.9", lastmod: "2026-10-09" },
-  ...["knee", "lumbar-spine", "cervical-spine", "kub", "pns-sinus", "shoulder", "hip-pelvis", "ankle", "foot", "hand-wrist", "bone-age"].map((s) => ({ path: "/x-ray/" + s, changefreq: "monthly", priority: "0.8", lastmod: "2026-10-10" })), // keep in sync with PARTS in api/_xray-parts.js
+  ...["knee", "lumbar-spine", "cervical-spine", "kub", "pns-sinus", "shoulder", "hip-pelvis", "ankle", "foot", "hand-wrist", "bone-age"].map((s) => ({ path: "/x-ray/" + s, changefreq: "monthly", priority: "0.8", lastmod: "2026-11-06" })), // keep in sync with PARTS in api/_xray-parts.js
   { path: "/packages/surgical-profile-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: "2026-10-11" }, // api/surgical.js
   ...["c-section", "hernia-surgery", "gallbladder-surgery", "hysterectomy", "knee-replacement", "kidney-stone-surgery", "appendix-surgery", "fracture-surgery", "piles-fistula-surgery", "thyroid-surgery", "bariatric-surgery"].map((s) => ({ path: "/pre-op-tests/" + s, changefreq: "monthly", priority: "0.7", lastmod: "2026-10-11" })), // keep in sync with SURGERIES in api/preop.js
   { path: "/home-sample-collection-hyderabad", changefreq: "monthly", priority: "0.9", lastmod: LASTMOD_LANDING },

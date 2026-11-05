@@ -256,8 +256,8 @@ function renderPart(slug) {
   const url = BASE + "/x-ray/" + slug;
   const tests = p.codes.map(c => BY_CODE[c]);
   const from = Math.min(...tests.map(t => t[4]));
-  const title = `${p.name} Price in Hyderabad, from ${inr(from)} | Caspian Labs`;
-  const desc = `${p.name} in Hyderabad from ${inr(from)} at Caspian Diagnostic Centre, Vijay Nagar Colony. ${tests.length > 1 ? tests.length + " views and prices, " : ""}what it shows, how to prepare. Radiologist report the same day on WhatsApp.`;
+  const title = `${p.seoName || p.name} Price in Hyderabad, from ${inr(from)} | Caspian Labs`;
+  const desc = `${p.seoName || p.name} in Hyderabad from ${inr(from)} at Caspian Diagnostic Centre, Vijay Nagar Colony. ${tests.length > 1 ? tests.length + " views and prices, what" : "What"} it shows, how to prepare. Radiologist report the same day on WhatsApp.`;
   const faqs = p.faqs.concat([
     [`How much does a ${p.name.toLowerCase()} cost at Caspian?`, tests.map(t => `${t[1]}: ${inr(t[4])}`).join("; ") + "."],
     ["Do I need an appointment, and when is the report ready?", "No appointment is needed; walk in with your prescription. A radiologist reports the X-ray the same day and the report is sent to you on WhatsApp. The printed film is included."]
