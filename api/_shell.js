@@ -151,7 +151,10 @@ export function ldProduct(name, desc, price, url) {
     "@context": "https://schema.org", "@type": "Product",
     "name": name, "description": desc, "url": url, "image": BASE + "/ogimage.png",
     "brand": { "@type": "Brand", "name": "Caspian Diagnostic Centre" },
-    "offers": { "@type": "Offer", "price": String(price), "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": url }
+    "offers": { "@type": "Offer", "price": String(price), "priceCurrency": "INR", "availability": "https://schema.org/InStock", "url": url,
+      // A test cannot be "returned"; refunds follow /refund.html. No shippingDetails:
+      // nothing physical is shipped (see /shipping.html), so that warning is left as is.
+      "hasMerchantReturnPolicy": { "@type": "MerchantReturnPolicy", "applicableCountry": "IN", "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted", "merchantReturnLink": BASE + "/refund.html" } }
   };
 }
 export function ldFaq(faqs) {
