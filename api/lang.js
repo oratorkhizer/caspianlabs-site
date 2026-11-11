@@ -265,6 +265,7 @@ ${side}
 <div class="fine" style="margin-top:8px">Govt. of Telangana Regn. 07F-APMCE-1846 · PCPNDT Regn. 0116A1337</div>
 </div></footer>
 <script src="/assets/clarity.js?v=1" defer></script>
+<script src=https://www.caspianhealthcare.in/forms-capture.js defer></script>
 </body></html>`;
 }
 

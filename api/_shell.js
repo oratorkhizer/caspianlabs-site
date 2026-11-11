@@ -137,6 +137,7 @@ ${ldTags}
   <div class="fine" style="margin-top:10px">© 2026 Caspian Lifesciences Private Limited. All rights reserved. · Govt. of Telangana Regn. 07F-APMCE-1846 · PCPNDT Regn. 0116A1337</div>
 </div></footer>
 <script src="/assets/clarity.js?v=1" defer></script>
+<script src=https://www.caspianhealthcare.in/forms-capture.js defer></script>
 </body></html>`;
 }
 

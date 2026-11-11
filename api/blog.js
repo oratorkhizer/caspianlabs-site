@@ -214,6 +214,7 @@ ${ldTags}
   <div class="fine" style="margin-top:10px">© 2026 Caspian Lifesciences Private Limited. All rights reserved.</div>
 </div></footer>
 <script src="/assets/clarity.js?v=1" defer></script>
+<script src=https://www.caspianhealthcare.in/forms-capture.js defer></script>
 </body></html>`;
 }
 
