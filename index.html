@@ -105,6 +105,9 @@
   .card .ic{width:52px;height:52px;border-radius:13px;background:var(--bg-blue);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
   .card h3{font-size:18px;margin-bottom:7px}
   .card p{font-size:14.5px;color:var(--muted)}
+  /* 17 Nov 2026, Clarity: dead taps on 18.5% of sessions; the department cards had no way in */
+  .card .card-links{margin-top:12px;font-size:14px;font-weight:600}
+  .card .card-links a{color:var(--blue);text-decoration:underline;text-underline-offset:.18em;display:inline-block;padding:6px 0}
 
   /* packages */
   .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
@@ -393,13 +396,13 @@
      after first interaction or on idle, keeping them off the critical path.
      Tracking is preserved: queued hits flush once the SDKs load. -->
 <script>
-  // GA4 shim — queues into dataLayer until gtag.js loads
+  // GA4 shim, queues into dataLayer until gtag.js loads
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-MLC8586NC3');
 
-  // Meta Pixel shim — queues into fbq.queue until fbevents.js loads
+  // Meta Pixel shim, queues into fbq.queue until fbevents.js loads
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document);
@@ -451,7 +454,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 <!-- NAV -->
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#home" aria-label="Caspian Diagnostic Centre — home">
+    <a class="brand" href="#home" aria-label="Caspian Diagnostic Centre, home">
       <span class="logo-img" role="img" aria-label="Caspian Diagnostic Centre"></span>
     </a>
     <nav class="links" id="menu">
@@ -582,8 +585,8 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     </div>
     <div class="hero-card">
       <h2 class="hc-title">Book a test in 3 easy steps</h2>
-      <p>No queues, no hassle — from booking to report.</p>
-      <div class="step"><div class="num">1</div><div><b>Book</b><span>Book online in seconds — or message us on WhatsApp. Pick your test or package.</span></div></div>
+      <p>No queues, no hassle, from booking to report.</p>
+      <div class="step"><div class="num">1</div><div><b>Book</b><span>Book online in seconds, or message us on WhatsApp. Pick your test or package.</span></div></div>
       <div class="step"><div class="num">2</div><div><b>Give your sample</b><span>Visit the centre or schedule free home collection.</span></div></div>
       <div class="step"><div class="num">3</div><div><b>Get your report</b><span>Accurate digital reports delivered to your phone.</span></div></div>
       <a class="btn btn-primary" style="width:100%;justify-content:center" href="#all-tests">Book a Test Online</a>
@@ -612,14 +615,14 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       <p class="lead center">From routine blood work to specialised profiles, all under one roof with strict quality control at every step.</p>
     </div>
     <div class="cards">
-      <div class="card"><div class="ic" aria-hidden="true">🩸</div><h3>Biochemistry</h3><p>Blood sugar, lipid profile, liver &amp; kidney function, electrolytes and metabolic panels.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">🔬</div><h3>Haematology</h3><p>Complete blood count (CBC), ESR, peripheral smear, coagulation and anaemia workups.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">🧪</div><h3>Clinical Pathology</h3><p>Urine and stool routine, semen analysis, body fluid examination and more.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">🦠</div><h3>Microbiology &amp; Serology</h3><p>Culture &amp; sensitivity, infection screening, widal, dengue, typhoid and viral markers.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">⚕️</div><h3>Hormones &amp; Immunology</h3><p>Thyroid, diabetes (HbA1c), vitamin, fertility and hormone assays.</p></div>
+      <div class="card"><div class="ic" aria-hidden="true">🩸</div><h3>Biochemistry</h3><p>Blood sugar, lipid profile, liver &amp; kidney function, electrolytes and metabolic panels.</p><p class="card-links"><a href="/tests/lipid-profile-test-hyderabad">Lipid profile</a> &middot; <a href="/tests/liver-function-test-hyderabad">Liver</a> &middot; <a href="/tests/kidney-function-test-hyderabad">Kidney</a></p></div>
+      <div class="card"><div class="ic" aria-hidden="true">🔬</div><h3>Haematology</h3><p>Complete blood count (CBC), ESR, peripheral smear, coagulation and anaemia workups.</p><p class="card-links"><a href="/tests/cbc-test-hyderabad">CBC</a> &middot; <a href="/tests/esr-test-hyderabad">ESR</a> &middot; <a href="/tests/ferritin-test-hyderabad">Ferritin</a></p></div>
+      <div class="card"><div class="ic" aria-hidden="true">🧪</div><h3>Clinical Pathology</h3><p>Urine and stool routine, semen analysis, body fluid examination and more.</p><p class="card-links"><a href="/tests/urine-routine-test-hyderabad">Urine routine</a> &middot; <a href="/tests">All tests</a></p></div>
+      <div class="card"><div class="ic" aria-hidden="true">🦠</div><h3>Microbiology &amp; Serology</h3><p>Culture &amp; sensitivity, infection screening, widal, dengue, typhoid and viral markers.</p><p class="card-links"><a href="/tests/crp-test-hyderabad">CRP</a> &middot; <a href="/tests">All tests</a></p></div>
+      <div class="card"><div class="ic" aria-hidden="true">⚕️</div><h3>Hormones &amp; Immunology</h3><p>Thyroid, diabetes (HbA1c), vitamin, fertility and hormone assays.</p><p class="card-links"><a href="/tests/tsh-test-hyderabad">Thyroid (TSH)</a> &middot; <a href="/tests/hba1c-test-hyderabad">HbA1c</a> &middot; <a href="/tests/vitamin-d-test-hyderabad">Vitamin D</a></p></div>
       <div class="card"><div class="ic" aria-hidden="true">🩻</div><h3>Digital X-ray</h3><p>Chest, spine, limbs, KUB and more, <strong>from ₹350</strong> at our centre, with a same-day radiologist report. <a href="/x-ray">See all 63 X-ray prices</a>. Can't travel? A <strong>portable chest X-ray at home</strong> can be arranged through our partner for ₹2,000.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">📈</div><h3>CGM at Home</h3><p>Continuous glucose monitoring fitted at your home — <strong>FreeStyle Libre 2+</strong> or <strong>Guardian IV</strong> sensor at MRP, <strong>no application charge</strong>. More sensors (Linx, GlucoRx) coming soon. Needs a compatible / NFC-enabled phone.</p></div>
-      <div class="card"><div class="ic" aria-hidden="true">📋</div><h3>Health Checkup Packages</h3><p>Curated preventive packages for individuals, families and corporate wellness.</p></div>
+      <div class="card"><div class="ic" aria-hidden="true">📈</div><h3>CGM at Home</h3><p>Continuous glucose monitoring fitted at your home: <strong>FreeStyle Libre 2+</strong> or <strong>Guardian IV</strong> sensor at MRP, <strong>no application charge</strong>. More sensors (Linx, GlucoRx) coming soon. Needs a compatible / NFC-enabled phone.</p><p class="card-links"><a href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20a%20CGM%20fitted%20at%20home.">Book CGM at home on WhatsApp</a></p></div>
+      <div class="card"><div class="ic" aria-hidden="true">📋</div><h3>Health Checkup Packages</h3><p>Curated preventive packages for individuals, families and corporate wellness.</p><p class="card-links"><a href="/packages">See all packages and prices</a></p></div>
     </div>
   </div>
 </section>
@@ -690,11 +693,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         <div class="act"><a class="btn btn-primary" href="https://www.eka.care/doctor/dr-sayyed-muzammil-physician-cardiologist" target="_blank" rel="noopener">Book cardiologist slot</a></div>
       </div>
       <div class="pkg">
-        <div class="top"><h3>Premium Health Check — Men 45+</h3><div class="cnt">Our most thorough package</div></div>
+        <div class="top"><h3>Premium Health Check, Men 45+</h3><div class="cnt">Our most thorough package</div></div>
         <div class="price">From <b>₹4,399</b></div>
         <div class="more"><a href="/packages/premium-health-checkup-men-hyderabad">Details &amp; preparation &rarr;</a></div>
         <ul><li>CBC, ESR &amp; HbA1c</li><li>Full Lipid + ApoA1/ApoB + Lp(a)</li><li>Liver &amp; Kidney Function</li><li>PSA (prostate)</li><li>Vitamin D &amp; B12</li><li>Cardiac risk (HsCRP) &amp; more</li></ul>
-        <div class="act"><a class="btn btn-primary" data-book-name="Premium Health Check — Men 45+" data-book-price="4399" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Premium%20Health%20Check%20for%20Men%2045%2B." target="_blank" rel="noopener">Book this package</a></div>
+        <div class="act"><a class="btn btn-primary" data-book-name="Premium Health Check, Men 45+" data-book-price="4399" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27d%20like%20to%20book%20the%20Premium%20Health%20Check%20for%20Men%2045%2B." target="_blank" rel="noopener">Book this package</a></div>
       </div>
       <div class="pkg">
         <div class="top"><h3>Haj / Umrah Fitness</h3><div class="cnt">Pilgrim fitness package</div></div>
@@ -713,12 +716,12 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="center" style="max-width:680px">
       <div class="eyebrow">Full test menu</div>
       <h2>Search all tests &amp; profiles</h2>
-      <p class="lead center">Need just one test — a Vitamin D, thyroid, sugar or a specific profile? Search our menu, see the price, and book it online in one tap.</p>
+      <p class="lead center">Need just one test, such as a Vitamin D, thyroid, sugar or a specific profile? Search our menu, see the price, and book it online in one tap.</p>
     </div>
 
     <div class="dir-search">
       <span class="si" aria-hidden="true">🔍</span>
-      <input id="dirInput" type="text" aria-label="Search tests and profiles" placeholder="Search a test or profile — e.g. thyroid, vitamin d, sugar, dengue…" oninput="renderDir()" autocomplete="off">
+      <input id="dirInput" type="text" aria-label="Search tests and profiles" placeholder="Search a test or profile, e.g. thyroid, vitamin d, sugar, dengue…" oninput="renderDir()" autocomplete="off">
     </div>
     <div class="dir-chips" id="dirChips"></div>
     <div class="dir-count" id="dirCount"></div>
@@ -727,7 +730,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="dir-list" id="dirMore"></div>
     <div class="dir-empty" id="dirEmpty" style="display:none">No match found. Tap below and our team will help you find it.<br><br><a class="btn btn-wa" href="https://wa.me/919059341154?text=Hi%20Caspian%20Diagnostic%20Centre%2C%20I%27m%20looking%20for%20a%20test%20and%20need%20help." target="_blank" rel="noopener">Ask on WhatsApp</a></div>
 
-    <div class="dir-portal">✅ Book &amp; pay online — tap <b>Book</b> on any test to reserve it in seconds and pay securely by UPI, card or netbanking (Razorpay). Your slot is confirmed the moment you pay.</div>
+    <div class="dir-portal">✅ Book &amp; pay online, tap <b>Book</b> on any test to reserve it in seconds and pay securely by UPI, card or netbanking (Razorpay). Your slot is confirmed the moment you pay.</div>
   </div>
 </section>
 
@@ -737,15 +740,15 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="center" style="max-width:640px">
       <div class="eyebrow">Why Caspian</div>
       <h2>Diagnostics done right</h2>
-      <p class="lead center">Our promise is simple — <em>Where Speed Meets Precision</em> — backed by trained professionals and rigorous processes.</p>
+      <p class="lead center">Our promise is simple: <em>Where Speed Meets Precision</em>, backed by trained professionals and rigorous processes.</p>
     </div>
     <div class="feat-grid">
       <div class="frow"><div class="ic" aria-hidden="true">🎯</div><div><h3>Accuracy first</h3><p>Calibrated analysers and multi-level quality checks so you and your doctor can rely on every result.</p></div></div>
-      <div class="frow"><div class="ic" aria-hidden="true">🏠</div><div><h3>Free home collection</h3><p>Free doorstep sample collection on orders above ₹500 — trained phlebotomists, at a time that suits you.</p></div></div>
-      <div class="frow"><div class="ic" aria-hidden="true">💬</div><div><h3>Reports on WhatsApp</h3><p>Get your digital reports delivered to your phone quickly — no need to travel back to collect them.</p></div></div>
+      <div class="frow"><div class="ic" aria-hidden="true">🏠</div><div><h3>Free home collection</h3><p>Free doorstep sample collection on orders above ₹500, trained phlebotomists, at a time that suits you.</p></div></div>
+      <div class="frow"><div class="ic" aria-hidden="true">💬</div><div><h3>Reports on WhatsApp</h3><p>Get your digital reports delivered to your phone quickly, no need to travel back to collect them.</p></div></div>
       <div class="frow"><div class="ic" aria-hidden="true">👨‍⚕️</div><div><h3>Expert verified</h3><p>Every report is reviewed and validated by qualified pathologists before it reaches you.</p></div></div>
-      <div class="frow"><div class="ic" aria-hidden="true">💰</div><div><h3>Fair, transparent pricing</h3><p>Honest package pricing with no hidden costs — quality diagnostics that stay affordable.</p></div></div>
-      <div class="frow"><div class="ic" aria-hidden="true">🕗</div><div><h3>Open 24/7</h3><p>We're open round the clock, every day — walk in or book a home collection whenever it suits you, day or night.</p></div></div>
+      <div class="frow"><div class="ic" aria-hidden="true">💰</div><div><h3>Fair, transparent pricing</h3><p>Honest package pricing with no hidden costs, quality diagnostics that stay affordable.</p></div></div>
+      <div class="frow"><div class="ic" aria-hidden="true">🕗</div><div><h3>Open 24/7</h3><p>We're open round the clock, every day, walk in or book a home collection whenever it suits you, day or night.</p></div></div>
     </div>
   </div>
 </section>
@@ -770,7 +773,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     </div>
     <script>
       // Load Elfsight's platform.js only when the reviews section nears the
-      // viewport — keeps the heaviest third-party script off initial load.
+      // viewport, keeps the heaviest third-party script off initial load.
       (function(){
         var target = document.getElementById('elfReviews');
         if (!target) return;
@@ -816,7 +819,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div>
       <div class="eyebrow">About us</div>
       <h2 style="font-size:clamp(26px,3.2vw,34px);margin-bottom:16px">A trusted name in Hyderabad diagnostics</h2>
-      <p>Caspian Diagnostic Centre has served the Vijay Nagar Colony community and greater Hyderabad since 2021, with a simple commitment — accurate results, delivered with care. We combine modern laboratory technology with a patient-first approach.</p>
+      <p>Caspian Diagnostic Centre has served the Vijay Nagar Colony community and greater Hyderabad since 2021, with a simple commitment: accurate results, delivered with care. We combine modern laboratory technology with a patient-first approach.</p>
       <p>As a <strong>Government of Telangana–registered</strong> diagnostic establishment (Regn. No. 07F-APMCE-1846) and a <strong>PCPNDT-registered</strong> imaging centre (Regn. No. 0116A1337), we uphold strict standards of quality and compliance.</p>
       <p>From routine tests to comprehensive health packages, our qualified team ensures every sample is handled with precision and every report is one you can trust.</p>
       <div class="chips">
@@ -845,16 +848,16 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     <div class="center" style="max-width:640px">
       <div class="eyebrow">Good to know</div>
       <h2>Frequently asked questions</h2>
-      <p class="lead center">Quick answers to what patients ask us most. Need something else? Message us on WhatsApp — we're open 24/7.</p>
+      <p class="lead center">Quick answers to what patients ask us most. Need something else? Message us on WhatsApp, we're open 24/7.</p>
     </div>
     <div class="faq-list" style="max-width:820px;margin:34px auto 0">
       <details class="faq-item"><summary>Do I need to fast before my blood test?</summary><p>Some tests such as fasting blood sugar and lipid profile need 8–12 hours of fasting, while many others don't. Message us on WhatsApp with your test name and we'll confirm whether fasting is required.</p></details>
-      <details class="faq-item"><summary>Do you offer home sample collection?</summary><p>Yes — our trained phlebotomists collect samples from your home, free for orders above ₹500. Book online in the "All Tests" section and choose <em>Home collection</em> (or message us on WhatsApp with your area and preferred time), and our team will confirm your slot.</p></details>
+      <details class="faq-item"><summary>Do you offer home sample collection?</summary><p>Yes, our trained phlebotomists collect samples from your home, free for orders above ₹500. Book online in the "All Tests" section and choose <em>Home collection</em> (or message us on WhatsApp with your area and preferred time), and our team will confirm your slot.</p></details>
       <details class="faq-item"><summary>When will I receive my report?</summary><p>Most routine reports are ready the same day or within 24 hours, and are delivered directly on WhatsApp. Timing can vary for specialised tests.</p></details>
       <details class="faq-item"><summary>What are your timings?</summary><p>We're open <strong>24/7</strong>, every day of the week.</p></details>
-      <details class="faq-item"><summary>How do I book a test?</summary><p>Book online right here at caspianlabs.in, message us on WhatsApp at +91 90593 41154, or simply walk in to our centre at Ahmed Plaza, Vijay Nagar Colony.</p></details>
+      <details class="faq-item"><summary>How do I book a test?</summary><p>Book online right here at caspianlabs.in, message us on WhatsApp at <a href="tel:+919059341154">+91 90593 41154</a>, or simply walk in to our centre at Ahmed Plaza, Vijay Nagar Colony.</p></details>
       <details class="faq-item"><summary>Where are you located?</summary><p>10-3-761/8, Ahmed Plaza, Vijay Nagar Colony, Hyderabad, Telangana 500057. <a href="https://share.google/AIJCsiy3rClrF880u" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">Get directions →</a></p></details>
-      <details class="faq-item"><summary>Can I consult a doctor at Caspian?</summary><p>Yes — doctor consultations are handled at <strong>Caspian Healthcare</strong>, our sister clinic &amp; OPD. You can <a href="#doctors" style="color:var(--blue);font-weight:600">book an appointment online with any of our doctors</a> right here, or visit <a href="https://www.caspianhealthcare.in" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">caspianhealthcare.in</a>.</p></details>
+      <details class="faq-item"><summary>Can I consult a doctor at Caspian?</summary><p>Yes, doctor consultations are handled at <strong>Caspian Healthcare</strong>, our sister clinic &amp; OPD. You can <a href="#doctors" style="color:var(--blue);font-weight:600">book an appointment online with any of our doctors</a> right here, or visit <a href="https://www.caspianhealthcare.in" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">caspianhealthcare.in</a>.</p></details>
     </div>
   </div>
 </section>
@@ -929,7 +932,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         <div class="row"><div class="ic" aria-hidden="true">📞</div><div><b>Phone</b><a href="tel:+919059341154">+91 90593 41154</a></div></div>
         <div class="row"><div class="ic" aria-hidden="true">💬</div><div><b>WhatsApp</b><a href="https://wa.me/919059341154" target="_blank" rel="noopener">Message us to book a test</a></div></div>
         <div class="row"><div class="ic" aria-hidden="true">✉️</div><div><b>Email</b><a href="mailto:info@caspianlabs.in">info@caspianlabs.in</a></div></div>
-        <div class="row"><div class="ic" aria-hidden="true">🕗</div><div><b>Working hours</b><span>Open 24/7 — every day, all day</span></div></div>
+        <div class="row"><div class="ic" aria-hidden="true">🕗</div><div><b>Working hours</b><span>Open 24/7, every day, all day</span></div></div>
       </div>
       <div class="cbox">
         <iframe title="Caspian Diagnostic Centre location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Caspian%20Diagnostic%20Centre%2C%20Ahmed%20Plaza%2C%20Vijay%20Nagar%20Colony%2C%20Hyderabad%20500057&output=embed"></iframe>
@@ -1141,11 +1144,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
             <div class="bk-loc"><button type="button" class="bk-loc-btn" id="bkLocGps">📍 Use my current location</button><button type="button" class="bk-loc-btn" id="bkLocMap">🗺️ Choose on map</button><span class="bk-loc-st" id="bkLocSt"></span></div>
           </div>
           <div class="bk-f" id="bkTimeWrap" style="display:none"><label for="bkTime">Preferred date &amp; time</label><input id="bkTime" type="datetime-local"></div>
-          <div class="bk-note">Pay securely online by UPI, card or netbanking (Razorpay) — your booking is confirmed instantly. Free home collection on orders above ₹500.</div>
+          <div class="bk-note">Pay securely online by UPI, card or netbanking (Razorpay), your booking is confirmed instantly. Free home collection on orders above ₹500.</div>
           <div class="bk-warn" id="bkHomeWarn" style="display:none"></div>
           <label class="bk-consent"><input type="checkbox" id="bkConsent"> I agree to be contacted about this booking and accept Caspian's <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label>
           <button class="bk-sub" type="submit" id="bkSub">Confirm booking</button>
-          <div class="bk-secure"><span aria-hidden="true">🔒</span> Your details go straight to Caspian — never shared.</div>
+          <div class="bk-secure"><span aria-hidden="true">🔒</span> Your details go straight to Caspian, never shared.</div>
         </form>
       </div>
       <div id="bkDone" class="bk-done" style="display:none"></div>
@@ -1183,7 +1186,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
 <div class="dt-ov" id="dtOv" role="dialog" aria-modal="true" aria-labelledby="dtTitle">
   <div class="dt-card">
     <div class="dt-head">
-      <div><div class="dt-cat" id="dtCat"></div><h3 id="dtTitle">—</h3></div>
+      <div><div class="dt-cat" id="dtCat"></div><h3 id="dtTitle">–</h3></div>
       <button class="bk-x" type="button" onclick="closeDetail()" aria-label="Close">&times;</button>
     </div>
     <div class="dt-body">
@@ -1222,7 +1225,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     {n:"Complete Metabolic Panel", c:"Health Checkup", p:2500, k:"metabolism"},
     {n:"Metabolic Wellness + InBody", c:"Health Checkup", p:1795, pop:1, k:"bca body composition ramzan fitness"},
     {n:"Metabolic Wellness (without InBody)", c:"Health Checkup", p:1499, k:""},
-    {n:"Premium Health Check — Men 45+", c:"Health Checkup", p:4399, k:"men male senior premium"},
+    {n:"Premium Health Check, Men 45+", c:"Health Checkup", p:4399, k:"men male senior premium"},
     {n:"Women's Health Profile", c:"Health Checkup", p:3000, k:"female women ladies"},
     {n:"Senior Citizen Health — Male", c:"Health Checkup", p:3500, k:"elderly old age geriatric men male"},
     {n:"Senior Citizen Health — Female", c:"Health Checkup", p:3500, k:"elderly old age geriatric women female ladies"},
@@ -1343,7 +1346,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     "Women's Health Profile":"Lipid Profile, Kidney Function Test (KFT) Basic, Vitamin D Total-25 Hydroxy, Calcium, Serum, Complete Urine Analysis (CUE), Folic Acid, Glucose-Fasting (FBS), Iron, Total Iron Binding Capacity (TIBC), Transferrin, CA125 - Cancer marker, Vitamin B12 Cyanocobalamin",
     "Senior Citizen Health — Male":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, PSA, Urine ACR & CUE",
     "Senior Citizen Health — Female":"Lipid & Kidney Function, HbA1c, Fasting Sugar, Iron Studies, Folic Acid, Vitamin D & B12, Calcium, Urine ACR & CUE",
-    "Premium Health Check — Men 45+":"Amylase, Serum, Cortisol Serum (3 to 5 PM), HsCRP (High Sensitive CRP), HbA1c (Glycated Haemoglobin), TOTAL IRON BINDING CAPACITY, Lipid Profile, Liver Function Test; LFT, Prostaate Specific Antigen (PSA Total), Vitamin D Total-25 Hydroxy, Kidney Function Test (KFT) Basic, Lp-a Lipoprotein(a), Apolipoprotein A1 (APO-A1), Complete Urine Analysis (CUE), Vitamin B12 Cyanocobalamin, Rheumatoid Factor-RA Test, Erythrocyte Sedimentation Rate (ESR), Apolipoprotein B (APO-B), Complete blood count CBC",
+    "Premium Health Check, Men 45+":"Amylase, Serum, Cortisol Serum (3 to 5 PM), HsCRP (High Sensitive CRP), HbA1c (Glycated Haemoglobin), TOTAL IRON BINDING CAPACITY, Lipid Profile, Liver Function Test; LFT, Prostaate Specific Antigen (PSA Total), Vitamin D Total-25 Hydroxy, Kidney Function Test (KFT) Basic, Lp-a Lipoprotein(a), Apolipoprotein A1 (APO-A1), Complete Urine Analysis (CUE), Vitamin B12 Cyanocobalamin, Rheumatoid Factor-RA Test, Erythrocyte Sedimentation Rate (ESR), Apolipoprotein B (APO-B), Complete blood count CBC",
     "Haj / Umrah Fitness":"Complete blood count CBC, Glucose-Random (RBS), Kidney Function Test (KFT) Basic, ECG, X -Ray Chest PA view, Blood Grouping ABO & Rh Typing",
     "Thyroid Profile (T3 T4 TSH)":"T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone)",
     "Thyroid Panel I (T3 T4 TSH)":"T3-Total, Tri Iodothyronine (TT3), T4-Total, Thyroxine (TT4, TSH (Thyroid Stimulating Hormone)",
@@ -1364,8 +1367,8 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     "Chest X-ray (PA / AP)":"Our most-requested X-ray: PA or AP chest view for cough, fever, TB screening, breathlessness & pre-op. Digital, same-day film & report. All 63 X-ray prices at caspianlabs.in/x-ray.",
     "Other Department X-ray":"Any other view: elbow, thoracic spine, skull, ribs and more. From ₹350 for one view, ₹600 for two views, done at the centre. Full price list at caspianlabs.in/x-ray.",
     "Chest X-ray at Home (Portable)":"Portable chest X-ray at your home, arranged through our partner radiology team, for elderly, bedridden or post-surgery patients who can't travel to the centre.",
-    "CGM at Home — FreeStyle Libre 2+":"Abbott FreeStyle Libre 2+ sensor fitted at your home at MRP — no application charge. Read it on a compatible NFC smartphone or the FreeStyle reader.",
-    "CGM at Home — Guardian IV Sensor":"Medtronic Guardian IV sensor fitted at your home at MRP — no application charge. Read it on a compatible phone/receiver. More CGMs (Linx, GlucoRx & others) coming soon.",
+    "CGM at Home — FreeStyle Libre 2+":"Abbott FreeStyle Libre 2+ sensor fitted at your home at MRP, no application charge. Read it on a compatible NFC smartphone or the FreeStyle reader.",
+    "CGM at Home — Guardian IV Sensor":"Medtronic Guardian IV sensor fitted at your home at MRP, no application charge. Read it on a compatible phone/receiver. More CGMs (Linx, GlucoRx & others) coming soon.",
     "General Health Check":"Creatinine, Serum, Urea, Serum, Lipid Profile, HIV-1&2 Antibody, CLIA, Hepatitis B Surface Antigen (HBsAg), Glucose-Random (RBS), Complete Blood Picture (CBP), Erythrocyte Sedimentation Rate (ESR), Blood Grouping ABO & Rh Typing, Complete Urine Analysis (CUE)",
     "Clinova Mini Health Check":"Lipid Profile, Urea, Serum, Creatinine, Serum, Glucose-Fasting (FBS)",
     "Clinova Health Screen":"Hemogram, Complete Urine Analysis (CUE), Lipid Profile, Kidney Function Test (KFT) Basic, Calcium, Serum, HbA1c (Glycated Haemoglobin), Albumin/Creatinine Ratio, Urine Spot (UACR)",
@@ -1525,7 +1528,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     });
     more.innerHTML=out;
     head.style.display="block";
-    head.innerHTML='<b>'+total+' more</b> from our full lab menu — the complete catalogue our reception can order'
+    head.innerHTML='<b>'+total+' more</b> from our full lab menu, the complete catalogue our reception can order'
       + (total>CAP?(' (showing first '+CAP+')'):'')
       + '. Tap <b>Book</b> to request; our team confirms the exact price.';
     setEmpty();
@@ -1564,7 +1567,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(function(){showToast('Link copied!');},function(){legacyCopy(url);showToast('Link copied!');}); }
       else { legacyCopy(url); showToast('Link copied!'); }
     } else if(how==='whatsapp'){ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener'); }
-    else if(how==='email'){ window.location.href='mailto:?subject='+encodeURIComponent('Caspian Diagnostic Centre — '+name)+'&body='+encodeURIComponent(msg); }
+    else if(how==='email'){ window.location.href='mailto:?subject='+encodeURIComponent('Caspian Diagnostic Centre: '+name)+'&body='+encodeURIComponent(msg); }
     else if(how==='native' && navigator.share){ navigator.share({title:name,text:label+' at Caspian Diagnostic Centre',url:url}).catch(function(){}); }
     if(typeof gtag==='function'){gtag('event','share',{method:how});}  // no test name to analytics (health-data privacy)
     closeSharePop();
@@ -1616,7 +1619,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     var i = cartFind(name);
     if(i<0){
       CART.push({ name:name, price:(price==null||price===""?null:Number(price)), code:code||"" });
-      if(!silent) showToast('Added — '+CART.length+(CART.length===1?' test':' tests')+' in your booking');
+      if(!silent) showToast('Added: '+CART.length+(CART.length===1?' test':' tests')+' in your booking');
     } else if(!silent){ showToast('Already in your booking'); }
     saveCart(); updateSticky(); cartBump();
     if(document.getElementById('bkOv').classList.contains('on')) renderBkItems();
@@ -1653,7 +1656,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     if(incText){ incWrap.innerHTML='<div class="dt-inc-h">What’s included</div><div class="dt-inc-b">'+esc(incText)+'</div>'; }
     else { incWrap.innerHTML='<div class="dt-inc-b dt-muted">A single lab test. Add it to your booking and our team confirms the price and any preparation when they call.</div>'; }
     var prep=document.getElementById('dtPrep'), low=(name+' '+(cat||'')).toLowerCase();
-    if(/lipid|fasting|full body|diabet|sugar|glucose|metabolic|insulin|cholesterol/.test(low)){ prep.textContent='Tip: this usually needs 8–12 hours of fasting — our team will confirm when you book.'; prep.style.display='block'; }
+    if(/lipid|fasting|full body|diabet|sugar|glucose|metabolic|insulin|cholesterol/.test(low)){ prep.textContent='Tip: this usually needs 8–12 hours of fasting, our team will confirm when you book.'; prep.style.display='block'; }
     else { prep.style.display='none'; }
     var add=document.getElementById('dtAdd'); add.textContent='＋ Add to booking'; add.classList.remove('added');
     dtReturnFocus=document.activeElement;
@@ -1847,7 +1850,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           + (t.t>=500 ? 'Your first visit is free; a ₹100 charge for the second visit is added at payment.'
                       : 'As your order is under ₹500, a ₹100 charge per visit ('+inr(charge)+' total) is added at payment.');
       } else {
-        w.textContent = 'Your order is '+inr(t.t)+'. Home collection is free above ₹500 — a ₹100 visit charge is added at payment.';
+        w.textContent = 'Your order is '+inr(t.t)+'. Home collection is free above ₹500, a ₹100 visit charge is added at payment.';
       }
       w.style.display='';
     } else { w.style.display='none'; }
@@ -1865,11 +1868,11 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   }
   document.getElementById('bkLocGps').addEventListener('click', function(){
     var st=document.getElementById('bkLocSt');
-    if(!navigator.geolocation){ st.textContent='Location not supported on this device — try "Choose on map".'; st.style.color='#8f6410'; return; }
+    if(!navigator.geolocation){ st.textContent='Location not supported on this device, try "Choose on map".'; st.style.color='#8f6410'; return; }
     st.textContent='Getting your location…'; st.style.color='#64748b';
     navigator.geolocation.getCurrentPosition(
       function(p){ bkSetLoc(p.coords.latitude,p.coords.longitude,p.coords.accuracy,'Current location pinned'); },
-      function(){ st.textContent='Couldn\'t get your location — allow location permission, or use "Choose on map".'; st.style.color='#8f6410'; },
+      function(){ st.textContent='Couldn\'t get your location, allow location permission, or use "Choose on map".'; st.style.color='#8f6410'; },
       {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
   });
   document.getElementById('bkLocMap').addEventListener('click', function(){ bkOpenMap(); });
@@ -1878,7 +1881,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     var c=document.createElement('link'); c.rel='stylesheet';
     c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(c);
     var s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-    s.onload=cb; s.onerror=function(){ var st=document.getElementById('bkLocSt'); st.textContent='Map couldn\'t load — please use "Use my current location" or describe a landmark in the address.'; st.style.color='#8f6410'; bkCloseMap(); };
+    s.onload=cb; s.onerror=function(){ var st=document.getElementById('bkLocSt'); st.textContent='Map couldn\'t load, please use "Use my current location" or describe a landmark in the address.'; st.style.color='#8f6410'; bkCloseMap(); };
     document.head.appendChild(s);
   }
   function bkOpenMap(){
@@ -1971,7 +1974,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
     done.style.display = "";
     done.innerHTML = '<div class="tick" style="background:#e7f7ee;color:#25D366">💬</div>'
       + '<h4>Almost done!</h4>'
-      + '<p>Tap below to send your booking to our team on WhatsApp — we\'ll confirm your slot right away.</p>'
+      + '<p>Tap below to send your booking to our team on WhatsApp, we\'ll confirm your slot right away.</p>'
       + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Confirm on WhatsApp</a>';
     // best-effort auto-open so a tap isn't strictly required
     try { window.open(url, '_blank', 'noopener'); } catch(err){}
@@ -1982,14 +1985,14 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
   function bkTimeout(v){
     if(typeof gtag==='function'){gtag('event','booking_timeout',{event_category:'booking'});}
     var _tnames = CART.map(function(it){return it.name;}).join(", ") || "a test";
-    var statusMsg = "Hi Caspian Diagnostic Centre, I just tried to book "+_tnames+" online (name: "+v.name+", mobile: "+v.mobile+"). My page timed out — could you please confirm whether my booking went through? I don't want to book twice.";
+    var statusMsg = "Hi Caspian Diagnostic Centre, I just tried to book "+_tnames+" online (name: "+v.name+", mobile: "+v.mobile+"). My page timed out, could you please confirm whether my booking went through? I don't want to book twice.";
     var url = WA + encodeURIComponent(statusMsg);
     var done = document.getElementById('bkDone');
     document.getElementById('bkFormWrap').style.display = "none";
     done.style.display = "";
     done.innerHTML = '<div class="tick" style="background:#fff4e0;color:#e08a00">⏳</div>'
       + '<h4>Still processing…</h4>'
-      + '<p>Your request is taking longer than usual. <b>Please don\'t book again</b> — it may already be registered. Our team will confirm on your phone (<b>'+esc(v.mobile)+'</b>) shortly.</p>'
+      + '<p>Your request is taking longer than usual. <b>Please don\'t book again</b>, it may already be registered. Our team will confirm on your phone (<b>'+esc(v.mobile)+'</b>) shortly.</p>'
       + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Check status on WhatsApp</a>';
     CART=[]; saveCart(); updateSticky();   // clear so the patient can't resubmit the same order
   }
@@ -2070,12 +2073,12 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
           + ref
           + '<p style="margin-top:8px">'
           + (v.mode==='now'
-              ? 'Show this Booking Ref at our centre and we\'ll have your tests ready — payment is collected at the counter.'
+              ? 'Show this Booking Ref at our centre and we\'ll have your tests ready, payment is collected at the counter.'
               : 'Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm the details'+(v.mode==='home'?' and your home-collection slot':' and your slot')+'.')
           + '</p>'
           + '<p style="margin-top:6px;color:#64748b;font-size:13.5px">You\'ll also receive a WhatsApp confirmation from our team within 15 minutes.</p>'
           + '<a class="btn-wa2" href="'+_waUrl+'" target="_blank" rel="noopener">Message us on WhatsApp</a>';
-        CART = []; saveCart(); updateSticky();   // order placed — clear the cart
+        CART = []; saveCart(); updateSticky();   // order placed, clear the cart
       } else if(j.human===false){
         // bot check failed: say so honestly and let the patient retry
         sub.disabled=false; sub.textContent='Confirm booking'; fail(j.error);
@@ -2098,13 +2101,13 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       var _names = CART.map(function(it){return esc(it.name);}).join(", ");
       var payLine = (j.amountPaid!=null) ? ('<p style="margin-top:6px"><b>'+inr(j.amountPaid)+' paid online</b>'+(j.paymentId?(' · Payment ID '+esc(String(j.paymentId))):'')+'</p>') : '';
       done.innerHTML = '<div class="tick">✓</div>'
-        + '<h4>Payment received — booking confirmed!</h4>'
+        + '<h4>Payment received. Booking confirmed!</h4>'
         + '<p>Thank you, '+esc(v.name)+'. Your booking for <b>'+_names+'</b> is registered and paid.</p>'
         + ref + payLine
         + '<p style="margin-top:8px">'
         + (v.mode==='now'
-            ? 'Show this Booking Ref at our centre — no payment is needed at the counter.'
-            : 'Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm '+(v.mode==='home'?'your home-collection slot':'your slot')+' — no payment is needed, you\'ve already paid.')
+            ? 'Show this Booking Ref at our centre, no payment is needed at the counter.'
+            : 'Our team will call you shortly on <b>'+esc(v.mobile)+'</b> to confirm '+(v.mode==='home'?'your home-collection slot':'your slot')+', no payment is needed, you\'ve already paid.')
         + '</p>'
         + '<p style="margin-top:6px;color:#64748b;font-size:13.5px">Razorpay will send your payment receipt. You\'ll also receive a WhatsApp confirmation from our team.</p>';
       CART = []; saveCart(); updateSticky();
@@ -2118,7 +2121,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
       document.getElementById('bkFormWrap').style.display="none"; done.style.display="";
       done.innerHTML = '<div class="tick">✓</div>'
         + '<h4>Payment received!</h4>'
-        + '<p>Thank you, '+esc(v.name)+'. Your payment is received'+(pid?(' (Payment ID <b>'+esc(pid)+'</b>)'):'')+' and your booking is being registered. <b>Please don\'t book or pay again</b> — our team will confirm on <b>'+esc(v.mobile)+'</b> shortly.</p>'
+        + '<p>Thank you, '+esc(v.name)+'. Your payment is received'+(pid?(' (Payment ID <b>'+esc(pid)+'</b>)'):'')+' and your booking is being registered. <b>Please don\'t book or pay again</b>, our team will confirm on <b>'+esc(v.mobile)+'</b> shortly.</p>'
         + '<a class="btn-wa2" href="'+url+'" target="_blank" rel="noopener">Check status on WhatsApp</a>';
       CART=[]; saveCart(); updateSticky();
     }
@@ -2155,7 +2158,7 @@ src="https://www.facebook.com/tr?id=4485931708352445&ev=PageView&noscript=1"/></
         theme: { color: '#ad4c3f' },
         modal: { ondismiss: function(){
           sub.disabled=false; sub.textContent='Confirm booking';
-          err.textContent='Payment not completed — your booking is not confirmed yet. Tap "Confirm booking" to try again, or book on WhatsApp.';
+          err.textContent='Payment not completed, your booking is not confirmed yet. Tap "Confirm booking" to try again, or book on WhatsApp.';
           err.style.display='block';
           if(typeof gtag==='function'){gtag('event','booking_payment_dismissed',{event_category:'booking'});}
         } },
