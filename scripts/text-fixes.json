@@ -464,7 +464,8 @@
    "public/assets/phase2-data.js",
    "api/page.js",
    "api/pay.js",
-   "api/book.js"
+   "api/book.js",
+   "api/catalog.js"
   ],
   "pairs": [
    [
