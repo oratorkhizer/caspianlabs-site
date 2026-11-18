@@ -83,10 +83,10 @@ const PACKAGES = [
     slug: "full-body-checkup-hyderabad",
     name: "Full Body Check Up",
     price: 1795,
-    tagline: "60+ parameters · our most popular package",
+    tagline: "60+ parameters",
     desc: "Full body checkup in Hyderabad at ₹1,795: 60+ parameters covering CBC, HbA1c, lipid, liver, kidney, thyroid, vitamins D & B12 and urine analysis. Free home sample collection above ₹500.",
     about: [
-      "The Full Body Check Up is our most-ordered preventive package, a single visit (or a single home-collection appointment) that screens every major organ system: blood counts, three-month sugar control, cholesterol, liver, kidneys, thyroid, iron stores, key vitamins and a complete urine analysis.",
+      "The Full Body Check Up is a preventive package, a single visit (or a single home-collection appointment) that screens every major organ system: blood counts, three-month sugar control, cholesterol, liver, kidneys, thyroid, iron stores, key vitamins and a complete urine analysis.",
       "It is designed as an annual health audit for adults of any age, especially useful if you have a family history of diabetes, heart disease or thyroid problems, or simply haven't been tested in over a year."
     ],
     includes: ["Complete Blood Count (CBC)", "ESR", "HbA1c (3-month sugar)", "Lipid Profile", "Liver Function Test (LFT)", "Kidney Function Test (KFT)", "Iron Studies (TIBC)", "Thyroid Profile I", "Vitamin D (25-OH)", "Vitamin B12", "Serum Calcium", "Complete Urine Analysis (CUE)"],

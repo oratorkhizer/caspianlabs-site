@@ -130,7 +130,7 @@ export default {
       title: "Full Body Check Up, Hyderabad | Caspian Diagnostic Centre",
       desc: "12 tests including CBC, HbA1c, lipid, liver, kidney, thyroid, iron, vitamin D and vitamin B12, in Hyderabad. Free home collection. Reports on WhatsApp.",
       h1: "Full Body Check Up",
-      sub: "12 tests · Our most booked package",
+      sub: "12 tests",
       wa: "Hello Caspian Diagnostic Centre, I would like to book the Full Body Check Up.",
       blocks: [
         { h: "What it covers", p: [
