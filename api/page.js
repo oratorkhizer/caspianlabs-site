@@ -150,7 +150,7 @@ const PACKAGES = [
     tagline: "Full body checkup + body composition",
     desc: "Metabolic wellness package in Hyderabad at ₹1,795: every Full Body Check Up test plus body composition analysis (BCA) mapping fat, muscle and metabolism. At Caspian Diagnostic Centre, Vijay Nagar.",
     about: [
-      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an body composition analysis (BCA), a quick, painless scan that maps your body fat, muscle mass, and metabolic profile.",
+      "This package combines our complete Full Body Check Up (60+ blood and urine parameters) with an body composition analysis (BCA), a quick, non-invasive scan that maps your body fat, muscle mass, and metabolic profile.",
       "Blood tests tell you what is happening inside; the body composition scan tells you what your weight is actually made of. Together they are ideal for weight-loss programmes, fitness goals and metabolic health tracking, an approach designed by our bariatric physician."
     ],
     includes: ["Everything in the Full Body Check Up", "body composition analysis (BCA)", "Fat, muscle & metabolic mapping"],
@@ -283,7 +283,7 @@ const TESTS = [
   },
   {
     slug: "tsh-test-hyderabad", name: "TSH Test (Thyroid Stimulating Hormone)", short: "TSH", price: 350, sample: "Blood", fasting: "no",
-    desc: "TSH test in Hyderabad at ₹350: the single best screening test for thyroid function. Same-day report on WhatsApp from Caspian Diagnostic Centre, Vijay Nagar.",
+    desc: "TSH test in Hyderabad at ₹350: the standard first screening test for thyroid function. Same-day report on WhatsApp from Caspian Diagnostic Centre, Vijay Nagar.",
     about: [
       "TSH is the single most sensitive screening test for thyroid problems. A high TSH usually points to an underactive thyroid (hypothyroidism); a low TSH to an overactive one (hyperthyroidism).",
       "If your TSH is abnormal, your doctor may follow up with the full thyroid profile (T3, T4 and TSH), available here at ₹470."
@@ -346,7 +346,7 @@ const TESTS = [
     desc: "Complete urine examination (CUE) in Hyderabad at ₹200: screens urine infection, kidney problems and diabetes-related changes. Same-day report at Caspian Diagnostic Centre.",
     about: [
       "The complete urine examination checks your urine physically, chemically and under the microscope, screening for urinary infection, kidney disease, sugar in urine and more.",
-      "It is quick, painless and remarkably informative: burning urination, frequent urination, foul-smelling or cloudy urine, and routine diabetes checks are all common reasons to test."
+      "It is quick, non-invasive and informative: burning urination, frequent urination, foul-smelling or cloudy urine, and routine diabetes checks are all common reasons to test."
     ],
     whoShould: ["Burning or frequent urination (suspected UTI)", "Routine diabetes and kidney screening", "Pregnancy-related routine checks"],
     related: ["t:kidney-function-test-hyderabad", "t:blood-sugar-test-hyderabad", "t:urine-acr-test-hyderabad", "t:stool-routine-test-hyderabad"]
@@ -466,7 +466,7 @@ const TESTS = [
     slug: "typhoid-widal-test-hyderabad", name: "Typhoid Test (Widal)", short: "Widal", price: 180, sample: "Blood", fasting: "no",
     desc: "Widal typhoid test in Hyderabad at ₹180: quick screening for typhoid fever. Same-day report; comprehensive typhoid profile also available. Open 24/7.",
     about: [
-      "The Widal test screens for antibodies against the typhoid bacteria, a quick, affordable first-line test when fever has lasted several days, especially with abdominal discomfort or loss of appetite.",
+      "The Widal test screens for antibodies against the typhoid bacteria, a quick, low-cost first-line test when fever has lasted several days, especially with abdominal discomfort or loss of appetite.",
       "For more definitive answers, a comprehensive typhoid profile (₹2,000) including newer antibody tests is also available; our team can advise which suits your fever duration."
     ],
     whoShould: ["Fever lasting more than 3–4 days", "Fever with abdominal pain or poor appetite", "Suspected water/food-borne infection"],
@@ -509,7 +509,7 @@ const TESTS = [
     whoShould: ["Chest pain, palpitations or breathlessness", "Before surgery, or fitness clearance before starting exercise", "High blood pressure, diabetes or a family history of heart disease", "Employment, visa and insurance medicals"],
     faqExtra: [
       ["Do I need an appointment for an ECG?", "No. We are open 24 hours, every day, and an ECG is a walk-in test that takes about five minutes."],
-      ["Is an ECG enough on its own?", "Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, ask about the Heart Health Check: a limited-period offer at \u20B9999 covering the ECG, the echo, a blood sugar and a consultation with our cardiologist. While it is running it costs less than the echo booked by itself."],
+      ["Is an ECG enough on its own?", "Often not. An ECG shows the heart's electrical activity in the minutes it was recorded; a 2D echo shows the structure of the heart and how well it is pumping. They answer different questions. If you are likely to need both, ask about the Heart Health Check: a package priced at \u20B9999 covering the ECG, the echo, a blood sugar and a consultation with our cardiologist. At this price it costs less than the echo booked by itself."],
       ["Does it hurt?", "No. Ten stickers are placed on the skin and peeled off afterwards. Nothing is injected and no current is passed into you."]
     ],
     homeCollection: false,
@@ -519,7 +519,7 @@ const TESTS = [
     slug: "2d-echo-test-hyderabad", seoName: "2D Echo Test", name: "2D Echocardiogram (2D Echo)", short: "2D Echo", price: 1200,
     sample: "Ultrasound scan of the heart, done at our centre", fasting: "no", photo: "echo",
     heroSub: "\u20B91,200 \u00B7 Done by our cardiologist \u00B7 Explained to you the same visit",
-    desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. A limited-period Heart Health Check at \u20B9999 covers this echo with an ECG and his consultation.",
+    desc: "2D Echo in Hyderabad at \u20B91,200 at Caspian Diagnostic Centre, Vijay Nagar Colony, performed by cardiologist Dr Sayyed Muzammil. A Heart Health Check package at \u20B9999 covers this echo with an ECG and his consultation.",
     about: [
       "A 2D echocardiogram is an ultrasound scan of the heart. A probe is moved across your chest with gel, and the heart is watched beating on screen: the four chambers, the four valves, the thickness of the muscle and the sac around it.",
       "Its single most useful number is the ejection fraction, the percentage of blood the main pumping chamber pushes out with each beat. That is the measurement that separates breathlessness caused by the heart from breathlessness caused by the lungs, weight or anaemia, and it is what heart-failure treatment is adjusted against.",
@@ -527,7 +527,7 @@ const TESTS = [
     ],
     whoShould: ["Breathlessness on exertion, or swelling of the ankles", "A murmur heard by a doctor, or known valve disease", "After a heart attack, or with known heart failure", "Long-standing high blood pressure or diabetes, to check the heart muscle"],
     faqExtra: [
-      ["Is the Heart Health Check better value than the echo alone?", "While the offer lasts, yes, and we would rather say so than let you work it out afterwards. \u20B91,200 is the standing price for the echo on its own. The Heart Health Check is a limited-period offer at \u20B9999 covering this echo, an ECG, a blood sugar and a consultation with the cardiologist, so for now it costs less than the echo booked by itself. No closing date has been set, and when it ends the echo stays at its own price. If you want the scan with a cardiologist reading it in the same visit, ask for the package while it is running."],
+      ["Is the Heart Health Check better value than the echo alone?", "At the current package price, yes, and we would rather say so than let you work it out afterwards. \u20B91,200 is the standing price for the echo on its own. The Heart Health Check is a package priced at \u20B9999 covering this echo, an ECG, a blood sugar and a consultation with the cardiologist, so at present it costs less than the echo booked by itself. No closing date has been set, and when it ends the echo stays at its own price. If you want the scan with a cardiologist reading it in the same visit, ask for the package."],
       ["Do I need to fast or prepare?", "No. Eat and drink normally, take your usual medicines, and wear something that opens at the front if you can. The scan takes about twenty minutes."],
       ["Is it the same as an ECG?", "No, and the names being similar causes real confusion. An ECG is a five-minute recording of the heart's electrical activity and costs \u20B9250. An echo is an ultrasound scan showing the structure and pumping of the heart. Many people need both, which is what the Heart Health Check bundles."],
       ["When can it be done?", "The echo is performed by our cardiologist, so it runs to his clinic hours rather than round the clock like our lab. Message us on WhatsApp and we will give you the next available slot."]
@@ -1172,7 +1172,7 @@ function renderHome() {
   const body = `<div class="grid"><div class="card">
 ${photoFig("nurse", "Our nursing and phlebotomy team, Caspian, Vijay Nagar Colony")}<h2>Skip the travel, we come to you</h2>
 <p>Caspian Diagnostic Centre offers professional blood-sample collection at your home, anywhere in our Hyderabad coverage area. A trained phlebotomist visits at a time that suits you, collects the sample using sterile single-use equipment, and your report arrives on WhatsApp, usually the same day.</p>
-<p>Home collection is <b>free on orders of ₹500 or more</b> (₹100 per visit below that, always shown before you pay), and is especially loved by elders, busy families, new mothers and anyone recovering from illness.</p>
+<p>Home collection is <b>free on orders of ₹500 or more</b> (₹100 per visit below that, always shown before you pay), and is especially useful for elders, busy families, new mothers and anyone recovering from illness.</p>
 <h2>Areas we cover</h2>
 <p>Our phlebotomists start from Vijay Nagar Colony, so the fastest slots are in <b>Mehdipatnam, Masab Tank, Asif Nagar, Gudimalkapur, Attapur, Tolichowki, Lakdikapul, Nampally, Banjara Hills, Humayun Nagar, Langar Houz and Karwan</b>. We also cover the rest of Hyderabad on request; send your area on WhatsApp and we will confirm the earliest visit.</p>
 <h2>How it works</h2>

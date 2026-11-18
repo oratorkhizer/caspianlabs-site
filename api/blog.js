@@ -31,7 +31,7 @@ const ARTICLES = [
       ["h2", "What the numbers mean"],
       ["ul", [
         "<b>Below 5.7%</b>: normal.",
-        "<b>5.7% to 6.4%</b>: prediabetes. Your sugar is running higher than it should, but there is still time to reverse course with diet, activity and weight management.",
+        "<b>5.7% to 6.4%</b>: prediabetes. Your sugar is running higher than it should, but there is still time to change course with diet, activity and weight management.",
         "<b>6.5% or above</b>: in the diabetes range. Your doctor will usually confirm with a repeat test or a sugar reading before making the diagnosis."
       ]],
       ["p", "For people already living with diabetes, the target is individual: commonly below 7%, but your doctor may set it higher or lower depending on your age, other conditions and risk of low sugar. Don't chase a number you saw online; chase the one your doctor set for you."],
