@@ -42,7 +42,8 @@ const I18N_TAG = (html.match(/<script src="\/assets\/i18n\.js(\?v=[^"]*)?" defer
 html = insertAfter(html, I18N_TAG, "\n" + SCRIPT, "i18n script tag");
 // Photos (Caspian staff shoot, Aug 2026; hosted on Supabase Storage, public bucket "caspianlabs", project caspian-cme).
 // Injected here so the 160 KB index.html need not be re-uploaded. Idempotent via the id="gallery" check.
-const PB = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
+// Pictures load through this site (/sbx rewrite to Supabase storage): some networks block supabase.co.
+const PB = "/sbx/gjpbiiqkvzysmdpioexk/storage/v1/object/public/caspianlabs/site/";
 const PHOTO_CSS = "  /* Photos */\n.about-grid .imgbox-photo{padding:0;overflow:hidden;min-height:0;display:block;background:none}\n.imgbox-photo img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;border-radius:var(--radius)}\n.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}\n@media(max-width:1100px){.gal{grid-template-columns:repeat(3,1fr)}}\n.gal figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}\n.gal img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}\n.gal figcaption{font-size:13px;color:var(--muted);padding:9px 12px}\n@media(max-width:820px){.gal{grid-template-columns:1fr 1fr}}\n@media(max-width:520px){.gal{grid-template-columns:1fr}}";
 const GALLERY = [
   ["biochemistry-analyser.jpg", "Biochemistry analyser", "Fully automated analyser for sugar, lipids, liver and kidney panels"],

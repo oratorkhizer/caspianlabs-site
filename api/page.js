@@ -800,6 +800,9 @@ const TESTS = [
 /* Site photos (Caspian staff shoot, Aug 2026) hosted on Supabase Storage, public bucket "caspianlabs" in project caspian-cme.
    1600px JPEGs. Add a new photo: upload to site/<name>.jpg in that bucket, then reference it here. */
 const PHOTO_BASE = "https://gjpbiiqkvzysmdpioexk.supabase.co/storage/v1/object/public/caspianlabs/site/";
+// <img> tags load through this site (/sbx rewrite): some networks block supabase.co.
+// Share tags (ogImage) keep the absolute Supabase address above.
+const IMG_BASE = "/sbx/gjpbiiqkvzysmdpioexk/storage/v1/object/public/caspianlabs/site/";
 const PHOTOS = {
   lab: ["lab-analysers.jpg", "Caspian Diagnostic Centre laboratory: biochemistry analysers and sample racks"],
   labWide: ["lab-wide.jpg", "Laboratory at Caspian Diagnostic Centre, Vijay Nagar Colony"],
@@ -814,7 +817,7 @@ const PHOTOS = {
 function photoUrl(key) { return PHOTOS[key] ? PHOTO_BASE + PHOTOS[key][0] : ""; }
 function photoFig(key, caption) {
   if (!PHOTOS[key]) return "";
-  return `<figure class="ph"><img src="${PHOTO_BASE + PHOTOS[key][0]}" alt="${esc(PHOTOS[key][1])}" width="1600" height="1067" loading="lazy" decoding="async">${caption ? `<figcaption>${esc(caption)}</figcaption>` : ""}</figure>`;
+  return `<figure class="ph"><img src="${IMG_BASE + PHOTOS[key][0]}" alt="${esc(PHOTOS[key][1])}" width="1600" height="1067" loading="lazy" decoding="async">${caption ? `<figcaption>${esc(caption)}</figcaption>` : ""}</figure>`;
 }
 
 const HOME_PAGE = {
