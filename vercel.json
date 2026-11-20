@@ -27,6 +27,7 @@
     { "source": "/tests/x-ray-hyderabad", "destination": "/x-ray", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/sbx/gjpbiiqkvzysmdpioexk/:path*", "destination": "https://gjpbiiqkvzysmdpioexk.supabase.co/:path*" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/r/:t", "destination": "https://gjpbiiqkvzysmdpioexk.supabase.co/functions/v1/lab-report?t=:t" },
     { "source": "/catalog.csv", "destination": "/api/whatsapp-catalog" },
