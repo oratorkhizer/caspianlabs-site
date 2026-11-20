@@ -51,7 +51,7 @@ const SURGERIES = [
     anaes: "Usually spinal anaesthesia; general anaesthesia in some emergencies",
     emergency: true,
     intro: [
-      "A caesarean section is one of the most common operations in India. Most are done under spinal anaesthesia, where the needle goes into the lower back. For that, the anaesthetist needs to know that your platelets and clotting are normal, because bleeding near the spine is dangerous.",
+      "A caesarean section is one of the most common operations in India. Most are done under spinal anaesthesia, where the needle goes into the lower back. For that, the anaesthetist needs to know that your platelets and clotting are normal, so that the spinal injection can be given safely.",
       "Your obstetrician will also want your haemoglobin, blood group and infection status on file before the day. Blood loss in a C-section is more than in a normal delivery, so blood may need to be kept ready."
     ],
     addons: [
@@ -287,7 +287,7 @@ const SURGERIES = [
     anaes: "General anaesthesia",
     intro: [
       "Thyroidectomy is done for a large goitre, a nodule that could be cancer, or an overactive thyroid that is not controlled by medicine. It is always under general anaesthesia.",
-      "The thyroid must be at a normal level before surgery. An overactive thyroid at the time of surgery can cause a dangerous rise in heart rate."
+      "The thyroid must be at a normal level before surgery. A well-controlled thyroid keeps the heart rate steady during surgery."
     ],
     addons: [
       ["thyroid", "The profile has TSH. The surgeon also wants T3 and T4 to confirm the thyroid is in the normal range."],
